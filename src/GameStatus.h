@@ -10,11 +10,33 @@
 
 #include "Define.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "SDL\SDL.h"
+
+typedef struct GameOptions {
+
+   int windowWidth;
+   int windowHeight;
+
+   bool fullscreen;
+
+} GameOptions;
+
 typedef struct GameStatus {
-	bool gameIsRunning;
-	int status;
+
+   bool gameIsRunning;
+   int status;
+
+   GameOptions* options;
+
+   /*Variables for the FPS*/
+   Uint32 nextTick;
+   Uint32 sleepTime;
 
 } GameStatus;
+
+
 
 void initGameStatus(GameStatus* status);
 
