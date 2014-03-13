@@ -1,4 +1,4 @@
-#include "MyLittleProject.h"
+#include "GameStatus.h"
 
 
 void initGameStatus(GameStatus* status) {
@@ -9,8 +9,6 @@ void initGameStatus(GameStatus* status) {
    status->options->fullscreen = FALSE;
    status->options->windowWidth = WINDOW_WIDTH_DEFAULT;
    status->options->windowHeight = WINDOW_HEIGTH_DEFAULT;
-}
 
-void updateGameStatus(GameStatus* status) {
-
+   status->nextTick = status->sleepTime = 0;
 }

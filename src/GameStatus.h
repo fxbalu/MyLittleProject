@@ -10,6 +10,10 @@
 
 #include "Define.h"
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "SDL\SDL.h"
+
 typedef struct GameOptions {
 
    int windowWidth;
@@ -21,16 +25,19 @@ typedef struct GameOptions {
 
 typedef struct GameStatus {
 
-   GameOptions* options;
-
    bool gameIsRunning;
    int status;
+
+   GameOptions* options;
+
+   /*Variables for the FPS*/
+   Uint32 nextTick;
+   Uint32 sleepTime;
 
 } GameStatus;
 
 
 
 void initGameStatus(GameStatus* status);
-void updateGameStatus(GameStatus* status);
 
 #endif /* GAMESTATUS_H_ */

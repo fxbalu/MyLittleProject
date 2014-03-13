@@ -13,14 +13,9 @@ Gwendal
 
 #include <stdio.h>
 #include <stdlib.h>
-
 #include "SDL\SDL.h"
 
-#include "GameStatus.h"
-
-
-
-
+#include "Game.h"
 
 
 #endif /* MYLITTLEPROJECT_H_ */

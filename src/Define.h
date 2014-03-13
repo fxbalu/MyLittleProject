@@ -5,8 +5,8 @@
  *      Author: Gwendal
  */
 
-#ifndef DEFINE_H_
-#define DEFINE_H_
+#ifndef DEFINE_H
+#define DEFINE_H
 
 #define FPS 60
 #define SKIP_TICKS (1000/FPS)
