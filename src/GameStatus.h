@@ -10,12 +10,27 @@
 
 #include "Define.h"
 
+typedef struct GameOptions {
+
+   int windowWidth;
+   int windowHeight;
+
+   bool fullscreen;
+
+} GameOptions;
+
 typedef struct GameStatus {
-	bool gameIsRunning;
-	int status;
+
+   GameOptions* options;
+
+   bool gameIsRunning;
+   int status;
 
 } GameStatus;
 
+
+
 void initGameStatus(GameStatus* status);
+void updateGameStatus(GameStatus* status);
 
 #endif /* GAMESTATUS_H_ */

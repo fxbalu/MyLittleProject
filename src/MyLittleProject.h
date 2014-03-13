@@ -1,9 +1,10 @@
 /*
  * MyLittleProject.h
- *
- *  Created on: 11 mars 2014
- *      Author: Gwendal
- */
+*
+*  Created on: 11 mars 2014
+*      Author:
+Gwendal
+*/
 
 #ifndef MYLITTLEPROJECT_H_
 #define MYLITTLEPROJECT_H_
