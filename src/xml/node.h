@@ -11,7 +11,7 @@
 
 #ifndef TREE_H_INCLUDED
 #define TREE_H_INCLUDED
-
+#define TREE_H_INCLUDED
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -24,7 +24,8 @@
  * \brief A tree's node.
  */
 typedef struct Node Node;
-struct Node {
+struct Node
+{
    char * name;   /**< The node's name. */
    char * value;  /**< The node's value. */
 
