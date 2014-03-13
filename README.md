@@ -1,4 +1,6 @@
-Ninja Cat Pizza Eater
-=====================
+My Little Project
+=================
 
-Ninja Cat Pizza Eater est un jeu développé dans le cadre de nos études d'ingénieurs. Le nom va très probablement changer !
+My Little Project is game developped by four (and a quarter) engineering students from INSA de Rennes in France. It's a 2D sprite based platformer.
+
+More informations to come.
