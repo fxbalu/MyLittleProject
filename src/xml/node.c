@@ -14,21 +14,35 @@
 
 /**
  * \brief Create a Node.
- * Allocate memory for a Node and set every pointer to NULL.
+ * Create a Node with a name and a value.
  *
- * \param n  Created Node
- * \return   Created Node
+ * \param[in] name   Given name for \p n.
+ * \param[in] value  Given value for \p n.
+ * \param     n      Created Node.
+ * \return           Created Node.
  */
-Node * createNode(Node * n)
+Node * createNode(const char * name, const char * value, Node * n)
+{
+   n = allocateNode(n);
+   resetNode(n);
+   setNodeName(name, n);
+   setNodeValue(value, n);
+
+   return n;
+}
+
+
+/**
+ * \brief Allocate memory for a Node.
+ *
+ * \param n  Memoryless Node
+ * \return   Memorized  Node
+ */
+Node * allocNode(Node * n)
 {
    if((n = malloc(sizeof(Node))) == NULL)
    {
-      printf("\n\\(O_O)/ <( oh ma gad, c'est le bowdel dans la memoiwe ! )");
       printf("\nerror in createNode(Node * n)");
-   }
-   else
-   {
-      resetNode(n);
    }
 
    return n;
@@ -40,15 +54,14 @@ Node * createNode(Node * n)
  * Set a Node's members to NULL for the pointers and 0 for the children count.
  *
  * \param n  Reseted Node
- *
- * \todo add attributes support when attribute struct is done.
  */
 void resetNode(Node * n)
 {
    if(n != NULL)
    {
       n->name = NULL;
-      /* n->attributes = NULL; */
+      n->value = NULL;
+      n->attr = NULL;
       /* Node's parent */
       n->parent = NULL;
       /* Node's siblings */

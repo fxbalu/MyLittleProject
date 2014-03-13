@@ -4,7 +4,7 @@
  *
  * Functions used to work on Node as a list.
  *
- * \author François-Xavier Balu <fx.balu@gmail.com>
+ * \author François-Xavier Balu \<fx.balu@gmail.com\>
  * \date 12 mars 2014
  */
 

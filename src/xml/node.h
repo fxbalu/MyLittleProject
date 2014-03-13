@@ -10,14 +10,27 @@
  */
 
 
-#ifndef TREE_H_INCLUDED
-#define TREE_H_INCLUDED
-#define TREE_H_INCLUDED
+#ifndef NODE_H_INCLUDED
+#define NODE_H_INCLUDED
+
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>  /* strlen() */
+#include <string.h>  /* strlen(), strcpy() */
 #include "common.h"
+
+
+/**
+ * \struct Attribute
+ * \brief A Node's Attribute.
+ */
+typedef struct Attribute Attribute;
+struct Attribute
+{
+   char * name;         /**< The Attribute's name. */
+   char * value;        /**< The Attribute's value. */
+   Attribute * next;    /**< Next Attribute. */
+};
 
 
 /**
@@ -27,8 +40,9 @@
 typedef struct Node Node;
 struct Node
 {
-   char * name;   /**< The node's name. */
-   char * value;  /**< The node's value. */
+   char * name;         /**< The node's name. */
+   char * value;        /**< The node's value. */
+   Attribute * attr;    /**< First Attribute for this node. */
 
    /** \name Parent node */
    /**@{*/
@@ -48,17 +62,17 @@ struct Node
    Node * last;         /**< Last child node. */
    int cc;              /**< Children count. */
    /**@}*/
-
-   /* list * attributes; */  /**< List of attributes for this node. */
 };
 
 
 /**
  * \name Node functions
- * Functions related to name and value members of Node
+ * Functions related to name and value of a Node
  */
 /**@{*/
-Node * createNode(Node * n);
+Node * createNode(const char * name, const char * value, Node * n);
+
+Node * allocateNode(Node * n);
 void resetNode(Node * n);
 
 void setNodeName(const char * name, Node * n);
@@ -66,6 +80,29 @@ void setNodeValue(const char * value, Node * n);
 
 void printNode(const Node * n, const int mode);
 /**@}*/ /* Node functions */
+
+
+/**
+ * \name Attribute functions
+ * Functions related to an Attribute.
+ */
+/**@{*/
+Attribute * createAttribute(Attribute * a);
+
+void allocateAttribute(Attribute * a);
+void resetAttribute(Attribute * a);
+
+void setAttributeName(const char * name, Attribute * a);
+void setAttributeValue(const char * value, Attribute * a);
+
+void printAttribute(const Attribute * a);
+
+void insertFirstAttribute(Attribute * a, Node * n);
+void insertLastAttribute(Attribute * a, Node * n);
+
+Attribute * deleteFirstAttribute(Node * n);
+Attribute * deleteLastAttribute(Node * n);
+/**@}*/ /* Attribute functions */
 
 
 /**
@@ -83,7 +120,7 @@ Node * deleteFirstNodeList(Node * parent);
 Node * deleteLastNodeList(Node * parent);
 
 void forEachNodeChild(Node * parent, void (*fn)(Node *));
-/**@}*/ /* List's node functions */
+/**@}*/ /* List functions */
 
 
-#endif /* TREE_H_INCLUDED */
+#endif /* NODE_H_INCLUDED */
