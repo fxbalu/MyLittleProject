@@ -63,47 +63,6 @@ boolean hasNodeParent(Node * n)
 
 
 /**
- * \brief Print a Node's data in the terminal.
- *
- * \param[in] n     Read Node.
- * \param[in] mode  Quantity of informations displayed.
- *                  1 = few informations (name and value)
- *                  2 = more informations (name, value and names of parent,
- *                      siblings and children)
- *                  3 = lot of informations (WIP)
- * \todo Implement mode 2 and 3.
- */
-void printNode(const Node * n, const int mode)
-{
-   if(n == NULL)
-   {
-      printf("Node doesn't exist (NULL pointer).\n");
-   }
-   else
-   {
-      /* Name */
-      if(n->name == NULL)
-      {
-         printf("Name = NULL\n");
-      }
-      else
-      {
-         printf("Name = \"%s\"\n", n->name);
-      }
-      /* Value */
-      if(n->value == NULL)
-      {
-         printf("Value = NULL\n");
-      }
-      else
-      {
-         printf("Value = \"%s\"\n", n->value);
-      }
-   }
-}
-
-
-/**
  * \brief Insert a Node in first position.
  * \param child   Added Node.
  * \param parent  Parent Node that will contain \p child.
@@ -115,10 +74,10 @@ void insertFirst(Node * child, Node * parent)
       if(hasNodeChildren(parent))
       {
          /* Link between child Node and NULL */
-         child->previous == NULL;
+         child->previous = NULL;
          /* Links between child Node and first Node */
-         child->next == parent->first;
-         parent->first->previous == child;
+         child->next = parent->first;
+         parent->first->previous = child;
          /* Links between child Node and parent Node */
          parent->first = child;
          child->parent = parent;
@@ -126,8 +85,8 @@ void insertFirst(Node * child, Node * parent)
       else
       {
          /* Links between child Node and NULL */
-         child->previous == NULL;
-         child->next == NULL;
+         child->previous = NULL;
+         child->next = NULL;
          /* Links between child Node and parent Node */
          parent->first = child;
          parent->current = child;
@@ -151,10 +110,10 @@ void insertLast(Node * child, Node * parent)
       if(hasNodeChildren(parent))
       {
          /* Link between child Node and NULL */
-         child->next == NULL;
+         child->next = NULL;
          /* Links between child Node and last Node */
-         child->previous == parent->last;
-         parent->last->next == child;
+         child->previous = parent->last;
+         parent->last->next = child;
          /* Links between child Node and parent Node */
          parent->last = child;
          child->parent = parent;
@@ -162,8 +121,8 @@ void insertLast(Node * child, Node * parent)
       else
       {
          /* Links between child Node and NULL */
-         child->previous == NULL;
-         child->next == NULL;
+         child->previous = NULL;
+         child->next = NULL;
          /* Links between child Node and parent Node */
          parent->first = child;
          parent->current = child;

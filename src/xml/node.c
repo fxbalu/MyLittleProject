@@ -40,6 +40,7 @@ Node * createNode(Node * n)
  * Set a Node's members to NULL for the pointers and 0 for the children count.
  *
  * \param n  Reseted Node
+ *
  * \todo add attributes support when attribute struct is done.
  */
 void resetNode(Node * n)
@@ -98,6 +99,47 @@ void setNodeValue(const char * value, Node * n)
       else
       {
          strcpy(n->value, value);
+      }
+   }
+}
+
+
+/**
+ * \brief Print a Node's data in the terminal.
+ *
+ * \param[in] n     Read Node.
+ * \param[in] mode  Quantity of informations displayed.
+ *                  1 = few informations (name and value)
+ *                  2 = more informations (name, value and names of parent,
+ *                      siblings and children)
+ *                  3 = lot of informations (WIP)
+ * \todo Implement mode 2 and 3.
+ */
+void printNode(const Node * n, const int mode)
+{
+   if(n == NULL)
+   {
+      printf("Node doesn't exist (NULL pointer).\n");
+   }
+   else
+   {
+      /* Name */
+      if(n->name == NULL)
+      {
+         printf("Name = NULL\n");
+      }
+      else
+      {
+         printf("Name = \"%s\"\n", n->name);
+      }
+      /* Value */
+      if(n->value == NULL)
+      {
+         printf("Value = NULL\n");
+      }
+      else
+      {
+         printf("Value = \"%s\"\n", n->value);
       }
    }
 }

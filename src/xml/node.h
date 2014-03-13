@@ -3,6 +3,7 @@
  * \brief Node related definitions
  *
  * Definition of a Node structure.
+ * Used by node.c, list.c and tree.c.
  *
  * \author François-Xavier Balu \<fx.balu@gmail.com\>
  * \date 11 mars 2014
@@ -15,7 +16,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>  /* strcpy() */
+#include <string.h>  /* strlen() */
 #include "common.h"
 
 
@@ -48,7 +49,7 @@ struct Node
    int cc;              /**< Children count. */
    /**@}*/
 
-   /* list * attributes;   /**< List of attributes for this node. */
+   /* list * attributes; */  /**< List of attributes for this node. */
 };
 
 
@@ -58,28 +59,30 @@ struct Node
  */
 /**@{*/
 Node * createNode(Node * n);
-
 void resetNode(Node * n);
+
 void setNodeName(const char * name, Node * n);
 void setNodeValue(const char * value, Node * n);
+
+void printNode(const Node * n, const int mode);
 /**@}*/ /* Node functions */
 
 
 /**
- * \name List's node functions
- * Functions related to Node as member of a list (the Node is IN a list).
- */
-/**@{*/
-int getNodePosition(Node * n);
-/**@}*/ /* List's node functions */
-
-
-/**
  * \name List functions
- * Functions related to Node as a list (the Node IS the list).
+ * Functions related to Node as a list.
  */
 /**@{*/
+boolean hasNodeChildren(Node * n);
+boolean hasNodeParent(Node * n);
 
+void insertFirst(Node * child, Node * parent);
+void insertLast(Node * child, Node * parent);
+
+Node * deleteFirstNodeList(Node * parent);
+Node * deleteLastNodeList(Node * parent);
+
+void forEachNodeChild(Node * parent, void (*fn)(Node *));
 /**@}*/ /* List's node functions */
 
 
