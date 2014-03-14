@@ -24,3 +24,7 @@
 
 # Code::Blocks project file
 *.cbp
+res/icon.png
+MyLittleProject.layout
+MyLittleProject.depend
+src/MyLittleProject.c

@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
       gameDisplay(&game);
 
 
-      gameDelay(&game);
+      //gameDelay(&game);
    }
 
    return EXIT_SUCCESS;
