@@ -37,7 +37,7 @@
  * \def Boolean
  * definition of the type Boolean to use the words TRUE and FALSE in order to clarify the code
  */
-#define Booleen char
+#define Booleen char/*bool ou Boolean*/
 
 /*!
  * \def TRUE
