@@ -1,7 +1,7 @@
 #ifndef PLAYER_H_INCLUDED
 #define PLAYER_H_INCLUDED
 
-#include "SDL\SDL.h"
+#include <SDL.h>
 
 typedef struct Player {
    SDL_Rect* position;
