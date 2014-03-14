@@ -24,3 +24,5 @@
 
 # Code::Blocks project file
 *.cbp
+*.layout
+*.depend
