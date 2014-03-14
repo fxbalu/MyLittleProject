@@ -24,6 +24,9 @@ int gameInit(Game* game) {
    /*Initialisation des timers*/
    game->status->nextTick = SDL_GetTicks();
 
+   /*Initialisation de la gestion d'event*/
+   SDL_PollEvent(&game->event);
+
    return 0;
 }
 
@@ -38,9 +41,19 @@ void gameDelay(Game* game) {
 }
 
 void gameUpdate(Game* game){
-
+   //check events (to be able to close this fuckin' window
+   //...
+   while(SDL_PollEvent(&game->event)){
+      if(game->event.type==SDL_QUIT)
+         game->status->gameIsRunning=0;
+   }
 }
 
 void gameDisplay(Game* game){
+   //display background
+   //display tiles
+   //display character
+   //display HUD
+   //...
 
 }

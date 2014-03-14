@@ -12,10 +12,11 @@ int main(int argc, char **argv) {
    /*Main Loop*/
    while(game.status->gameIsRunning) {
 
-      updateGame(&game);
-      displayGame(&game);
+      gameUpdate(&game);
+      gameDisplay(&game);
 
-      gameDelay(&game);
+
+      //gameDelay(&game);
    }
 
    return EXIT_SUCCESS;

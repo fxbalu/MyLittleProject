@@ -14,6 +14,8 @@ typedef struct Game {
 
    Player* player;
 
+   SDL_Event event;
+
 } Game;
 
 
