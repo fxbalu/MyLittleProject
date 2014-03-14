@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>  /* strlen(), strcpy() */
-#include "common.h"
+#include "../common.h"
 
 
 /**
@@ -27,9 +27,9 @@
 typedef struct Attribute Attribute;
 struct Attribute
 {
-   char * name;         /**< The Attribute's name. */
-   char * value;        /**< The Attribute's value. */
-   Attribute * next;    /**< Next Attribute. */
+   char* name;          /**< The Attribute's name. */
+   char* value;         /**< The Attribute's value. */
+   Attribute* next;     /**< Next Attribute. */
 };
 
 
@@ -40,26 +40,26 @@ struct Attribute
 typedef struct Node Node;
 struct Node
 {
-   char * name;         /**< The node's name. */
-   char * value;        /**< The node's value. */
-   Attribute * attr;    /**< First Attribute for this node. */
+   char* name;          /**< The node's name. */
+   char* value;         /**< The node's value. */
+   Attribute* attr;     /**< First Attribute for this node. */
 
    /** \name Parent node */
    /**@{*/
-   Node * parent;       /**< Parent node. */
+   Node* parent;        /**< Parent node. */
    /**@}*/
 
    /** \name Sibling nodes */
    /**@{*/
-   Node * previous;     /**< Previous sibling node. */
-   Node * next;         /**< Next sibling node. */
+   Node* previous;      /**< Previous sibling node. */
+   Node* next;          /**< Next sibling node. */
    /**@}*/
 
    /** \name Child nodes */
    /**@{*/
-   Node * first;        /**< First child node. */
-   Node * current;      /**< Current child node. */
-   Node * last;         /**< Last child node. */
+   Node* first;         /**< First child node. */
+   Node* current;       /**< Current child node. */
+   Node* last;          /**< Last child node. */
    int cc;              /**< Children count. */
    /**@}*/
 };
@@ -70,15 +70,15 @@ struct Node
  * Functions related to name and value of a Node
  */
 /**@{*/
-Node * createNode(const char * name, const char * value, Node * n);
+Node* createNode(const char* name, const char* value, Node* n);
 
-Node * allocateNode(Node * n);
-void resetNode(Node * n);
+Node* allocateNode(Node* n);
+void resetNode(Node* n);
 
-void setNodeName(const char * name, Node * n);
-void setNodeValue(const char * value, Node * n);
+void setNodeName(const char* name, Node* n);
+void setNodeValue(const char* value, Node* n);
 
-void printNode(const Node * n, const int mode);
+void printNode(const Node* n, const int mode);
 /**@}*/ /* Node functions */
 
 
@@ -87,21 +87,21 @@ void printNode(const Node * n, const int mode);
  * Functions related to an Attribute.
  */
 /**@{*/
-Attribute * createAttribute(Attribute * a);
+Attribute* createAttribute(const char* name, const char* value, Attribute* n);
 
-void allocateAttribute(Attribute * a);
-void resetAttribute(Attribute * a);
+Attribute* allocateAttribute(Attribute* a);
+void resetAttribute(Attribute* a);
 
-void setAttributeName(const char * name, Attribute * a);
-void setAttributeValue(const char * value, Attribute * a);
+void setAttributeName(const char* name, Attribute* a);
+void setAttributeValue(const char* value, Attribute* a);
 
-void printAttribute(const Attribute * a);
+void printAttribute(const Attribute* a);
 
-void insertFirstAttribute(Attribute * a, Node * n);
-void insertLastAttribute(Attribute * a, Node * n);
+void insertFirstAttribute(Attribute* a, Node* n);
+void insertLastAttribute(Attribute* a, Node* n);
 
-Attribute * deleteFirstAttribute(Node * n);
-Attribute * deleteLastAttribute(Node * n);
+Attribute* deleteFirstAttribute(Node* n);
+Attribute* deleteLastAttribute(Node* n);
 /**@}*/ /* Attribute functions */
 
 
@@ -110,16 +110,16 @@ Attribute * deleteLastAttribute(Node * n);
  * Functions related to Node as a list.
  */
 /**@{*/
-boolean hasNodeChildren(Node * n);
-boolean hasNodeParent(Node * n);
+boolean hasNodeChildren(Node* n);
+boolean hasNodeParent(Node* n);
 
-void insertFirst(Node * child, Node * parent);
-void insertLast(Node * child, Node * parent);
+void insertFirst(Node* child, Node* parent);
+void insertLast(Node* child, Node* parent);
 
-Node * deleteFirstNodeList(Node * parent);
-Node * deleteLastNodeList(Node * parent);
+Node* deleteFirstNodeList(Node* parent);
+Node* deleteLastNodeList(Node* parent);
 
-void forEachNodeChild(Node * parent, void (*fn)(Node *));
+void forEachNodeChild(Node* parent, void (* fn)(Node*));
 /**@}*/ /* List functions */
 
 

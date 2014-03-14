@@ -22,12 +22,12 @@
  * \param     a      Created Attribute.
  * \return           Created Attribute.
  */
-Attribute * createAttribute(const char * name, const char * value, Attribute * n)
+Attribute* createAttribute(const char* name, const char* value, Attribute* a)
 {
    a = allocateAttribute(a);
    resetAttribute(a);
-   setAttributeName(name, Attribute);
-   setAttributeValue(value, Attribute);
+   setAttributeName(name, a);
+   setAttributeValue(value, a);
 
    return a;
 }
@@ -39,7 +39,7 @@ Attribute * createAttribute(const char * name, const char * value, Attribute * n
  * \param a  Memoryless Attribute
  * \return   Memorized  Attribute
  */
-Attribute * allocAttribute(Attribute * a)
+Attribute* allocateAttribute(Attribute* a)
 {
    if((a = malloc(sizeof(Attribute))) == NULL)
    {
@@ -56,7 +56,7 @@ Attribute * allocAttribute(Attribute * a)
  *
  * \param a  Reseted Attribute
  */
-void resetAttribute(Attribute * a)
+void resetAttribute(Attribute* a)
 {
    if(a != NULL)
    {
@@ -72,7 +72,7 @@ void resetAttribute(Attribute * a)
  * \param[in] name given name
  * \param     a    modified Attribute
  */
-void setAttributeName(const char * name, Attribute * a)
+void setAttributeName(const char* name, Attribute* a)
 {
    if(name != NULL && a != NULL)
    {
@@ -94,7 +94,7 @@ void setAttributeName(const char * name, Attribute * a)
  * \param[in] value given value
  * \param     a     modified Attribute
  */
-void setAttributeValue(const char * value, Attribute * a)
+void setAttributeValue(const char* value, Attribute* a)
 {
    if(value != NULL && a != NULL)
    {
@@ -118,7 +118,7 @@ void setAttributeValue(const char * value, Attribute * a)
  * \param a  Added Attribute.
  * \param n  Modified Node.
  */
-void insertFirstAttribute(Attribute * a, Node * n)
+void insertFirstAttribute(Attribute* a, Node* n)
 {
    if((a != NULL) && (n != NULL))
    {
@@ -135,16 +135,16 @@ void insertFirstAttribute(Attribute * a, Node * n)
  * \param a  Added Attribute.
  * \param n  Modified Node.
  */
-void insertLastAttribute(Attribute * a, Node * n)
+void insertLastAttribute(Attribute* a, Node* n)
 {
-   Attribute * temp;
+   Attribute* temp;
 
    if(n != NULL)
    {
       /* No Attribute attached to Node */
       if(n->attr == NULL)
       {
-         n->attr = temp;
+         n->attr = a;
       }
       /* One Attribute or more */
       else
@@ -166,9 +166,9 @@ void insertLastAttribute(Attribute * a, Node * n)
  * \param n  Modified Node
  * \return   Deleted Attribute
  */
-Attribute * deleteFirstAttribute(Node * n)
+Attribute* deleteFirstAttribute(Node* n)
 {
-   Attribute * deleted;
+   Attribute* deleted;
 
    deleted = NULL;
    if(n != NULL)
@@ -193,9 +193,9 @@ Attribute * deleteFirstAttribute(Node * n)
  * \param n  Modified Node
  * \return   Deleted Attribute
  */
-Attribute * deleteLastAttribute(Node * n)
+Attribute* deleteLastAttribute(Node* n)
 {
-   Attribute * temp, * deleted;
+   Attribute* temp, * deleted;
 
    deleted = NULL;
    if(n != NULL)

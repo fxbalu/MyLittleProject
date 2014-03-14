@@ -21,7 +21,7 @@
  * \param     n      Created Node.
  * \return           Created Node.
  */
-Node * createNode(const char * name, const char * value, Node * n)
+Node* createNode(const char* name, const char* value, Node* n)
 {
    n = allocateNode(n);
    resetNode(n);
@@ -38,7 +38,7 @@ Node * createNode(const char * name, const char * value, Node * n)
  * \param n  Memoryless Node
  * \return   Memorized  Node
  */
-Node * allocNode(Node * n)
+Node* allocateNode(Node* n)
 {
    if((n = malloc(sizeof(Node))) == NULL)
    {
@@ -55,7 +55,7 @@ Node * allocNode(Node * n)
  *
  * \param n  Reseted Node
  */
-void resetNode(Node * n)
+void resetNode(Node* n)
 {
    if(n != NULL)
    {
@@ -79,7 +79,7 @@ void resetNode(Node * n)
  * \param[in] name given name
  * \param     n    modified Node
  */
-void setNodeName(const char * name, Node * n)
+void setNodeName(const char* name, Node* n)
 {
    if(name != NULL && n != NULL)
    {
@@ -101,7 +101,7 @@ void setNodeName(const char * name, Node * n)
  * \param[in] value given value
  * \param     n     modified Node
  */
-void setNodeValue(const char * value, Node * n)
+void setNodeValue(const char* value, Node* n)
 {
    if(value != NULL && n != NULL)
    {
@@ -128,7 +128,7 @@ void setNodeValue(const char * value, Node * n)
  *                  3 = lot of informations (WIP)
  * \todo Implement mode 2 and 3.
  */
-void printNode(const Node * n, const int mode)
+void printNode(const Node* n, const int mode)
 {
    if(n == NULL)
    {

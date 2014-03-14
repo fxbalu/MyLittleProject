@@ -17,7 +17,7 @@
  * \param[in] n Tested Node.
  * \return      \c true if Node \p n has children Nodes, \c false if not.
  */
-boolean hasNodeChildren(Node * n)
+boolean hasNodeChildren(Node* n)
 {
    if(n == NULL)
    {
@@ -42,7 +42,7 @@ boolean hasNodeChildren(Node * n)
  * \param n  Tested Node.
  * \return   \c true if \p n has a parent Node, \c false if not.
  */
-boolean hasNodeParent(Node * n)
+boolean hasNodeParent(Node* n)
 {
    if(n == NULL)
    {
@@ -67,7 +67,7 @@ boolean hasNodeParent(Node * n)
  * \param child   Added Node.
  * \param parent  Parent Node that will contain \p child.
  */
-void insertFirst(Node * child, Node * parent)
+void insertFirst(Node* child, Node* parent)
 {
    if((child != NULL) && (parent != NULL))
    {
@@ -103,7 +103,7 @@ void insertFirst(Node * child, Node * parent)
  * \param child   Added Node.
  * \param parent  Parent Node that will contain \p child.
  */
-void insertLast(Node * child, Node * parent)
+void insertLast(Node* child, Node* parent)
 {
    if((child != NULL) && (parent != NULL))
    {
@@ -141,9 +141,9 @@ void insertLast(Node * child, Node * parent)
  * \param parent  Modified parent Node.
  * \return        Deleted child Node.
  */
-Node * deleteFirstNodeList(Node * parent)
+Node* deleteFirstNodeList(Node* parent)
 {
-   Node * temp;
+   Node* temp;
 
    temp = NULL;
    if(parent != NULL)
@@ -189,9 +189,9 @@ Node * deleteFirstNodeList(Node * parent)
  * \param parent  Modified parent Node.
  * \return        Deleted child Node.
  */
-Node * deleteLastNodeList(Node * parent)
+Node* deleteLastNodeList(Node* parent)
 {
-   Node * temp;
+   Node* temp;
 
    temp = NULL;
    if(parent != NULL)
@@ -237,9 +237,9 @@ Node * deleteLastNodeList(Node * parent)
  * \param[in] parent  Parent Node
  * \param     fn      function used on child Nodes. Take a Node as parameter.
  */
-void forEachNodeChild(Node * parent, void (*fn)(Node *))
+void forEachNodeChild(Node* parent, void (* fn)(Node*))
 {
-   Node * temp;
+   Node* temp;
 
    if(parent != NULL)
    {
@@ -249,9 +249,9 @@ void forEachNodeChild(Node * parent, void (*fn)(Node *))
          while(temp != parent->last)
          {
             temp = temp->next;
-            (*fn)(temp->previous);
+            (* fn)(temp->previous);
          }
-         (*fn)(temp);
+         (* fn)(temp);
       }
    }
 }
