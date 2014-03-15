@@ -26,3 +26,6 @@
 *.cbp
 *.layout
 *.depend
+
+# Testing files that shouldn't be shared
+test_*
