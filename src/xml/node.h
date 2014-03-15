@@ -67,10 +67,11 @@ struct Node
 
 /**
  * \name Node functions
- * Functions related to name and value of a Node
  */
 /**@{*/
 Node* createNode(const char* name, const char* value, Node* n);
+
+void destroyNode(Node* n);
 
 Node* allocateNode(Node* n);
 void resetNode(Node* n);
@@ -84,7 +85,6 @@ void printNode(const Node* n, const int mode);
 
 /**
  * \name Attribute functions
- * Functions related to an Attribute.
  */
 /**@{*/
 Attribute* createAttribute(const char* name, const char* value, Attribute* n);
@@ -102,12 +102,15 @@ void insertLastAttribute(Attribute* a, Node* n);
 
 Attribute* deleteFirstAttribute(Node* n);
 Attribute* deleteLastAttribute(Node* n);
+
+boolean hasAttribute(Node* n);
+
+void destroyEveryAttributes(Node* n);
 /**@}*/ /* Attribute functions */
 
 
 /**
  * \name List functions
- * Functions related to Node as a list.
  */
 /**@{*/
 boolean hasNodeChildren(Node* n);

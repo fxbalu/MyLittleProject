@@ -33,6 +33,32 @@ Node* createNode(const char* name, const char* value, Node* n)
 
 
 /**
+ * \brief Erase existence of a node and it's children.
+ * Free specific members of a Node : name, value, Attributes
+ * Recursively use destroyNode() on every child Node, from first to last.
+ *
+ * \param n  Destroyed Node.
+ */
+void destroyNode(Node* n)
+{
+   if(n != NULL)
+   {
+      /* destroy Attributes */
+      destroyEveryAttributes(n);
+      /* free members */
+      if(n->name != NULL)
+         free(n->name);
+      if(n->value != NULL)
+         free(n->value);
+      /* destroy child Nodes */
+      forEachNodeChild(n, destroyNode);
+      /* free Node */
+      free(n);
+   }
+}
+
+
+/**
  * \brief Allocate memory for a Node.
  *
  * \param n  Memoryless Node

@@ -81,5 +81,77 @@ XMLFile* createXMLFile(const char* path, XMLFile* xml)
       return NULL;
    }
 
+   /* provided file is a valid XML file */
+   fclose(xml->file);
+
    return xml;
+}
+
+
+/**
+ * \brief Destroy a XMLFile
+ * Free everything allocated in a given XMLFile. File is closed, path is freed
+ * and tree is destroyed using destroyNode().
+ *
+ * \param xml  Destroyed XMLFile
+ */
+void destroyXMLFile(XMLFile* xml)
+{
+   if(xml != NULL)
+   {
+      if(xml->file != NULL)
+         fclose(xml->file);
+      if(xml->path != NULL)
+         free(xml->path);
+      if(xml->root != NULL)
+         destroyNode(xml->root);
+   }
+}
+
+
+Node* parseXMLFile(const char* path)
+{
+   XMLFile* xml;
+   int buffer;
+   Node* current;
+
+   xml = NULL;
+   current = NULL;
+   if((xml = createXMLFile(path, xml)) != NULL)
+   {
+      xml->file = fopen(path, "r");
+      /* pass first XML node */
+      do
+      {
+         buffer = fgetc(xml->file);
+      }
+      while((buffer != (char)'>') && (buffer != EOF));
+
+      /* read every character */
+      while(buffer != EOF)
+      {
+         buffer = fgetc(xml->file);
+         switch((char)buffer)
+         {
+            case '<' :
+               /* close current Node */
+               if((char)fgetc(xml->file) == '/')
+               {
+
+               }
+               /* start a new Node */
+               else
+               {
+
+               }
+
+         }
+      }
+
+      /* close XML file */
+      fclose(xml->file);
+   }
+
+
+   return xml->root;
 }

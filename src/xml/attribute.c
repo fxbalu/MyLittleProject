@@ -161,7 +161,8 @@ void insertLastAttribute(Attribute* a, Node* n)
 
 
 /**
- * \brief Delete the first Attribute of a Node
+ * \brief Delete the first Attribute of a Node.
+ * Deleted Node is not freed from memory.
  *
  * \param n  Modified Node
  * \return   Deleted Attribute
@@ -224,4 +225,43 @@ Attribute* deleteLastAttribute(Node* n)
    }
 
    return deleted;
+}
+
+
+/**
+ * \brief Tell if a Node has Attribute or not.
+ *
+ * \param n  Checked Node.
+ * \return   \c true if Node n has at least one Attribute, \c false if not.
+ */
+boolean hasAttribute(Node* n)
+{
+   return(n->attr != NULL);
+}
+
+
+
+/**
+ * \brief Destroy every Attributes of a Node
+ * Free memory allocated to members (name and value) and Attributes.
+ *
+ * \param n  Node where Attributes are destroyed.
+ */
+void destroyEveryAttributes(Node* n)
+{
+   Attribute* temp;
+
+   if(n != NULL)
+   {
+      while(hasAttribute(n))
+      {
+         temp = deleteFirstAttribute(n);
+         if(temp->name != NULL)
+            free(temp->name);
+         if(temp->value != NULL)
+            free(temp->value);
+         free(temp);
+      }
+   }
+
 }
