@@ -8,9 +8,7 @@
  * \date 12 mars 2014
  */
 
-
 #include "common.h"
-
 
 /**
  * \brief Log error in standard error output
@@ -36,5 +34,5 @@
  */
 void logError(const char* str, const char* file, const int line)
 {
-   fprintf(stderr, "! error in [%s] at line [%d] :\n! %s\n", file, line, str);
+    fprintf(stderr, "! error in [%s] at line [%d] :\n! %s\n", file, line, str);
 }

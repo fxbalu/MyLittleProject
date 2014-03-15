@@ -1,5 +1,7 @@
 	general:
 doxy des fonctions
+gestion des events clean (sans attente)
+revoir la fonction delay
 
 
 	define.h:
