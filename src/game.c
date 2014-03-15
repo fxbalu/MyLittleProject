@@ -38,9 +38,9 @@ int gameInit(Game* game) {
 }
 
 void initGameStatus(Game* game){
-   game->status->gameIsRunning = TRUE;
+   game->status->gameIsRunning = true;
    game->options = (GameOptions*) malloc(sizeof(GameOptions));
-   game->options->fullscreen = FALSE;
+   game->options->fullscreen = false;
    game->options->windowWidth = WINDOW_WIDTH_DEFAULT;
    game->options->windowHeight = WINDOW_HEIGHT_DEFAULT;
    game->status->nextTick = game->status->sleepTime = 0;

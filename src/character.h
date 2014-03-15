@@ -9,11 +9,11 @@
 #define DEFINED_CHARACTER_H
 
 /*!
- * \struct Player
+ * \struct Character
  * variables to manage the character
  */
 typedef struct Character{
    SDL_Rect* position;
-}Player;
+}Character;
 
 #endif // DEFINED_CHARACTER_H

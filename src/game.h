@@ -8,14 +8,39 @@
 #ifndef DEFINED_GAME_H
 #define DEFINED_GAME_H
 
-#include "include.h"
+#include "common.h"
+#include "character.h"
+
+/*!
+ * \def WINDOW_WIDTH_DEFAULT
+ * width of the window of the game
+ */
+#define WINDOW_WIDTH_DEFAULT 640
+
+/*!
+ * \def WINDOW_HEIGHT_DEFAULT
+ * height of the window of the game
+ */
+#define WINDOW_HEIGHT_DEFAULT 480
+
+/*!
+ * \def FPS
+ * number of frames per seconds of the game
+ */
+#define FPS 60
+
+/*!
+ * \def SKIP_TICKS
+ * ### TO B-B-B-B-BE DEFIIINEED BY -----> GWEEEENDOU <------ mouaahahahaha
+ */
+#define SKIP_TICKS (1000/FPS)
 
 /*!
  * \struct GameStatus
  * informations on the state of the game and for the timers
  */
 typedef struct GameStatus {
-   Booleen gameIsRunning;
+   Boolean gameIsRunning;
    int status;
    /*Variables for the FPS*/
    Uint32 nextTick;
@@ -29,7 +54,7 @@ typedef struct GameStatus {
 typedef struct GameOptions {
    int windowWidth;
    int windowHeight;
-   Booleen fullscreen;
+   Boolean fullscreen;
 } GameOptions;
 
 /*!
@@ -41,7 +66,7 @@ typedef struct Game {
    GameStatus* status;
    GameOptions* options;
    SDL_Event event;
-   Player* player;
+   Character* player;
 } Game;
 
 int gameInit(Game* game);  //initialiser les paramètres du jeu
