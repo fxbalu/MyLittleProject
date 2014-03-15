@@ -234,7 +234,7 @@ Attribute* deleteLastAttribute(Node* n)
  * \param n  Checked Node.
  * \return   \c true if Node n has at least one Attribute, \c false if not.
  */
-boolean hasAttribute(Node* n)
+Boolean hasAttribute(Node* n)
 {
    return(n->attr != NULL);
 }

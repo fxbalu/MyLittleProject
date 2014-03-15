@@ -17,7 +17,7 @@
  * \param[in] n Tested Node.
  * \return      \c true if Node \p n has children Nodes, \c false if not.
  */
-boolean hasNodeChildren(Node* n)
+Boolean hasNodeChildren(Node* n)
 {
    if(n == NULL)
    {
@@ -42,7 +42,7 @@ boolean hasNodeChildren(Node* n)
  * \param n  Tested Node.
  * \return   \c true if \p n has a parent Node, \c false if not.
  */
-boolean hasNodeParent(Node* n)
+Boolean hasNodeParent(Node* n)
 {
    if(n == NULL)
    {

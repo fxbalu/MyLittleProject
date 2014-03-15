@@ -103,7 +103,7 @@ void insertLastAttribute(Attribute* a, Node* n);
 Attribute* deleteFirstAttribute(Node* n);
 Attribute* deleteLastAttribute(Node* n);
 
-boolean hasAttribute(Node* n);
+Boolean hasAttribute(Node* n);
 
 void destroyEveryAttributes(Node* n);
 /**@}*/ /* Attribute functions */
@@ -113,8 +113,8 @@ void destroyEveryAttributes(Node* n);
  * \name List functions
  */
 /**@{*/
-boolean hasNodeChildren(Node* n);
-boolean hasNodeParent(Node* n);
+Boolean hasNodeChildren(Node* n);
+Boolean hasNodeParent(Node* n);
 
 void insertFirst(Node* child, Node* parent);
 void insertLast(Node* child, Node* parent);
