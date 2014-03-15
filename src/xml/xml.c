@@ -109,44 +109,40 @@ void destroyXMLFile(XMLFile* xml)
 }
 
 
+/**
+ * \brief Generate a tree from a XML file.
+ * This function has the higher level possible in the XML Parser. It's should be
+ * The only function called from outside.
+ *
+ * \param[in] path  read XML file.
+ * \return          Generated tree's root.
+ */
 Node* parseXMLFile(const char* path)
 {
    XMLFile* xml;
    int buffer;
-   Node* current;
+   XMLTag
+
 
    xml = NULL;
    current = NULL;
    if((xml = createXMLFile(path, xml)) != NULL)
    {
       xml->file = fopen(path, "r");
-      /* pass first XML node */
+      /* skip first XML node, since it was checked in createXMLFile() */
       do
       {
-         buffer = fgetc(xml->file);
+         if((buffer = fgetc(xml->file)) == EOF)
+            logError("EOF found before end of first tag.", __FILE__, __LINE__);
       }
       while((buffer != (char)'>') && (buffer != EOF));
 
-      /* read every character */
+      /* read file until EOF is reached */
       while(buffer != EOF)
       {
-         buffer = fgetc(xml->file);
-         switch((char)buffer)
-         {
-            case '<' :
-               /* close current Node */
-               if((char)fgetc(xml->file) == '/')
-               {
 
-               }
-               /* start a new Node */
-               else
-               {
-
-               }
-
-         }
       }
+      printf(" End of file [s] reached. Parsing stopped.\n", path);
 
       /* close XML file */
       fclose(xml->file);
@@ -154,4 +150,54 @@ Node* parseXMLFile(const char* path)
 
 
    return xml->root;
+}
+
+
+/**
+ * \brief Create a XMLTag.
+ *
+ * \param tag Created XMLTag.
+ * \return    Created XMLTag.
+ */
+XMLTag* createXMLTag(XMLTag* tag)
+{
+   if((tag = malloc(sizeof(XMLTag))) == NULL)
+   {
+      logError("Can't allocate memory for XMLTag", __FILE__, __LINE__);
+   }
+   else
+   {
+      tag->name = NULL;
+      tag->attr = NULL;
+   }
+
+   return tag;
+}
+
+
+/**
+ * \brief Read and parse a tag in a XML file.
+ * Read characters in a XML file until '>' is reached, and store informations in
+ * a XMLTag structure.
+ *
+ * \param[in] xml  Handled XMLFile, read file is in XMLFile->file.
+ * \return         Read and parsed XMLTag, \c NULL if an error happened.
+ */
+XMLTag* readTag(const XMLFile* xml, XMLTag* tag)
+{
+   int buffer;
+
+   if(xml != NULL)
+   {
+      tag = createXMLTag(tag);
+
+      /* parse tag */
+      do
+      {
+
+      }
+      while((buffer != (int)'>') && (buffer != EOF));
+   }
+
+   return tag;
 }

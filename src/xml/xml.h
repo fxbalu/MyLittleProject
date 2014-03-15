@@ -44,17 +44,41 @@
  */
 #define FIRST_LINE_XML_FILE  "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n"
 
+/**
+ * \brief String length of XMLTag's members.
+ */
+#define XML_TAG_STRING_LENGTH 100
 
-typedef struct XMLFile XMLFile;
-struct XMLFile
-{
+
+typedef struct XMLFile     XMLFile;
+typedef struct XMLTag      XMLTag;
+typedef enum   XMLTagType  XMLTagType;
+
+/**
+ * \brief XML file structure
+ * Contains informations about a XML file.
+ */
+struct XMLFile {
    char * path;   /**< Path of the XML file */
    FILE * file;   /**< Pointer to the file */
    Node * root;   /**< Root of the generated tree after parsing */
 };
 
+/**
+ * \brief XML Tag structure
+ * Contains informations about a XML tag.
+ * Example of a XML tag :
+ * \code{.xml} <name attr1name="attr1value" attr2name="attr2value"/> \endcode
+ */
+struct XMLTag {
+   char* name;       /**< Tag's name. */
+   Attribute* attr;  /**< Tag's first Attribute. */
+};
 
+
+Node* parseXMLFile(const char* path);
 XMLFile* createXMLFile(const char* path, XMLFile* xml);
+XMLTag* readNextTag(const XMLFile* xml, XMLTag* tag);
 
 
 #endif /* XML_H_INCLUDED */
