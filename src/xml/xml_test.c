@@ -22,7 +22,7 @@
 int main(int argc, char* argv[], char** arge)
 {
    char testXMLFilePath[10] = "test.xml";
-   XMLFile* testXMLFile;
+   XML_File* testXMLFile;
 
    testXMLFile = NULL;
    printf("Test program\n============\n");

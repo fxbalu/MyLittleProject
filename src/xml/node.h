@@ -2,11 +2,15 @@
  * \file node.h
  * \brief Node related definitions
  *
- * Definition of a Node structure.
- * Used by node.c, list.c and tree.c.
+ * Definition of a XML_Node structure and functions to use it.
  *
  * \author François-Xavier Balu \<fx.balu@gmail.com\>
  * \date 11 mars 2014
+ *
+ * \todo check usefulness of functions in XML parsing.
+ * \todo change type from Node to XML_Node, like SDL does.
+ * \todo use XML_Attribute list like a FIFO (First In First Out) pile.
+ *       Attributes doesn't need powerful functions to use them.
  */
 
 
@@ -17,86 +21,55 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>  /* strlen(), strcpy() */
-#include "../common.h"
 
 
 /**
- * \struct Attribute
- * \brief A Node's Attribute.
+ * \struct XML_Node
+ * \brief A XML tree's node.
  */
-typedef struct Attribute Attribute;
-struct Attribute
+typedef struct XML_Node XML_Node;
+struct XML_Node
 {
-   char* name;          /**< The Attribute's name. */
-   char* value;         /**< The Attribute's value. */
-   Attribute* next;     /**< Next Attribute. */
-};
-
-
-/**
- * \struct Node
- * \brief A tree's node.
- */
-typedef struct Node Node;
-struct Node
-{
-   char* name;          /**< The node's name. */
-   char* value;         /**< The node's value. */
-   Attribute* attr;     /**< First Attribute for this node. */
+   char* name;             /**< Node's name. */
+   char* value;            /**< Node's value. */
+   XML_Attribute* attr;    /**< First node's attribute. */
 
    /** \name Parent node */
    /**@{*/
-   Node* parent;        /**< Parent node. */
+   XML_Node* parent;       /**< Parent node. */
    /**@}*/
 
    /** \name Sibling nodes */
    /**@{*/
-   Node* previous;      /**< Previous sibling node. */
-   Node* next;          /**< Next sibling node. */
+   XML_Node* previous;     /**< Previous sibling node. */
+   XML_Node* next;         /**< Next sibling node. */
    /**@}*/
 
    /** \name Child nodes */
    /**@{*/
-   Node* first;         /**< First child node. */
-   Node* current;       /**< Current child node. */
-   Node* last;          /**< Last child node. */
-   int cc;              /**< Children count. */
+   XML_Node* first;        /**< First child node. */
+   XML_Node* current;      /**< Current child node. */
+   XML_Node* last;         /**< Last child node. */
+   int cc;                 /**< Children count. */
    /**@}*/
 };
 
 
-/**
- * \name Node functions
- */
-/**@{*/
-Node* createNode(const char* name, const char* value, Node* n);
+XML_Node* createXMLNode(void);
+void destroyXMLNode(XML_Node* n);
 
-void destroyNode(Node* n);
+void resetXMLNode(XML_Node* n);
+void setXMLNodeName(const char* name, XML_Node* n);
+void setXMLNodeValue(const char* value, XML_Node* n);
 
-Node* allocateNode(Node* n);
-void resetNode(Node* n);
+void printXMLNode(const XML_Node* n, const int mode);
 
-void setNodeName(const char* name, Node* n);
-void setNodeValue(const char* value, Node* n);
-
-void printNode(const Node* n, const int mode);
-/**@}*/ /* Node functions */
 
 
 /**
  * \name Attribute functions
  */
 /**@{*/
-Attribute* createAttribute(const char* name, const char* value, Attribute* n);
-
-Attribute* allocateAttribute(Attribute* a);
-void resetAttribute(Attribute* a);
-
-void setAttributeName(const char* name, Attribute* a);
-void setAttributeValue(const char* value, Attribute* a);
-
-void printAttribute(const Attribute* a);
-
 void insertFirstAttribute(Attribute* a, Node* n);
 void insertLastAttribute(Attribute* a, Node* n);
 

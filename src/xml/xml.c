@@ -11,19 +11,24 @@
 
 #include "xml.h"
 
+/*
+   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+   :::    Old functions                                                   :::
+   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+*/
 
 /**
- * \brief create an XMLFile
+ * \brief create an XML_File
  * Allocate memory, open the file described in path and check if it contains
  * XML formated data. The check is done by reading the first line of the file.
  *
  * \param path  Path of the file to read
- * \param xml   Created XMLFile
- * \return      \p XMLFile if file contains XML formated data, \c NULL if not.
+ * \param xml   Created XML_File
+ * \return      \p XML_File if file contains XML formated data, \c NULL if not.
  *
  * \todo update error log after fopen() check when logError() will be improved.
  */
-XMLFile* createXMLFile(const char* path, XMLFile* xml)
+XML_File* createXMLFile(const char* path, XML_File* xml)
 {
    char firstLine[XML_BUFFER_LENGTH];
 
@@ -35,9 +40,9 @@ XMLFile* createXMLFile(const char* path, XMLFile* xml)
    }
 
    /* allocate memory for XMLFile xml */
-   if((xml = malloc(sizeof(XMLFile))) == NULL)
+   if((xml = malloc(sizeof(XML_File))) == NULL)
    {
-      logError("Can't allocate memory for XMLFile* xml.", __FILE__, __LINE__);
+      logError("Can't allocate memory for XML_File* xml.", __FILE__, __LINE__);
       return NULL;
    }
 
@@ -71,7 +76,7 @@ XMLFile* createXMLFile(const char* path, XMLFile* xml)
    }
 
    /* check first line */
-   if(strcmp(firstLine, FIRST_LINE_XML_FILE) != 0)
+   if(strcmp(firstLine, XML_FIRST_LINE) != 0)
    {
       fprintf(stderr, "! error in [%s] at line [%d] :\n", __FILE__, __LINE__);
       fprintf(stderr, "! [%s] is not a valid XML file.\n", path);
@@ -95,7 +100,7 @@ XMLFile* createXMLFile(const char* path, XMLFile* xml)
  *
  * \param xml  Destroyed XMLFile
  */
-void destroyXMLFile(XMLFile* xml)
+void destroyXMLFile(XML_File* xml)
 {
    if(xml != NULL)
    {
@@ -116,16 +121,17 @@ void destroyXMLFile(XMLFile* xml)
  *
  * \param[in] path  read XML file.
  * \return          Generated tree's root.
+ *
+ * \todo Redo this function entirely
  */
-Node* parseXMLFile(const char* path)
+Node* getTreeFromXMLFile(const char* path)
 {
-   XMLFile* xml;
+   XML_File* xml;
    int buffer;
-   XMLTag
+   /*XML_Tag* tag;*/
 
 
    xml = NULL;
-   current = NULL;
    if((xml = createXMLFile(path, xml)) != NULL)
    {
       xml->file = fopen(path, "r");
@@ -142,7 +148,7 @@ Node* parseXMLFile(const char* path)
       {
 
       }
-      printf(" End of file [s] reached. Parsing stopped.\n", path);
+      printf("End of file [%s] reached. Parsing stopped.\n", path);
 
       /* close XML file */
       fclose(xml->file);
@@ -153,51 +159,59 @@ Node* parseXMLFile(const char* path)
 }
 
 
-/**
- * \brief Create a XMLTag.
- *
- * \param tag Created XMLTag.
- * \return    Created XMLTag.
- */
-XMLTag* createXMLTag(XMLTag* tag)
-{
-   if((tag = malloc(sizeof(XMLTag))) == NULL)
-   {
-      logError("Can't allocate memory for XMLTag", __FILE__, __LINE__);
-   }
-   else
-   {
-      tag->name = NULL;
-      tag->attr = NULL;
-   }
 
-   return tag;
-}
+
+
+
+
 
 
 /**
- * \brief Read and parse a tag in a XML file.
- * Read characters in a XML file until '>' is reached, and store informations in
- * a XMLTag structure.
+ * \brief Read a tag attribute in a XML file.
  *
- * \param[in] xml  Handled XMLFile, read file is in XMLFile->file.
- * \return         Read and parsed XMLTag, \c NULL if an error happened.
+ * \param file Read XML file.
+ * \return     Read tag's attribute.
  */
-XMLTag* readTag(const XMLFile* xml, XMLTag* tag)
+Attribute* readAttribute(FILE* file)
 {
-   int buffer;
+   Attribute* attr;
+   char strBuffer[XML_BUFFER_LENGTH];
+   int charBuffer, i;
 
-   if(xml != NULL)
-   {
-      tag = createXMLTag(tag);
+   attr = allocateAttribute(attr);
 
-      /* parse tag */
-      do
-      {
+   /* read attribute's name */
+   i = 0;
+   charBuffer = fgetc(file);
+   while(charBuffer != (int)'=') {
 
-      }
-      while((buffer != (int)'>') && (buffer != EOF));
+      strBuffer[i] = (char)charBuffer;
+      i++;
+      charBuffer = fgetc(file);
+   }
+   strBuffer[i] = '\0';
+
+   /* check implied following character '"' */
+   if(fgetc(file) != (int)'"') {
+      logError("Badly parsed XML file.", __FILE__, __LINE__);
+      return NULL;
    }
 
-   return tag;
+   /* set attribute's name with read string */
+   setAttributeName(strBuffer, attr);
+
+   /* read attribute's value */
+   i = 0;
+   charBuffer = fgetc(file);
+   while(charBuffer != (int)'"') {
+      strBuffer[i] = (char)charBuffer;
+      i++;
+      charBuffer = fgetc(file);
+   }
+   strBuffer[i] = '\0';
+
+   /* set attribute's value with read string */
+   setAttributeValue(strBuffer, attr);
+
+   return attr;
 }

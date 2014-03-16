@@ -1,36 +1,237 @@
 /**
  * \file attribute.c
- * \brief Attribute related functions
+ * \brief XML attribute related functions
  *
- * Definitions of functions to access an Attribute's members and insert and
- * remove it from a Node.
+ * Functions to use a XML_Tag structure.
  *
  * \author François-Xavier Balu \<fx.balu@gmail.com\>
- * \date 13 mars 2014
+ * \date 16 mars 2014
  */
 
 
- #include "node.h"
+#include "attribute.h"
 
 
- /**
- * \brief Create an Attribute.
- * Create an Attribute with a name and a value.
+/**
+ * \brief Create a XML attribute.
+ * Allocate memory for a XML attribute and set its members to NULL.
  *
- * \param[in] name   Given name for \p a.
- * \param[in] value  Given value for \p a.
- * \param     a      Created Attribute.
- * \return           Created Attribute.
+ * \return Created XML attribute.
  */
-Attribute* createAttribute(const char* name, const char* value, Attribute* a)
+XML_Attribute* createXMLAttribute(void)
 {
-   a = allocateAttribute(a);
-   resetAttribute(a);
-   setAttributeName(name, a);
-   setAttributeValue(value, a);
+   XML_Attribute* attr;
 
-   return a;
+   attr = allocXMLAttribute(attr);
+   initXMLAttribute(attr);
+
+   return attr;
 }
+
+
+/**
+ * \brief Destroy a XML attribute.
+ * Free all memory allocated for a XML attribute, and accessible attributes
+ * pointed by next member to prevent memory leaks.
+ *
+ * \param attr  Destroyed XML attribute.
+ */
+void destroyXMLAttribute(XML_Attribute* attr)
+{
+   if(attr == NULL) {
+      logError("Trying to destroy a NULL attribute", __FILE__, __LINE__);
+   }
+   else {
+      /* logMem(FREE, "string", __FILE__, __LINE__); */
+      free(attr->name);
+      /* logMem(FREE, "string", __FILE__, __LINE__); */
+      free(attr->value);
+      if(attr->next != NULL) {
+         destroyXMLAttribute(attr->next);
+      }
+      /* logMem(FREE, "attribute", __FILE__, __LINE__); */
+      free(attr);
+   }
+}
+
+
+/**
+ * \brief Allocate memory for a XM attribute.
+ * Need more blah blah, like in allocXMLTag().
+ *
+ * \param attr  Tested XML attribute.
+ * \return      Allocated XML attribute.
+ */
+XML_Attribute* allocXMLAttribute(XML_Attribute* attr)
+{
+   if(attr != NULL) {
+      logError("Trying to allocate memory for a non NULL attribute",
+               __FILE__, __LINE__);
+   }
+   else if((attr = malloc(sizeof(XML_Attribute))) == NULL) {
+      logError("Can't allocate memory for an attribute", __FILE__, __LINE__);
+   }
+   else {
+      /* logMem(ALLOC, "XML_Attribute", __FILE__, __LINE__) */
+   }
+
+   return attr;
+}
+
+
+/**
+ * \brief Free an initialized XML attribute.
+ * Free memory from a XML attribute. If attribute isn't in an initialized state,
+ * it won't be freed to prevent memory leaks.
+ *
+ * \param attr Freed XML attribute.
+ */
+void freeXMLAttribute(XML_Attribute* attr)
+{
+   if(attr == NULL) {
+      logError("Trying to free a NULL attribute", __FILE__, LINE__);
+   }
+   else if((attr->name != NULL) &&
+           (attr->value != NULL) &&
+           (attr->next != NULL)) {
+      logError("Trying to free a non initialized attribute",
+               __FILE__, __LINE__);
+   }
+   else {
+      /* logMem(FREE, "XML_Attribute", __FILE__, __LINE__) */
+      free(attr);
+   }
+}
+
+
+/**
+ * \brief Initialize an allocated attribute.
+ * Set attribute's members to NULL. It can't check if members are used or not,
+ * so memory leaks can happen here. You should use it immediately after
+ * allocXMLAttribute().
+ *
+ * \param attr  Initialized attribute.
+ */
+void initXMLAttribute(XML_Attribute* attr)
+{
+   if(attr == NULL) {
+      logError("Trying to initialize a NULL attr", __FILE__, __LINE__);
+   }
+   else {
+      attr->name = NULL;
+      attr->value = NULL;
+      attr->next = NULL;
+   }
+}
+
+
+/**
+ * \brief Reset a XML attribute to its initial state.
+ * Free memory allocated to attribute's members and initialize it. It does work
+ * on already initialized attribute, but freeXMLAttribute() is better in this
+ * case.
+ *
+ * Attributes are recursively freed to prevent memory leaks. Use
+ * copyXMLAttribute() to pass an attribute to another structure, such as
+ * XML_Node.
+ *
+ * Don't use this function on an allocated attribute, because free() has
+ * undefined behavior on non allocated variable.
+ *
+ * \param attr  Reseted XML attribute.
+ */
+void resetXMLAttribute(XML_Attribute* attr)
+{
+   if(attr == NULL) {
+      logError("Trying to reset a NULL attribute", __FILE__, __LINE__);
+   }
+   else {
+      /* logMem(FREE, "string", __FILE__, __LINE__); */
+      free(attr->name);
+      /* logMem(FREE, "string", __FILE__, __LINE__); */
+      free(attr->value);
+      destroyXMLAttribute(tag->attr);
+      initXMLAttribute(attr);
+   }
+}
+
+void setXMLAttributeName(const char* name, XML_Attribute* a);
+void setXMLAttributeValue(const char* value, XML_Attribute* a);
+
+XML_Attribute* readXMLAttribute(FILE* file);
+
+/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+   :::   Old functions                                                    :::
+   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+*/
+
+
+
+
+/**
+ * \brief Reset a XML attribute.
+ * Set every attribute's members to NULL.
+ *
+ * \param attr  Reseted attribute.
+ */
+void resetXMLAttribute(XML_Attribute* attr)
+{
+   if(attr != NULL)
+   {
+      attr->name = NULL;
+      attr->value = NULL;
+      attr->next = NULL;
+   }
+}
+
+
+/**
+ * \brief Set an attribute's name.
+ * Allocate memory for a attribute's name, and copy name's content in it.
+ * If attribute already has a name, memory is reallocated instead.
+ *
+ * \param[in] name  Given name.
+ * \param     attr  Modified attribute.
+ */
+void setXMLAttributeName(const char* name, XML_Attribute* a)
+{
+   /* NULL attribute */
+   if(attr != NULL) {
+      logError("Giving a name to a NULL attr", __FILE__, __LINE__);
+   }
+   /* attribute already has a name */
+   else if(attr->name != NULL) {
+      if((attr->name = realloc(attr->name, (strlen(name) + 1) * sizeof(char))) == NULL) {
+         logError("Can't reallocate memory for attribute's name", __FILE__, __LINE__);
+      }
+      else {
+         strcpy(tag->name, name);
+      }
+   }
+   /* tag doesn't have a name */
+   else {
+      if((tag->name = malloc((strlen(name) + 1) * sizeof(char))) == NULL) {
+         logError("can't allocate memory for tag's name", __FILE__, __LINE__);
+      }
+      else {
+         /* logMem(ALLOC, "string", __FILE__, __LINE__) */
+         strcpy(tag->name, name);
+      }
+   }
+}
+
+
+void setXMLAttributeValue(const char* value, XML_Attribute* a)
+void printXMLAttribute(const XML_Attribute* a);
+
+XML_Attribute* readXMLAttribute(FILE* file);
+
+
+/*
+   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+   :::    Old functions                                                   :::
+   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+*/
 
 
 /**
@@ -38,6 +239,9 @@ Attribute* createAttribute(const char* name, const char* value, Attribute* a)
  *
  * \param a  Memoryless Attribute
  * \return   Memorized  Attribute
+ *
+ * \todo Remove need for parameter \p a
+ * \todo use new logError() function instead of printf().
  */
 Attribute* allocateAttribute(Attribute* a)
 {
@@ -239,6 +443,27 @@ Boolean hasAttribute(Node* n)
    return(n->attr != NULL);
 }
 
+
+
+
+
+/**
+ * \brief Destroy an Attribute and the ones after it.
+ * Destroy Attribute first, then Attribute pointed by first->next, then
+ * Attribute pointed by first->next->next, etc.
+ * \see destroyAttribute
+ *
+ * \param first  First destroyed Attribute
+ */
+void destroyNextAttributes(Attribute* first)
+{
+   Attribute* temp;
+
+   temp = first;
+   while(temp != NULL) {
+      temp = destroyAttribute(temp);
+   }
+}
 
 
 /**
