@@ -1,11 +1,12 @@
 /*!
  * \file main.c
- * \brief fonction main et boucle principale
+ * \brief main function and main loop
  * \author fx.balu & a.dufac & g.henry & m.parisot & v.werner
  * \date 14.03.2014
  */
 
-#include "include.h"
+#include "common.h"
+#include "game.h"
 
 int main(int argc, char* argv[]){
 
@@ -18,8 +19,10 @@ int main(int argc, char* argv[]){
    /* Main Loop */
    while(game.status->gameIsRunning){
       gameEvent(&game);
+      gameUpdate(&game);
       gameDisplay(&game);
-      //gameDelay(&game); ### a recoder, la fonction ne tourne pas :)
+
+      gameDelay(&game);
    }
 
    return EXIT_SUCCESS;

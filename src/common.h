@@ -14,7 +14,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>   /* fprintf(), stderr */
-
+#include <SDL.h>
 
 /**
  * \enum boolean
