@@ -46,7 +46,6 @@ void destroyXMLTag(XML_Tag* tag)
    else {
       resetXMLTag(tag);
       freeXMLTag(tag);
-      destroyXMLAttribute(attr);
    }
 }
 
@@ -90,7 +89,7 @@ void freeXMLTag(XML_Tag* tag)
    if(tag == NULL) {
       logError("Trying to free a NULL tag", __FILE__, LINE__);
    }
-   else if((tag->name != NULL) && (tag->attr != NULL)) {
+   else if((tag->name != NULL) || (tag->attr != NULL)) {
       logError("Trying to free a non initialized tag", __FILE__, __LINE__);
    }
    else {
@@ -141,9 +140,12 @@ void resetXMLTag(XML_Tag* tag)
       logError("Trying to reset a NULL tag", __FILE__, __LINE__);
    }
    else {
-      /* logMem(FREE, "string", __FILE__, __LINE__); */
-      free(tag->name);
+      if(tag->name != NULL) {
+         /* logMem(FREE, "string", __FILE__, __LINE__); */
+         free(tag->name);
+      }
       destroyXMLAttribute(tag->attr);
+      initXMLTag(tag);
    }
 }
 
@@ -187,6 +189,7 @@ void setXMLTagName(const char* name, XML_Tag* tag)
    }
 }
 
+
 /**
  * \brief Add an attribute to a XML tag.
  *
@@ -221,7 +224,7 @@ void addAttributeToXMLTag(Attribute* attr, XML_Tag* tag)
  * \param tag  Modified tag.
  * \return     Deleted attribute.
  */
-XML_Tag* deleteAttributeFromXMLTag(XML_Tag* tag)
+XML_Attribute* deleteAttributeFromXMLTag(XML_Tag* tag)
 {
    XML_Attribute* deleted;
 

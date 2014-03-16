@@ -59,7 +59,7 @@ void resetXMLTag(XML_Tag* tag);
 
 void setXMLTagName(const char* name, XML_Tag* tag);
 void addAttributeToXMLTag(Attribute* attr, XML_Tag* tag);
-XML_Tag* deleteAttributeFromXMLTag(XML_Tag* tag);
+XML_Attribute* deleteAttributeFromXMLTag(XML_Tag* tag);
 
 XML_Tag* readXMLTag(FILE* file);
 

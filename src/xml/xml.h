@@ -48,9 +48,9 @@
  * Contains informations about a XML file.
  */
 typedef struct XML_File {
-   char * path;      /**< Path of the XML file */
-   FILE * file;      /**< Pointer to the file */
-   XML_Node * root;  /**< Root of the generated tree after parsing */
+   char* path;      /**< Path of the XML file */
+   FILE* file;      /**< Pointer to the file */
+   XML_Node* root;  /**< Root of the generated tree after parsing */
 } XML_File;
 
 
@@ -62,7 +62,10 @@ void setXMLFilePath(const char* path, XML_File* xml);
 
 void openXMLFile(XML_File* xml);
 void closeXMLFile(XML_File* xml);
-XML_Node* parseXMLFile(FILE* file);
+
+Boolean checkFirstLineXMLFile(XML_File* xml);
+void parseXMLFile(XML_File* xml);
+
 XML_Node* loadDataFromXMLFile(const char* filePath);
 
 

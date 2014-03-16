@@ -35,29 +35,11 @@ void freeXMLAttribute(XML_Attribute* attr);
 void initXMLAttribute(XML_Attribute* attr);
 void resetXMLAttribute(XML_Attribute* attr);
 
-void setXMLAttributeName(const char* name, XML_Attribute* a);
-void setXMLAttributeValue(const char* value, XML_Attribute* a);
+void setXMLAttributeName(const char* name, XML_Attribute* attr);
+void setXMLAttributeValue(const char* value, XML_Attribute* attr);
 
 XML_Attribute* readXMLAttribute(FILE* file);
 
-/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-   :::   Example                                                          :::
-   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*/
-
-XML_Tag* createXMLTag(void);
-void destroyXMLTag(XML_Tag* tag);
-
-XML_Tag* allocXMLTag(XML_Tag* tag);
-void freeXMLTag(XML_Tag* tag);
-
-void initXMLTag(XML_Tag* tag);
-void resetXMLTag(XML_Tag* tag);
-
-void setXMLTagName(const char* name, XML_Tag* tag);
-void addAttributeToXMLTag(Attribute* attr, XML_Tag* tag);
-XML_Tag* deleteAttributeFromXMLTag(XML_Tag* tag);
-
-XML_Tag* readXMLTag(FILE* file);
+void copyXMLAttribute(XML_Attribute* dst, XML_Attribute* src);
 
 #endif // ATTRIBUTE_H_INCLUDED

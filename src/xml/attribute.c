@@ -91,8 +91,8 @@ void freeXMLAttribute(XML_Attribute* attr)
    if(attr == NULL) {
       logError("Trying to free a NULL attribute", __FILE__, LINE__);
    }
-   else if((attr->name != NULL) &&
-           (attr->value != NULL) &&
+   else if((attr->name != NULL) ||
+           (attr->value != NULL) ||
            (attr->next != NULL)) {
       logError("Trying to free a non initialized attribute",
                __FILE__, __LINE__);
@@ -146,10 +146,14 @@ void resetXMLAttribute(XML_Attribute* attr)
       logError("Trying to reset a NULL attribute", __FILE__, __LINE__);
    }
    else {
-      /* logMem(FREE, "string", __FILE__, __LINE__); */
-      free(attr->name);
-      /* logMem(FREE, "string", __FILE__, __LINE__); */
-      free(attr->value);
+      if(attr->name != NULL) {
+         /* logMem(FREE, "string", __FILE__, __LINE__); */
+         free(attr->name);
+      }
+      if(attr->value != NULL) {
+         /* logMem(FREE, "string", __FILE__, __LINE__); */
+         free(attr->value);
+      }
       destroyXMLAttribute(tag->attr);
       initXMLAttribute(attr);
    }
@@ -193,11 +197,15 @@ void resetXMLAttribute(XML_Attribute* attr)
  * \param[in] name  Given name.
  * \param     attr  Modified attribute.
  */
-void setXMLAttributeName(const char* name, XML_Attribute* a)
+void setXMLAttributeName(const char* name, XML_Attribute* attr)
 {
    /* NULL attribute */
    if(attr != NULL) {
-      logError("Giving a name to a NULL attr", __FILE__, __LINE__);
+      logError("Giving a name to a NULL attribute", __FILE__, __LINE__);
+   }
+   /* NULL name */
+   else if(name != NULL) {
+      logError("Giving a NULL name to an attribute", __FILE__, __LINE__);
    }
    /* attribute already has a name */
    else if(attr->name != NULL) {
@@ -205,288 +213,119 @@ void setXMLAttributeName(const char* name, XML_Attribute* a)
          logError("Can't reallocate memory for attribute's name", __FILE__, __LINE__);
       }
       else {
-         strcpy(tag->name, name);
+         strcpy(attr->name, name);
       }
    }
-   /* tag doesn't have a name */
+   /* attribute doesn't have a name */
    else {
-      if((tag->name = malloc((strlen(name) + 1) * sizeof(char))) == NULL) {
-         logError("can't allocate memory for tag's name", __FILE__, __LINE__);
+      if((attribute->name = malloc((strlen(name) + 1) * sizeof(char))) == NULL) {
+         logError("can't allocate memory for attribute's name", __FILE__, __LINE__);
       }
       else {
          /* logMem(ALLOC, "string", __FILE__, __LINE__) */
-         strcpy(tag->name, name);
-      }
-   }
-}
-
-
-void setXMLAttributeValue(const char* value, XML_Attribute* a)
-void printXMLAttribute(const XML_Attribute* a);
-
-XML_Attribute* readXMLAttribute(FILE* file);
-
-
-/*
-   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-   :::    Old functions                                                   :::
-   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*/
-
-
-/**
- * \brief Allocate memory for an Attribute.
- *
- * \param a  Memoryless Attribute
- * \return   Memorized  Attribute
- *
- * \todo Remove need for parameter \p a
- * \todo use new logError() function instead of printf().
- */
-Attribute* allocateAttribute(Attribute* a)
-{
-   if((a = malloc(sizeof(Attribute))) == NULL)
-   {
-      printf("\nerror in createAttribute(Attribute * a)");
-   }
-
-   return a;
-}
-
-
-/**
- * \brief Reset an Attribute.
- * Set an Attribute's members to NULL.
- *
- * \param a  Reseted Attribute
- */
-void resetAttribute(Attribute* a)
-{
-   if(a != NULL)
-   {
-      a->name = NULL;
-      a->value = NULL;
-   }
-}
-
-
-/**
- * \brief Set a name for an Attribute.
- *
- * \param[in] name given name
- * \param     a    modified Attribute
- */
-void setAttributeName(const char* name, Attribute* a)
-{
-   if(name != NULL && a != NULL)
-   {
-      if((a->name = malloc((strlen(name) + 1) * sizeof(char))) == NULL)
-      {
-         printf("error in setAttributeName()");
-      }
-      else
-      {
-         strcpy(a->name, name);
+         strcpy(attr->name, name);
       }
    }
 }
 
 
 /**
- * \brief Set a value for an Attribute.
+ * \brief Set an attribute's value.
+ * Allocate memory for a attribute's value, and copy value's content in it.
+ * If attribute already has a value, memory is reallocated instead.
  *
- * \param[in] value given value
- * \param     a     modified Attribute
+ * \param[in] value  Given value.
+ * \param     attr  Modified attribute.
  */
-void setAttributeValue(const char* value, Attribute* a)
+void setXMLAttributeValue(const char* value, XML_Attribute* attr)
 {
-   if(value != NULL && a != NULL)
-   {
-      if((a->value = malloc((strlen(value) + 1) * sizeof(char))) == NULL)
-      {
-         printf("error in setAttributeValue()");
+   /* NULL attribute */
+   if(attr != NULL) {
+      logError("Giving a value to a NULL attribute", __FILE__, __LINE__);
+   }
+   /* NULL value */
+   else if(value != NULL) {
+      logError("Giving a NULL value to an attribute", __FILE__, __LINE__);
+   }
+   /* attribute already has a value */
+   else if(attr->value != NULL) {
+      if((attr->value = realloc(attr->value, (strlen(value) + 1) * sizeof(char))) == NULL) {
+         logError("Can't reallocate memory for attribute's value", __FILE__, __LINE__);
       }
-      else
-      {
-         strcpy(a->value, value);
+      else {
+         strcpy(attr->value, value);
       }
    }
-}
-
-
-/**
- * \brief Insert an Attribute in a Node.
- * Insert an Attribute in a Node before the first Attribute already attached to
- * said Node.
- *
- * \param a  Added Attribute.
- * \param n  Modified Node.
- */
-void insertFirstAttribute(Attribute* a, Node* n)
-{
-   if((a != NULL) && (n != NULL))
-   {
-      a->next = n->attr;
-      n->attr = a;
-   }
-}
-
-/**
- * \brief Insert an Attribute in a Node.
- * Insert an Attribute in a Node after the last Attribute already attached to
- * said Node.
- *
- * \param a  Added Attribute.
- * \param n  Modified Node.
- */
-void insertLastAttribute(Attribute* a, Node* n)
-{
-   Attribute* temp;
-
-   if(n != NULL)
-   {
-      /* No Attribute attached to Node */
-      if(n->attr == NULL)
-      {
-         n->attr = a;
+   /* attribute doesn't have a value */
+   else {
+      if((attribute->value = malloc((strlen(value) + 1) * sizeof(char))) == NULL) {
+         logError("can't allocate memory for attribute's value", __FILE__, __LINE__);
       }
-      /* One Attribute or more */
-      else
-      {
-         temp = n->attr;
-         while(temp->next != NULL)
-         {
-            temp = temp->next;
-         }
-         temp->next = a;
+      else {
+         /* logMem(ALLOC, "string", __FILE__, __LINE__) */
+         strcpy(attr->value, value);
       }
    }
 }
 
 
 /**
- * \brief Delete the first Attribute of a Node.
- * Deleted Node is not freed from memory.
+ * \brief Read a tag attribute in a XML file.
  *
- * \param n  Modified Node
- * \return   Deleted Attribute
+ * \param file  Read XML file.
+ * \return      Read tag's attribute.
+ *
+ * \todo Secure this function from buffer overflow with strBuffer.
+ * \todo Secure this function from reading even when EOF is reached.
  */
-Attribute* deleteFirstAttribute(Node* n)
+XML_Attribute* readXMLAttribute(FILE* file)
 {
-   Attribute* deleted;
+   Attribute* attr;
+   char strBuffer[XML_BUFFER_LENGTH];
+   int charBuffer, i;
 
-   deleted = NULL;
-   if(n != NULL)
-   {
-      deleted = n->attr;
-      /* One or more Attribute attached to Node */
-      if(deleted != NULL)
-      {
-         n->attr = deleted->next;
-         deleted->next = NULL;
-      }
+   attr = createXMLAttribute();
 
+   /* read attribute's name */
+   i = 0;
+   charBuffer = fgetc(file);
+   while(charBuffer != (int)'=') {
+
+      strBuffer[i] = (char)charBuffer;
+      i++;
+      charBuffer = fgetc(file);
+   }
+   strBuffer[i] = '\0';
+
+   /* check implied following character '"' */
+   if(fgetc(file) != (int)'"') {
+      logError("Badly parsed XML file.", __FILE__, __LINE__);
+      freeXMLAttribute(attr);
+      return NULL;
    }
 
-   return deleted;
+   /* set attribute's name with read string */
+   setAttributeName(strBuffer, attr);
+
+   /* read attribute's value */
+   i = 0;
+   charBuffer = fgetc(file);
+   while(charBuffer != (int)'"') {
+      strBuffer[i] = (char)charBuffer;
+      i++;
+      charBuffer = fgetc(file);
+   }
+   strBuffer[i] = '\0';
+
+   /* set attribute's value with read string */
+   setAttributeValue(strBuffer, attr);
+
+   return attr;
 }
 
 
-/**
- * \brief Delete the last Attribute of a Node
- *
- * \param n  Modified Node
- * \return   Deleted Attribute
- */
-Attribute* deleteLastAttribute(Node* n)
+void copyXMLAttribute(XML_Attribute* dst, XML_Attribute* src)
 {
-   Attribute* temp, * deleted;
-
-   deleted = NULL;
-   if(n != NULL)
-   {
-      /* At least one Attribute attached to Node */
-      if(n->attr != NULL)
-      {
-         temp = n->attr;
-         /* Only one Attribute */
-         if(temp->next == NULL)
-         {
-            deleted = temp;
-            n->attr = NULL;
-         }
-         /* Two or more Attribute */
-         else
-         {
-            while(temp->next->next != NULL)
-            {
-               temp = temp->next;
-            }
-            deleted = temp->next;
-            temp->next = NULL;
-         }
-      }
-   }
-
-   return deleted;
-}
-
-
-/**
- * \brief Tell if a Node has Attribute or not.
- *
- * \param n  Checked Node.
- * \return   \c true if Node n has at least one Attribute, \c false if not.
- */
-Boolean hasAttribute(Node* n)
-{
-   return(n->attr != NULL);
-}
-
-
-
-
-
-/**
- * \brief Destroy an Attribute and the ones after it.
- * Destroy Attribute first, then Attribute pointed by first->next, then
- * Attribute pointed by first->next->next, etc.
- * \see destroyAttribute
- *
- * \param first  First destroyed Attribute
- */
-void destroyNextAttributes(Attribute* first)
-{
-   Attribute* temp;
-
-   temp = first;
-   while(temp != NULL) {
-      temp = destroyAttribute(temp);
-   }
-}
-
-
-/**
- * \brief Destroy every Attributes of a Node
- * Free memory allocated to members (name and value) and Attributes.
- *
- * \param n  Node where Attributes are destroyed.
- */
-void destroyEveryAttributes(Node* n)
-{
-   Attribute* temp;
-
-   if(n != NULL)
-   {
-      while(hasAttribute(n))
-      {
-         temp = deleteFirstAttribute(n);
-         if(temp->name != NULL)
-            free(temp->name);
-         if(temp->value != NULL)
-            free(temp->value);
-         free(temp);
-      }
-   }
-
+   setXMLAttributeName(src->name, dst);
+   setXMLAttributeValue(src->value, dst);
 }

@@ -13,108 +13,169 @@
 
 
 /**
- * \brief Create a Node.
- * Create a Node with a name and a value.
+ * \brief Create an initialized XML node.
+ * Allocate memory for a XML node and initialize it.
  *
- * \param[in] name   Given name for \p n.
- * \param[in] value  Given value for \p n.
- * \param     n      Created Node.
- * \return           Created Node.
+ * \return  Created XML node.
  */
-Node* createNode(const char* name, const char* value, Node* n)
+XML_Node* createXMLNode(void)
 {
-   n = allocateNode(n);
-   resetNode(n);
-   setNodeName(name, n);
-   setNodeValue(value, n);
+   XML_Node* n;
+
+   n = NULL;
+   n = allocXMLNode(n);
+   initXMLNode(n);
 
    return n;
 }
 
 
 /**
- * \brief Erase existence of a node and it's children.
- * Free specific members of a Node : name, value, Attributes
- * Recursively use destroyNode() on every child Node, from first to last.
+ * \brief Destroy a XML node.
+ * Free all memory allocated for a XML node. Recursively destroy its attributes
+ * and its children to prevent memory leaks. References in parent and siblings
+ * node are deleted to prevent memory violations.
  *
- * \param n  Destroyed Node.
+ * \param n  Destroyed XML node.
  */
-void destroyNode(Node* n)
+void destroyXMLNode(XML_Node* n)
 {
-   if(n != NULL)
-   {
-      /* destroy Attributes */
-      destroyEveryAttributes(n);
-      /* free members */
-      if(n->name != NULL)
+   if(n == NULL) {
+      logError("Trying to destroy a NULL node", __FILE__, __LINE__);
+   }
+   else {
+      /* destroy children */
+      while(n->cc > 0) {
+         destroyXMLNode(n->last);
+      }
+
+      /* delete reference from parent and siblings nodes */
+      if(n->parent != NULL) {
+         deleteXMLNodeFromParent(n->parent, n);
+      }
+
+      /* destroy other members */
+      if(n->name != NULL) {
+         /* logMem(FREE, "string", __FILE__, __LINE__); */
          free(n->name);
-      if(n->value != NULL)
+      }
+      if(n->value != NULL) {
+         /* logMem(FREE, "string", __FILE__, __LINE__); */
          free(n->value);
-      /* destroy child Nodes */
-      forEachNodeChild(n, destroyNode);
-      /* free Node */
+      }
+      if(n->attr != NULL) {
+         destroyXMLAttribute(n->attr);
+      }
+
+      /* free node */
+      /* logMem(FREE, "XML_Node", __FILE__, __LINE__); */
+      free(n);
+   }
+}
+
+
+XML_Node* allocXMLNode(XML_Node* n)
+{
+   if(n != NULL) {
+      logError("Try to allocate memory for an already used node",
+               __FILE_, __LINE__);
+   }
+   else if((n = malloc(sizeof(XML_Node))) == NULL) {
+      logError("Can't allocate memory for a XML node", __FILE__, __LINE__);
+   }
+   else {
+      /* logMem(ALLOC, "XML_Node", __FILE__, __LINE__); */
+   }
+
+   return n;
+}
+
+
+void freeXMLNode(XML_Node* n)
+{
+   if(n == NULL) {
+      logError("Trying to free a NULL node", __FILE__, __LINE__);
+   }
+   else if((n->name != NULL) ||
+           (n->value != NULL) ||
+           (n->attr != NULL) ||
+           (n->parent != NULL) ||
+           (n->previous != NULL) ||
+           (n->next != NULL) ||
+           (n->first != NULL) ||
+           (n->current != NULL) ||
+           (n->last != NULL) ||
+           (n->cc != 0)) {
+      logError("Trying to free a non initialized node", __FILE__, __LINE__);
+   }
+   else {
+      /* logMem(FREE, "XML_Node", __FILE__, __LINE__); */
       free(n);
    }
 }
 
 
 /**
- * \brief Allocate memory for a Node.
- *
- * \param n  Memoryless Node
- * \return   Memorized  Node
- */
-Node* allocateNode(Node* n)
-{
-   if((n = malloc(sizeof(Node))) == NULL)
-   {
-      printf("\nerror in createNode(Node * n)");
-   }
-
-   return n;
-}
-
-
-/**
- * \brief Reset a node.
+ * \brief Initialize a node.
  * Set a Node's members to NULL for the pointers and 0 for the children count.
  *
- * \param n  Reseted Node
+ * \param n  Initialized Node
  */
-void resetNode(Node* n)
+void initXMLNode(XML_Node* n)
 {
-   if(n != NULL)
-   {
+   if(n == NULL) {
+      logError("Trying to initialize a NULL node", __FILE__, __LINE__);
+   }
+   else {
       n->name = NULL;
       n->value = NULL;
       n->attr = NULL;
-      /* Node's parent */
       n->parent = NULL;
-      /* Node's siblings */
-      n->previous = n->next = NULL;
-      /* Node's children */
-      n->first = n->current = n->last = NULL;
+      n->previous = NULL;
+      n->next = NULL;
+      n->first = NULL;
+      n->current = NULL;
+      n->last = NULL;
       n->cc = 0;
    }
 }
 
 
+
 /**
- * \brief Set a name for a Node.
+ * \brief Set a node's name.
+ * Allocate memory for a \p node 's name, and copy \p name 's content in it.
+ * If \p node already has a name, memory is reallocated instead.
  *
- * \param[in] name given name
- * \param     n    modified Node
+ * \param[in] name  Given name.
+ * \param     node   Modified node.
  */
-void setNodeName(const char* name, Node* n)
+void setXMLNodeName(const char* name, XML_Node* n)
 {
-   if(name != NULL && n != NULL)
-   {
-      if((n->name = malloc((strlen(name) + 1) * sizeof(char))) == NULL)
-      {
-         printf("error in setNodeName()");
+   /* NULL node */
+   if(n != NULL) {
+      logError("Giving a name to a NULL node", __FILE__, __LINE__);
+   }
+   /* NULL node */
+   else if(n != NULL) {
+      logError("Giving a NULL name to a node", __FILE__, __LINE__);
+   }
+   /* node already has a name */
+   else if(n->name != NULL) {
+      if((n->name = realloc(n->name, (strlen(name) + 1) * sizeof(char))) == NULL) {
+         logError("Can't reallocate memory for node's name", __FILE__, __LINE__);
       }
-      else
-      {
+      else {
+         strcpy(n->name, name);
+      }
+   }
+   /* node doesn't have a name */
+   else {
+      if((node->n = malloc((strlen(name) + 1) * sizeof(char))) == NULL) {
+         logError("can't allocate memory for node's name", __FILE__, __LINE__);
+      }
+      else {
+         /* logMem(ALLOC, "string", __FILE__, __LINE__) */
          strcpy(n->name, name);
       }
    }
@@ -122,21 +183,39 @@ void setNodeName(const char* name, Node* n)
 
 
 /**
- * \brief Set a value for a Node.
+ * \brief Set a node's value.
+ * Allocate memory for a \p node 's value, and copy \p value 's content in it.
+ * If \p node already has a value, memory is reallocated instead.
  *
- * \param[in] value given value
- * \param     n     modified Node
+ * \param[in] value  Given value.
+ * \param     node   Modified node.
  */
-void setNodeValue(const char* value, Node* n)
+void setXMLNodeValue(const char* value, XML_Node* n)
 {
-   if(value != NULL && n != NULL)
-   {
-      if((n->value = malloc((strlen(value) + 1) * sizeof(char))) == NULL)
-      {
-         printf("error in setNodeValue()");
+   /* NULL node */
+   if(n != NULL) {
+      logError("Giving a value to a NULL node", __FILE__, __LINE__);
+   }
+   /* NULL node */
+   else if(n != NULL) {
+      logError("Giving a NULL value to a node", __FILE__, __LINE__);
+   }
+   /* node already has a value */
+   else if(n->value != NULL) {
+      if((n->value = realloc(n->value, (strlen(value) + 1) * sizeof(char))) == NULL) {
+         logError("Can't reallocate memory for node's value", __FILE__, __LINE__);
       }
-      else
-      {
+      else {
+         strcpy(n->value, value);
+      }
+   }
+   /* node doesn't have a value */
+   else {
+      if((node->n = malloc((strlen(value) + 1) * sizeof(char))) == NULL) {
+         logError("can't allocate memory for node's value", __FILE__, __LINE__);
+      }
+      else {
+         /* logMem(ALLOC, "string", __FILE__, __LINE__) */
          strcpy(n->value, value);
       }
    }
@@ -144,41 +223,135 @@ void setNodeValue(const char* value, Node* n)
 
 
 /**
- * \brief Print a Node's data in the terminal.
+ * \brief Add an attribute to a XML node.
  *
- * \param[in] n     Read Node.
- * \param[in] mode  Quantity of informations displayed.
- *                  1 = few informations (name and value)
- *                  2 = more informations (name, value and names of parent,
- *                      siblings and children)
- *                  3 = lot of informations (WIP)
- * \todo Implement mode 2 and 3.
+ * \param attr  Added attribute.
+ * \param n     Modified node.
  */
-void printNode(const Node* n, const int mode)
+void addAttributeToXMLNode(Attribute* attr, XML_Node* n)
 {
-   if(n == NULL)
-   {
-      printf("Node doesn't exist (NULL pointer).\n");
+   if(n == NULL) {
+      logError("Trying to add an attribute to a NULL tag", __FILE__, __LINE__);
    }
-   else
-   {
-      /* Name */
-      if(n->name == NULL)
-      {
-         printf("Name = NULL\n");
+   else if(n == NULL) {
+      logError("Trying to add a NULL attribute to a tag", __FILE__, __LINE__);
+   }
+   /* no attribute in node */
+   else if(n->attr == NULL) {
+      n->attr = attr;
+   }
+   /* one or more attributes in node */
+   else {
+      attr->next = n->attr;
+      n->attr = attr;
+   }
+}
+
+
+/**
+ * \brief Delete an attribute form a XML node.
+ * Remove reference of an attribute from a XML node, and return the deleted
+ * attribute. The deleted attribute isn't freed from memory.
+ *
+ * \param n  Modified node.
+ * \return     Deleted attribute.
+ */
+XML_Attribute* deleteAttributeFromXMLNode(XML_Node* n)
+{
+   XML_Attribute* deleted;
+
+   if(n == NULL) {
+      logError("Trying to delete an attribute from a NULL node",
+               __FILE__, __LINE__);
+   }
+   else if(n->attr == NULL) {
+      logError("Nothing to delete in node", __FILE__, __LINE__);
+   }
+   else {
+      deleted = n->attr;
+      n->attr = deleted->next;
+      deleted->next = NULL;
+   }
+
+   return deleted;
+}
+
+
+void addXMLNodeToParent(XML_Node* parent, XML_Node* child)
+{
+   if(parent == NULL) {
+      logError("Trying to add child node in a NULL parent", __FILE__, __LINE__);
+   }
+   else if(child == NULL) {
+      logError("Trying to add NULL child node in a parent", __FILE__, __LINE__);
+   }
+   else if(child->parent != NULL) {
+      logError("Child node already has a parent", __FILE__, __LINE__);
+   }
+   else if((child->previous != NULL) || (child->next != NULL)) {
+      logError("Child node already has siblings", __FILE__, __LINE__);
+   }
+   else {
+      child->parent = parent;
+      (parent->cc)++;
+      /* no child in parent node */
+      if(parent->last == NULL) {
+         parent->first = child;
+         parent->current = child;
+         parent->last = child;
       }
-      else
-      {
-         printf("Name = \"%s\"\n", n->name);
+      /* other children in parent node */
+      else {
+         parent->last->next = child;
+         child->previous = parent->last;
+         parent->last = child;
       }
-      /* Value */
-      if(n->value == NULL)
-      {
-         printf("Value = NULL\n");
+   }
+}
+
+
+void deleteXMLNodeFromParent(XML_Node* child)
+{
+   if(child == NULL) {
+      logError("Trying to delete a NULL node from its parent",
+               __FILE__, __LINE__);
+   }
+   else if(child->parent == NULL) {
+      logError("Node doesn't have parent and can't be deleted",
+               __FILE__, __LINE__);
+   }
+   else {
+      /* decrement parent's child count */
+      (child->parent->cc)--;
+      /* remove reference from parent first node */
+      if(child->parent->first == child) {
+         child->parent->first = child->next;
       }
-      else
-      {
-         printf("Value = \"%s\"\n", n->value);
+      /* remove reference from parent last node */
+      if(child->parent->last == child) {
+         child->parent->last = child->previous;
       }
+      /* remove reference from parent current node */
+      if(child->parent->current == child) {
+         if(child->next == NULL) {
+            child->parent->current = child->previous;
+         }
+         else {
+            child->parent->current = child->next;
+         }
+      }
+      /* remove reference to parent */
+      child->parent = NULL;
+      /* remove reference from previous node */
+      if(child->previous != NULL) {
+         child->previous->next = child->next;
+      }
+      /* remove reference from next node */
+      if(child->next != NULL) {
+         child->next->previous = child->previous;
+      }
+      /* remove references to siblings */
+      child->previous = NULL;
+      child->next = NULL;
    }
 }

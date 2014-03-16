@@ -58,45 +58,19 @@ struct XML_Node
 XML_Node* createXMLNode(void);
 void destroyXMLNode(XML_Node* n);
 
-void resetXMLNode(XML_Node* n);
+XML_Node* allocXMLNode(XML_Node* n);
+void freeXMLNode(XML_Node* n);
+
+void initXMLNode(XML_Node* n);
+
 void setXMLNodeName(const char* name, XML_Node* n);
 void setXMLNodeValue(const char* value, XML_Node* n);
 
-void printXMLNode(const XML_Node* n, const int mode);
+void addAttributeToXMLNode(Attribute* attr, XML_Node* n);
+XML_Attribute* deleteAttributeFromXMLNode(XML_Node* n);
 
-
-
-/**
- * \name Attribute functions
- */
-/**@{*/
-void insertFirstAttribute(Attribute* a, Node* n);
-void insertLastAttribute(Attribute* a, Node* n);
-
-Attribute* deleteFirstAttribute(Node* n);
-Attribute* deleteLastAttribute(Node* n);
-
-Boolean hasAttribute(Node* n);
-
-void destroyEveryAttributes(Node* n);
-/**@}*/ /* Attribute functions */
-
-
-/**
- * \name List functions
- */
-/**@{*/
-Boolean hasNodeChildren(Node* n);
-Boolean hasNodeParent(Node* n);
-
-void insertFirst(Node* child, Node* parent);
-void insertLast(Node* child, Node* parent);
-
-Node* deleteFirstNodeList(Node* parent);
-Node* deleteLastNodeList(Node* parent);
-
-void forEachNodeChild(Node* parent, void (* fn)(Node*));
-/**@}*/ /* List functions */
+void addXMLNodeToParent(XML_Node* parent, XML_Node* child);
+void deleteXMLNodeFromParent(XML_Node* child);
 
 
 #endif /* NODE_H_INCLUDED */
