@@ -15,13 +15,13 @@
  * \def WINDOW_WIDTH_DEFAULT
  * width of the window of the game
  */
-#define WINDOW_WIDTH_DEFAULT 640
+#define WINDOW_WIDTH_DEFAULT 1050
 
 /*!
  * \def WINDOW_HEIGHT_DEFAULT
  * height of the window of the game
  */
-#define WINDOW_HEIGHT_DEFAULT 480
+#define WINDOW_HEIGHT_DEFAULT 700
 
 /*!
  * \def FPS
@@ -81,6 +81,7 @@ typedef struct Game {
    GameOptions* options;
    GameEvent* event;
    Level* level;
+   SDL_Surface* background;
    Character* player;
 } Game;
 

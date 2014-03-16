@@ -56,7 +56,7 @@ void initGameStatus(Game* game){
 
 void initLevel(Game* game){
    game->level = (Level*) malloc(sizeof(Level));
-   game->level->imgTest = SDL_LoadBMP("icon.bmp");
+   game->level->imgTest = SDL_LoadBMP("res/icon.bmp");
    game->level->src = (SDL_Rect*) malloc(sizeof(SDL_Rect));
    game->level->src->x = game->level->src->y = 150;
 }
@@ -94,8 +94,8 @@ void gameDisplay(Game* game){
    display character
    display HUD
    ...*/
+   displayBackground(game);
 
-   SDL_BlitSurface(game->level->imgTest, NULL, game->screen, game->level->src);
   /* game->status->fps++;
    game->status->fpsEnd = SDL_GetTicks();
    if(game->status->fpsEnd >10000)
