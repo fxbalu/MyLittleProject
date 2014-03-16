@@ -218,7 +218,7 @@
   <object gid="15" x="490" y="350"/>
   <object gid="15" x="560" y="350"/>
   <object type="coin" gid="15" x="560" y="420"/>
-  <object type="piece" gid="15" x="630" y="350"/>
+  <object type="coin" gid="15" x="630" y="350"/>
   <object gid="15" x="630" y="420"/>
   <object gid="15" x="560" y="350"/>
   <object type="coin" gid="15" x="560" y="350"/>
@@ -228,7 +228,7 @@
   <object gid="15" x="630" y="350"/>
   <object type="coin" gid="15" x="630" y="350"/>
   <object gid="15" x="490" y="350"/>
-  <object name="pièce1" gid="15" x="490" y="350"/>
+  <object name="coin" gid="15" x="490" y="350"/>
   <object type="coin" gid="15" x="490" y="350"/>
   <object type="coin" gid="15" x="490" y="420"/>
   <object gid="15" x="630" y="350"/>
