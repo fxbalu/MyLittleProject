@@ -31,7 +31,7 @@
 
 /*!
  * \def SKIP_TICKS
- * ### TO B-B-B-B-BE DEFIIINEED BY -----> GWEEEENDOU <------ mouaahahahaha
+ * ### time (in ms) between two frames
  */
 #define SKIP_TICKS (1000/FPS)
 
@@ -45,6 +45,10 @@ typedef struct GameStatus {
    /*Variables for the FPS*/
    Uint32 nextTick;
    Uint32 sleepTime;
+
+   Uint32 fps;
+   Uint32 fpsStart; /*temporary variable to calculate the fps rate*/
+   Uint32 fpsEnd;
 } GameStatus;
 
 /*!
@@ -57,6 +61,16 @@ typedef struct GameOptions {
    Boolean fullscreen;
 } GameOptions;
 
+typedef struct GameEvent {
+   SDL_Event sdlEvent;
+   Boolean eventInQueue;
+} GameEvent;
+
+typedef struct Level {
+   SDL_Surface* imgTest;
+   SDL_Rect* src;
+} Level;
+
 /*!
  * \struct Game
  * variables necessaries to most of the game-related functions
@@ -65,14 +79,18 @@ typedef struct Game {
    SDL_Surface* screen;
    GameStatus* status;
    GameOptions* options;
-   SDL_Event event;
+   GameEvent* event;
+   Level* level;
    Character* player;
 } Game;
 
-int gameInit(Game* game);  //initialiser les paramètres du jeu
+int gameInit(Game* game);  /* initialiser les paramètres du jeu */
 void initGameStatus(Game* game);
+void initLevel(Game* game);
+
 void gameDelay(Game* game);
-void gameEvent(Game* game); // gestion d'events
+void gameEvent(Game* game); /* gestion d'events */
+void gameUpdate(Game* game);
 void gameDisplay(Game* game);
 
 #endif // DEFINED_GAME_H
