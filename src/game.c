@@ -46,8 +46,6 @@ int initGame(Game* game) {
 }
 
 
-
-
 /*a deplacer*/
 void updateGameEvent(Game* game){
 

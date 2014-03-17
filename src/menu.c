@@ -28,7 +28,7 @@ void displayMenuBlock(Game* game) {
 
    game->menu->rectSrc->x = 0;
    game->menu->rectSrc->y = 0;
-   game->menu->rectSrc->w = 190;
+   game->menu->rectSrc->w = 190; /*Should be done in the initMenu function*/
    game->menu->rectSrc->h = 49;
 
    game->menu->rectDst->x = game->options->windowWidth/2 - (190/2);
