@@ -199,6 +199,7 @@ XML_Node* parseXMLFile(FILE* file)
 
    /* read following tags, if any */
    while(endOfParsing == false) {
+         reachNextXMLTag(file);
       tag = readXMLTag(file);
 
       if(tag == NULL) {
