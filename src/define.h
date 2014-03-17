@@ -31,4 +31,4 @@
  */
 #define SKIP_TICKS (1000/FPS)
 
-#endif // DEFINE_H_INCLUDED
+#endif

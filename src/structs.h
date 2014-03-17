@@ -35,8 +35,11 @@ typedef struct GameOptions {
 
 typedef struct Menu {
    char** contenu;/* a revoir */
+   int selection;
    SDL_Surface* menuSpriteSheet;
    SDL_Surface* splashScreen;
+   SDL_Rect* rectSrc;
+   SDL_Rect* rectDst;
 } Menu;
 
 /**

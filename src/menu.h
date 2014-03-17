@@ -15,4 +15,6 @@ void initMenu (Game* game);
 
 void displayMenu(Game* game);
 
+void displayMenuBlock(Game* game);
+
 #endif

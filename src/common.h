@@ -26,4 +26,4 @@ typedef enum Boolean{
 void logError(const char* str, const char* file, const int line);
 
 
-#endif /* COMMON_H_INCLUDED */
+#endif
