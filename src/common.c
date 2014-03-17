@@ -1,9 +1,6 @@
 /**
  * \file common.c
  * \brief Common functions
- *
- * Error logging function.
- *
  * \author François-Xavier Balu \<fx.balu@gmail.com\>
  * \date 12 mars 2014
  */

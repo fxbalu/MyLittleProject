@@ -8,14 +8,8 @@
 #ifndef DEFINED_CHARACTER_H
 #define DEFINED_CHARACTER_H
 
-#include <SDL.h>
+#include "structs.h"
 
-/*!
- * \struct Character
- * variables to manage the character
- */
-typedef struct Character{
-   SDL_Rect* position;
-}Character;
+void displayCharacter(Game* game);
 
-#endif // DEFINED_CHARACTER_H
+#endif

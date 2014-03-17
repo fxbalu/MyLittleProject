@@ -12,16 +12,14 @@
 #ifndef COMMON_H_INCLUDED
 #define COMMON_H_INCLUDED
 
-#include <stdlib.h>
-#include <stdio.h>   /* fprintf(), stderr */
-#include <SDL.h>
+#include <stdio.h>
 
 /**
  * \enum boolean
  * \brief Enum with two values : true and false
  */
 typedef enum Boolean{
-   false= 0, true= 1
+   false = 0, true = 1
 } Boolean;
 
 

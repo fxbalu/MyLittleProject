@@ -1,4 +1,4 @@
-/*!
+/**
  * \file game.c
  * \brief major functions for the game
  * \author fx.balu & a.dufac & g.henry & m.parisot & v.werner
@@ -7,7 +7,7 @@
 
 #include "game.h"
 
-int gameInit(Game* game) {
+int initGame(Game* game) {
 
    /*Initialisation SDL*/
    if(SDL_Init(SDL_INIT_VIDEO) != 0) {
@@ -16,21 +16,25 @@ int gameInit(Game* game) {
    }
    atexit(SDL_Quit);
 
-   /* Initialisation GameStatus*/
+   /*Initialisation GameStatus*/
    initGameStatus(game);
 
-   /*Creation de la fenetre */
+   /*Initialisation GameOptions*/
+   initGameOptions(game);
+
+   /*Create the SDL window*/
    game->screen = SDL_SetVideoMode(game->options->windowWidth, game->options->windowHeight, 32, SDL_HWSURFACE|SDL_DOUBLEBUF);
 
    if(game->screen == NULL) {
-      fprintf(stderr, "Unable to create the window : %s\n", SDL_GetError());
-      return -1;
+      fprintf(stderr, "Unable to create the window : %s\n", SDL_GetError());      return -1;
    }
+
+   initMenu(game);
 
    initLevel(game);
 
    /*Initialisation des timers*/
-   game->status->nextTick = SDL_GetTicks()+SKIP_TICKS;
+   game->status->nextTick = SDL_GetTicks() + SKIP_TICKS;
 
    /*Initialisation de la gestion d'event*/
    /*init GameEvent or Input*/
@@ -40,69 +44,73 @@ int gameInit(Game* game) {
    return 0;
 }
 
-void initGameStatus(Game* game){
-   game->status = (GameStatus*) malloc(sizeof(GameStatus));
-   game->status->gameIsRunning = true;
-   game->options = (GameOptions*) malloc(sizeof(GameOptions));
-   game->options->fullscreen = false;
-   game->options->windowWidth = WINDOW_WIDTH_DEFAULT;
-   game->options->windowHeight = WINDOW_HEIGHT_DEFAULT;
-   game->status->nextTick = game->status->sleepTime = 0;
 
-   game->status->fps=0;/*Temporary*/
-   game->status->fpsStart = SDL_GetTicks();
-   game->status->fpsEnd = SDL_GetTicks() + SKIP_TICKS;
-}
 
-void initLevel(Game* game){
-   game->level = (Level*) malloc(sizeof(Level));
-   game->level->imgTest = SDL_LoadBMP("res/icon.bmp");
-   game->level->src = (SDL_Rect*) malloc(sizeof(SDL_Rect));
-   game->level->src->x = game->level->src->y = 150;
-}
 
-void gameDelay(Game* game) {
-
-   game->status->sleepTime = 0;
-   if (game->status->nextTick > SDL_GetTicks()){
-      game->status->sleepTime = game->status->nextTick - SDL_GetTicks();
-   }
-   game->status->nextTick += SKIP_TICKS;
-
-   if(game->status->sleepTime >= 0) {
-      SDL_Delay(game->status->sleepTime); /*Pas terrible le sdl delay, à voir si on modifie ca*/
-   }
-}
-
-void gameEvent(Game* game){
+/*a deplacer*/
+void updateGameEvent(Game* game){
 
    SDL_PollEvent(&(game->event->sdlEvent));
 
    if(game->event->sdlEvent.type == SDL_QUIT){
       game->status->gameIsRunning = false;
    }
+   if(game->event->sdlEvent.type == SDL_KEYDOWN) {
+      game->status->state = inGame;
+   }
 }
 
-void gameUpdate(Game* game) {
-   SDL_FillRect(game->screen, NULL, SDL_MapRGB(game->screen->format, 0, 0, 0));
+
+void updateGame(Game* game) {
+
+   updateGameEvent(game);
+   /*update game status options etc*/
+
 }
 
-void gameDisplay(Game* game){
+void clearScreen (Game* game){
 
-   /*display background
-   display tiles
-   display character
-   display HUD
-   ...*/
-   displayBackground(game);
+   SDL_FillRect(game->screen, NULL, SDL_MapRGB(game->screen->format, 255, 255, 255));
+}
 
-  /* game->status->fps++;
-   game->status->fpsEnd = SDL_GetTicks();
-   if(game->status->fpsEnd >10000)
-      fprintf(stdout, "%d %d %d\n", game->status->fps,game->status->fpsEnd, game->status->fpsStart);*/
-   SDL_Flip(game->screen);
-   /*
-   if(SDL_Flip(game->screen) == -1){
-      logError("error during the flip screen", __FILE__, __LINE__);
-   }*/
+void displayGame(Game* game) {
+
+   clearScreen(game);
+
+   switch (game->status->state) {
+   case menu :
+      displayMenu(game);
+      break;
+   case options :
+      /*displayOptions(game);*/
+      break;
+   case inGame :
+      displayLevel(game);
+      displayCharacter(game);
+      break;
+   default :
+      displayMenu(game);;
+      break;
+   }
+
+   if(SDL_Flip(game->screen) == -1) {
+      logError("Error when flipping screen", __FILE__, __LINE__);
+   }
+}
+
+/**
+ * \param game Pointer on a Game structure.
+ * \brief Function to wait a brief amount of time so the game runs at a constant FPS.
+ */
+ void delayGame(Game* game) {
+
+   game->status->sleepTime = 0;
+
+   if (game->status->nextTick > SDL_GetTicks()) {
+      game->status->sleepTime = game->status->nextTick - SDL_GetTicks();
+   }
+
+   game->status->nextTick += SKIP_TICKS;
+
+   SDL_Delay(game->status->sleepTime);
 }
