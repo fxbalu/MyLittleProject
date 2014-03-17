@@ -376,9 +376,20 @@ void initXMLNodeFromXMLTag(XML_Node* n, XML_Tag* tag)
 }
 
 
-void printXMLNode(XML_Node* n)
+/**
+ * \brief Display a node's data in a terminal
+ * Display name and attributes of a node. If complete mode is chosen, this node
+ * and its descendants will also be displayed.
+ *
+ * \param n     Displayed node.
+ * \param mode  Quantity of informations displayed. 1 is normal mode, and only
+ *              the given node is displayed. 2 is complete mode, and descendants
+ *              are displayed too.
+ */
+void printXMLNode(XML_Node* n, int mode)
 {
    XML_Attribute* current;
+   XML_Node* child;
 
    if(n == NULL) {
       logError("Trying to print a NULL node", __FILE__, __LINE__);
@@ -391,6 +402,19 @@ void printXMLNode(XML_Node* n)
          printf(" %s=\"%s\"", current->name, current->value);
          current = current->next;
       }
-      printf("/>");
+      /* normal display mode, without descendants */
+      if(mode != 2) {
+         printf("/>");
+      }
+      /* complete display mode, with descendants */
+      else {
+         printf(">\n");
+         child = n->first;
+         while(child != NULL) {
+            printXMLNode(child, 2);
+            child = child->next;
+         }
+         printf("</%s>\n", n->name);
+      }
    }
 }
