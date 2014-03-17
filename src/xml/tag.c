@@ -376,3 +376,17 @@ XML_Tag* readXMLTag(FILE* file)
    return tag;
 }
 
+
+void reachNextXMLTag(FILE* file)
+{
+   int charBuffer;
+
+   do {
+      charBuffer = fgetc(file);
+   } while((charBuffer != (char)'<') && (charBuffer != EOF));
+
+   if(charBuffer == EOF) {
+      logError("Reached End Of File while searching for next tag",
+               __FILE__, __LINE__);
+   }
+}

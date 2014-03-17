@@ -68,4 +68,7 @@ XML_Attribute* deleteAttributeFromXMLTag(XML_Tag* tag);
 
 XML_Tag* readXMLTag(FILE* file);
 
+void reachNextXMLTag(FILE* file);
+
+
 #endif /* TAG_H_INCLUDED */
