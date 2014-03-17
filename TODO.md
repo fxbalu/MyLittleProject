@@ -5,6 +5,8 @@
 - [ ] Document functions, Doxygen style
 - [ ] Handle Events better, whithout delay
 - [ ] Redo delay() function
+- [ ] Add comments support in XML Parser
+- [ ] Add node's value support in XML Parser
 
 ## Example todo list ##
 
@@ -15,13 +17,11 @@
 
 ## Old todo list ##
 
-	general:
+general:
 doxy des fonctions
 gestion des events clean (sans attente)
 revoir la fonction delay
 
-
-	define.h:
- 
+define.h:
 l.29: description du SKIP_TICKS
 
