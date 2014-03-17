@@ -72,6 +72,6 @@ void deleteXMLNodeFromParent(XML_Node* child);
 
 void initXMLNodeFromXMLTag(XML_Node* n, XML_Tag* tag);
 
-void printXMLNode(XML_Node* n);
+void printXMLNode(XML_Node* n, int mode);
 
 #endif /* NODE_H_INCLUDED */
