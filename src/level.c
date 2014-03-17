@@ -1,4 +1,11 @@
-#include "level.h"
+/**
+ * \file level.c
+ * \brief Functions to draw the level on the screen.
+ * \author fx.balu & a.dufac & gw.henry & m.parisot & v.werner
+ * \date 14.03.2014
+ */
+
+ #include "level.h"
 
 void initLevel(Game* game) {
    game->level = (Level*) malloc(sizeof(Level));

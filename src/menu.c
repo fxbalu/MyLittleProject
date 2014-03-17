@@ -1,6 +1,7 @@
 /**
  * \file menu.c
- * \brief Functions to display all the menu stuffs, options, credits, splashdcreen etc ...
+ * \brief Functions to draw all the menu stuffs, options, credits, splashdcreen etc ...
+ * \author fx.balu & a.dufac & gw.henry & m.parisot & v.werner
  */
 
 #include "menu.h"

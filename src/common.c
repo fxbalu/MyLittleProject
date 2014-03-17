@@ -1,6 +1,6 @@
 /**
  * \file common.c
- * \brief Common functions
+ * \brief Common functions.
  * \author François-Xavier Balu \<fx.balu@gmail.com\>
  * \date 12 mars 2014
  */

@@ -1,7 +1,7 @@
 /**
  * \file game.h
- * \brief structs and prototypes necessaries for the major functions of the game
- * \author fx.balu & a.dufac & g.henry & m.parisot & v.werner
+ * \brief Prototypes of functions used in the main function.
+ * \author fx.balu & a.dufac & gw.henry & m.parisot & v.werner
  * \date 14.03.2014
  */
 
@@ -10,7 +10,7 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <SDL/SDL.h>
+#include <SDL.h>
 
 #include "define.h"
 #include "common.h"

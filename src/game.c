@@ -1,7 +1,7 @@
 /**
  * \file game.c
- * \brief major functions for the game
- * \author fx.balu & a.dufac & g.henry & m.parisot & v.werner
+ * \brief Major functions for the game.
+ * \author fx.balu & a.dufac & gw.henry & m.parisot & v.werner
  * \date 14.03.2014
  */
 
@@ -26,7 +26,8 @@ int initGame(Game* game) {
    game->screen = SDL_SetVideoMode(game->options->windowWidth, game->options->windowHeight, 32, SDL_HWSURFACE|SDL_DOUBLEBUF);
 
    if(game->screen == NULL) {
-      fprintf(stderr, "Unable to create the window : %s\n", SDL_GetError());      return -1;
+      fprintf(stderr, "Unable to create the window : %s\n", SDL_GetError());
+      return -1;
    }
 
    initMenu(game);
@@ -89,7 +90,7 @@ void displayGame(Game* game) {
       displayCharacter(game);
       break;
    default :
-      displayMenu(game);;
+      displayMenu(game);
       break;
    }
 
