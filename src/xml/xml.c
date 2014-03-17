@@ -160,10 +160,83 @@ Boolean checkFirstLineXMLFile(XML_File* xml)
       return (strcmp(firstLine, XML_FIRST_LINE) == 0);
    }
 
-   return false;
+   return (1 == 0);
 }
 
 
-void parseXMLFile(XML_File* xml);
+XML_Node* parseXMLFile(FILE* file)
+{
+   XML_Node *current, *child, *root;
+   XML_Tag* tag;
+   Boolean endOfParsing;
 
-XML_Node* loadDataFromXMLFile(const char* filePath);
+   current = child = root = NULL;
+   tag = NULL;
+   endOfParsing = false;
+
+   /* read first tag */
+   if((tag = readXMLTag(file)) == NULL) {
+      logError("Nothing to parse", __FILE__, __LINE__);
+      destroyXMLTag(tag);
+      return NULL;
+   }
+   else if(tag->type == CLOSING) {
+      logError("First tag is a closing tag", __FILE__, __LINE__);
+      destroyXMLTag(tag);
+      return NULL;
+   }
+   else if(tag->type == UNIQUE) {
+      root = createXMLNode();
+      initXMLNodeFromXMLTag(root, tag);
+      destroyXMLTag(tag);
+      return root;
+   }
+   else /* tag->type == OPENING */ {
+      current = root = createXMLNode();
+      initXMLNodeFromXMLTag(current, tag);
+      destroyXMLTag(tag);
+   }
+
+   /* read following tags, if any */
+   while(endOfParsing == false) {
+      tag = readXMLTag(file);
+
+      if(tag == NULL) {
+         logError("No tag remaining, and tree isn't finished",
+                  __FILE__, __LINE__);
+         destroyXMLNode(root);
+         return NULL;
+      }
+      /* Tag opens a child node for current node */
+      else if(tag->type == OPENING) {
+         child = createXMLNode();
+         initXMLNodeFromXMLTag(child, tag);
+         addXMLNodeToParent(current, child);
+         current = child;
+      }
+      else if(tag->type == UNIQUE) {
+         child = createXMLNode();
+         initXMLNodeFromXMLTag(child, tag);
+         addXMLNodeToParent(current, child);
+      }
+      /* Tag close current node */
+      else if(tag->type == CLOSING) {
+         if(current->parent != NULL) {
+            current = current->parent;
+         }
+         else {
+            endOfParsing = true;
+         }
+      }
+
+      destroyXMLTag(tag);
+   }
+
+   if(root != current) {
+      logError("Last closed node isn't root node", __FILE__, __LINE__);
+      destroyXMLNode(root);
+      return NULL;
+   }
+
+   return root;
+}

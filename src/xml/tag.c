@@ -317,16 +317,16 @@ XML_Tag* readXMLTag(FILE* file)
       case (int)'/':
          if(tag->type == UNKNOWN) {
             tag->type = UNIQUE;
+            /* check implied following '>' */
+            if((charBuffer = fgetc(file)) != (int)'>') {
+               logError("Badly parsed XML file.", __FILE__, __LINE__);
+               destroyXMLTag(tag);
+               return NULL;
+            }
          }
          else {
-            logError("XML parser found a closing unique tag.",
+            logError("XML parser found a closing unique tag !",
                      __FILE__, __LINE__);
-            destroyXMLTag(tag);
-            return NULL;
-         }
-         /* check implied following '>' */
-         if(fgetc(file) != (int)'>') {
-            logError("Badly parsed XML file.", __FILE__, __LINE__);
             destroyXMLTag(tag);
             return NULL;
          }
@@ -350,8 +350,8 @@ XML_Tag* readXMLTag(FILE* file)
          return NULL;
    }
 
-   /* try reading attribute if tag isn't a closing one */
-   if(tag->type != CLOSING) {
+   /* try reading attribute if tag isn't a closing one or a closed unique one */
+   if(tag->type == UNKNOWN) {
       while(charBuffer == (int)' ') {
          addAttributeToXMLTag(readXMLAttribute(file), tag);
          charBuffer = fgetc(file);

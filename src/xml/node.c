@@ -153,11 +153,11 @@ void initXMLNode(XML_Node* n)
 void setXMLNodeName(const char* name, XML_Node* n)
 {
    /* NULL node */
-   if(n != NULL) {
+   if(n == NULL) {
       logError("Giving a name to a NULL node", __FILE__, __LINE__);
    }
    /* NULL node */
-   else if(n != NULL) {
+   else if(n == NULL) {
       logError("Giving a NULL name to a node", __FILE__, __LINE__);
    }
    /* node already has a name */
@@ -193,11 +193,11 @@ void setXMLNodeName(const char* name, XML_Node* n)
 void setXMLNodeValue(const char* value, XML_Node* n)
 {
    /* NULL node */
-   if(n != NULL) {
+   if(n == NULL) {
       logError("Giving a value to a NULL node", __FILE__, __LINE__);
    }
    /* NULL node */
-   else if(n != NULL) {
+   else if(n == NULL) {
       logError("Giving a NULL value to a node", __FILE__, __LINE__);
    }
    /* node already has a value */
@@ -294,7 +294,7 @@ void addXMLNodeToParent(XML_Node* parent, XML_Node* child)
    }
    else {
       child->parent = parent;
-      (parent->cc)++;
+      parent->cc++;
       /* no child in parent node */
       if(parent->last == NULL) {
          parent->first = child;
@@ -354,5 +354,23 @@ void deleteXMLNodeFromParent(XML_Node* child)
       /* remove references to siblings */
       child->previous = NULL;
       child->next = NULL;
+   }
+}
+
+
+void initXMLNodeFromXMLTag(XML_Node* n, XML_Tag* tag)
+{
+   if(n == NULL) {
+      logError("Trying to initialize a NULL node", __FILE__, __LINE__);
+   }
+   else if(tag == NULL) {
+      logError("Trying to initialize a node from a NULL tag", __FILE__, __LINE__);
+   }
+   else {
+      initXMLNode(n);
+      setXMLNodeName(tag->name, n);
+      while(tag->attr != NULL) {
+         addAttributeToXMLNode(deleteAttributeFromXMLTag(tag), n);
+      }
    }
 }

@@ -8,9 +8,6 @@
  * \date 11 mars 2014
  *
  * \todo check usefulness of functions in XML parsing.
- * \todo change type from Node to XML_Node, like SDL does.
- * \todo use XML_Attribute list like a FIFO (First In First Out) pile.
- *       Attributes doesn't need powerful functions to use them.
  */
 
 
@@ -22,6 +19,7 @@
 #include <stdlib.h>     /* malloc(), realloc(), free() */
 #include <string.h>     /* strlen(), strcpy() */
 #include "attribute.h"  /* XML_Attribute */
+#include "tag.h"        /* readXMLTag() */
 
 /**
  * \struct XML_Node
@@ -71,6 +69,8 @@ XML_Attribute* deleteAttributeFromXMLNode(XML_Node* n);
 
 void addXMLNodeToParent(XML_Node* parent, XML_Node* child);
 void deleteXMLNodeFromParent(XML_Node* child);
+
+void initXMLNodeFromXMLTag(XML_Node* n, XML_Tag* tag);
 
 
 #endif /* NODE_H_INCLUDED */
