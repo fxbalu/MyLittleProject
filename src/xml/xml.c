@@ -78,11 +78,11 @@ void destroyXMLFile(XML_File* xml)
 void setXMLFilePath(const char* path, XML_File* xml)
 {
    /* NULL XML_File */
-   if(xml != NULL) {
+   if(xml == NULL) {
       logError("Giving a file path to a NULL XML_File", __FILE__, __LINE__);
    }
    /* NULL file path */
-   else if(path != NULL) {
+   else if(path == NULL) {
       logError("Giving a NULL file path to a XML_File", __FILE__, __LINE__);
    }
    /* XML_File already has a file path */
@@ -138,6 +138,7 @@ void closeXMLFile(XML_File* xml)
    else {
       /* logMem(FREE, "file", __FILE__, __LINE__) */
       fclose(xml->file);
+      xml->file = NULL;
    }
 }
 
