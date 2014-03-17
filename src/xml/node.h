@@ -18,10 +18,10 @@
 #define NODE_H_INCLUDED
 
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>  /* strlen(), strcpy() */
-
+#include <stdio.h>      /* printf() */
+#include <stdlib.h>     /* malloc(), realloc(), free() */
+#include <string.h>     /* strlen(), strcpy() */
+#include "attribute.h"  /* XML_Attribute */
 
 /**
  * \struct XML_Node
@@ -66,7 +66,7 @@ void initXMLNode(XML_Node* n);
 void setXMLNodeName(const char* name, XML_Node* n);
 void setXMLNodeValue(const char* value, XML_Node* n);
 
-void addAttributeToXMLNode(Attribute* attr, XML_Node* n);
+void addAttributeToXMLNode(XML_Attribute* attr, XML_Node* n);
 XML_Attribute* deleteAttributeFromXMLNode(XML_Node* n);
 
 void addXMLNodeToParent(XML_Node* parent, XML_Node* child);

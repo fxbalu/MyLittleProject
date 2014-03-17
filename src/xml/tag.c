@@ -61,7 +61,7 @@ void destroyXMLTag(XML_Tag* tag)
  */
 XML_Tag* allocXMLTag(XML_Tag* tag)
 {
-   if(tag == NULL) {
+   if(tag != NULL) {
       logError("Doesn't allocate memory for a non NULL tag to prevent memory leak",
                __FILE__, __LINE__);
       tag = NULL;
@@ -87,7 +87,7 @@ XML_Tag* allocXMLTag(XML_Tag* tag)
 void freeXMLTag(XML_Tag* tag)
 {
    if(tag == NULL) {
-      logError("Trying to free a NULL tag", __FILE__, LINE__);
+      logError("Trying to free a NULL tag", __FILE__, __LINE__);
    }
    else if((tag->name != NULL) || (tag->attr != NULL)) {
       logError("Trying to free a non initialized tag", __FILE__, __LINE__);
@@ -144,7 +144,9 @@ void resetXMLTag(XML_Tag* tag)
          /* logMem(FREE, "string", __FILE__, __LINE__); */
          free(tag->name);
       }
-      destroyXMLAttribute(tag->attr);
+      if(tag->attr != NULL) {
+         destroyXMLAttribute(tag->attr);
+      }
       initXMLTag(tag);
    }
 }
@@ -161,11 +163,11 @@ void resetXMLTag(XML_Tag* tag)
 void setXMLTagName(const char* name, XML_Tag* tag)
 {
    /* NULL tag */
-   if(tag != NULL) {
+   if(tag == NULL) {
       logError("Giving a name to a NULL tag", __FILE__, __LINE__);
    }
    /* NULL tag */
-   else if(name != NULL) {
+   else if(name == NULL) {
       logError("Giving a NULL name to a tag", __FILE__, __LINE__);
    }
    /* tag already has a name */
@@ -196,7 +198,7 @@ void setXMLTagName(const char* name, XML_Tag* tag)
  * \param attr  Added attribute.
  * \param tag   Modified Tag.
  */
-void addAttributeToXMLTag(Attribute* attr, XML_Tag* tag)
+void addAttributeToXMLTag(XML_Attribute* attr, XML_Tag* tag)
 {
    if(tag == NULL) {
       logError("Trying to add an attribute to a NULL tag", __FILE__, __LINE__);
@@ -228,6 +230,7 @@ XML_Attribute* deleteAttributeFromXMLTag(XML_Tag* tag)
 {
    XML_Attribute* deleted;
 
+   deleted = NULL;
    if(tag == NULL) {
       logError("Trying to delete an attribute from a NULL tag",
                __FILE__, __LINE__);
@@ -262,19 +265,25 @@ XML_Tag* readXMLTag(FILE* file)
    /* create a tag structure where informations will be stored */
    tag = createXMLTag();
 
-   /* check if this tag is a closing tag */
+   /* pre name parsing, check the closing tag character '/' */
    i = 0;
    charBuffer = fgetc(file);
+   /* ignore opening chevron '<' */
+   if(charBuffer == (char)'<') {
+      charBuffer = fgetc(file);
+   }
+   /* detect closing tag character '/' */
    if(charBuffer == (char)'/') {
       tag->type = CLOSING;
    }
+   /* not a closing tag, put read character in name */
    else {
-      /* not a closing tag, put read character in name */
       strBuffer[0] = (char)charBuffer;
       i++;
    }
 
    /* get tag's name */
+   charBuffer = fgetc(file);
    while((charBuffer != (int)' ') &&
          (charBuffer != (int)'>') &&
          (charBuffer != (int)'/') &&
@@ -308,8 +317,10 @@ XML_Tag* readXMLTag(FILE* file)
       case (int)'/':
          if(tag->type == UNKNOWN) {
             tag->type = UNIQUE;
-         } else {
-            logError("Badly parsed XML file.", __FILE__, __LINE__);
+         }
+         else {
+            logError("XML parser found a closing unique tag.",
+                     __FILE__, __LINE__);
             destroyXMLTag(tag);
             return NULL;
          }
@@ -323,12 +334,12 @@ XML_Tag* readXMLTag(FILE* file)
 
       /* attribute separation character ' ' */
       case (int)' ':
-         /* tag has attribute, it will be read after this switch */
+         /* tag has attribute, and can be opening or unique */
          break;
 
       /* End Of File character EOF, who shouldn't be here */
       case EOF:
-         logError("Reached EOF in XML file.", __FILE__, __LINE__);
+         logError("Reached EOF while reading XML tag", __FILE__, __LINE__);
          destroyXMLTag(tag);
          return NULL;
 
@@ -339,10 +350,18 @@ XML_Tag* readXMLTag(FILE* file)
          return NULL;
    }
 
-   /* try reading attribute if tag is an opening one */
-   if(tag->type == OPENING) {
+   /* try reading attribute if tag isn't a closing one */
+   if(tag->type != CLOSING) {
       while(charBuffer == (int)' ') {
          addAttributeToXMLTag(readXMLAttribute(file), tag);
+         charBuffer = fgetc(file);
+      }
+      /* check character after attributes */
+      if(charBuffer == (int)'>') {
+         tag->type = OPENING;
+      }
+      else if(charBuffer == (int)'/') {
+         tag->type = UNIQUE;
          charBuffer = fgetc(file);
       }
    }

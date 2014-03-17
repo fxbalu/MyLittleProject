@@ -16,6 +16,7 @@
 #include <stdio.h>   /* printf(), fopen(), fclose(), fgets() */
 #include <stdlib.h>  /* malloc(), free() */
 #include <string.h>  /* strlen(), strcpy() */
+#include "node.h"    /* XML_Node */
 
 
 /**
@@ -31,7 +32,9 @@
  * line that contains xml version and character encoding.
  * \see XML_FIRST_LINE
  */
+#ifndef XML_BUFFER_LENGTH
 #define XML_BUFFER_LENGTH  50
+#endif /* XML_BUFFER_LENGTH */
 
 /**
  * \brief First line of a valid XML file.

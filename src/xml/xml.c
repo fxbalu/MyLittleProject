@@ -62,7 +62,7 @@ void destroyXMLFile(XML_File* xml)
       }
       /* free XML_File */
       /* logMem(FREE, "XML_File", __FILE__, __LINE__); */
-      free(n);
+      free(xml);
    }
 }
 
@@ -96,7 +96,7 @@ void setXMLFilePath(const char* path, XML_File* xml)
    }
    /* XML_File doesn't have a file path */
    else {
-      if((node->n = malloc((strlen(path) + 1) * sizeof(char))) == NULL) {
+      if((xml->path = malloc((strlen(path) + 1) * sizeof(char))) == NULL) {
          logError("can't allocate memory for file path", __FILE__, __LINE__);
       }
       else {
@@ -155,11 +155,11 @@ Boolean checkFirstLineXMLFile(XML_File* xml)
    else if(fgets(firstLine, XML_BUFFER_LENGTH, xml->file) == NULL) {
       logError("Can't read first line of XML_File", __FILE__, __LINE__);
    }
-   else if{
+   else {
       return (strcmp(firstLine, XML_FIRST_LINE) == 0);
    }
 
-   return Boolean.false;
+   return false;
 }
 
 

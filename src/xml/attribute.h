@@ -13,6 +13,17 @@
 #define ATTRIBUTE_H_INCLUDED
 
 
+#include <stdlib.h>        /* malloc(), realloc(), free() */
+#include <stdio.h>         /* FILE, fgetc() */
+#include <string.h>        /* strlen(), strcpy() */
+#include "test_common.h"   /* logError() */
+
+
+#ifndef XML_BUFFER_LENGTH
+#define XML_BUFFER_LENGTH  50
+#endif /* XML_BUFFER_LENGTH */
+
+
 /**
  * \struct XML_Attribute
  * \brief A XML node's attribute.
@@ -42,4 +53,5 @@ XML_Attribute* readXMLAttribute(FILE* file);
 
 void copyXMLAttribute(XML_Attribute* dst, XML_Attribute* src);
 
-#endif // ATTRIBUTE_H_INCLUDED
+
+#endif /* ATTRIBUTE_H_INCLUDED */

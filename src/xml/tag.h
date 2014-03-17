@@ -15,11 +15,16 @@
 #define TAG_H_INCLUDED
 
 
-#include <stdio.h>
+#include <stdio.h>      /* FILE */
+#include <stdlib.h>     /* malloc(), realloc(), free() */
+#include <string.h>     /* strlen(), strcpy() */
 #include "attribute.h"
-#include "xml.h"        /* XML_BUFFER_LENGTH */
-#include "../common.h"  /* logError() */
+#include "test_common.h"  /* logError() */
 
+
+#ifndef XML_BUFFER_LENGTH
+#define XML_BUFFER_LENGTH  50
+#endif /* XML_BUFFER_LENGTH */
 
 
 /**
@@ -58,9 +63,9 @@ void initXMLTag(XML_Tag* tag);
 void resetXMLTag(XML_Tag* tag);
 
 void setXMLTagName(const char* name, XML_Tag* tag);
-void addAttributeToXMLTag(Attribute* attr, XML_Tag* tag);
+void addAttributeToXMLTag(XML_Attribute* attr, XML_Tag* tag);
 XML_Attribute* deleteAttributeFromXMLTag(XML_Tag* tag);
 
 XML_Tag* readXMLTag(FILE* file);
 
-#endif // TAG_H_INCLUDED
+#endif /* TAG_H_INCLUDED */

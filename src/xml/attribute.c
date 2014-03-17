@@ -22,6 +22,7 @@ XML_Attribute* createXMLAttribute(void)
 {
    XML_Attribute* attr;
 
+   attr = NULL;
    attr = allocXMLAttribute(attr);
    initXMLAttribute(attr);
 
@@ -89,7 +90,7 @@ XML_Attribute* allocXMLAttribute(XML_Attribute* attr)
 void freeXMLAttribute(XML_Attribute* attr)
 {
    if(attr == NULL) {
-      logError("Trying to free a NULL attribute", __FILE__, LINE__);
+      logError("Trying to free a NULL attribute", __FILE__, __LINE__);
    }
    else if((attr->name != NULL) ||
            (attr->value != NULL) ||
@@ -154,37 +155,10 @@ void resetXMLAttribute(XML_Attribute* attr)
          /* logMem(FREE, "string", __FILE__, __LINE__); */
          free(attr->value);
       }
-      destroyXMLAttribute(tag->attr);
+      if(attr->next != NULL) {
+         destroyXMLAttribute(attr->next);
+      }
       initXMLAttribute(attr);
-   }
-}
-
-void setXMLAttributeName(const char* name, XML_Attribute* a);
-void setXMLAttributeValue(const char* value, XML_Attribute* a);
-
-XML_Attribute* readXMLAttribute(FILE* file);
-
-/* ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-   :::   Old functions                                                    :::
-   ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-*/
-
-
-
-
-/**
- * \brief Reset a XML attribute.
- * Set every attribute's members to NULL.
- *
- * \param attr  Reseted attribute.
- */
-void resetXMLAttribute(XML_Attribute* attr)
-{
-   if(attr != NULL)
-   {
-      attr->name = NULL;
-      attr->value = NULL;
-      attr->next = NULL;
    }
 }
 
@@ -200,11 +174,11 @@ void resetXMLAttribute(XML_Attribute* attr)
 void setXMLAttributeName(const char* name, XML_Attribute* attr)
 {
    /* NULL attribute */
-   if(attr != NULL) {
+   if(attr == NULL) {
       logError("Giving a name to a NULL attribute", __FILE__, __LINE__);
    }
    /* NULL name */
-   else if(name != NULL) {
+   else if(name == NULL) {
       logError("Giving a NULL name to an attribute", __FILE__, __LINE__);
    }
    /* attribute already has a name */
@@ -218,7 +192,7 @@ void setXMLAttributeName(const char* name, XML_Attribute* attr)
    }
    /* attribute doesn't have a name */
    else {
-      if((attribute->name = malloc((strlen(name) + 1) * sizeof(char))) == NULL) {
+      if((attr->name = malloc((strlen(name) + 1) * sizeof(char))) == NULL) {
          logError("can't allocate memory for attribute's name", __FILE__, __LINE__);
       }
       else {
@@ -240,11 +214,11 @@ void setXMLAttributeName(const char* name, XML_Attribute* attr)
 void setXMLAttributeValue(const char* value, XML_Attribute* attr)
 {
    /* NULL attribute */
-   if(attr != NULL) {
+   if(attr == NULL) {
       logError("Giving a value to a NULL attribute", __FILE__, __LINE__);
    }
    /* NULL value */
-   else if(value != NULL) {
+   else if(value == NULL) {
       logError("Giving a NULL value to an attribute", __FILE__, __LINE__);
    }
    /* attribute already has a value */
@@ -258,7 +232,7 @@ void setXMLAttributeValue(const char* value, XML_Attribute* attr)
    }
    /* attribute doesn't have a value */
    else {
-      if((attribute->value = malloc((strlen(value) + 1) * sizeof(char))) == NULL) {
+      if((attr->value = malloc((strlen(value) + 1) * sizeof(char))) == NULL) {
          logError("can't allocate memory for attribute's value", __FILE__, __LINE__);
       }
       else {
@@ -280,7 +254,7 @@ void setXMLAttributeValue(const char* value, XML_Attribute* attr)
  */
 XML_Attribute* readXMLAttribute(FILE* file)
 {
-   Attribute* attr;
+   XML_Attribute* attr;
    char strBuffer[XML_BUFFER_LENGTH];
    int charBuffer, i;
 
@@ -305,7 +279,7 @@ XML_Attribute* readXMLAttribute(FILE* file)
    }
 
    /* set attribute's name with read string */
-   setAttributeName(strBuffer, attr);
+   setXMLAttributeName(strBuffer, attr);
 
    /* read attribute's value */
    i = 0;
@@ -318,7 +292,7 @@ XML_Attribute* readXMLAttribute(FILE* file)
    strBuffer[i] = '\0';
 
    /* set attribute's value with read string */
-   setAttributeValue(strBuffer, attr);
+   setXMLAttributeValue(strBuffer, attr);
 
    return attr;
 }

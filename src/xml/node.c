@@ -51,7 +51,7 @@ void destroyXMLNode(XML_Node* n)
 
       /* delete reference from parent and siblings nodes */
       if(n->parent != NULL) {
-         deleteXMLNodeFromParent(n->parent, n);
+         deleteXMLNodeFromParent(n);
       }
 
       /* destroy other members */
@@ -78,7 +78,7 @@ XML_Node* allocXMLNode(XML_Node* n)
 {
    if(n != NULL) {
       logError("Try to allocate memory for an already used node",
-               __FILE_, __LINE__);
+               __FILE__, __LINE__);
    }
    else if((n = malloc(sizeof(XML_Node))) == NULL) {
       logError("Can't allocate memory for a XML node", __FILE__, __LINE__);
@@ -171,7 +171,7 @@ void setXMLNodeName(const char* name, XML_Node* n)
    }
    /* node doesn't have a name */
    else {
-      if((node->n = malloc((strlen(name) + 1) * sizeof(char))) == NULL) {
+      if((n->name = malloc((strlen(name) + 1) * sizeof(char))) == NULL) {
          logError("can't allocate memory for node's name", __FILE__, __LINE__);
       }
       else {
@@ -211,7 +211,7 @@ void setXMLNodeValue(const char* value, XML_Node* n)
    }
    /* node doesn't have a value */
    else {
-      if((node->n = malloc((strlen(value) + 1) * sizeof(char))) == NULL) {
+      if((n->value = malloc((strlen(value) + 1) * sizeof(char))) == NULL) {
          logError("can't allocate memory for node's value", __FILE__, __LINE__);
       }
       else {
@@ -228,7 +228,7 @@ void setXMLNodeValue(const char* value, XML_Node* n)
  * \param attr  Added attribute.
  * \param n     Modified node.
  */
-void addAttributeToXMLNode(Attribute* attr, XML_Node* n)
+void addAttributeToXMLNode(XML_Attribute* attr, XML_Node* n)
 {
    if(n == NULL) {
       logError("Trying to add an attribute to a NULL tag", __FILE__, __LINE__);
@@ -260,6 +260,7 @@ XML_Attribute* deleteAttributeFromXMLNode(XML_Node* n)
 {
    XML_Attribute* deleted;
 
+   deleted = NULL;
    if(n == NULL) {
       logError("Trying to delete an attribute from a NULL node",
                __FILE__, __LINE__);
