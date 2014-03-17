@@ -374,3 +374,23 @@ void initXMLNodeFromXMLTag(XML_Node* n, XML_Tag* tag)
       }
    }
 }
+
+
+void printXMLNode(XML_Node* n)
+{
+   XML_Attribute* current;
+
+   if(n == NULL) {
+      logError("Trying to print a NULL node", __FILE__, __LINE__);
+   }
+   else {
+      printf("<%s", n->name);
+      /* printing attributes */
+      current = n->attr;
+      while(current != NULL) {
+         printf(" %s=\"%s\"", current->name, current->value);
+         current = current->next;
+      }
+      printf("/>");
+   }
+}
