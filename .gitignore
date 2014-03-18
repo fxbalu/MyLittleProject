@@ -26,6 +26,7 @@
 *.cbp
 *.layout
 *.depend
+*.cscope_file_list
 
 # Testing files that shouldn't be shared
 test_*
