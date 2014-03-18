@@ -28,7 +28,6 @@ void clearInput(Game* game) {
 
    game->input->escape = false;
    game->input->exit = false;
-   game->input->nothing = true;
 }
 
 /*obtient les touches appuyés pendat un cycle de la boucle ( en partant du dernier getInput)*/
@@ -51,48 +50,38 @@ void getInput(Game* game) {
          switch (game->input->event->key.keysym.sym) {
          case SDLK_LEFT :
             game->input->left = true;
-            game->input->nothing = false;
             break;
          case SDLK_UP :
             game->input->up = true;
-            game->input->nothing = false;
             break;
          case SDLK_RIGHT :
             game->input->right = true;
-            game->input->nothing = false;
             break;
          case SDLK_DOWN :
             game->input->down = true;
-            game->input->nothing = false;
             break;
 
          case SDLK_RETURN :
             game->input->enter = true;
-            game->input->nothing = false;
             break;
          case SDLK_SPACE :
             game->input->jump = true;
-            game->input->nothing = false;
             break;
          case SDLK_RCTRL :
             game->input->crouch = true;
-            game->input->nothing = false;
             break;
          case SDLK_RSHIFT :
             game->input->shoot = true;
-            game->input->nothing = false;
             break;
 
          case SDLK_ESCAPE :
             game->input->escape = true;
-            game->input->nothing = false;
             break;
          case SDLK_BACKSPACE :
             game->input->escape = true; /*deuxieme touche escape*/
-            game->input->nothing = false;
             break;
          default :
-            break;
+            ;
          }
          break;
       }

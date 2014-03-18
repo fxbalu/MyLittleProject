@@ -11,6 +11,7 @@
 
 #include "structs.h"
 
+
 void initMenu (Game* game);
 
 void displayMenu(Game* game);

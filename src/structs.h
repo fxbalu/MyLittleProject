@@ -6,7 +6,8 @@
 #ifndef STRUCTS_H_INCLUDED
 #define STRUCTS_H_INCLUDED
 
-#include <SDL/SDL.h>
+#include <SDL.h>
+#include <SDL_image.h>
 #include "common.h"
 #include "define.h"
 
@@ -62,7 +63,6 @@ typedef struct Input {
 
    Control escape;
    Control exit;
-   Control nothing;
 } Input;
 
 
