@@ -8,8 +8,8 @@
 
 void initMenu (Game* game) {
    game->menu = (Menu*) malloc(sizeof(Menu));
-   game->menu->menuSpriteSheet = SDL_LoadBMP("res\\blueSheet.bmp");
-   game->menu->splashScreen = SDL_LoadBMP("res\\splashScreen.bmp");
+   game->menu->menuSpriteSheet = IMG_Load("res/blueSheet.png");
+   game->menu->splashScreen = SDL_LoadBMP("res/splashScreen.bmp");
 
    game->menu->rectSrc = (SDL_Rect*) malloc(sizeof(SDL_Rect));
    game->menu->rectDst = (SDL_Rect*) malloc(sizeof(SDL_Rect));

@@ -12,7 +12,7 @@ void initLevel(Game* game) {
    game->level->src = (SDL_Rect*) malloc(sizeof(SDL_Rect));
    game->level->src->x = game->level->src->y = 150;
 
-   game->level->background = SDL_LoadBMP("res\\image\\background\\backgroundworld1.bmp");
+   game->level->background = IMG_Load("res/image/background/backgroundworld1.png");
 }
 
 void displayLevel(Game* game){

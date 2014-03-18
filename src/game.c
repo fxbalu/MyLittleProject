@@ -10,11 +10,17 @@
 int initGame(Game* game) {
 
    /*Initialisation SDL*/
-   if(SDL_Init(SDL_INIT_VIDEO) != 0) {
+   if(SDL_Init(SDL_INIT_VIDEO) < 0) {
       fprintf(stderr, "Unable to initialize SDL : %s\n", SDL_GetError());
       return -1;
    }
    atexit(SDL_Quit);
+
+   if(IMG_Init(IMG_INIT_PNG) < 0) {
+      fprintf(stderr, "Unable to initialize SDL_image : %s\n", IMG_GetError());
+      return -1;
+   }
+   atexit(IMG_Quit);
 
    /*Initialisation GameStatus*/
    initGameStatus(game);
@@ -29,6 +35,8 @@ int initGame(Game* game) {
       fprintf(stderr, "Unable to create the window : %s\n", SDL_GetError());
       return -1;
    }
+   SDL_WM_SetCaption("My Little Project", NULL);
+   SDL_WM_SetIcon(IMG_Load("res/icon.png"),NULL);
 
    initMenu(game);
 
