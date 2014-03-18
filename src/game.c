@@ -34,38 +34,24 @@ int initGame(Game* game) {
 
    initLevel(game);
 
+   /*Initialisation de la gestion d'event*/
+   initInput(game);
+
    /*Initialisation des timers*/
    game->status->nextTick = SDL_GetTicks() + SKIP_TICKS;
-
-   /*Initialisation de la gestion d'event*/
-   /*init GameEvent or Input*/
-   game->event = (GameEvent*) malloc(sizeof(GameEvent));
-   SDL_PollEvent(&game->event->sdlEvent);
 
    return 0;
 }
 
-
-/*a deplacer*/
-void updateGameEvent(Game* game){
-
-   SDL_PollEvent(&(game->event->sdlEvent));
-
-   if(game->event->sdlEvent.type == SDL_QUIT){
-      game->status->gameIsRunning = false;
-   }
-   if(game->event->sdlEvent.type == SDL_KEYDOWN) {
-      game->status->state = inGame;
-   }
-}
-
-
 void updateGame(Game* game) {
 
-   updateGameEvent(game);
-   /*update game status options etc*/
+   getInput(game);
 
+   updateGameStatus(game);
+
+   /*updateLevel...*/
 }
+
 
 void clearScreen (Game* game){
 
@@ -77,16 +63,15 @@ void displayGame(Game* game) {
    clearScreen(game);
 
    switch (game->status->state) {
-   case menu :
+   case mainMenu : /*si on est dans les menus, peu importe lequel*/
       displayMenu(game);
       break;
-   case options :
-      /*displayOptions(game);*/
-      break;
+
    case inGame :
       displayLevel(game);
       displayCharacter(game);
       break;
+
    default :
       displayMenu(game);
       break;

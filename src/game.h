@@ -17,6 +17,7 @@
 #include "structs.h"
 #include "gameStatus.h"
 #include "gameOptions.h"
+#include "input.h"
 #include "menu.h"
 #include "level.h"
 #include "character.h"
@@ -24,8 +25,8 @@
 
 int initGame(Game* game);
 
-void updateGameEvent(Game* game); /* gestion d'events, a revoir soon*/
 void updateGame(Game* game);
+void clearScreen (Game* game);
 void displayGame(Game* game);
 void delayGame(Game* game);
 

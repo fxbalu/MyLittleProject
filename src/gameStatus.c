@@ -7,14 +7,27 @@
 
  #include "gameStatus.h"
 
+/*au lancement du jeu*/
 void initGameStatus(Game* game){
    game->status = (GameStatus*) malloc(sizeof(GameStatus));
-   game->status->state = menu;
-   game->status->level = 1;
+   game->status->state = mainMenu;
+   game->status->level = 0;
    game->status->gameIsRunning = true;
    game->status->nextTick = game->status->sleepTime = 0;
 }
 
+/*a refaire, peut etre avec des switchs*/
+/*juste pour montrer que ca marche */
 void updateGameStatus(Game* game) {
 
+   if(game->input->exit) {
+      game->status->gameIsRunning = false;
+   }
+
+   if(game->status->state==inGame && game->input->escape) {
+      game->status->state=mainMenu;
+   }
+   if(game->status->state==mainMenu && game->input->enter) {
+      game->status->state=inGame;
+   }
 }

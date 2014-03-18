@@ -31,4 +31,7 @@
  */
 #define SKIP_TICKS (1000/FPS)
 
+#define Control Boolean
+/*ok pour le nom ?*/
+
 #endif

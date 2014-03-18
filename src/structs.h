@@ -15,7 +15,7 @@
  * \brief Enumeration of the different possible states of the game.
  */
 typedef enum State {
-   menu=0, options=1, inGame=2
+   mainMenu , newGameMenu, continueMenu, optionsMenu, creditsMenu, inGame, inGameMenu, inGamePopUp/*peut etre ajoouter un état start, revoir les noms peut etre*/
 } State;
 
 
@@ -27,6 +27,7 @@ typedef struct GameStatus {
    Boolean gameIsRunning;
    State state;
    int level;
+   int menuSelection;/*nom a modifier*/
    /*Variables for the FPS*/
    Uint32 nextTick;
    Uint32 sleepTime;
@@ -44,31 +45,44 @@ typedef struct GameOptions {
 } GameOptions;
 
 /**
+ * \struct Input
+ * \brief
+ */
+typedef struct Input {
+   SDL_Event* event;
+   Control left;
+   Control up;
+   Control right;
+   Control down;
+
+   Control enter;
+   Control jump;/* note : les control sont des flags, ils sont a appliqur dans une fonction getinput, et en fonction de gameOptions*/
+   Control crouch;
+   Control shoot;
+
+   Control escape;
+   Control exit;
+   Control nothing;
+} Input;
+
+
+/**
  * \struct Menu
  * \brief Informations to draw the menu on the screen
  */
 typedef struct Menu {
-   char** contenu;/* a revoir */
-   int selection;
+   char** contenu;/*nom a revoir */
    SDL_Surface* menuSpriteSheet;
    SDL_Surface* splashScreen;
    SDL_Rect* rectSrc;
    SDL_Rect* rectDst;
 } Menu;
 
-/**
- * \struct GameEvent
- *
- */
-/*a revoir soon*/
-typedef struct GameEvent {
-   SDL_Event sdlEvent;
-   Boolean eventInQueue;
-} GameEvent;
+/*peut etre une strucure GameEvent pour le detecteur de collision*/
 
 /**
  * \struct Level
- * Informations on the current level.
+ * Informations on the current level(to draw it).
  */
 typedef struct Level {
    SDL_Surface* background;
@@ -91,8 +105,8 @@ typedef struct Game {
    SDL_Surface* screen;
    GameStatus* status;
    GameOptions* options;
+   Input* input;
    Menu* menu;
-   GameEvent* event;
    Level* level;
    Character* player;
 } Game;
