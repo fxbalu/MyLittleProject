@@ -5,17 +5,24 @@
  * \date 14.03.2014
  */
 
- #include "level.h"
+#include "level.h"
 
 void initLevel(Game* game) {
    game->level = (Level*) malloc(sizeof(Level));
-   game->level->src = (SDL_Rect*) malloc(sizeof(SDL_Rect));
-   game->level->src->x = game->level->src->y = 150;
+   game->level->rectSrc = (SDL_Rect*) malloc(sizeof(SDL_Rect));
+   game->level->rectSrc->x = game->level->rectSrc->y = 150;
 
    game->level->background = IMG_Load("res/image/background/backgroundworld1.png");
+   game->level->tileset = IMG_Load("res/image/tile_tileset.png");
+
+   /*charger le niveau avec le parseur xml*/
 }
 
-void displayLevel(Game* game){
+void updateLevel(Game* game) {
+
+}
+
+void displayLevel(Game* game) {
    displayBackground(game);
 }
 

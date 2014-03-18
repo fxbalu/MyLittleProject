@@ -10,6 +10,10 @@
 
 #include "structs.h"
 
+void initCharacter (Game* game);
+
+void updateCharacter(Game* game);
+
 void displayCharacter(Game* game);
 
 #endif

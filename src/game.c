@@ -7,6 +7,7 @@
 
 #include "game.h"
 
+/*décomposer plus cette fonction*/
 int initGame(Game* game) {
 
    /*Initialisation SDL*/
@@ -39,7 +40,7 @@ int initGame(Game* game) {
    SDL_WM_SetIcon(IMG_Load("res/icon.png"),NULL);
 
    initMenu(game);
-
+   initCharacter(game);
    initLevel(game);
 
    /*Initialisation de la gestion d'event*/
@@ -55,13 +56,43 @@ void updateGame(Game* game) {
 
    getInput(game);
 
-   updateGameStatus(game);
+   updateGameStatus(game); /*on update d'abord le statud du jeu*/
 
-   /*updateLevel...*/
+   switch (game->status->state) { /*je sais pas trop pour ca*/
+   case intro :
+      /*updateIntro(game);*/
+      break;
+
+   case mainMenu :
+      updateMenu(game);
+      break;
+   case newGameMenu :
+      updateMenu(game);
+      break;
+   case continueMenu :
+      updateMenu(game);
+      break;
+   case creditsMenu :
+      updateMenu(game);
+      break;
+   case optionsMenu :
+      updateMenu(game);
+      break;
+
+   case inGame :
+      updateCharacter(game);
+      updateLevel(game);
+      break;
+   case inGameMenu :
+      break;
+   case inGamePopUp :
+      updateLevel(game);
+      ;
+   }
 }
 
 
-void clearScreen (Game* game){
+void clearScreen (Game* game) {
 
    SDL_FillRect(game->screen, NULL, SDL_MapRGB(game->screen->format, 255, 255, 255));
 }
@@ -70,8 +101,24 @@ void displayGame(Game* game) {
 
    clearScreen(game);
 
-   switch (game->status->state) {
-   case mainMenu : /*si on est dans les menus, peu importe lequel*/
+   switch (game->status->state) { /*je sais pas trop pour ca*/
+   case intro :
+      /*displayIntro(game);*/
+      break;
+
+   case mainMenu :
+      displayMenu(game);
+      break;
+   case newGameMenu :
+      displayMenu(game);
+      break;
+   case continueMenu :
+      displayMenu(game);
+      break;
+   case creditsMenu :
+      displayMenu(game);
+      break;
+   case optionsMenu :
       displayMenu(game);
       break;
 
@@ -79,11 +126,16 @@ void displayGame(Game* game) {
       displayLevel(game);
       displayCharacter(game);
       break;
-
-   default :
-      displayMenu(game);
+   case inGameMenu :
+      displayLevel(game);
+      displayCharacter(game);
+      break;
+   case inGamePopUp :
+      displayLevel(game);
+      displayCharacter(game);
       break;
    }
+
 
    if(SDL_Flip(game->screen) == -1) {
       logError("Error when flipping screen", __FILE__, __LINE__);
@@ -94,7 +146,7 @@ void displayGame(Game* game) {
  * \param game Pointer on a Game structure.
  * \brief Function to wait a brief amount of time so the game runs at a constant FPS.
  */
- void delayGame(Game* game) {
+void delayGame(Game* game) {
 
    game->status->sleepTime = 0;
 

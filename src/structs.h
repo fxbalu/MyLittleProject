@@ -16,7 +16,7 @@
  * \brief Enumeration of the different possible states of the game.
  */
 typedef enum State {
-   mainMenu , newGameMenu, continueMenu, optionsMenu, creditsMenu, inGame, inGameMenu, inGamePopUp/*peut etre ajoouter un état start, revoir les noms peut etre*/
+   intro, mainMenu , newGameMenu, continueMenu, optionsMenu, creditsMenu, inGame, inGameMenu, inGamePopUp/*peut etre ajoouter un état start, revoir les noms peut etre*/
 } State;
 
 
@@ -86,15 +86,18 @@ typedef struct Menu {
  */
 typedef struct Level {
    SDL_Surface* background;
-   SDL_Rect* src;
+   SDL_Surface* tileset;
+   SDL_Rect* rectSrc;
+   SDL_Rect* rectDst;
 } Level;
 
 /*!
  * \struct Character
  * \brief Variables to manage the character.
  */
-typedef struct Character{
-   SDL_Rect* position;
+typedef struct Character {
+   SDL_Surface* spriteCharacterSheet;
+   SDL_Rect* position; /*nom a changer*/
 }Character;
 
 /**

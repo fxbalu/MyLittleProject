@@ -7,18 +7,22 @@
 #include "menu.h"
 
 void initMenu (Game* game) {
+   /*a faire apres avec xml peut etre ? */
    game->menu = (Menu*) malloc(sizeof(Menu));
    game->menu->menuSpriteSheet = IMG_Load("res/blueSheet.png");
-   game->menu->splashScreen = SDL_LoadBMP("res/splashScreen.bmp");
+   game->menu->splashScreen = IMG_Load("res/splashScreen.png");
 
    game->menu->rectSrc = (SDL_Rect*) malloc(sizeof(SDL_Rect));
    game->menu->rectDst = (SDL_Rect*) malloc(sizeof(SDL_Rect));
 }
 
+void updateMenu(Game* game) {
+
+}
 
 void displayMenu(Game* game) {
-   SDL_BlitSurface(game->menu->splashScreen, NULL, game->screen, NULL);/* on fera mieux plus tard pour le splash screen*/
 
+   displaySplashScreen(game);
    displayMenuBlock(game);
    /*writeMenu(Game* game);*/
 }
@@ -47,3 +51,11 @@ void displayMenuBlock(Game* game) {
    SDL_BlitSurface(game->menu->menuSpriteSheet, game->menu->rectSrc, game->screen, game->menu->rectDst);
 }
 
+void updateSplashScreen(Game* game){
+
+}
+
+void displaySplashScreen (Game* game){
+
+   SDL_BlitSurface(game->menu->splashScreen, NULL, game->screen, NULL);/* on fera mieux plus tard pour le splash screen*/
+}

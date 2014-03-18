@@ -13,6 +13,8 @@
 
 void initLevel(Game* game);
 
+void updateLevel(Game* game);
+
 void displayLevel(Game* game);
 
 void displayBackground(Game* game);

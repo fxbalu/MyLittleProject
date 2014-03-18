@@ -14,8 +14,14 @@
 
 void initMenu (Game* game);
 
+void updateMenu(Game* game);
+
 void displayMenu(Game* game);
 
 void displayMenuBlock(Game* game);
+
+void updateSplashScreen(Game* game);
+
+void displaySplashScreen (Game* game);
 
 #endif
