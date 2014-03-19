@@ -16,6 +16,7 @@ void initMenu (Game* game) {
    game->menu->rectDst = (SDL_Rect*) malloc(sizeof(SDL_Rect));
 
    game->menu->numberItem = 4;
+   game->menu->selectItem = 0;
 }
 
 void updateMenu(Game* game) {
@@ -44,6 +45,20 @@ void updateMenu(Game* game) {
    default :
       ;
    }
+   if (game->input->up) {
+      game->menu->selectItem--;
+      clearInput(game); /*éviter que ca défile tout seule*/
+
+      if (game->menu->selectItem < 0) {
+         game->menu->selectItem = game->menu->numberItem - 1;
+      }
+   } else if (game->input->down) {
+      game->menu->selectItem++;
+      clearInput(game);
+      if (game->menu->selectItem >= game->menu->numberItem) {
+         game->menu->selectItem = 0;
+      }
+   }
 }
 
 void displayMenu(Game* game) {
@@ -66,11 +81,21 @@ void displayMenuBlock(Game* game) {
    game->menu->rectDst->x = game->options->windowWidth/2 - (190/2);
    game->menu->rectDst->y = game->options->windowHeight/2 + 100;
 
-
-
    for(i=0 ; i<game->menu->numberItem ; i++) {
+      if (i == game->menu->selectItem) {
+         game->menu->rectSrc->x = 0;
+         game->menu->rectSrc->y = 192;
+         game->menu->rectSrc->w = 190;
+         game->menu->rectSrc->h = 45;
+
+         game->menu->rectDst->y += 4;
+      }
       SDL_BlitSurface(game->menu->menuSpriteSheet, game->menu->rectSrc, game->screen, game->menu->rectDst);
 
+      game->menu->rectSrc->x = 0;
+      game->menu->rectSrc->y = 0;
+      game->menu->rectSrc->w = 190;
+      game->menu->rectSrc->h = 49;
       game->menu->rectDst->y += 60;
    }
 }

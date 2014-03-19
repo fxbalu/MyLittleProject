@@ -10,7 +10,7 @@
 #define MENU_H_INCLUDED
 
 #include "structs.h"
-
+#include "input.h"
 
 void initMenu (Game* game);
 

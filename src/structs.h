@@ -78,6 +78,7 @@ typedef struct Menu {
    SDL_Rect* rectDst;
 
    int numberItem;
+   int selectItem;
 } Menu;
 
 /*peut etre une strucure GameEvent pour le detecteur de collision*/

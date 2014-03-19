@@ -35,13 +35,11 @@ void updateGameStatus(Game* game) {
       clearInput(game);
    }
    if (game->status->state == newGameMenu && game->input->escape) {
-      game->status->state=optionsMenu;
+      game->status->state=mainMenu;
       clearInput(game);
-
    }
-   if(game->status->state==mainMenu && game->input->escape) {
-      game->status->state=optionsMenu;
+   if (game->status->state == newGameMenu && game->input->enter) {
+      game->status->state=inGame;
       clearInput(game);
-
    }
 }
