@@ -23,8 +23,6 @@ void initCharacter (Game* game) {
 
    game->player->rectDst->x = 0;
    game->player->rectDst->y = 0;
-   game->player->rectDst->w = 72;/*definir des constantes !*/
-   game->player->rectDst->h = 97;
 
    game->player->state = idle;
    game->player->direction = right;
@@ -32,32 +30,65 @@ void initCharacter (Game* game) {
 }
 
 /*detecte les collisions, détermine la nouvelle position du perso*/
+/*chande l'etat du perso etc*/
 void updateCharacter(Game* game) {
    /*a revoir*/
    if(game->input->left) {
       game->player->direction = left;
+      game->player->state=walk;
    }
    if(game->input->right) {
       game->player->direction = right;
+      game->player->state=walk;
+   }
+   if(game->input->jump) {
+      game->player->state=jump;
+   }
+   if(!game->input->right && ! game->input->left) {
+      game->player->state=idle;
    }
 }
 
 void displayCharacter(Game* game) {
    /*a revoir*/
+   /*refaire le sprite aussi*/
+   /*changement de sdl rect ici ( ajouter ca dans une autre fct selectSprite charach?*/
 
-   /*changement de sdl rect ici ( ajouter ca dans une autre fct ?*/
-/*
-   switch (game->player->direction) {
-   case left :
-      game->player->rectSrc->y=97;
+   switch (game->player->state) {
+   case idle :
+      game->player->rectSrc->x=0;   /*rajouter une direction*/
+      game->player->rectSrc->y=97*3;
       break;
-   case right :
-      game->player->rectSrc->y=0;
 
-   }*/
+   case walk :
+      switch (game->player->direction) {
+      case left :
+         game->player->rectSrc->x = 0;
+         game->player->rectSrc->y = 97;
+         break;
+      case right :
+         game->player->rectSrc->x = 0;
+         game->player->rectSrc->y = 0;
+      }
+      break;
 
-   /*SDL_BlitSurface(game->player->spriteCharacterSheet, game->player->rectSrc, game->screen, game->player->rectDst);*/
-   if (game->input->left){
-         SDL_BlitSurface(game->player->spriteCharacterSheet, NULL, game->screen, NULL);
+   case run : /*pas encore gérer*/
+      break;
+
+   case jump :
+      game->player->rectSrc->x=0;
+      game->player->rectSrc->y=97*2;/*rajouter une direction de saut*/
    }
+
+   /*WTFFF! peut etre parce que dans le prortype c'est mis const ?*/
+   game->player->rectSrc->w = 72;/*definir des constantes !*/
+   game->player->rectSrc->h = 97;
+
+   /*
+   game->player->rectSrc->x = 0;
+   game->player->rectSrc->y = 0;
+   game->player->rectSrc->w = 72;//si je ne note pas tout le rectangle ca ne marche pas Dafuk ?
+   game->player->rectSrc->h = 97;*/
+
+   SDL_BlitSurface(game->player->spriteCharacterSheet, game->player->rectSrc, game->screen, game->player->rectDst);
 }

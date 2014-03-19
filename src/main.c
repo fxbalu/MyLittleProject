@@ -20,6 +20,7 @@ int main(int argc, char* argv[]) {
 
    /* Main Loop */
    while(game.status->gameIsRunning) {
+
       updateGame(&game);
       displayGame(&game);
 

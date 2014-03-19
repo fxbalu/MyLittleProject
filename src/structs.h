@@ -16,7 +16,7 @@
  * \brief Enumeration of the different possible states of the game.
  */
 typedef enum State {
-   intro, mainMenu , newGameMenu, continueMenu, optionsMenu, creditsMenu, inGame, inGameMenu, inGamePopUp/*peut etre ajoouter un état start, revoir les noms peut etre*/
+   intro, mainMenu , newGameMenu, continueMenu, optionsMenu, creditsMenu, inGame, inGameMenu, inGamePopUp /*peut etre ajoouter un état start, revoir les noms peut etre*/
 } State;
 
 
@@ -56,7 +56,7 @@ typedef struct Input {
    Control right;
    Control down;
 
-   Control enter;
+   Control enter; /*on peut appuyer sur plusieurs touches en meme temps, donc pas faire juste une enumeration*/
    Control jump;/* note : les control sont des flags, ils sont a appliqur dans une fonction getinput, et en fonction de gameOptions*/
    Control crouch;
    Control shoot;
