@@ -89,7 +89,26 @@ typedef struct Level {
    SDL_Surface* tileset;
    SDL_Rect* rectSrc;
    SDL_Rect* rectDst;
+   /*ajouter la camera ici je pense*/
 } Level;
+
+
+/**
+ * \enum Direction
+ * \brief Enumeration of the different directions possible of the character.
+ */
+typedef enum Direction {
+   left, right
+} Direction;
+
+
+/**
+ * \enum CharacterState
+ * \brief Enumeration of the different states possible of the character.
+ */
+typedef enum CharacterState {
+   idle, walk, run, jump
+} CharacterState;
 
 /*!
  * \struct Character
@@ -97,8 +116,15 @@ typedef struct Level {
  */
 typedef struct Character {
    SDL_Surface* spriteCharacterSheet;
-   SDL_Rect* position; /*nom a changer*/
-}Character;
+   SDL_Rect* rectSrc;
+   SDL_Rect* rectDst;
+
+   int x; /*coordonnées du perosn ,om a changer peut etre*/
+   int y;
+
+   CharacterState state;
+   Direction direction;
+} Character;
 
 /**
  * \struct Game

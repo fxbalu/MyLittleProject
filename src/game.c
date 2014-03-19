@@ -54,7 +54,7 @@ int initGame(Game* game) {
 
 void updateGame(Game* game) {
 
-   getInput(game);
+   getInput(game); /*on recupere les input*/
 
    updateGameStatus(game); /*on update d'abord le statud du jeu*/
 

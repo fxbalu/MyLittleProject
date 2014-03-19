@@ -9,6 +9,7 @@
 #define GAMESTATUS_H_INCLUDED
 
 #include "structs.h"
+#include "input.h"
 
 void initGameStatus(Game* game);
 

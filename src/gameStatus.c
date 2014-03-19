@@ -18,6 +18,7 @@ void initGameStatus(Game* game){
 
 /*a refaire, peut etre avec des switchs*/
 /*juste pour montrer que ca marche */
+/*dans quel ordre faire les tests ?*/
 void updateGameStatus(Game* game) {
 
    if(game->input->exit) {
@@ -26,8 +27,12 @@ void updateGameStatus(Game* game) {
 
    if(game->status->state==inGame && game->input->escape) {
       game->status->state=mainMenu;
+            clearInput(game);
    }
    if(game->status->state==mainMenu && game->input->enter) {
       game->status->state=inGame;
+   }
+      if(game->status->state==mainMenu && game->input->escape) {
+      game->status->gameIsRunning = false;
    }
 }

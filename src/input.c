@@ -34,9 +34,10 @@ void clearInput(Game* game) {
 /*a modifier : comparer les touches avec les options de controlees de jeu + gérer manette*
 + utilise des edefines de valeur par défault :*/
 /*regarder précisement au débuggeur si tout marche !!!*/
-void getInput(Game* game) {
 
-   clearInput(game);/*On efface les inputs précédents*/
+/* solution : on peut stocker une input e,n appuyant enlever en relachant (sdlk_up), et clear les input quand on en a besoin,
+lors d'une transistion par ex (pour éviter de faire échap échap et donc quitter le jeu en 2frames.*/
+void getInput(Game* game) {
 
    /*On analyse tous  les événements entrés*/
    while(SDL_PollEvent(game->input->event)) {
@@ -84,6 +85,46 @@ void getInput(Game* game) {
             ;
          }
          break;
+
+      case SDL_KEYUP :
+
+         switch (game->input->event->key.keysym.sym) {
+         case SDLK_LEFT :
+            game->input->left = false;
+            break;
+         case SDLK_UP :
+            game->input->up = false;
+            break;
+         case SDLK_RIGHT :
+            game->input->right = false;
+            break;
+         case SDLK_DOWN :
+            game->input->down = false;
+            break;
+
+         case SDLK_RETURN :
+            game->input->enter = false;
+            break;
+         case SDLK_SPACE :
+            game->input->jump = false;
+            break;
+         case SDLK_RCTRL :
+            game->input->crouch = false;
+            break;
+         case SDLK_RSHIFT :
+            game->input->shoot = false;
+            break;
+
+         case SDLK_ESCAPE :
+            game->input->escape = false;
+            break;
+         case SDLK_BACKSPACE :
+            game->input->escape = false; /*deuxieme touche escape*/
+            break;
+         default :
+            ;
+         }
+
       }
    }
 }
