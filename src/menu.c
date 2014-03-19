@@ -14,10 +14,12 @@ void initMenu (Game* game) {
 
    game->menu->rectSrc = (SDL_Rect*) malloc(sizeof(SDL_Rect));
    game->menu->rectDst = (SDL_Rect*) malloc(sizeof(SDL_Rect));
+
+   game->menu->itemsNumber = 4;
 }
 
 void updateMenu(Game* game) {
-
+   if(game->)
 }
 
 void displayMenu(Game* game) {

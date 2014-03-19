@@ -76,6 +76,8 @@ typedef struct Menu {
    SDL_Surface* splashScreen;
    SDL_Rect* rectSrc;
    SDL_Rect* rectDst;
+
+   int numberItem;
 } Menu;
 
 /*peut etre une strucure GameEvent pour le detecteur de collision*/
