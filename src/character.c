@@ -14,7 +14,7 @@ void initCharacter (Game* game) {
    game->player->rectSrc = (SDL_Rect*) malloc(sizeof(SDL_Rect));
    game->player->rectDst = (SDL_Rect*) malloc(sizeof(SDL_Rect));
 
-   game->player->spriteCharacterSheet = IMG_Load("res/image/sprite/playerSpriteSheet.png");
+   game->player->spriteCharacterSheet = IMG_Load("res/image/sprite/player/playerSpriteSheet.png");
 
    game->player->rectSrc->x = 0;
    game->player->rectSrc->y = 0;

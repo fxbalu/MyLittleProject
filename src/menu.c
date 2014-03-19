@@ -9,8 +9,8 @@
 void initMenu (Game* game) {
    /*a faire apres avec xml peut etre ? */
    game->menu = (Menu*) malloc(sizeof(Menu));
-   game->menu->menuSpriteSheet = IMG_Load("res/blueSheet.png");
-   game->menu->splashScreen = IMG_Load("res/splashScreen.png");
+   game->menu->menuSpriteSheet = IMG_Load("res/image/menu/blueSheet.png");
+   game->menu->splashScreen = IMG_Load("res/image/menu/splashScreen.png");
 
    game->menu->rectSrc = (SDL_Rect*) malloc(sizeof(SDL_Rect));
    game->menu->rectDst = (SDL_Rect*) malloc(sizeof(SDL_Rect));
