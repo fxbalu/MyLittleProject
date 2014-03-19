@@ -72,7 +72,7 @@ typedef struct Input {
  */
 typedef struct Menu {
    char** contenu;/*nom a revoir */
-   SDL_Surface* menuSpriteSheet;
+   SDL_Surface* menuSpriteSheet; /* struct item menu a ajouter ?*/
    SDL_Surface* splashScreen;
    SDL_Rect* rectSrc;
    SDL_Rect* rectDst;

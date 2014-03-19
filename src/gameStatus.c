@@ -5,10 +5,10 @@
  * \date 14.03.2014
  */
 
- #include "gameStatus.h"
+#include "gameStatus.h"
 
 /*au lancement du jeu*/
-void initGameStatus(Game* game){
+void initGameStatus(Game* game) {
    game->status = (GameStatus*) malloc(sizeof(GameStatus));
    game->status->state = mainMenu;
    game->status->level = 0;
@@ -19,6 +19,7 @@ void initGameStatus(Game* game){
 /*a refaire, peut etre avec des switchs*/
 /*juste pour montrer que ca marche */
 /*dans quel ordre faire les tests ?*/
+/*clear inut a chaque changements*/
 void updateGameStatus(Game* game) {
 
    if(game->input->exit) {
@@ -27,12 +28,20 @@ void updateGameStatus(Game* game) {
 
    if(game->status->state==inGame && game->input->escape) {
       game->status->state=mainMenu;
-            clearInput(game);
+      clearInput(game);
    }
    if(game->status->state==mainMenu && game->input->enter) {
-      game->status->state=inGame;
+      game->status->state=newGameMenu;
+      clearInput(game);
    }
-      if(game->status->state==mainMenu && game->input->escape) {
-      game->status->gameIsRunning = false;
+   if (game->status->state == newGameMenu && game->input->escape) {
+      game->status->state=optionsMenu;
+      clearInput(game);
+
+   }
+   if(game->status->state==mainMenu && game->input->escape) {
+      game->status->state=optionsMenu;
+      clearInput(game);
+
    }
 }

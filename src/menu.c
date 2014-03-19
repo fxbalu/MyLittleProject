@@ -15,11 +15,35 @@ void initMenu (Game* game) {
    game->menu->rectSrc = (SDL_Rect*) malloc(sizeof(SDL_Rect));
    game->menu->rectDst = (SDL_Rect*) malloc(sizeof(SDL_Rect));
 
-   game->menu->itemsNumber = 4;
+   game->menu->numberItem = 4;
 }
 
 void updateMenu(Game* game) {
-   if(game->)
+
+   switch (game->status->state) {
+   case mainMenu :
+      game->menu->numberItem = 4;
+      /*game->menu->contenu*/
+      break;
+   case newGameMenu :
+      game->menu->numberItem = 3;
+      /*game->menu->contenu*/
+      break;
+   case continueMenu :
+      game->menu->numberItem = 2;
+      /*game->menu->contenu*/
+      break;
+   case optionsMenu :
+      game->menu->numberItem = 1;
+      /*game->menu->contenu*/
+      break;
+   case creditsMenu :
+      game->menu->numberItem = 0;
+      /*game->menu->contenu*/
+      break;
+   default :
+      ;
+   }
 }
 
 void displayMenu(Game* game) {
@@ -32,32 +56,30 @@ void displayMenu(Game* game) {
 /* A améliorer, notament prendre en compte la r&solution, et le nombre d'item dans le menu*/
 void displayMenuBlock(Game* game) {
 
+   int i;
+
    game->menu->rectSrc->x = 0;
    game->menu->rectSrc->y = 0;
    game->menu->rectSrc->w = 190; /*Should be done in the initMenu function*/
    game->menu->rectSrc->h = 49;
 
    game->menu->rectDst->x = game->options->windowWidth/2 - (190/2);
-   game->menu->rectDst->y = game->options->windowHeight/2 + 60;
-   game->menu->rectDst->w = 190;
-   game->menu->rectDst->h = 49;
+   game->menu->rectDst->y = game->options->windowHeight/2 + 100;
 
-   SDL_BlitSurface(game->menu->menuSpriteSheet, game->menu->rectSrc, game->screen, game->menu->rectDst);
 
-   game->menu->rectDst->y = game->options->windowHeight/2 + 120; /*écrire peut etre + offset*/
 
-   SDL_BlitSurface(game->menu->menuSpriteSheet, game->menu->rectSrc, game->screen, game->menu->rectDst);
+   for(i=0 ; i<game->menu->numberItem ; i++) {
+      SDL_BlitSurface(game->menu->menuSpriteSheet, game->menu->rectSrc, game->screen, game->menu->rectDst);
 
-   game->menu->rectDst->y = game->options->windowHeight/2 + 180;
-
-   SDL_BlitSurface(game->menu->menuSpriteSheet, game->menu->rectSrc, game->screen, game->menu->rectDst);
+      game->menu->rectDst->y += 60;
+   }
 }
 
-void updateSplashScreen(Game* game){
+void updateSplashScreen(Game* game) {
 
 }
 
-void displaySplashScreen (Game* game){
+void displaySplashScreen (Game* game) {
 
    SDL_BlitSurface(game->menu->splashScreen, NULL, game->screen, NULL);/* on fera mieux plus tard pour le splash screen*/
 }
