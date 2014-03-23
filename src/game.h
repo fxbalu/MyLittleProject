@@ -15,7 +15,7 @@
 
 #include "define.h"
 #include "common.h"
-#include "structs.h"
+
 #include "gameStatus.h"
 #include "gameOptions.h"
 #include "input.h"
@@ -23,8 +23,22 @@
 #include "level.h"
 #include "character.h"
 
+/**
+ * \struct Game
+ * \brief Variables necessaries to most of the game-related functions.
+ */
+typedef struct Game {
+   SDL_Surface* screen;
+   GameStatus* status;
+   GameOptions* options;
+   Input* input;
+   Menu* menu;
+   Level* level;
+   Character* player;
+} Game;
 
 int initGame(Game* game);
+int initSDL ();
 
 void updateGame(Game* game);
 void clearScreen (Game* game);

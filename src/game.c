@@ -7,9 +7,50 @@
 
 #include "game.h"
 
-/*décomposer plus cette fonction*/
+
+
+
+/*décomposer plus cette fonction, tout revoir*/
+// malloc chaque structure de Game puis lancer init.....*/
 int initGame(Game* game) {
 
+   if(initSDL()){
+      return -1;
+   }
+
+   game->status = (GameStatus*) malloc(sizeof(GameStatus));
+   initGameStatus(game->status);
+
+   game->options = (GameOptions*) malloc(sizeof(GameOptions));
+   initGameOptions(game->options);
+
+   game->input = (Input*) malloc(sizeof(Input));
+   initInput(game->input);
+
+   game->menu = (Menu*) malloc(sizeof(Menu));  // ou alors on peut faire game->menu = initMenu();
+   initMenu(game->menu);
+
+   /*Create the SDL window*/
+   game->screen = SDL_SetVideoMode(game->options->windowWidth, game->options->windowHeight, 32, SDL_HWSURFACE|SDL_DOUBLEBUF);
+
+   if(game->screen == NULL) {
+      fprintf(stderr, "Unable to create the window : %s\n", SDL_GetError());
+      return -1;
+   }
+   SDL_WM_SetCaption("My Little Project", NULL);
+   SDL_WM_SetIcon(IMG_Load("res/icon.png"),NULL);
+
+
+   /*Initialisation des timers*/ //initTicks
+   game->status->nextTick = SDL_GetTicks() + SKIP_TICKS;
+
+   return 0;
+}
+
+/**
+ * Initialisation of SDL and SDL image
+ */
+int initSDL () {
    /*Initialisation SDL*/
    if(SDL_Init(SDL_INIT_VIDEO) < 0) {
       fprintf(stderr, "Unable to initialize SDL : %s\n", SDL_GetError());
@@ -22,78 +63,21 @@ int initGame(Game* game) {
       return -1;
    }
    atexit(IMG_Quit);
-
-   /*Initialisation GameStatus*/
-   initGameStatus(game);
-
-   /*Initialisation GameOptions*/
-   initGameOptions(game);
-
-   /*Create the SDL window*/
-   game->screen = SDL_SetVideoMode(game->options->windowWidth, game->options->windowHeight, 32, SDL_HWSURFACE|SDL_DOUBLEBUF);
-
-   if(game->screen == NULL) {
-      fprintf(stderr, "Unable to create the window : %s\n", SDL_GetError());
-      return -1;
-   }
-   SDL_WM_SetCaption("My Little Project", NULL);
-   SDL_WM_SetIcon(IMG_Load("res/icon.png"),NULL);
-
-   initMenu(game);
-   initCharacter(game);
-   initLevel(game);
-
-   /*Initialisation de la gestion d'event*/
-   initInput(game);
-
-   /*Initialisation des timers*/
-   game->status->nextTick = SDL_GetTicks() + SKIP_TICKS;
-
    return 0;
 }
 
 void updateGame(Game* game) {
 
-   getInput(game); /*on recupere les input*/
+   getInput(game->input, game->options); /*on recupere les input*/
 
-   updateGameStatus(game); /*on update d'abord le statud du jeu*/
+   updateGameStatus(game->status); /*on update d'abord le statud du jeu*/
 
-   switch (game->status->state) { /*je sais pas trop pour ca*/
-   case intro :
-      /*updateIntro(game);*/
-      break;
-
-   case mainMenu :
-      updateMenu(game);
-      break;
-   case newGameMenu :
-      updateMenu(game);
-      break;
-   case continueMenu :
-      updateMenu(game);
-      break;
-   case creditsMenu :
-      updateMenu(game);
-      break;
-   case optionsMenu :
-      updateMenu(game);
-      break;
-
-   case inGame :
-      updateCharacter(game);
-      updateLevel(game);
-      break;
-   case inGameMenu :
-      break;
-   case inGamePopUp :
-      updateLevel(game);
-      ;
-   }
+//puis switch pour update la partie qui va bien
 }
 
 
-void clearScreen (Game* game) {
 
+void clearScreen (Game* game) {
    SDL_FillRect(game->screen, NULL, SDL_MapRGB(game->screen->format, 255, 255, 255));
 }
 
@@ -101,41 +85,7 @@ void displayGame(Game* game) {
 
    clearScreen(game);
 
-   switch (game->status->state) { /*je sais pas trop pour ca*/
-   case intro :
-      /*displayIntro(game);*/
-      break;
-
-   case mainMenu :
-      displayMenu(game);
-      break;
-   case newGameMenu :
-      displayMenu(game);
-      break;
-   case continueMenu :
-      displayMenu(game);
-      break;
-   case creditsMenu :
-      displayMenu(game);
-      break;
-   case optionsMenu :
-      displayMenu(game);
-      break;
-
-   case inGame :
-      displayLevel(game);
-      displayCharacter(game);
-      break;
-   case inGameMenu :
-      displayLevel(game);
-      displayCharacter(game);
-      break;
-   case inGamePopUp :
-      displayLevel(game);
-      displayCharacter(game);
-      break;
-   }
-
+   //switch sur le status, et dsplay la partie qui va bien
 
    if(SDL_Flip(game->screen) == -1) {
       logError("Error when flipping screen", __FILE__, __LINE__);
@@ -144,14 +94,16 @@ void displayGame(Game* game) {
 
 /**
  * \param game Pointer on a Game structure.
- * \brief Function to wait a brief amount of time so the game runs at a constant FPS.
+ * \brief Wait a brief amount of time so the game runs at a constant FPS.
  */
 void delayGame(Game* game) {
 
-   game->status->sleepTime = 0;
+   Uint32 ticks = SDL_GetTicks();
 
-   if (game->status->nextTick > SDL_GetTicks()) {
-      game->status->sleepTime = game->status->nextTick - SDL_GetTicks();
+   if (game->status->nextTick > ticks) {
+      game->status->sleepTime = game->status->nextTick - ticks;
+   } else {
+      game->status->sleepTime = 0;
    }
 
    game->status->nextTick += SKIP_TICKS;

@@ -7,25 +7,28 @@
 
 #include "level.h"
 
-void initLevel(Game* game) {
-   game->level = (Level*) malloc(sizeof(Level));
-   game->level->rectSrc = (SDL_Rect*) malloc(sizeof(SDL_Rect));
-   game->level->rectSrc->x = game->level->rectSrc->y = 150;
 
-   game->level->background = IMG_Load("res/image/background/backgroundworld1.png");
-   game->level->tileset = IMG_Load("res/image/tile_tileset.png");
+
+void initLevel (Level* level) {
+      level = (Level*) malloc(sizeof(Level));
+   level->rectSrc = (SDL_Rect*) malloc(sizeof(SDL_Rect));
+   level->rectSrc->x = level->rectSrc->y = 150;
+
+   level->background = IMG_Load("res/image/background/backgroundworld1.png");
+   level->tileset = IMG_Load("res/image/tile_tileset.png");
 
    /*charger le niveau avec le parseur xml*/
 }
 
-void updateLevel(Game* game) {
+void updateLevel (Level* level) {
 
 }
 
-void displayLevel(Game* game) {
-   displayBackground(game);
+void displayLevel (Level* level, SDL_Surface* screen) {
+   displayBackground(level, screen);
 }
 
-void displayBackground(Game* game) {
-   SDL_BlitSurface(game->level->background, NULL, game->screen, NULL);/*il faudra gérer la caméra plus tard*/
+void displayBackground (Level* level, SDL_Surface* screen) {
+    SDL_BlitSurface(level->background, NULL, screen, NULL);/*il faudra gérer la caméra plus tard, double scrolling ?*/
 }
+

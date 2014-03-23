@@ -7,39 +7,19 @@
 
 #include "gameStatus.h"
 
-/*au lancement du jeu*/
-void initGameStatus(Game* game) {
-   game->status = (GameStatus*) malloc(sizeof(GameStatus));
-   game->status->state = mainMenu;
-   game->status->level = 0;
-   game->status->gameIsRunning = true;
-   game->status->nextTick = game->status->sleepTime = 0;
+
+void initGameStatus(GameStatus* status) {
+    status->gameIsRunning = true;
+    status->state = intro;
+    status->level = 0;
+    status->nextTick = 0;
+    status->sleepTime = 0;
 }
 
 /*a refaire, peut etre avec des switchs*/
-/*juste pour montrer que ca marche */
 /*dans quel ordre faire les tests ?*/
-/*clear inut a chaque changements*/
-void updateGameStatus(Game* game) {
-
-   if(game->input->exit) {
-      game->status->gameIsRunning = false;
-   }
-
-   if(game->status->state==inGame && game->input->escape) {
-      game->status->state=mainMenu;
-      clearInput(game);
-   }
-   if(game->status->state==mainMenu && game->input->enter) {
-      game->status->state=newGameMenu;
-      clearInput(game);
-   }
-   if (game->status->state == newGameMenu && game->input->escape) {
-      game->status->state=mainMenu;
-      clearInput(game);
-   }
-   if (game->status->state == newGameMenu && game->input->enter) {
-      game->status->state=inGame;
-      clearInput(game);
-   }
+void updateGameStatus(GameStatus* status) {
+   //faire le graph d'état, mais avant gérer les input
 }
+
+

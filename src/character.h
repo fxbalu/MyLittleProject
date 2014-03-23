@@ -8,12 +8,47 @@
 #ifndef DEFINED_CHARACTER_H
 #define DEFINED_CHARACTER_H
 
-#include "structs.h"
+#include <SDL.h>
+#include <SDL_image.h>
+#include "level.h"
 
-void initCharacter (Game* game);
+/**
+ * \enum Direction
+ * \brief Enumeration of the different directions possible of the character.
+ */
+typedef enum Direction {
+   left, right
+} Direction;
 
-void updateCharacter(Game* game);
 
-void displayCharacter(Game* game);
+/**
+ * \enum CharacterState
+ * \brief Enumeration of the different states possible of the character.
+ */
+typedef enum CharacterState {
+   idle, walk, run, jump
+} CharacterState;
+
+/*!
+ * \struct Character
+ * \brief Variables to manage the character.
+ */
+typedef struct Character {
+   SDL_Surface* spriteCharacterSheet;
+   SDL_Rect* rectSrc;
+   SDL_Rect* rectDst;
+
+   int x; /*coordonnées du perosn ,om a changer peut etre*/
+   int y;
+
+   CharacterState state;
+   Direction direction;
+} Character;
+
+void initCharacter (Character* player);
+
+void updateCharacter (Character* player, Level* level);
+
+void displayCharacter (Character* player, SDL_Surface* screen);
 
 #endif

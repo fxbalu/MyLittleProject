@@ -8,8 +8,36 @@
  #ifndef GAMEOPTIONS_H_INCLUDED
 #define GAMEOPTIONS_H_INCLUDED
 
-#include "structs.h"
+#include "define.h"
+#include "common.h"
 
-void initGameOptions(Game* game);
+/**
+ * \struct GameOptions
+ * \brief Represent the options of the game, selected by the player in the options menu.
+ */
+typedef struct GameOptions {
+   int windowWidth;
+   int windowHeight;
+
+   int controlerDown;
+   int controlerUp;
+
+   int left;   /*Garde en mémoire les préférences de commandes de l'utilisateur*/
+   int up;
+   int right;
+   int down;
+
+   int enter;
+   int jump;
+   int crouch;
+   int shoot;
+
+   int escape;
+   int exit;
+
+   Boolean fullscreen;
+} GameOptions;
+
+void initGameOptions(GameOptions* options);
 
 #endif

@@ -9,19 +9,35 @@
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
 
-#include "structs.h"
-#include "input.h"
+#include <SDL.h>
+#include <SDL_image.h>
 
-void initMenu (Game* game);
+/**
+ * \struct Menu
+ * \brief Informations to draw (just draw the current menu)the menu on the screen
+ */
+typedef struct Menu {
+   char** contenu;/*nom a revoir */
 
-void updateMenu(Game* game);
+   SDL_Surface* menuSpriteSheet; /* struct item menu a ajouter ?*/
+   SDL_Surface* splashScreen;
+   SDL_Rect* rectSrc;
+   SDL_Rect* rectDst;
 
-void displayMenu(Game* game);
+   int numberItem;
+   int selectItem;
+} Menu;
 
-void displayMenuBlock(Game* game);
+void initMenu (Menu* menu);
 
-void updateSplashScreen(Game* game);
+void updateMenu();//gérer l'update dans game statut ?
 
-void displaySplashScreen (Game* game);
+void displayMenu(Menu* menu, SDL_Surface* screen);
+
+void displayMenuBlock();
+
+// void updateSplashScreen(Game* game); plus tard
+
+void displaySplashScreen (Menu* menu, SDL_Surface* screen);
 
 #endif
