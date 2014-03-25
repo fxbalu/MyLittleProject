@@ -7,12 +7,12 @@
 
 #ifndef DEFINED_GAME_H
 #define DEFINED_GAME_H
-
+/*
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL.h>
 #include <SDL_image.h>
-
+*/
 #include "define.h"
 #include "common.h"
 

@@ -14,6 +14,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <SDL.h>
+#include <SDL_image.h>
 
 /**
  * \enum boolean
@@ -26,5 +28,6 @@ typedef enum Boolean{
 
 void logError(const char* str, const char* file, const int line);
 
+SDL_Surface* loadImage(char* file);
 
 #endif

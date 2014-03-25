@@ -22,14 +22,16 @@ int initGame(Game* game) {
    game->options = (GameOptions*) malloc(sizeof(GameOptions));
    initGameOptions(game->options);
 
+   /*Create the SDL window*/
+   game->screen = SDL_SetVideoMode(game->options->windowWidth, game->options->windowHeight, 32, SDL_HWSURFACE|SDL_DOUBLEBUF);
+
+
    game->input = (Input*) malloc(sizeof(Input));
    initInput(game->input);
 
    game->menu = (Menu*) malloc(sizeof(Menu));  // ou alors on peut faire game->menu = initMenu();
    initMenu(game->menu);
 
-   /*Create the SDL window*/
-   game->screen = SDL_SetVideoMode(game->options->windowWidth, game->options->windowHeight, 32, SDL_HWSURFACE|SDL_DOUBLEBUF);
 
    if(game->screen == NULL) {
       fprintf(stderr, "Unable to create the window : %s\n", SDL_GetError());

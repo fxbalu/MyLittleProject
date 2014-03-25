@@ -33,3 +33,15 @@ void logError(const char* str, const char* file, const int line)
 {
     fprintf(stderr, "! error in [%s] at line [%d] :\n! %s\n", file, line, str);
 }
+
+//premiere version on va test la vitesse des blits avec et sans
+SDL_Surface* loadImage(char* file) {
+   SDL_Surface* temp = IMG_Load(file);
+   SDL_Surface* image = SDL_DisplayFormatAlpha(temp);
+
+   if(image == NULL){
+      logError("erreur fonction loadImage", __FILE__, __LINE__);
+   }
+   free(temp);
+   return image;
+}
