@@ -10,11 +10,10 @@
 /*utiliser parseur xml ???*/
 void initCharacter (Character* player) {
 
-    player = (Character*) malloc(sizeof(Character));
     player->rectSrc = (SDL_Rect*) malloc(sizeof(SDL_Rect));
     player->rectDst = (SDL_Rect*) malloc(sizeof(SDL_Rect));
 
-    player->spriteCharacterSheet = IMG_Load("res/image/sprite/player/playerSpriteSheet.png");
+    player->spriteCharacterSheet = loadImage("res/image/sprite/player/playerSpriteSheet.png");
 
     player->rectSrc->x = 0;
     player->rectSrc->y = 0;

@@ -22,7 +22,7 @@ int initGame(Game* game) {
    game->options = (GameOptions*) malloc(sizeof(GameOptions));
    initGameOptions(game->options);
 
-   /*Create the SDL window*/
+   /*Create the SDL window after the options*/
    game->screen = SDL_SetVideoMode(game->options->windowWidth, game->options->windowHeight, 32, SDL_HWSURFACE|SDL_DOUBLEBUF);
 
 
@@ -32,6 +32,11 @@ int initGame(Game* game) {
    game->menu = (Menu*) malloc(sizeof(Menu));  // ou alors on peut faire game->menu = initMenu();
    initMenu(game->menu);
 
+   game->level = (Level*) malloc(sizeof(Level));
+   initLevel(game->level);
+
+   game->player = (Character*) malloc(sizeof(Character));
+   initCharacter(game->player);
 
    if(game->screen == NULL) {
       fprintf(stderr, "Unable to create the window : %s\n", SDL_GetError());
@@ -92,19 +97,19 @@ void displayGame(Game* game) {
       //displayIntro();
       break;
    case mainMenu :
-      displayMenu(game->menu, game->screen);
+      displayMenu(game->menu, game->status, game->screen);
       break;
    case newGameMenu :
-      displayMenu(game->menu, game->screen);
+      displayMenu(game->menu, game->status, game->screen);
       break;
    case continueMenu :
-      displayMenu(game->menu, game->screen);
+      displayMenu(game->menu, game->status, game->screen);
       break;
    case optionsMenu :
-      displayMenu(game->menu, game->screen);
+      displayMenu(game->menu, game->status, game->screen);
       break;
    case creditsMenu :
-      displayMenu(game->menu, game->screen);
+      displayMenu(game->menu, game->status, game->screen); // or dislay crédits !
       break;
    case inGame :
       displayLevel(game->level, game->screen);

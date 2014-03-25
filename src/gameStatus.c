@@ -11,6 +11,8 @@
 void initGameStatus(GameStatus* status) {
    status->gameIsRunning = true;
    status->state = mainMenu; //intro
+   status->menuSelection = 0;
+   status->numberItemsMenu = 4;
    status->level = 0;
    status->nextTick = 0;
    status->sleepTime = 0;
@@ -57,55 +59,55 @@ void updateGameStatus (GameStatus* status, Input* input) {
 void updateIntro(GameStatus* status, Input* input) {
 
    if(input->left.pressed) {
-
+      status->state = mainMenu;
    }
    if(input->left.down) {
 
    }
    if(input->up.pressed) {
-
+      status->state = mainMenu;
    }
    if(input->up.down) {
 
    }
    if(input->right.pressed) {
-
+      status->state = mainMenu;
    }
    if(input->right.down) {
 
    }
    if(input->down.pressed) {
-
+      status->state = mainMenu;
    }
    if(input->down.down) {
 
    }
    if(input->enter.pressed) {
-
+      status->state = mainMenu;
    }
    if(input->enter.down) {
 
    }
    if(input->jump.pressed) {
-
+      status->state = mainMenu;
    }
    if(input->jump.down) {
 
    }
    if(input->crouch.pressed) {
-
+      status->state = mainMenu;
    }
    if(input->crouch.down) {
 
    }
    if(input->shoot.pressed) {
-
+      status->state = mainMenu;
    }
    if(input->shoot.down) {
 
    }
    if(input->escape.pressed) {
-
+      status->state = mainMenu;
    }
    if(input->escape.down) {
 
@@ -127,7 +129,10 @@ void updateMainMenu(GameStatus* status, Input* input) {
 
    }
    if(input->up.pressed) {
-
+      status->menuSelection--;
+      if(status->menuSelection < 0) {
+         status->menuSelection = status->numberItemsMenu - 1;
+      }
    }
    if(input->up.down) {
 
@@ -139,13 +144,36 @@ void updateMainMenu(GameStatus* status, Input* input) {
 
    }
    if(input->down.pressed) {
-
+      status->menuSelection++;
+      if(status->menuSelection >= status->numberItemsMenu) {
+         status->menuSelection = 0;
+      }
    }
    if(input->down.down) {
 
    }
    if(input->enter.pressed) {
-
+      switch (status->menuSelection) { // faire une fonction d'évolution pour les menu ?
+      case 0 :
+         status->state = newGameMenu;
+         status->menuSelection = 0;
+         status->numberItemsMenu = 3;
+         break;
+      case 1 :
+         status->state = continueMenu;
+         status->menuSelection = 0;
+         status->numberItemsMenu = 2;
+         break;
+      case 2 :
+         status->state = optionsMenu;
+         status->menuSelection = 0;
+         status->numberItemsMenu = 4;
+         break;
+      case 3 :
+         status->state = creditsMenu;
+         status->menuSelection = 0;
+         status->numberItemsMenu = 0;  //quand 0 items menu spécile !!
+      }
    }
    if(input->enter.down) {
 
@@ -191,7 +219,10 @@ void updateNewGameMenu(GameStatus* status, Input* input) {
 
    }
    if(input->up.pressed) {
-
+      status->menuSelection--;
+      if(status->menuSelection < 0) {
+         status->menuSelection = status->numberItemsMenu - 1;
+      }
    }
    if(input->up.down) {
 
@@ -203,13 +234,27 @@ void updateNewGameMenu(GameStatus* status, Input* input) {
 
    }
    if(input->down.pressed) {
-
+      status->menuSelection++;
+      if(status->menuSelection >= status->numberItemsMenu) {
+         status->menuSelection = 0;
+      }
    }
    if(input->down.down) {
 
    }
    if(input->enter.pressed) {
-
+      switch (status->menuSelection) { // faire une fonction d'évolution pour les menu ?
+      case 0 :
+         status->state = inGame;
+         break;
+      case 1 :
+         break;
+      case 2 :
+         status->state = mainMenu;
+         status->numberItemsMenu = 4;
+         status->menuSelection = 0;
+         //LoadMenu(mainMenu)
+      }
    }
    if(input->enter.down) {
 
@@ -233,7 +278,8 @@ void updateNewGameMenu(GameStatus* status, Input* input) {
 
    }
    if(input->escape.pressed) {
-
+      status->state = mainMenu;
+      //LoadMenu(mainMenu)
    }
    if(input->escape.down) {
 
@@ -255,7 +301,10 @@ void updateContinueMenu(GameStatus* status, Input* input) {
 
    }
    if(input->up.pressed) {
-
+      status->menuSelection--;
+      if(status->menuSelection < 0) {
+         status->menuSelection = status->numberItemsMenu - 1;
+      }
    }
    if(input->up.down) {
 
@@ -267,7 +316,174 @@ void updateContinueMenu(GameStatus* status, Input* input) {
 
    }
    if(input->down.pressed) {
+      status->menuSelection++;
+      if(status->menuSelection >= status->numberItemsMenu) {
+         status->menuSelection = 0;
+      }
+   }
+   if(input->down.down) {
 
+   }
+   if(input->enter.pressed) {
+      switch (status->menuSelection) { // faire une fonction d'évolution pour les menu ?
+      case 0 :
+         status->state = inGame;
+         break;
+      case 1 :
+         status->state = mainMenu;
+         status->numberItemsMenu = 4;
+         status->menuSelection = 0;
+         //LoadMenu(mainMenu)
+      }
+   }
+   if(input->enter.down) {
+
+   }
+   if(input->jump.pressed) {
+
+   }
+   if(input->jump.down) {
+
+   }
+   if(input->crouch.pressed) {
+
+   }
+   if(input->crouch.down) {
+
+   }
+   if(input->shoot.pressed) {
+
+   }
+   if(input->shoot.down) {
+
+   }
+   if(input->escape.pressed) {
+      status->state = mainMenu;
+      //LoadMenu(mainMenu)
+   }
+   if(input->escape.down) {
+
+   }
+   if(input->exit.pressed) {
+      status->gameIsRunning = false;
+   }
+   if(input->exit.down) {
+      status->gameIsRunning = false;
+   }
+}
+
+void updateOptionsMenu(GameStatus* status, Input* input) {
+
+   if(input->left.pressed) {
+
+   }
+   if(input->left.down) {
+
+   }
+   if(input->up.pressed) {
+      status->menuSelection--;
+      if(status->menuSelection < 0) {
+         status->menuSelection = status->numberItemsMenu - 1;
+      }
+   }
+   if(input->up.down) {
+
+   }
+   if(input->right.pressed) {
+
+   }
+   if(input->right.down) {
+
+   }
+   if(input->down.pressed) {
+      status->menuSelection++;
+      if(status->menuSelection >= status->numberItemsMenu) {
+         status->menuSelection = 0;
+      }
+   }
+   if(input->down.down) {
+
+   }
+   if(input->enter.pressed) {
+      switch (status->menuSelection) { // faire une fonction d'évolution pour les menu ?
+      case 0 :
+         break;
+      case 1 :
+         break;
+      case 2 :
+         break;
+      case 3 :
+         status->state = mainMenu;
+         status->numberItemsMenu = 4;
+         status->menuSelection = 0;
+         //LoadMenu(mainMenu)
+      }
+   }
+   if(input->enter.down) {
+
+   }
+   if(input->jump.pressed) {
+
+   }
+   if(input->jump.down) {
+
+   }
+   if(input->crouch.pressed) {
+
+   }
+   if(input->crouch.down) {
+
+   }
+   if(input->shoot.pressed) {
+
+   }
+   if(input->shoot.down) {
+
+   }
+   if(input->escape.pressed) {
+               status->state = mainMenu;
+         status->numberItemsMenu = 4;
+         status->menuSelection = 0;
+   }
+   if(input->escape.down) {
+
+   }
+   if(input->exit.pressed) {
+      status->gameIsRunning = false;
+   }
+   if(input->exit.down) {
+      status->gameIsRunning = false;
+   }
+}
+
+void updateCreditsMenu(GameStatus* status, Input* input) {
+
+   if(input->left.pressed) {
+
+   }
+   if(input->left.down) {
+
+   }
+   if(input->up.pressed) {
+      status->menuSelection--;
+      if(status->menuSelection < 0) {
+         status->menuSelection = status->numberItemsMenu - 1;
+      }
+   }
+   if(input->up.down) {
+
+   }
+   if(input->right.pressed) {
+
+   }
+   if(input->right.down) {
+
+   }
+   if(input->down.pressed) {
+      status->menuSelection++;
+      if(status->menuSelection >= status->numberItemsMenu) {
+         status->menuSelection = 0;
+      }
    }
    if(input->down.down) {
 
@@ -297,7 +513,10 @@ void updateContinueMenu(GameStatus* status, Input* input) {
 
    }
    if(input->escape.pressed) {
-
+      status->state = mainMenu;
+      status->numberItemsMenu = 4;
+      status->menuSelection = 0;
+      //LoadMenu(mainMenu)
    }
    if(input->escape.down) {
 
@@ -310,7 +529,7 @@ void updateContinueMenu(GameStatus* status, Input* input) {
    }
 }
 
-void updateOptionsMenu(GameStatus* status, Input* input) {
+void updateInGame(GameStatus* status, Input* input) {
 
    if(input->left.pressed) {
 
@@ -364,135 +583,9 @@ void updateOptionsMenu(GameStatus* status, Input* input) {
 
    }
    if(input->escape.down) {
-
-   }
-   if(input->exit.pressed) {
-      status->gameIsRunning = false;
-   }
-   if(input->exit.down) {
-      status->gameIsRunning = false;
-   }
-}
-
-void updateCreditsMenu(GameStatus* status, Input* input) {
-
-      if(input->left.pressed) {
-
-   }
-   if(input->left.down) {
-
-   }
-   if(input->up.pressed) {
-
-   }
-   if(input->up.down) {
-
-   }
-   if(input->right.pressed) {
-
-   }
-   if(input->right.down) {
-
-   }
-   if(input->down.pressed) {
-
-   }
-   if(input->down.down) {
-
-   }
-   if(input->enter.pressed) {
-
-   }
-   if(input->enter.down) {
-
-   }
-   if(input->jump.pressed) {
-
-   }
-   if(input->jump.down) {
-
-   }
-   if(input->crouch.pressed) {
-
-   }
-   if(input->crouch.down) {
-
-   }
-   if(input->shoot.pressed) {
-
-   }
-   if(input->shoot.down) {
-
-   }
-   if(input->escape.pressed) {
-
-   }
-   if(input->escape.down) {
-
-   }
-   if(input->exit.pressed) {
-      status->gameIsRunning = false;
-   }
-   if(input->exit.down) {
-      status->gameIsRunning = false;
-   }
-}
-
-void updateInGame(GameStatus* status, Input* input) {
-
-      if(input->left.pressed) {
-
-   }
-   if(input->left.down) {
-
-   }
-   if(input->up.pressed) {
-
-   }
-   if(input->up.down) {
-
-   }
-   if(input->right.pressed) {
-
-   }
-   if(input->right.down) {
-
-   }
-   if(input->down.pressed) {
-
-   }
-   if(input->down.down) {
-
-   }
-   if(input->enter.pressed) {
-
-   }
-   if(input->enter.down) {
-
-   }
-   if(input->jump.pressed) {
-
-   }
-   if(input->jump.down) {
-
-   }
-   if(input->crouch.pressed) {
-
-   }
-   if(input->crouch.down) {
-
-   }
-   if(input->shoot.pressed) {
-
-   }
-   if(input->shoot.down) {
-
-   }
-   if(input->escape.pressed) {
-
-   }
-   if(input->escape.down) {
-
+      status->state = mainMenu;
+      status->numberItemsMenu = 4;
+      status->menuSelection = 0;
    }
    if(input->exit.pressed) {
       status->gameIsRunning = false;
@@ -504,7 +597,7 @@ void updateInGame(GameStatus* status, Input* input) {
 
 void updateInGameMenu(GameStatus* status, Input* input) {
 
-      if(input->left.pressed) {
+   if(input->left.pressed) {
 
    }
    if(input->left.down) {
@@ -568,7 +661,7 @@ void updateInGameMenu(GameStatus* status, Input* input) {
 
 void updateInGamePopUp(GameStatus* status, Input* input) {
 
-      if(input->left.pressed) {
+   if(input->left.pressed) {
 
    }
    if(input->left.down) {

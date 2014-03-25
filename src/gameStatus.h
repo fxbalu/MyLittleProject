@@ -30,8 +30,10 @@ typedef struct GameStatus { //toutes les infos sur l'état !!!!!
    Boolean gameIsRunning;
    State state; /*enumeration des etats*/
 
-   int level; /* on peut mettre  si pas chargé ou si pas dans un niveau*/
    int menuSelection;/*nom a modifier, a revoir toute la gestion des menu*/
+   int numberItemsMenu; //meilleur nom ?
+
+   int level; /* on peut mettre  si pas chargé ou si pas dans un niveau*/
 
    /*Variables for the FPS*/
    Uint32 frames;

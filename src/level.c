@@ -10,12 +10,12 @@
 
 
 void initLevel (Level* level) {
-      level = (Level*) malloc(sizeof(Level));
+
    level->rectSrc = (SDL_Rect*) malloc(sizeof(SDL_Rect));
    level->rectSrc->x = level->rectSrc->y = 150;
 
-   level->background = IMG_Load("res/image/background/backgroundworld1.png");
-   level->tileset = IMG_Load("res/image/tile_tileset.png");
+   level->background = loadImage("res/image/background/backgroundworld1.png");
+   level->tileset = loadImage("res/image/tileset/tilesetLevel.png");
 
    /*charger le niveau avec le parseur xml*/
 }

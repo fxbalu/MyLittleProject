@@ -16,6 +16,7 @@
  * \brief Represent the options of the game, selected by the player in the options menu.
  */
 typedef struct GameOptions {
+   Boolean fullscreen;
    int windowWidth;
    int windowHeight;
 
@@ -34,8 +35,6 @@ typedef struct GameOptions {
 
    int escape;
    int exit;
-
-   Boolean fullscreen;
 } GameOptions;
 
 void initGameOptions(GameOptions* options);

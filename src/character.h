@@ -10,6 +10,7 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
+#include "common.h"
 #include "level.h"
 
 /**

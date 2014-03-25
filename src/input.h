@@ -11,7 +11,7 @@
 
 #include <SDL.h>
 #include "common.h"
-#include "GameOptions.h"
+#include "gameOptions.h"
 
 /*ok pour le nom ?*/
 /**
