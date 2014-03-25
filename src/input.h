@@ -30,18 +30,18 @@ typedef struct Control {
 typedef struct Input {
    SDL_Event* event;
 
-   Control* left;
-   Control* up; // pointeur sur control c'est bien non ?
-   Control* right;
-   Control* down;
+   Control left;
+   Control up; // pointeur sur control c'est bien non ?
+   Control right;
+   Control down;
 
-   Control* enter; /*on peut appuyer sur plusieurs touches en meme temps, donc pas faire juste une enumeration*/
-   Control* jump;/* note : les control sont des flags, ils sont a appliqur dans une fonction getinput, et en fonction de gameOptions*/
-   Control* crouch;
-   Control* shoot;
+   Control enter; /*on peut appuyer sur plusieurs touches en meme temps, donc pas faire juste une enumeration*/
+   Control jump;/* note : les control sont des flags, ils sont a appliqur dans une fonction getinput, et en fonction de gameOptions*/
+   Control crouch;
+   Control shoot;
 
-   Control* escape;
-   Control* exit;
+   Control escape;
+   Control exit;
 } Input;
 
 
@@ -52,8 +52,12 @@ void clearInput(Input* input);
 
 void clearInputPressed(Input* input);
 
+void clearInputDown(Input* input);
+
 void getInput(Input* input, GameOptions* options);
 
 void freeInput(Input* input);
+
+void printInput(Input* input);
 
 #endif

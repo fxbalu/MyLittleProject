@@ -11,6 +11,7 @@
 #include <SDL.h>
 #include "define.h"
 #include "common.h"
+#include "input.h"
 
 /**
  * \enum State
@@ -25,9 +26,10 @@ typedef enum State {
  * \struct GameStatus
  * \brief Informations on the state of the game and for the timers.
  */
-typedef struct GameStatus {
+typedef struct GameStatus { //toutes les infos sur l'état !!!!!
    Boolean gameIsRunning;
    State state; /*enumeration des etats*/
+
    int level; /* on peut mettre  si pas chargé ou si pas dans un niveau*/
    int menuSelection;/*nom a modifier, a revoir toute la gestion des menu*/
 
@@ -43,6 +45,17 @@ typedef struct GameStatus {
 
 void initGameStatus(GameStatus* status);
 
-void updateGameStatus(GameStatus* status);
+void updateGameStatus(GameStatus* status, Input* input);
+
+//appeler dans le switch de update gamestatus
+void updateIntro(GameStatus* status, Input* input);
+void updateMainMenu(GameStatus* status, Input* input);
+void updateNewGameMenu(GameStatus* status, Input* input);
+void updateContinueMenu(GameStatus* status, Input* input);
+void updateOptionsMenu(GameStatus* status, Input* input);
+void updateCreditsMenu(GameStatus* status, Input* input);
+void updateInGame(GameStatus* status, Input* input);
+void updateInGameMenu(GameStatus* status, Input* input);
+void updateInGamePopUp(GameStatus* status, Input* input);
 
 #endif

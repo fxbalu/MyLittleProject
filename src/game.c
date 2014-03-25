@@ -8,8 +8,6 @@
 #include "game.h"
 
 
-
-
 /*décomposer plus cette fonction, tout revoir*/
 // malloc chaque structure de Game puis lancer init.....*/
 int initGame(Game* game) {
@@ -41,7 +39,7 @@ int initGame(Game* game) {
    SDL_WM_SetIcon(IMG_Load("res/icon.png"),NULL);
 
 
-   /*Initialisation des timers*/ //initTicks
+   /*Initialisation des timers*/ //function initTicks
    game->status->nextTick = SDL_GetTicks() + SKIP_TICKS;
 
    return 0;
@@ -68,9 +66,9 @@ int initSDL () {
 
 void updateGame(Game* game) {
 
-   getInput(game->input, game->options); /*on recupere les input*/
+   getInput(game->input, game->options); /*on recupere les inputs, arche bien pour l'instant*/
 
-   updateGameStatus(game->status); /*on update d'abord le statud du jeu*/
+   updateGameStatus(game->status, game->input); /*on update d'abord le statud du jeu*/
 
 //puis switch pour update la partie qui va bien
 }
@@ -85,7 +83,37 @@ void displayGame(Game* game) {
 
    clearScreen(game);
 
-   //switch sur le status, et dsplay la partie qui va bien
+      switch (game->status->state) {
+
+   case intro :
+      //displayIntro();
+      break;
+   case mainMenu :
+      displayMenu(game->menu, game->screen);
+      break;
+   case newGameMenu :
+      displayMenu(game->menu, game->screen);
+      break;
+   case continueMenu :
+      displayMenu(game->menu, game->screen);
+      break;
+   case optionsMenu :
+      displayMenu(game->menu, game->screen);
+      break;
+   case creditsMenu :
+      displayMenu(game->menu, game->screen);
+      break;
+   case inGame :
+      displayLevel(game->level, game->screen);
+      displayCharacter(game->player, game->screen);
+      break;
+   case inGameMenu :
+      displayCharacter(game->player, game->screen);
+      break;
+   case inGamePopUp :
+      displayCharacter(game->player, game->screen);
+      break;
+   }
 
    if(SDL_Flip(game->screen) == -1) {
       logError("Error when flipping screen", __FILE__, __LINE__);

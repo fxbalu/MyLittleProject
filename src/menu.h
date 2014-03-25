@@ -24,8 +24,6 @@ typedef struct Menu {
    SDL_Rect* rectSrc;
    SDL_Rect* rectDst;
 
-   int numberItem;
-   int selectItem;
 } Menu;
 
 void initMenu (Menu* menu);

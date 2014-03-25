@@ -6,6 +6,7 @@
 
 #include "menu.h"
 
+//init du main menu au lancement du jeu
 void initMenu (Menu* menu) {
    /*a faire apres avec xml peut etre ? */
    menu->menuSpriteSheet = IMG_Load("res/image/menu/blueSheet.png"); //Ici on charge le fond du menu, on peut dierct le redimensionner à la taille du screen
@@ -13,15 +14,19 @@ void initMenu (Menu* menu) {
 
    menu->rectSrc = (SDL_Rect*) malloc(sizeof(SDL_Rect));
    menu->rectDst = (SDL_Rect*) malloc(sizeof(SDL_Rect));
-
-   menu->numberItem = 4;
-   menu->selectItem = 0;
 }
 
 void updateMenu() {
 
 }
 
+/*a faire apres avec xml peut etre ? */
+//  quand on change de menu
+/*void loadMenu (Menu* menu, State State) {
+
+}
+*/
+//display le menu qui est chargé !
 void displayMenu(Menu* menu, SDL_Surface* screen) {
 
    displaySplashScreen(menu, screen);

@@ -38,10 +38,10 @@ typedef struct Game {
 } Game;
 
 int initGame(Game* game);
-int initSDL ();
+int initSDL();
 
 void updateGame(Game* game);
-void clearScreen (Game* game);
+void clearScreen(Game* game);
 void displayGame(Game* game);
 void delayGame(Game* game);
 
