@@ -7,12 +7,12 @@
 
 #include "game.h"
 
-
+//le level n'est initialiser qu'apres le menu !!!
 /*décomposer plus cette fonction, tout revoir*/
 // malloc chaque structure de Game puis lancer init.....*/
 int initGame(Game* game) {
 
-   if(initSDL()){
+   if(initSDL()) {
       return -1;
    }
 
@@ -41,6 +41,7 @@ int initGame(Game* game) {
 
    /*Initialisation des timers*/ //function initTicks
    game->status->nextTick = SDL_GetTicks() + SKIP_TICKS;
+   printf("%d initTicks\n", game->status->nextTick);
 
    return 0;
 }
@@ -80,10 +81,10 @@ void clearScreen (Game* game) {
 }
 
 void displayGame(Game* game) {
-
+   printf("%d before clear screen\n", SDL_GetTicks());
    clearScreen(game);
 
-      switch (game->status->state) {
+   switch (game->status->state) {
 
    case intro :
       //displayIntro();
@@ -112,8 +113,9 @@ void displayGame(Game* game) {
       break;
    case inGamePopUp :
       displayCharacter(game->player, game->screen);
-      break;
    }
+
+   printf("%d before Flipping the screen\n", SDL_GetTicks());
 
    if(SDL_Flip(game->screen) == -1) {
       logError("Error when flipping screen", __FILE__, __LINE__);
@@ -126,15 +128,14 @@ void displayGame(Game* game) {
  */
 void delayGame(Game* game) {
 
-   Uint32 ticks = SDL_GetTicks();
+   Uint32 tick = SDL_GetTicks();
+   game->status->sleepTime = 0;
 
-   if (game->status->nextTick > ticks) {
-      game->status->sleepTime = game->status->nextTick - ticks;
-   } else {
-      game->status->sleepTime = 0;
+   if (game->status->nextTick > tick) {
+      game->status->sleepTime = game->status->nextTick - tick;
+      SDL_Delay(game->status->sleepTime);
    }
+   printf(" sleeptime : %d\n\n",game->status->sleepTime);
 
    game->status->nextTick += SKIP_TICKS;
-
-   SDL_Delay(game->status->sleepTime);
 }

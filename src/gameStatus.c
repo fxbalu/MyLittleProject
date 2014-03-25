@@ -10,7 +10,7 @@
 
 void initGameStatus(GameStatus* status) {
    status->gameIsRunning = true;
-   status->state = intro; //intro
+   status->state = mainMenu; //intro
    status->level = 0;
    status->nextTick = 0;
    status->sleepTime = 0;
@@ -48,7 +48,6 @@ void updateGameStatus (GameStatus* status, Input* input) {
       break;
    case inGamePopUp :
       updateInGamePopUp(status, input);
-      break;
    }
    //faire le graph d'état, mais avant gérer les input
 }

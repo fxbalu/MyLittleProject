@@ -10,7 +10,7 @@
 void initMenu (Menu* menu) {
    /*a faire apres avec xml peut etre ? */
    menu->menuSpriteSheet = IMG_Load("res/image/menu/blueSheet.png"); //Ici on charge le fond du menu, on peut dierct le redimensionner à la taille du screen
-   menu->splashScreen = IMG_Load("res/image/menu/splashScreen.png");
+   menu->splashScreen = IMG_Load("res/image/menu/blueSheet.png");
 
    menu->rectSrc = (SDL_Rect*) malloc(sizeof(SDL_Rect));
    menu->rectDst = (SDL_Rect*) malloc(sizeof(SDL_Rect));
@@ -30,7 +30,7 @@ void updateMenu() {
 void displayMenu(Menu* menu, SDL_Surface* screen) {
 
    displaySplashScreen(menu, screen);
-   displayMenuBlock();
+   //displayMenuBlock();
    /*writeMenu();*/
 }
 
@@ -40,6 +40,8 @@ void displayMenuBlock() {
 }
 
 void displaySplashScreen (Menu* menu, SDL_Surface* screen) {
-
+   printf("%d before blit\n", SDL_GetTicks());
    SDL_BlitSurface(menu->splashScreen, NULL, screen, NULL);/* on fera mieux plus tard pour le splash screen*/
+
+   printf("%d after blit\n", SDL_GetTicks());
 }
