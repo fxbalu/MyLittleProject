@@ -12,7 +12,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include "common.h"
-
+#include "xml/xml.h"
 
 /**
  * \struct Camera
@@ -33,6 +33,11 @@ typedef struct Level {
    SDL_Rect* rectSrc;
    SDL_Rect* rectDst;
 
+   int sizeX;
+   int sizeY;
+
+   char** tab; //nom a changer
+
    Camera* camera;
    /*ajouter la camera ici je pense*/
 } Level;
@@ -46,5 +51,7 @@ void updateLevel (Level* level);
 void displayLevel (Level* level, SDL_Surface* screen);
 
 void displayBackground (Level* level, SDL_Surface* screen);
+
+void loadLevel (Level* level);
 
 #endif

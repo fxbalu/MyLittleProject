@@ -8,15 +8,17 @@
 #include "level.h"
 
 
-
 void initLevel (Level* level) {
 
    level->rectSrc = (SDL_Rect*) malloc(sizeof(SDL_Rect));
-   level->rectSrc->x = level->rectSrc->y = 150;
+   level->rectDst = (SDL_Rect*) malloc(sizeof(SDL_Rect));
 
-   level->background = loadImage("res/image/background/backgroundworld1.png");
-   level->tileset = loadImage("res/image/tileset/tilesetLevel.png");
+   level->rectSrc->x = 0;
+   level->rectSrc->y = 0;
+   level->rectSrc->w = 70;
+   level->rectSrc->h = 70;
 
+loadLevel(level);
    /*charger le niveau avec le parseur xml*/
 }
 
@@ -32,3 +34,27 @@ void displayBackground (Level* level, SDL_Surface* screen) {
     SDL_BlitSurface(level->background, NULL, screen, NULL);/*il faudra gérer la caméra plus tard, double scrolling ?*/
 }
 
+//test xml parseur :
+void loadLevel (Level* level) {
+   XML_File* xmlLevel = createXMLFile();
+   setXMLFilePath("res/data/level/level 0.tmx", xmlLevel); // resetXMLFile pour recharger un autre niveau ! ty fx
+   openXMLFile(xmlLevel);
+   checkFirstLineXMLFile(xmlLevel);
+
+   xmlLevel->root = parseXMLFile(xmlLevel->file);
+
+   //char* path = xmlLevel->root->first->name;
+
+   printf("%s", xmlLevel->root->first->name);
+
+//   level->tileset = loadImage(path);
+
+//réutiliser path normalement
+   //level->background = loadImage("res/image/background/backgroundworld1.png");
+
+   level->sizeX = 20;
+   level->sizeY = 20;
+
+   closeXMLFile(xmlLevel);
+   destroyXMLFile(xmlLevel);
+}

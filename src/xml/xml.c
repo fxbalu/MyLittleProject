@@ -160,7 +160,7 @@ Boolean checkFirstLineXMLFile(XML_File* xml)
       return (strcmp(firstLine, XML_FIRST_LINE) == 0);
    }
 
-   return (1 == 0);
+   return false;
 }
 
 

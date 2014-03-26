@@ -16,7 +16,7 @@
 #include <stdlib.h>        /* malloc(), realloc(), free() */
 #include <stdio.h>         /* FILE, fgetc() */
 #include <string.h>        /* strlen(), strcpy() */
-#include "test_common.h"   /* logError() */
+#include "../common.h"   /* logError() */
 
 
 #ifndef XML_BUFFER_LENGTH

@@ -19,7 +19,7 @@
 #include <stdlib.h>     /* malloc(), realloc(), free() */
 #include <string.h>     /* strlen(), strcpy() */
 #include "attribute.h"
-#include "test_common.h"  /* logError() */
+#include "../common.h" /* logError() */
 
 
 #ifndef XML_BUFFER_LENGTH
