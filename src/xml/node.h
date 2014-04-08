@@ -15,11 +15,9 @@
 #define NODE_H_INCLUDED
 
 
-#include <stdio.h>      /* printf() */
-#include <stdlib.h>     /* malloc(), realloc(), free() */
-#include <string.h>     /* strlen(), strcpy() */
-#include "attribute.h"  /* XML_Attribute */
-#include "tag.h"        /* readXMLTag() */
+
+#include "attribute.h"  /* XML_Attribute member in XML_Node structure */
+#include "tag.h"        /* XML_Tag member in XML_Node structure */
 
 /**
  * \struct XML_Node

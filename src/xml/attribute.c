@@ -9,6 +9,11 @@
  */
 
 
+#include <stdlib.h>        /* malloc(), realloc(), free() */
+#include <stdio.h>         /* FILE, fgetc() */
+#include <string.h>        /* strlen(), strcpy() */
+
+#include "../log.h"     /* logError() */
 #include "attribute.h"
 
 

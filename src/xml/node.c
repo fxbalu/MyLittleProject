@@ -8,7 +8,13 @@
  * \date 11 mars 2014
  */
 
+#include <stdio.h>      /* printf() */
+#include <stdlib.h>     /* malloc(), realloc(), free() */
+#include <string.h>     /* strlen(), strcpy() */
 
+#include "../log.h"     /* logError() */
+#include "attribute.h"  /* XML_Attribute */
+#include "tag.h"        /* XML_Tag */
 #include "node.h"
 
 

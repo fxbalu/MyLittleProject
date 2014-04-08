@@ -13,12 +13,6 @@
 #define ATTRIBUTE_H_INCLUDED
 
 
-#include <stdlib.h>        /* malloc(), realloc(), free() */
-#include <stdio.h>         /* FILE, fgetc() */
-#include <string.h>        /* strlen(), strcpy() */
-#include "../common.h"   /* logError() */
-
-
 #ifndef XML_BUFFER_LENGTH
 #define XML_BUFFER_LENGTH  50
 #endif /* XML_BUFFER_LENGTH */

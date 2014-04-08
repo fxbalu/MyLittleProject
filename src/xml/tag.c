@@ -8,7 +8,12 @@
  * \date 16 mars 2014
  */
 
+#include <stdio.h>      /* FILE */
+#include <stdlib.h>     /* malloc(), realloc(), free() */
+#include <string.h>     /* strlen(), strcpy() */
 
+#include "../log.h"     /* logError() */
+#include "attribute.h"
 #include "tag.h"
 
 
@@ -70,7 +75,7 @@ XML_Tag* allocXMLTag(XML_Tag* tag)
       logError("Can't allocate memory for XML_Tag", __FILE__, __LINE__);
    }
    else {
-      /* logMem(ALLOC, "XML_Tag, __FILE__, __LINE__) */
+      /* logMem(ALLOC, "XML_Tag", __FILE__, __LINE__) */
    }
 
    return tag;

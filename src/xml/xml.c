@@ -9,6 +9,12 @@
  */
 
 
+#include <stdio.h>   /* printf(), fopen(), fclose(), fgets() */
+#include <stdlib.h>  /* malloc(), free() */
+#include <string.h>  /* strlen(), strcpy() */
+
+#include "../log.h"  /* logError() */
+#include "node.h"    /* XML_Node */
 #include "xml.h"
 
 
@@ -143,7 +149,7 @@ void closeXMLFile(XML_File* xml)
 }
 
 
-Boolean checkFirstLineXMLFile(XML_File* xml)
+int checkFirstLineXMLFile(XML_File* xml)
 {
    char firstLine[XML_BUFFER_LENGTH];
 
@@ -160,7 +166,7 @@ Boolean checkFirstLineXMLFile(XML_File* xml)
       return (strcmp(firstLine, XML_FIRST_LINE) == 0);
    }
 
-   return false;
+   return 0;
 }
 
 
@@ -168,11 +174,11 @@ XML_Node* parseXMLFile(FILE* file)
 {
    XML_Node *current, *child, *root;
    XML_Tag* tag;
-   Boolean endOfParsing;
+   int endOfParsing;
 
    current = child = root = NULL;
    tag = NULL;
-   endOfParsing = false;
+   endOfParsing = 0;
 
    /* read first tag */
    if((tag = readXMLTag(file)) == NULL) {
@@ -198,7 +204,7 @@ XML_Node* parseXMLFile(FILE* file)
    }
 
    /* read following tags, if any */
-   while(endOfParsing == false) {
+   while(endOfParsing == 0) {
          reachNextXMLTag(file);
       tag = readXMLTag(file);
 
@@ -226,7 +232,7 @@ XML_Node* parseXMLFile(FILE* file)
             current = current->parent;
          }
          else {
-            endOfParsing = true;
+            endOfParsing = 1;
          }
       }
 

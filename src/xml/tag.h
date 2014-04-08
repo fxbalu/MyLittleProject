@@ -6,8 +6,6 @@
  *
  * \author François-Xavier Balu \<fx.balu@gmail.com\>
  * \date 16 mars 2014
- *
- * \todo check if \\struct tag in needed to document struct and enum.
  */
 
 
@@ -15,11 +13,7 @@
 #define TAG_H_INCLUDED
 
 
-#include <stdio.h>      /* FILE */
-#include <stdlib.h>     /* malloc(), realloc(), free() */
-#include <string.h>     /* strlen(), strcpy() */
-#include "attribute.h"
-#include "../common.h" /* logError() */
+#include "attribute.h"  /* XML_Attribute member in XML_Tag structure */
 
 
 #ifndef XML_BUFFER_LENGTH

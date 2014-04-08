@@ -13,17 +13,16 @@
 #define XML_H_INCLUDED
 
 
-#include <stdio.h>   /* printf(), fopen(), fclose(), fgets() */
-#include <stdlib.h>  /* malloc(), free() */
-#include <string.h>  /* strlen(), strcpy() */
-#include "node.h"    /* XML_Node */
+#include "node.h"    /* XML_Node member in XML_File structure */
 
 
 /**
  * \brief Execute some testing code in function
- * Lines preceded by \code if(DEBUG) {...} \endcode will be executed.
+ * Lines preceded by \code #ifdef DEBUG \endcode  and ended by \code #endif
+ * \endcode will be executed.
+ * \note Not used right now.
  */
-#define DEBUG  true
+#define DEBUG
 
 /**
  * \brief Buffer length for XML file reading.
@@ -66,7 +65,7 @@ void setXMLFilePath(const char* path, XML_File* xml);
 void openXMLFile(XML_File* xml);
 void closeXMLFile(XML_File* xml);
 
-Boolean checkFirstLineXMLFile(XML_File* xml);
+int checkFirstLineXMLFile(XML_File* xml);
 XML_Node* parseXMLFile(FILE* file);
 
 

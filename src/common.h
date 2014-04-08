@@ -25,9 +25,6 @@ typedef enum Boolean{
    false = 0, true = 1
 } Boolean;
 
-
-void logError(const char* str, const char* file, const int line);
-
 SDL_Surface* loadImage(char* file);
 
 #endif
