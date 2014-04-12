@@ -1,4026 +1,2168 @@
-<map version="1.0" orientation="orthogonal" width="20" height="20" tilewidth="70" tileheight="70">
-<tileset firstgid="1" name="tilesetLevel" tilewidth="70" tileheight="70">
-<image source="Git/MyLittleProject/res/image/tileset/tilesetLevel.png" trans="ffffff" width="700" height="1050">
-</image>
-</tileset>
-<layer name="Calque de Tile 1" width="20" height="20">
-<data>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="13">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="1">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="81">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="80">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="80">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="5">
-</tile>
-<tile gid="5">
-</tile>
-<tile gid="5">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="80">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="80">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="80">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="57">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="11">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="116">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="80">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="114">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="56">
-</tile>
-<tile gid="0">
-</tile>
-<tile gid="11">
-</tile>
-<tile gid="11">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="78">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-<tile gid="63">
-</tile>
-</data>
-</layer>
-</map>
-tileset627 initTicks
-627 next ticks
-611 before update
-612 before display
-612 before clear screen
-612 before Flipping the screen
-613 before delay
+res/image/background/backgroundworld1.png
+20, 20
+668 initTicks
+668 next ticks
+652 before update
+653 before display
+653 before clear screen
+653 before Flipping the screen
+654 before delay
 
  sleeptime : 14
 
-643 next ticks
-627 before update
-628 before display
-628 before clear screen
-628 before Flipping the screen
-629 before delay
+684 next ticks
+668 before update
+669 before display
+669 before clear screen
+669 before Flipping the screen
+670 before delay
 
  sleeptime : 14
 
-659 next ticks
-643 before update
-643 before display
-643 before clear screen
-643 before Flipping the screen
-644 before delay
-
- sleeptime : 15
-
-675 next ticks
-659 before update
-659 before display
-659 before clear screen
-659 before Flipping the screen
-660 before delay
-
- sleeptime : 15
-
-691 next ticks
-675 before update
-675 before display
-675 before clear screen
-675 before Flipping the screen
-676 before delay
-
- sleeptime : 15
-
-707 next ticks
-691 before update
-692 before display
-692 before clear screen
-692 before Flipping the screen
-693 before delay
+700 next ticks
+684 before update
+685 before display
+685 before clear screen
+685 before Flipping the screen
+686 before delay
 
  sleeptime : 14
 
-723 next ticks
-707 before update
-707 before display
-707 before clear screen
-707 before Flipping the screen
-708 before delay
+716 next ticks
+700 before update
+700 before display
+700 before clear screen
+700 before Flipping the screen
+701 before delay
 
  sleeptime : 15
 
-739 next ticks
-723 before update
-723 before display
-723 before clear screen
-723 before Flipping the screen
-724 before delay
+732 next ticks
+716 before update
+716 before display
+716 before clear screen
+716 before Flipping the screen
+717 before delay
 
  sleeptime : 15
 
-755 next ticks
-739 before update
-739 before display
-739 before clear screen
-739 before Flipping the screen
-740 before delay
+748 next ticks
+732 before update
+732 before display
+732 before clear screen
+732 before Flipping the screen
+733 before delay
 
  sleeptime : 15
 
-771 next ticks
-755 before update
-755 before display
-755 before clear screen
-755 before Flipping the screen
-756 before delay
+764 next ticks
+748 before update
+750 before display
+750 before clear screen
+750 before Flipping the screen
+752 before delay
 
- sleeptime : 15
+ sleeptime : 12
 
-787 next ticks
-771 before update
-771 before display
-771 before clear screen
-771 before Flipping the screen
-772 before delay
-
- sleeptime : 15
-
-803 next ticks
-787 before update
-787 before display
-787 before clear screen
-787 before Flipping the screen
-788 before delay
-
- sleeptime : 15
-
-819 next ticks
-803 before update
-803 before display
-803 before clear screen
-803 before Flipping the screen
-804 before delay
-
- sleeptime : 15
-
-835 next ticks
-819 before update
-819 before display
-819 before clear screen
-819 before Flipping the screen
-820 before delay
-
- sleeptime : 15
-
-851 next ticks
-835 before update
-835 before display
-835 before clear screen
-835 before Flipping the screen
-836 before delay
-
- sleeptime : 15
-
-867 next ticks
-851 before update
-851 before display
-851 before clear screen
-851 before Flipping the screen
-852 before delay
-
- sleeptime : 15
-
-883 next ticks
-867 before update
-867 before display
-867 before clear screen
-867 before Flipping the screen
-868 before delay
-
- sleeptime : 15
-
-899 next ticks
-883 before update
-883 before display
-883 before clear screen
-883 before Flipping the screen
-885 before delay
+780 next ticks
+764 before update
+764 before display
+764 before clear screen
+765 before Flipping the screen
+766 before delay
 
  sleeptime : 14
 
-915 next ticks
-899 before update
-899 before display
-899 before clear screen
-899 before Flipping the screen
-900 before delay
-
- sleeptime : 15
-
-931 next ticks
-915 before update
-915 before display
-915 before clear screen
-915 before Flipping the screen
-916 before delay
-
- sleeptime : 15
-
-947 next ticks
-931 before update
-931 before display
-931 before clear screen
-931 before Flipping the screen
-931 before delay
-
- sleeptime : 15
-
-963 next ticks
-947 before update
-947 before display
-947 before clear screen
-947 before Flipping the screen
-948 before delay
-
- sleeptime : 15
-
-979 next ticks
-963 before update
-963 before display
-963 before clear screen
-963 before Flipping the screen
-964 before delay
-
- sleeptime : 15
-
-995 next ticks
-979 before update
-979 before display
-979 before clear screen
-979 before Flipping the screen
-980 before delay
-
- sleeptime : 15
-
-1011 next ticks
-995 before update
-995 before display
-995 before clear screen
-995 before Flipping the screen
-995 before delay
-
- sleeptime : 16
-
-1027 next ticks
-1011 before update
-1011 before display
-1011 before clear screen
-1011 before Flipping the screen
-1012 before delay
-
- sleeptime : 15
-
-1043 next ticks
-1027 before update
-1027 before display
-1027 before clear screen
-1027 before Flipping the screen
-1028 before delay
-
- sleeptime : 15
-
-1059 next ticks
-1043 before update
-1043 before display
-1043 before clear screen
-1043 before Flipping the screen
-1044 before delay
-
- sleeptime : 15
-
-1075 next ticks
-1059 before update
-1059 before display
-1059 before clear screen
-1059 before Flipping the screen
-1060 before delay
-
- sleeptime : 15
-
-1091 next ticks
-1075 before update
-1075 before display
-1075 before clear screen
-1075 before Flipping the screen
-1076 before delay
-
- sleeptime : 15
-
-1107 next ticks
-1091 before update
-1091 before display
-1091 before clear screen
-1091 before Flipping the screen
-1091 before delay
-
- sleeptime : 16
-
-1123 next ticks
-1107 before update
-1107 before display
-1107 before clear screen
-1107 before Flipping the screen
-1108 before delay
-
- sleeptime : 15
-
-1139 next ticks
-1123 before update
-1123 before display
-1123 before clear screen
-1123 before Flipping the screen
-1125 before delay
+796 next ticks
+780 before update
+780 before display
+780 before clear screen
+780 before Flipping the screen
+782 before delay
 
  sleeptime : 14
 
-1155 next ticks
-1139 before update
-1139 before display
-1139 before clear screen
-1139 before Flipping the screen
-1140 before delay
-
- sleeptime : 15
-
-1171 next ticks
-1155 before update
-1155 before display
-1155 before clear screen
-1155 before Flipping the screen
-1156 before delay
-
- sleeptime : 15
-
-1187 next ticks
-1171 before update
-1171 before display
-1171 before clear screen
-1171 before Flipping the screen
-1172 before delay
-
- sleeptime : 15
-
-1203 next ticks
-1187 before update
-1187 before display
-1187 before clear screen
-1187 before Flipping the screen
-1203 before delay
-
- sleeptime : 0
-
-1219 next ticks
-1203 before update
-1203 before display
-1203 before clear screen
-1203 before Flipping the screen
-1205 before delay
+812 next ticks
+796 before update
+796 before display
+796 before clear screen
+797 before Flipping the screen
+798 before delay
 
  sleeptime : 14
 
-1235 next ticks
-1219 before update
-1219 before display
-1219 before clear screen
-1220 before Flipping the screen
-1221 before delay
+828 next ticks
+812 before update
+812 before display
+812 before clear screen
+813 before Flipping the screen
+814 before delay
 
  sleeptime : 14
 
-1251 next ticks
-1235 before update
-1235 before display
-1235 before clear screen
-1236 before Flipping the screen
-1237 before delay
+844 next ticks
+828 before update
+828 before display
+828 before clear screen
+828 before Flipping the screen
+829 before delay
+
+ sleeptime : 15
+
+860 next ticks
+844 before update
+844 before display
+844 before clear screen
+844 before Flipping the screen
+845 before delay
+
+ sleeptime : 15
+
+876 next ticks
+860 before update
+860 before display
+860 before clear screen
+861 before Flipping the screen
+862 before delay
 
  sleeptime : 14
 
-1267 next ticks
-1251 before update
-1251 before display
-1251 before clear screen
-1251 before Flipping the screen
-1252 before delay
-
- sleeptime : 15
-
-1283 next ticks
-1267 before update
-1267 before display
-1267 before clear screen
-1267 before Flipping the screen
-1268 before delay
-
- sleeptime : 15
-
-1299 next ticks
-1283 before update
-1283 before display
-1283 before clear screen
-1283 before Flipping the screen
-1284 before delay
-
- sleeptime : 15
-
-1315 next ticks
-1299 before update
-1299 before display
-1299 before clear screen
-1299 before Flipping the screen
-1300 before delay
-
- sleeptime : 15
-
-1331 next ticks
-1315 before update
-1315 before display
-1315 before clear screen
-1316 before Flipping the screen
-1317 before delay
+892 next ticks
+876 before update
+876 before display
+876 before clear screen
+876 before Flipping the screen
+878 before delay
 
  sleeptime : 14
 
-1347 next ticks
-1331 before update
-1331 before display
-1331 before clear screen
-1331 before Flipping the screen
-1332 before delay
+908 next ticks
+892 before update
+892 before display
+892 before clear screen
+892 before Flipping the screen
+893 before delay
 
  sleeptime : 15
 
-1363 next ticks
-1347 before update
-1347 before display
-1347 before clear screen
-1347 before Flipping the screen
-1348 before delay
+924 next ticks
+908 before update
+908 before display
+908 before clear screen
+908 before Flipping the screen
+910 before delay
+
+ sleeptime : 14
+
+940 next ticks
+924 before update
+924 before display
+924 before clear screen
+924 before Flipping the screen
+926 before delay
+
+ sleeptime : 14
+
+956 next ticks
+942 before update
+942 before display
+942 before clear screen
+942 before Flipping the screen
+944 before delay
+
+ sleeptime : 12
+
+972 next ticks
+956 before update
+956 before display
+956 before clear screen
+956 before Flipping the screen
+957 before delay
 
  sleeptime : 15
 
-1379 next ticks
-1363 before update
-1363 before display
-1363 before clear screen
-1363 before Flipping the screen
-1364 before delay
+988 next ticks
+972 before update
+972 before display
+972 before clear screen
+972 before Flipping the screen
+973 before delay
 
  sleeptime : 15
 
-1395 next ticks
-1379 before update
-1379 before display
-1379 before clear screen
-1379 before Flipping the screen
-1380 before delay
+1004 next ticks
+988 before update
+988 before display
+988 before clear screen
+988 before Flipping the screen
+989 before delay
 
  sleeptime : 15
 
-1411 next ticks
-1395 before update
-1395 before display
-1395 before clear screen
-1395 before Flipping the screen
-1396 before delay
+1020 next ticks
+1004 before update
+1004 before display
+1004 before clear screen
+1004 before Flipping the screen
+1005 before delay
 
  sleeptime : 15
 
-1427 next ticks
-1411 before update
-1411 before display
-1411 before clear screen
-1411 before Flipping the screen
-1412 before delay
+1036 next ticks
+1020 before update
+1020 before display
+1020 before clear screen
+1020 before Flipping the screen
+1021 before delay
 
  sleeptime : 15
 
-1443 next ticks
-1427 before update
-1427 before display
-1427 before clear screen
-1427 before Flipping the screen
-1428 before delay
+1052 next ticks
+1036 before update
+1036 before display
+1036 before clear screen
+1036 before Flipping the screen
+1037 before delay
 
  sleeptime : 15
 
-1459 next ticks
-1443 before update
-1443 before display
-1443 before clear screen
-1443 before Flipping the screen
-1444 before delay
+1068 next ticks
+1052 before update
+1052 before display
+1052 before clear screen
+1052 before Flipping the screen
+1053 before delay
 
  sleeptime : 15
 
-1475 next ticks
-1459 before update
-1459 before display
-1459 before clear screen
-1459 before Flipping the screen
-1460 before delay
+1084 next ticks
+1068 before update
+1068 before display
+1068 before clear screen
+1068 before Flipping the screen
+1070 before delay
+
+ sleeptime : 14
+
+1100 next ticks
+1084 before update
+1084 before display
+1084 before clear screen
+1084 before Flipping the screen
+1085 before delay
 
  sleeptime : 15
 
-1491 next ticks
-1475 before update
-1475 before display
-1475 before clear screen
-1475 before Flipping the screen
-1476 before delay
+1116 next ticks
+1100 before update
+1100 before display
+1100 before clear screen
+1100 before Flipping the screen
+1102 before delay
+
+ sleeptime : 14
+
+1132 next ticks
+1116 before update
+1116 before display
+1116 before clear screen
+1116 before Flipping the screen
+1117 before delay
 
  sleeptime : 15
 
-1507 next ticks
-1491 before update
-1491 before display
-1491 before clear screen
-1491 before Flipping the screen
-1492 before delay
+1148 next ticks
+1132 before update
+1132 before display
+1132 before clear screen
+1132 before Flipping the screen
+1133 before delay
 
  sleeptime : 15
 
-1523 next ticks
-1507 before update
-1507 before display
-1507 before clear screen
-1507 before Flipping the screen
-1508 before delay
+1164 next ticks
+1148 before update
+1148 before display
+1148 before clear screen
+1148 before Flipping the screen
+1150 before delay
+
+ sleeptime : 14
+
+1180 next ticks
+1164 before update
+1164 before display
+1164 before clear screen
+1164 before Flipping the screen
+1166 before delay
+
+ sleeptime : 14
+
+1196 next ticks
+1180 before update
+1180 before display
+1180 before clear screen
+1180 before Flipping the screen
+1182 before delay
+
+ sleeptime : 14
+
+1212 next ticks
+1196 before update
+1196 before display
+1196 before clear screen
+1196 before Flipping the screen
+1197 before delay
 
  sleeptime : 15
 
-1539 next ticks
-1523 before update
-1523 before display
-1523 before clear screen
-1523 before Flipping the screen
-1524 before delay
+1228 next ticks
+1212 before update
+1213 before display
+1213 before clear screen
+1213 before Flipping the screen
+1215 before delay
+
+ sleeptime : 13
+
+1244 next ticks
+1228 before update
+1228 before display
+1228 before clear screen
+1228 before Flipping the screen
+1230 before delay
+
+ sleeptime : 14
+
+1260 next ticks
+1244 before update
+1245 before display
+1245 before clear screen
+1245 before Flipping the screen
+1247 before delay
+
+ sleeptime : 13
+
+1276 next ticks
+1260 before update
+1260 before display
+1260 before clear screen
+1260 before Flipping the screen
+1262 before delay
+
+ sleeptime : 14
+
+1292 next ticks
+1276 before update
+1276 before display
+1276 before clear screen
+1276 before Flipping the screen
+1278 before delay
+
+ sleeptime : 14
+
+1308 next ticks
+1292 before update
+1292 before display
+1292 before clear screen
+1292 before Flipping the screen
+1294 before delay
+
+ sleeptime : 14
+
+1324 next ticks
+1308 before update
+1308 before display
+1308 before clear screen
+1312 before Flipping the screen
+1313 before delay
+
+ sleeptime : 11
+
+1340 next ticks
+1324 before update
+1324 before display
+1324 before clear screen
+1324 before Flipping the screen
+1326 before delay
+
+ sleeptime : 14
+
+1356 next ticks
+1340 before update
+1340 before display
+1340 before clear screen
+1340 before Flipping the screen
+1342 before delay
+
+ sleeptime : 14
+
+1372 next ticks
+1356 before update
+1356 before display
+1356 before clear screen
+1356 before Flipping the screen
+1358 before delay
+
+ sleeptime : 14
+
+1388 next ticks
+1372 before update
+1372 before display
+1372 before clear screen
+1372 before Flipping the screen
+1374 before delay
+
+ sleeptime : 14
+
+1404 next ticks
+1388 before update
+1388 before display
+1388 before clear screen
+1388 before Flipping the screen
+1389 before delay
 
  sleeptime : 15
 
-1555 next ticks
-1539 before update
-1539 before display
-1539 before clear screen
-1539 before Flipping the screen
-1540 before delay
+1420 next ticks
+1404 before update
+1404 before display
+1404 before clear screen
+1404 before Flipping the screen
+1407 before delay
+
+ sleeptime : 13
+
+1436 next ticks
+1420 before update
+1420 before display
+1420 before clear screen
+1420 before Flipping the screen
+1421 before delay
 
  sleeptime : 15
 
-1571 next ticks
-1555 before update
-1555 before display
-1555 before clear screen
-1555 before Flipping the screen
-1556 before delay
+1452 next ticks
+1436 before update
+1436 before display
+1436 before clear screen
+1436 before Flipping the screen
+1438 before delay
+
+ sleeptime : 14
+
+1468 next ticks
+1452 before update
+1452 before display
+1452 before clear screen
+1452 before Flipping the screen
+1453 before delay
 
  sleeptime : 15
 
-1587 next ticks
+1484 next ticks
+1468 before update
+1468 before display
+1468 before clear screen
+1468 before Flipping the screen
+1469 before delay
+
+ sleeptime : 15
+
+1500 next ticks
+1484 before update
+1484 before display
+1484 before clear screen
+1484 before Flipping the screen
+1485 before delay
+
+ sleeptime : 15
+
+1516 next ticks
+1500 before update
+1500 before display
+1500 before clear screen
+1500 before Flipping the screen
+1501 before delay
+
+ sleeptime : 15
+
+1532 next ticks
+1516 before update
+1516 before display
+1516 before clear screen
+1516 before Flipping the screen
+1517 before delay
+
+ sleeptime : 15
+
+1548 next ticks
+1532 before update
+1532 before display
+1532 before clear screen
+1532 before Flipping the screen
+1533 before delay
+
+ sleeptime : 15
+
+1564 next ticks
+1548 before update
+1548 before display
+1548 before clear screen
+1548 before Flipping the screen
+1549 before delay
+
+ sleeptime : 15
+
+1580 next ticks
 1571 before update
 1571 before display
 1571 before clear screen
 1571 before Flipping the screen
-1572 before delay
+1573 before delay
+
+ sleeptime : 7
+
+1596 next ticks
+1580 before update
+1580 before display
+1580 before clear screen
+1580 before Flipping the screen
+1581 before delay
 
  sleeptime : 15
 
-1603 next ticks
-1587 before update
-1587 before display
-1587 before clear screen
-1588 before Flipping the screen
-1589 before delay
-
- sleeptime : 14
-
-1619 next ticks
-1603 before update
-1603 before display
-1603 before clear screen
-1603 before Flipping the screen
-1604 before delay
+1612 next ticks
+1596 before update
+1596 before display
+1596 before clear screen
+1596 before Flipping the screen
+1597 before delay
 
  sleeptime : 15
 
-1635 next ticks
-1619 before update
-1619 before display
-1619 before clear screen
-1619 before Flipping the screen
-1620 before delay
+1628 next ticks
+1612 before update
+1612 before display
+1612 before clear screen
+1612 before Flipping the screen
+1613 before delay
 
  sleeptime : 15
 
-1651 next ticks
-1635 before update
-1635 before display
-1635 before clear screen
-1635 before Flipping the screen
-1638 before delay
-
- sleeptime : 13
-
-1667 next ticks
-1651 before update
-1651 before display
-1651 before clear screen
-1651 before Flipping the screen
-1652 before delay
+1644 next ticks
+1628 before update
+1628 before display
+1628 before clear screen
+1628 before Flipping the screen
+1629 before delay
 
  sleeptime : 15
 
-1683 next ticks
-1667 before update
-1667 before display
-1667 before clear screen
-1668 before Flipping the screen
-1669 before delay
-
- sleeptime : 14
-
-1699 next ticks
-1683 before update
-1683 before display
-1683 before clear screen
-1683 before Flipping the screen
-1684 before delay
+1660 next ticks
+1644 before update
+1644 before display
+1644 before clear screen
+1644 before Flipping the screen
+1645 before delay
 
  sleeptime : 15
 
-1715 next ticks
-1699 before update
-1699 before display
-1699 before clear screen
-1699 before Flipping the screen
-1700 before delay
-
- sleeptime : 15
-
-1731 next ticks
-1715 before update
-1715 before display
-1715 before clear screen
-1715 before Flipping the screen
-1716 before delay
-
- sleeptime : 15
-
-1747 next ticks
-1731 before update
-1731 before display
-1731 before clear screen
-1731 before Flipping the screen
-1731 before delay
-
- sleeptime : 16
-
-1763 next ticks
-1747 before update
-1747 before display
-1747 before clear screen
-1747 before Flipping the screen
-1748 before delay
-
- sleeptime : 15
-
-1779 next ticks
-1763 before update
-1763 before display
-1763 before clear screen
-1763 before Flipping the screen
-1763 before delay
-
- sleeptime : 16
-
-1795 next ticks
-1779 before update
-1779 before display
-1779 before clear screen
-1779 before Flipping the screen
-1780 before delay
-
- sleeptime : 15
-
-1811 next ticks
-1795 before update
-1795 before display
-1795 before clear screen
-1795 before Flipping the screen
-1796 before delay
-
- sleeptime : 15
-
-1827 next ticks
-1811 before update
-1811 before display
-1811 before clear screen
-1811 before Flipping the screen
-1812 before delay
-
- sleeptime : 15
-
-1843 next ticks
-1827 before update
-1827 before display
-1827 before clear screen
-1827 before Flipping the screen
-1828 before delay
-
- sleeptime : 15
-
-1859 next ticks
-1843 before update
-1843 before display
-1843 before clear screen
-1843 before Flipping the screen
-1844 before delay
-
- sleeptime : 15
-
-1875 next ticks
-1859 before update
-1859 before display
-1859 before clear screen
-1859 before Flipping the screen
-1860 before delay
-
- sleeptime : 15
-
-1891 next ticks
-1875 before update
-1875 before display
-1875 before clear screen
-1875 before Flipping the screen
-1876 before delay
-
- sleeptime : 15
-
-1907 next ticks
-1891 before update
-1891 before display
-1891 before clear screen
-1891 before Flipping the screen
-1892 before delay
-
- sleeptime : 15
-
-1923 next ticks
-1907 before update
-1907 before display
-1907 before clear screen
-1907 before Flipping the screen
-1909 before delay
-
- sleeptime : 14
-
-1939 next ticks
-1923 before update
-1923 before display
-1923 before clear screen
-1923 before Flipping the screen
-1924 before delay
-
- sleeptime : 15
-
-1955 next ticks
-1939 before update
-1939 before display
-1939 before clear screen
-1939 before Flipping the screen
-1940 before delay
-
- sleeptime : 15
-
-1971 next ticks
-1955 before update
-1955 before display
-1955 before clear screen
-1955 before Flipping the screen
-1956 before delay
-
- sleeptime : 15
-
-1987 next ticks
-1971 before update
-1971 before display
-1971 before clear screen
-1971 before Flipping the screen
-1972 before delay
-
- sleeptime : 15
-
-2003 next ticks
-1987 before update
-1987 before display
-1987 before clear screen
-1987 before Flipping the screen
-1988 before delay
-
- sleeptime : 15
-
-2019 next ticks
-2003 before update
-2003 before display
-2003 before clear screen
-2003 before Flipping the screen
-2004 before delay
-
- sleeptime : 15
-
-2035 next ticks
-2019 before update
-2019 before display
-2019 before clear screen
-2019 before Flipping the screen
-2020 before delay
-
- sleeptime : 15
-
-2051 next ticks
-2035 before update
-2035 before display
-2035 before clear screen
-2035 before Flipping the screen
-2037 before delay
-
- sleeptime : 14
-
-2067 next ticks
-2051 before update
-2051 before display
-2051 before clear screen
-2051 before Flipping the screen
-2052 before delay
-
- sleeptime : 15
-
-2083 next ticks
-2067 before update
-2067 before display
-2067 before clear screen
-2067 before Flipping the screen
-2068 before delay
-
- sleeptime : 15
-
-2099 next ticks
-2083 before update
-2083 before display
-2083 before clear screen
-2083 before Flipping the screen
-2084 before delay
-
- sleeptime : 15
-
-2115 next ticks
-2099 before update
-2099 before display
-2099 before clear screen
-2099 before Flipping the screen
-2100 before delay
-
- sleeptime : 15
-
-2131 next ticks
-2115 before update
-2115 before display
-2115 before clear screen
-2115 before Flipping the screen
-2117 before delay
-
- sleeptime : 14
-
-2147 next ticks
-2131 before update
-2131 before display
-2131 before clear screen
-2131 before Flipping the screen
-2132 before delay
-
- sleeptime : 15
-
-2163 next ticks
-2147 before update
-2147 before display
-2147 before clear screen
-2147 before Flipping the screen
-2148 before delay
-
- sleeptime : 15
-
-2179 next ticks
-2163 before update
-2163 before display
-2163 before clear screen
-2163 before Flipping the screen
-2164 before delay
-
- sleeptime : 15
-
-2195 next ticks
-2179 before update
-2179 before display
-2179 before clear screen
-2179 before Flipping the screen
-2180 before delay
-
- sleeptime : 15
-
-2211 next ticks
-2195 before update
-2195 before display
-2195 before clear screen
-2195 before Flipping the screen
-2196 before delay
-
- sleeptime : 15
-
-2227 next ticks
-2211 before update
-2211 before display
-2211 before clear screen
-2211 before Flipping the screen
-2212 before delay
-
- sleeptime : 15
-
-2243 next ticks
-2227 before update
-2227 before display
-2227 before clear screen
-2227 before Flipping the screen
-2228 before delay
-
- sleeptime : 15
-
-2259 next ticks
-2243 before update
-2243 before display
-2243 before clear screen
-2243 before Flipping the screen
-2245 before delay
-
- sleeptime : 14
-
-2275 next ticks
-2259 before update
-2259 before display
-2259 before clear screen
-2259 before Flipping the screen
-2260 before delay
-
- sleeptime : 15
-
-2291 next ticks
-2275 before update
-2275 before display
-2275 before clear screen
-2275 before Flipping the screen
-2276 before delay
-
- sleeptime : 15
-
-2307 next ticks
-2291 before update
-2291 before display
-2291 before clear screen
-2291 before Flipping the screen
-2292 before delay
-
- sleeptime : 15
-
-2323 next ticks
-2307 before update
-2307 before display
-2307 before clear screen
-2307 before Flipping the screen
-2308 before delay
-
- sleeptime : 15
-
-2339 next ticks
-2323 before update
-2323 before display
-2323 before clear screen
-2323 before Flipping the screen
-2324 before delay
-
- sleeptime : 15
-
-2355 next ticks
-2339 before update
-2339 before display
-2339 before clear screen
-2339 before Flipping the screen
-2340 before delay
-
- sleeptime : 15
-
-2371 next ticks
-2355 before update
-2355 before display
-2355 before clear screen
-2355 before Flipping the screen
-2356 before delay
-
- sleeptime : 15
-
-2387 next ticks
-2371 before update
-2371 before display
-2371 before clear screen
-2371 before Flipping the screen
-2372 before delay
-
- sleeptime : 15
-
-2403 next ticks
-2387 before update
-2387 before display
-2387 before clear screen
-2387 before Flipping the screen
-2388 before delay
-
- sleeptime : 15
-
-2419 next ticks
-2403 before update
-2403 before display
-2403 before clear screen
-2403 before Flipping the screen
-2404 before delay
-
- sleeptime : 15
-
-2435 next ticks
-2419 before update
-2419 before display
-2419 before clear screen
-2419 before Flipping the screen
-2420 before delay
-
- sleeptime : 15
-
-2451 next ticks
-2435 before update
-2435 before display
-2435 before clear screen
-2435 before Flipping the screen
-2437 before delay
-
- sleeptime : 14
-
-2467 next ticks
-2451 before update
-2451 before display
-2451 before clear screen
-2452 before Flipping the screen
-2453 before delay
-
- sleeptime : 14
-
-2483 next ticks
-2467 before update
-2467 before display
-2467 before clear screen
-2467 before Flipping the screen
-2469 before delay
-
- sleeptime : 14
-
-2499 next ticks
-2483 before update
-2483 before display
-2483 before clear screen
-2483 before Flipping the screen
-2484 before delay
-
- sleeptime : 15
-
-2515 next ticks
-2499 before update
-2499 before display
-2499 before clear screen
-2499 before Flipping the screen
-2499 before delay
-
- sleeptime : 16
-
-2531 next ticks
-2515 before update
-2515 before display
-2515 before clear screen
-2515 before Flipping the screen
-2516 before delay
-
- sleeptime : 15
-
-2547 next ticks
-2531 before update
-2531 before display
-2531 before clear screen
-2531 before Flipping the screen
-2532 before delay
-
- sleeptime : 15
-
-2563 next ticks
-2547 before update
-2547 before display
-2547 before clear screen
-2547 before Flipping the screen
-2548 before delay
-
- sleeptime : 15
-
-2579 next ticks
-2563 before update
-2563 before display
-2563 before clear screen
-2563 before Flipping the screen
-2564 before delay
-
- sleeptime : 15
-
-2595 next ticks
-2579 before update
-2579 before display
-2579 before clear screen
-2579 before Flipping the screen
-2580 before delay
-
- sleeptime : 15
-
-2611 next ticks
-2595 before update
-2595 before display
-2595 before clear screen
-2595 before Flipping the screen
-2596 before delay
-
- sleeptime : 15
-
-2627 next ticks
-2611 before update
-2611 before display
-2611 before clear screen
-2611 before Flipping the screen
-2612 before delay
-
- sleeptime : 15
-
-2643 next ticks
-2627 before update
-2627 before display
-2627 before clear screen
-2627 before Flipping the screen
-2628 before delay
-
- sleeptime : 15
-
-2659 next ticks
-2643 before update
-2643 before display
-2643 before clear screen
-2643 before Flipping the screen
-2644 before delay
-
- sleeptime : 15
-
-2675 next ticks
-2659 before update
-2659 before display
-2659 before clear screen
-2659 before Flipping the screen
-2660 before delay
-
- sleeptime : 15
-
-2691 next ticks
-2675 before update
-2675 before display
-2675 before clear screen
-2675 before Flipping the screen
-2676 before delay
-
- sleeptime : 15
-
-2707 next ticks
-2691 before update
-2691 before display
-2691 before clear screen
-2691 before Flipping the screen
-2691 before delay
-
- sleeptime : 16
-
-2723 next ticks
-2707 before update
-2707 before display
-2707 before clear screen
-2707 before Flipping the screen
-2708 before delay
-
- sleeptime : 15
-
-2739 next ticks
-2723 before update
-2723 before display
-2723 before clear screen
-2723 before Flipping the screen
-2724 before delay
-
- sleeptime : 15
-
-2755 next ticks
-2739 before update
-2739 before display
-2739 before clear screen
-2739 before Flipping the screen
-2740 before delay
-
- sleeptime : 15
-
-2771 next ticks
-2755 before update
-2755 before display
-2755 before clear screen
-2755 before blit
-2757 after blit
-2757 before Flipping the screen
-2758 before delay
-
- sleeptime : 13
-
-2787 next ticks
-2771 before update
-2771 before display
-2771 before clear screen
-2771 before blit
-2773 after blit
-2773 before Flipping the screen
-2774 before delay
-
- sleeptime : 13
-
-2803 next ticks
-2787 before update
-2787 before display
-2787 before clear screen
-2787 before blit
-2789 after blit
-2789 before Flipping the screen
-2790 before delay
-
- sleeptime : 13
-
-2819 next ticks
-2803 before update
-2803 before display
-2803 before clear screen
-2803 before blit
-2805 after blit
-2805 before Flipping the screen
-2806 before delay
-
- sleeptime : 13
-
-2835 next ticks
-2819 before update
-2819 before display
-2819 before clear screen
-2819 before blit
-2821 after blit
-2821 before Flipping the screen
-2822 before delay
-
- sleeptime : 13
-
-2851 next ticks
-2835 before update
-2835 before display
-2835 before clear screen
-2835 before blit
-2837 after blit
-2837 before Flipping the screen
-2838 before delay
-
- sleeptime : 13
-
-2867 next ticks
-2851 before update
-2851 before display
-2851 before clear screen
-2851 before blit
-2853 after blit
-2853 before Flipping the screen
-2854 before delay
-
- sleeptime : 13
-
-2883 next ticks
-2867 before update
-2867 before display
-2867 before clear screen
-2867 before blit
-2869 after blit
-2869 before Flipping the screen
-2871 before delay
+1676 next ticks
+1660 before update
+1660 before display
+1660 before clear screen
+1660 before blit
+1662 after blit
+1663 before Flipping the screen
+1664 before delay
 
  sleeptime : 12
 
-2899 next ticks
-2883 before update
-2883 before display
-2883 before clear screen
-2883 before blit
-2885 after blit
-2885 before Flipping the screen
-2887 before delay
+1692 next ticks
+1676 before update
+1676 before display
+1676 before clear screen
+1676 before blit
+1678 after blit
+1678 before Flipping the screen
+1680 before delay
 
  sleeptime : 12
 
-2915 next ticks
-2899 before update
-2899 before display
-2899 before clear screen
-2899 before blit
-2901 after blit
-2901 before Flipping the screen
-2903 before delay
+1708 next ticks
+1692 before update
+1692 before display
+1692 before clear screen
+1692 before blit
+1694 after blit
+1694 before Flipping the screen
+1695 before delay
+
+ sleeptime : 13
+
+1724 next ticks
+1708 before update
+1708 before display
+1708 before clear screen
+1708 before blit
+1710 after blit
+1710 before Flipping the screen
+1711 before delay
+
+ sleeptime : 13
+
+1740 next ticks
+1724 before update
+1724 before display
+1724 before clear screen
+1724 before blit
+1726 after blit
+1727 before Flipping the screen
+1728 before delay
 
  sleeptime : 12
 
-2931 next ticks
-2915 before update
-2915 before display
-2915 before clear screen
-2915 before blit
-2917 after blit
-2917 before Flipping the screen
-2918 before delay
-
- sleeptime : 13
-
-2947 next ticks
-2931 before update
-2931 before display
-2931 before clear screen
-2931 before blit
-2933 after blit
-2933 before Flipping the screen
-2934 before delay
-
- sleeptime : 13
-
-2963 next ticks
-2947 before update
-2947 before display
-2947 before clear screen
-2947 before blit
-2949 after blit
-2949 before Flipping the screen
-2950 before delay
-
- sleeptime : 13
-
-2979 next ticks
-2963 before update
-2963 before display
-2963 before clear screen
-2963 before blit
-2965 after blit
-2965 before Flipping the screen
-2966 before delay
-
- sleeptime : 13
-
-2995 next ticks
-2979 before update
-2979 before display
-2979 before clear screen
-2979 before blit
-2981 after blit
-2981 before Flipping the screen
-2982 before delay
-
- sleeptime : 13
-
-3011 next ticks
-2995 before update
-2995 before display
-2995 before clear screen
-2995 before blit
-2997 after blit
-2997 before Flipping the screen
-2998 before delay
-
- sleeptime : 13
-
-3027 next ticks
-3011 before update
-3011 before display
-3011 before clear screen
-3011 before blit
-3013 after blit
-3013 before Flipping the screen
-3014 before delay
-
- sleeptime : 13
-
-3043 next ticks
-3027 before update
-3027 before display
-3027 before clear screen
-3027 before blit
-3029 after blit
-3029 before Flipping the screen
-3030 before delay
-
- sleeptime : 13
-
-3059 next ticks
-3043 before update
-3043 before display
-3043 before clear screen
-3043 before blit
-3045 after blit
-3045 before Flipping the screen
-3046 before delay
-
- sleeptime : 13
-
-3075 next ticks
-3059 before update
-3059 before display
-3059 before clear screen
-3059 before blit
-3061 after blit
-3061 before Flipping the screen
-3062 before delay
-
- sleeptime : 13
-
-3091 next ticks
-3075 before update
-3075 before display
-3075 before clear screen
-3075 before blit
-3077 after blit
-3077 before Flipping the screen
-3078 before delay
-
- sleeptime : 13
-
-3107 next ticks
-3091 before update
-3091 before display
-3091 before clear screen
-3091 before blit
-3093 after blit
-3093 before Flipping the screen
-3094 before delay
-
- sleeptime : 13
-
-3123 next ticks
-3107 before update
-3107 before display
-3107 before clear screen
-3107 before blit
-3109 after blit
-3109 before Flipping the screen
-3110 before delay
-
- sleeptime : 13
-
-3139 next ticks
-3123 before update
-3123 before display
-3123 before clear screen
-3123 before blit
-3125 after blit
-3125 before Flipping the screen
-3130 before delay
+1756 next ticks
+1740 before update
+1740 before display
+1740 before clear screen
+1740 before blit
+1745 after blit
+1745 before Flipping the screen
+1747 before delay
 
  sleeptime : 9
 
-3155 next ticks
-3139 before update
-3139 before display
-3139 before clear screen
-3139 before blit
-3141 after blit
-3141 before Flipping the screen
-3147 before delay
+1772 next ticks
+1756 before update
+1756 before display
+1756 before clear screen
+1756 before blit
+1762 after blit
+1762 before Flipping the screen
+1764 before delay
 
  sleeptime : 8
 
-3171 next ticks
-3155 before update
-3155 before display
-3155 before clear screen
-3155 before blit
-3157 after blit
-3157 before Flipping the screen
-3161 before delay
+1788 next ticks
+1772 before update
+1772 before display
+1772 before clear screen
+1772 before blit
+1777 after blit
+1777 before Flipping the screen
+1779 before delay
 
- sleeptime : 10
+ sleeptime : 9
 
-3187 next ticks
-3171 before update
-3171 before display
-3171 before clear screen
-3171 before blit
-3173 after blit
-3173 before Flipping the screen
-3181 before delay
+1804 next ticks
+1788 before update
+1788 before display
+1788 before clear screen
+1788 before blit
+1793 after blit
+1793 before Flipping the screen
+1795 before delay
 
- sleeptime : 6
+ sleeptime : 9
 
-3203 next ticks
-3187 before update
-3187 before display
-3187 before clear screen
-3187 before blit
-3189 after blit
-3189 before Flipping the screen
-3202 before delay
+1820 next ticks
+1804 before update
+1804 before display
+1804 before clear screen
+1804 before blit
+1809 after blit
+1809 before Flipping the screen
+1813 before delay
 
- sleeptime : 1
+ sleeptime : 7
 
-3219 next ticks
-3207 before update
-3209 before display
-3209 before clear screen
-3209 before blit
-3211 after blit
-3211 before Flipping the screen
-3213 before delay
-
- sleeptime : 6
-
-3235 next ticks
-3219 before update
-3219 before display
-3219 before clear screen
-3219 before blit
-3221 after blit
-3221 before Flipping the screen
-3222 before delay
-
- sleeptime : 13
-
-3251 next ticks
-3235 before update
-3235 before display
-3235 before clear screen
-3235 before blit
-3238 after blit
-3238 before Flipping the screen
-3239 before delay
+1836 next ticks
+1820 before update
+1820 before display
+1820 before clear screen
+1820 before blit
+1823 after blit
+1823 before Flipping the screen
+1824 before delay
 
  sleeptime : 12
 
-3267 next ticks
-3251 before update
-3251 before display
-3251 before clear screen
-3252 before blit
-3253 after blit
-3254 before Flipping the screen
-3254 before delay
-
- sleeptime : 13
-
-3283 next ticks
-3267 before update
-3267 before display
-3267 before clear screen
-3267 before blit
-3269 after blit
-3269 before Flipping the screen
-3270 before delay
-
- sleeptime : 13
-
-3299 next ticks
-3283 before update
-3283 before display
-3283 before clear screen
-3283 before blit
-3286 after blit
-3286 before Flipping the screen
-3287 before delay
+1852 next ticks
+1836 before update
+1836 before display
+1836 before clear screen
+1836 before blit
+1839 after blit
+1839 before Flipping the screen
+1840 before delay
 
  sleeptime : 12
 
-3315 next ticks
-3299 before update
-3299 before display
-3299 before clear screen
-3299 before blit
-3301 after blit
-3301 before Flipping the screen
-3302 before delay
-
- sleeptime : 13
-
-3331 next ticks
-3315 before update
-3315 before display
-3315 before clear screen
-3315 before blit
-3317 after blit
-3317 before Flipping the screen
-3319 before delay
+1868 next ticks
+1852 before update
+1852 before display
+1852 before clear screen
+1852 before blit
+1855 after blit
+1855 before Flipping the screen
+1856 before delay
 
  sleeptime : 12
 
-3347 next ticks
-3331 before update
-3331 before display
-3331 before clear screen
-3331 before blit
-3333 after blit
-3334 before Flipping the screen
-3336 before delay
+1884 next ticks
+1868 before update
+1868 before display
+1868 before clear screen
+1868 before blit
+1871 after blit
+1871 before Flipping the screen
+1872 before delay
+
+ sleeptime : 12
+
+1900 next ticks
+1884 before update
+1884 before display
+1884 before clear screen
+1884 before blit
+1887 after blit
+1887 before Flipping the screen
+1888 before delay
+
+ sleeptime : 12
+
+1916 next ticks
+1900 before update
+1900 before display
+1900 before clear screen
+1900 before blit
+1903 after blit
+1903 before Flipping the screen
+1903 before delay
+
+ sleeptime : 13
+
+1932 next ticks
+1916 before update
+1916 before display
+1916 before clear screen
+1916 before blit
+1919 after blit
+1919 before Flipping the screen
+1919 before delay
+
+ sleeptime : 13
+
+1948 next ticks
+1932 before update
+1932 before display
+1932 before clear screen
+1932 before blit
+1935 after blit
+1935 before Flipping the screen
+1935 before delay
+
+ sleeptime : 13
+
+1964 next ticks
+1948 before update
+1948 before display
+1948 before clear screen
+1948 before blit
+1951 after blit
+1951 before Flipping the screen
+1952 before delay
+
+ sleeptime : 12
+
+1980 next ticks
+1964 before update
+1964 before display
+1964 before clear screen
+1964 before blit
+1967 after blit
+1967 before Flipping the screen
+1967 before delay
+
+ sleeptime : 13
+
+1996 next ticks
+1980 before update
+1980 before display
+1980 before clear screen
+1980 before blit
+1983 after blit
+1983 before Flipping the screen
+1983 before delay
+
+ sleeptime : 13
+
+2012 next ticks
+1996 before update
+1996 before display
+1996 before clear screen
+1996 before blit
+1999 after blit
+1999 before Flipping the screen
+1999 before delay
+
+ sleeptime : 13
+
+2028 next ticks
+2012 before update
+2012 before display
+2012 before clear screen
+2012 before blit
+2015 after blit
+2015 before Flipping the screen
+2016 before delay
+
+ sleeptime : 12
+
+2044 next ticks
+2028 before update
+2028 before display
+2028 before clear screen
+2028 before blit
+2031 after blit
+2031 before Flipping the screen
+2032 before delay
+
+ sleeptime : 12
+
+2060 next ticks
+2044 before update
+2044 before display
+2044 before clear screen
+2044 before blit
+2047 after blit
+2047 before Flipping the screen
+2048 before delay
+
+ sleeptime : 12
+
+2076 next ticks
+2060 before update
+2060 before display
+2060 before clear screen
+2060 before blit
+2064 after blit
+2064 before Flipping the screen
+2065 before delay
 
  sleeptime : 11
 
-3363 next ticks
-3347 before update
-3347 before display
-3347 before clear screen
-3349 before Flipping the screen
-3351 before delay
+2092 next ticks
+2076 before update
+2076 before display
+2076 before clear screen
+2076 before blit
+2079 after blit
+2079 before Flipping the screen
+2080 before delay
 
  sleeptime : 12
 
-3379 next ticks
-3363 before update
-3363 before display
-3363 before clear screen
-3365 before Flipping the screen
-3366 before delay
+2108 next ticks
+2092 before update
+2092 before display
+2092 before clear screen
+2092 before blit
+2095 after blit
+2095 before Flipping the screen
+2096 before delay
+
+ sleeptime : 12
+
+2124 next ticks
+2108 before update
+2108 before display
+2108 before clear screen
+2108 before blit
+2111 after blit
+2111 before Flipping the screen
+2112 before delay
+
+ sleeptime : 12
+
+2140 next ticks
+2124 before update
+2124 before display
+2124 before clear screen
+2124 before blit
+2127 after blit
+2127 before Flipping the screen
+2127 before delay
 
  sleeptime : 13
 
-3395 next ticks
-3379 before update
-3379 before display
-3379 before clear screen
-3381 before Flipping the screen
-3382 before delay
+2156 next ticks
+2140 before update
+2140 before display
+2140 before clear screen
+2140 before blit
+2143 after blit
+2143 before Flipping the screen
+2143 before delay
 
  sleeptime : 13
 
-3411 next ticks
-3395 before update
-3395 before display
-3395 before clear screen
-3397 before Flipping the screen
-3398 before delay
+2172 next ticks
+2156 before update
+2156 before display
+2156 before clear screen
+2156 before blit
+2159 after blit
+2159 before Flipping the screen
+2160 before delay
+
+ sleeptime : 12
+
+2188 next ticks
+2172 before update
+2172 before display
+2172 before clear screen
+2172 before blit
+2175 after blit
+2175 before Flipping the screen
+2175 before delay
 
  sleeptime : 13
 
-3427 next ticks
-3411 before update
-3411 before display
-3411 before clear screen
-3413 before Flipping the screen
-3414 before delay
+2204 next ticks
+2188 before update
+2188 before display
+2188 before clear screen
+2188 before blit
+2191 after blit
+2191 before Flipping the screen
+2191 before delay
 
  sleeptime : 13
 
-3443 next ticks
-3427 before update
-3427 before display
-3427 before clear screen
-3429 before Flipping the screen
-3430 before delay
+2220 next ticks
+2204 before update
+2204 before display
+2204 before clear screen
+2204 before blit
+2207 after blit
+2208 before Flipping the screen
+2209 before delay
+
+ sleeptime : 11
+
+2236 next ticks
+2220 before update
+2220 before display
+2220 before clear screen
+2223 before Flipping the screen
+2224 before delay
+
+ sleeptime : 12
+
+2252 next ticks
+2236 before update
+2236 before display
+2236 before clear screen
+2239 before Flipping the screen
+2240 before delay
+
+ sleeptime : 12
+
+2268 next ticks
+2252 before update
+2252 before display
+2252 before clear screen
+2255 before Flipping the screen
+2256 before delay
+
+ sleeptime : 12
+
+2284 next ticks
+2268 before update
+2268 before display
+2268 before clear screen
+2271 before Flipping the screen
+2271 before delay
 
  sleeptime : 13
 
-3459 next ticks
-3443 before update
-3443 before display
-3443 before clear screen
-3445 before Flipping the screen
-3446 before delay
+2300 next ticks
+2284 before update
+2284 before display
+2284 before clear screen
+2287 before Flipping the screen
+2287 before delay
 
  sleeptime : 13
 
-3475 next ticks
-3459 before update
-3459 before display
-3459 before clear screen
-3461 before Flipping the screen
-3462 before delay
+2316 next ticks
+2300 before update
+2300 before display
+2300 before clear screen
+2303 before Flipping the screen
+2303 before delay
 
  sleeptime : 13
 
-3491 next ticks
-3475 before update
-3475 before display
-3475 before clear screen
-3477 before Flipping the screen
-3478 before delay
+2332 next ticks
+2316 before update
+2316 before display
+2316 before clear screen
+2319 before Flipping the screen
+2319 before delay
 
  sleeptime : 13
 
-3507 next ticks
-3491 before update
-3491 before display
-3491 before clear screen
-3493 before Flipping the screen
-3494 before delay
+2348 next ticks
+2332 before update
+2332 before display
+2332 before clear screen
+2335 before Flipping the screen
+2335 before delay
 
  sleeptime : 13
 
-3523 next ticks
-3507 before update
-3507 before display
-3507 before clear screen
-3509 before Flipping the screen
-3510 before delay
+2364 next ticks
+2348 before update
+2348 before display
+2348 before clear screen
+2351 before Flipping the screen
+2351 before delay
 
  sleeptime : 13
 
-3539 next ticks
-3523 before update
-3523 before display
-3523 before clear screen
-3525 before Flipping the screen
-3525 before delay
+2380 next ticks
+2364 before update
+2364 before display
+2364 before clear screen
+2367 before Flipping the screen
+2367 before delay
+
+ sleeptime : 13
+
+2396 next ticks
+2380 before update
+2380 before display
+2380 before clear screen
+2383 before Flipping the screen
+2383 before delay
+
+ sleeptime : 13
+
+2412 next ticks
+2396 before update
+2396 before display
+2396 before clear screen
+2399 before Flipping the screen
+2400 before delay
+
+ sleeptime : 12
+
+2428 next ticks
+2412 before update
+2412 before display
+2412 before clear screen
+2415 before Flipping the screen
+2416 before delay
+
+ sleeptime : 12
+
+2444 next ticks
+2428 before update
+2428 before display
+2428 before clear screen
+2431 before Flipping the screen
+2432 before delay
+
+ sleeptime : 12
+
+2460 next ticks
+2444 before update
+2444 before display
+2444 before clear screen
+2447 before Flipping the screen
+2448 before delay
+
+ sleeptime : 12
+
+2476 next ticks
+2460 before update
+2460 before display
+2460 before clear screen
+2463 before Flipping the screen
+2464 before delay
+
+ sleeptime : 12
+
+2492 next ticks
+2476 before update
+2476 before display
+2476 before clear screen
+2479 before Flipping the screen
+2480 before delay
+
+ sleeptime : 12
+
+2508 next ticks
+2492 before update
+2492 before display
+2492 before clear screen
+2494 before Flipping the screen
+2497 before delay
+
+ sleeptime : 11
+
+2524 next ticks
+2508 before update
+2508 before display
+2508 before clear screen
+2511 before Flipping the screen
+2512 before delay
+
+ sleeptime : 12
+
+2540 next ticks
+2524 before update
+2524 before display
+2524 before clear screen
+2527 before Flipping the screen
+2528 before delay
+
+ sleeptime : 12
+
+2556 next ticks
+2540 before update
+2540 before display
+2540 before clear screen
+2543 before Flipping the screen
+2543 before delay
+
+ sleeptime : 13
+
+2572 next ticks
+2556 before update
+2556 before display
+2556 before clear screen
+2559 before Flipping the screen
+2559 before delay
+
+ sleeptime : 13
+
+2588 next ticks
+2572 before update
+2572 before display
+2572 before clear screen
+2575 before Flipping the screen
+2576 before delay
+
+ sleeptime : 12
+
+2604 next ticks
+2588 before update
+2588 before display
+2588 before clear screen
+2591 before Flipping the screen
+2591 before delay
+
+ sleeptime : 13
+
+2620 next ticks
+2604 before update
+2604 before display
+2604 before clear screen
+2606 before Flipping the screen
+2607 before delay
+
+ sleeptime : 13
+
+2636 next ticks
+2620 before update
+2620 before display
+2620 before clear screen
+2623 before Flipping the screen
+2623 before delay
+
+ sleeptime : 13
+
+2652 next ticks
+2636 before update
+2636 before display
+2636 before clear screen
+2638 before Flipping the screen
+2638 before delay
 
  sleeptime : 14
 
-3555 next ticks
-3539 before update
-3539 before display
-3539 before clear screen
-3541 before Flipping the screen
-3542 before delay
-
- sleeptime : 13
-
-3571 next ticks
-3555 before update
-3555 before display
-3555 before clear screen
-3557 before Flipping the screen
-3558 before delay
-
- sleeptime : 13
-
-3587 next ticks
-3571 before update
-3571 before display
-3571 before clear screen
-3573 before Flipping the screen
-3574 before delay
-
- sleeptime : 13
-
-3603 next ticks
-3587 before update
-3587 before display
-3587 before clear screen
-3590 before Flipping the screen
-3590 before delay
-
- sleeptime : 13
-
-3619 next ticks
-3603 before update
-3603 before display
-3603 before clear screen
-3605 before Flipping the screen
-3606 before delay
-
- sleeptime : 13
-
-3635 next ticks
-3619 before update
-3619 before display
-3619 before clear screen
-3621 before Flipping the screen
-3622 before delay
-
- sleeptime : 13
-
-3651 next ticks
-3635 before update
-3635 before display
-3635 before clear screen
-3638 before Flipping the screen
-3639 before delay
-
- sleeptime : 12
-
-3667 next ticks
-3651 before update
-3651 before display
-3651 before clear screen
-3654 before Flipping the screen
-3654 before delay
-
- sleeptime : 13
-
-3683 next ticks
-3667 before update
-3667 before display
-3667 before clear screen
-3669 before Flipping the screen
-3671 before delay
-
- sleeptime : 12
-
-3699 next ticks
-3683 before update
-3683 before display
-3683 before clear screen
-3685 before Flipping the screen
-3687 before delay
-
- sleeptime : 12
-
-3715 next ticks
-3699 before update
-3699 before display
-3699 before clear screen
-3701 before Flipping the screen
-3703 before delay
-
- sleeptime : 12
-
-3731 next ticks
-3715 before update
-3715 before display
-3715 before clear screen
-3717 before Flipping the screen
-3718 before delay
-
- sleeptime : 13
-
-3747 next ticks
-3731 before update
-3731 before display
-3731 before clear screen
-3733 before Flipping the screen
-3734 before delay
-
- sleeptime : 13
-
-3763 next ticks
-3747 before update
-3747 before display
-3747 before clear screen
-3750 before Flipping the screen
-3752 before delay
-
- sleeptime : 11
-
-3779 next ticks
-3763 before update
-3763 before display
-3763 before clear screen
-3765 before Flipping the screen
-3766 before delay
-
- sleeptime : 13
-
-3795 next ticks
-3779 before update
-3779 before display
-3779 before clear screen
-3781 before Flipping the screen
-3782 before delay
-
- sleeptime : 13
-
-3811 next ticks
-3795 before update
-3795 before display
-3795 before clear screen
-3797 before Flipping the screen
-3798 before delay
-
- sleeptime : 13
-
-3827 next ticks
-3811 before update
-3811 before display
-3811 before clear screen
-3813 before Flipping the screen
-3814 before delay
-
- sleeptime : 13
-
-3843 next ticks
-3827 before update
-3827 before display
-3827 before clear screen
-3829 before Flipping the screen
-3830 before delay
-
- sleeptime : 13
-
-3859 next ticks
-3843 before update
-3843 before display
-3843 before clear screen
-3845 before Flipping the screen
-3846 before delay
-
- sleeptime : 13
-
-3875 next ticks
-3859 before update
-3859 before display
-3859 before clear screen
-3861 before Flipping the screen
-3862 before delay
-
- sleeptime : 13
-
-3891 next ticks
-3875 before update
-3875 before display
-3875 before clear screen
-3877 before Flipping the screen
-3878 before delay
-
- sleeptime : 13
-
-3907 next ticks
-3891 before update
-3891 before display
-3891 before clear screen
-3893 before Flipping the screen
-3894 before delay
-
- sleeptime : 13
-
-3923 next ticks
-3907 before update
-3907 before display
-3907 before clear screen
-3909 before Flipping the screen
-3910 before delay
-
- sleeptime : 13
-
-3939 next ticks
-3923 before update
-3923 before display
-3923 before clear screen
-3925 before Flipping the screen
-3926 before delay
-
- sleeptime : 13
-
-3955 next ticks
-3939 before update
-3939 before display
-3939 before clear screen
-3941 before Flipping the screen
-3944 before delay
-
- sleeptime : 11
-
-3971 next ticks
-3955 before update
-3955 before display
-3955 before clear screen
-3957 before Flipping the screen
-3958 before delay
-
- sleeptime : 13
-
-3987 next ticks
-3971 before update
-3971 before display
-3971 before clear screen
-3973 before Flipping the screen
-3974 before delay
-
- sleeptime : 13
-
-4003 next ticks
-3987 before update
-3987 before display
-3987 before clear screen
-3989 before Flipping the screen
-3990 before delay
-
- sleeptime : 13
-
-4019 next ticks
-4003 before update
-4003 before display
-4003 before clear screen
-4005 before Flipping the screen
-4006 before delay
-
- sleeptime : 13
-
-4035 next ticks
-4019 before update
-4019 before display
-4019 before clear screen
-4022 before Flipping the screen
-4023 before delay
-
- sleeptime : 12
-
-4051 next ticks
-4035 before update
-4035 before display
-4035 before clear screen
-4039 before Flipping the screen
-4040 before delay
-
- sleeptime : 11
-
-4067 next ticks
-4051 before update
-4051 before display
-4051 before clear screen
-4055 before Flipping the screen
-4056 before delay
-
- sleeptime : 11
-
-4083 next ticks
-4067 before update
-4067 before display
-4067 before clear screen
-4070 before Flipping the screen
-4071 before delay
-
- sleeptime : 12
-
-4099 next ticks
-4083 before update
-4083 before display
-4083 before clear screen
-4085 before Flipping the screen
-4088 before delay
-
- sleeptime : 11
-
-4115 next ticks
-4099 before update
-4099 before display
-4099 before clear screen
-4101 before Flipping the screen
-4102 before delay
-
- sleeptime : 13
-
-4131 next ticks
-4115 before update
-4115 before display
-4115 before clear screen
-4119 before Flipping the screen
-4120 before delay
-
- sleeptime : 11
-
-4147 next ticks
-4131 before update
-4131 before display
-4131 before clear screen
-4133 before Flipping the screen
-4134 before delay
-
- sleeptime : 13
-
-4163 next ticks
-4147 before update
-4147 before display
-4147 before clear screen
-4149 before Flipping the screen
-4151 before delay
-
- sleeptime : 12
-
-4179 next ticks
-4163 before update
-4163 before display
-4163 before clear screen
-4165 before Flipping the screen
-4166 before delay
-
- sleeptime : 13
-
-4195 next ticks
-4179 before update
-4179 before display
-4179 before clear screen
-4181 before Flipping the screen
-4182 before delay
-
- sleeptime : 13
-
-4211 next ticks
-4195 before update
-4195 before display
-4195 before clear screen
-4197 before Flipping the screen
-4199 before delay
-
- sleeptime : 12
-
-4227 next ticks
-4211 before update
-4211 before display
-4211 before clear screen
-4213 before Flipping the screen
-4214 before delay
-
- sleeptime : 13
-
-4243 next ticks
-4227 before update
-4227 before display
-4227 before clear screen
-4229 before Flipping the screen
-4230 before delay
-
- sleeptime : 13
-
-4259 next ticks
-4243 before update
-4243 before display
-4243 before clear screen
-4245 before Flipping the screen
-4246 before delay
-
- sleeptime : 13
-
-4275 next ticks
-4259 before update
-4259 before display
-4259 before clear screen
-4261 before Flipping the screen
-4262 before delay
-
- sleeptime : 13
-
-4291 next ticks
-4275 before update
-4275 before display
-4275 before clear screen
-4277 before Flipping the screen
-4278 before delay
-
- sleeptime : 13
-
-4307 next ticks
-4291 before update
-4291 before display
-4291 before clear screen
-4293 before Flipping the screen
-4294 before delay
-
- sleeptime : 13
-
-4323 next ticks
-4307 before update
-4307 before display
-4307 before clear screen
-4309 before Flipping the screen
-4310 before delay
-
- sleeptime : 13
-
-4339 next ticks
-4323 before update
-4323 before display
-4323 before clear screen
-4325 before Flipping the screen
-4326 before delay
-
- sleeptime : 13
-
-4355 next ticks
-4339 before update
-4339 before display
-4339 before clear screen
-4341 before Flipping the screen
-4342 before delay
-
- sleeptime : 13
-
-4371 next ticks
-4355 before update
-4355 before display
-4355 before clear screen
-4357 before Flipping the screen
-4358 before delay
-
- sleeptime : 13
-
-4387 next ticks
-4371 before update
-4371 before display
-4371 before clear screen
-4373 before Flipping the screen
-4374 before delay
-
- sleeptime : 13
-
-4403 next ticks
-4387 before update
-4387 before display
-4387 before clear screen
-4390 before Flipping the screen
-4391 before delay
-
- sleeptime : 12
-
-4419 next ticks
-4403 before update
-4403 before display
-4403 before clear screen
-4406 before Flipping the screen
-4406 before delay
-
- sleeptime : 13
-
-4435 next ticks
-4420 before update
-4421 before display
-4421 before clear screen
-4423 before Flipping the screen
-4424 before delay
-
- sleeptime : 11
-
-4451 next ticks
-4435 before update
-4435 before display
-4435 before clear screen
-4438 before Flipping the screen
-4439 before delay
-
- sleeptime : 12
-
-4467 next ticks
-4451 before update
-4451 before display
-4451 before clear screen
-4453 before Flipping the screen
-4455 before delay
-
- sleeptime : 12
-
-4483 next ticks
-4467 before update
-4467 before display
-4467 before clear screen
-4470 before Flipping the screen
-4471 before delay
-
- sleeptime : 12
-
-4499 next ticks
-4483 before update
-4483 before display
-4483 before clear screen
-4485 before Flipping the screen
-4487 before delay
-
- sleeptime : 12
-
-4515 next ticks
-4499 before update
-4499 before display
-4499 before clear screen
-4501 before Flipping the screen
-4502 before delay
-
- sleeptime : 13
-
-4531 next ticks
-4515 before update
-4515 before display
-4515 before clear screen
-4517 before Flipping the screen
-4518 before delay
-
- sleeptime : 13
-
-4547 next ticks
-4531 before update
-4531 before display
-4531 before clear screen
-4533 before Flipping the screen
-4534 before delay
-
- sleeptime : 13
-
-4563 next ticks
-4547 before update
-4547 before display
-4547 before clear screen
-4549 before Flipping the screen
-4550 before delay
-
- sleeptime : 13
-
-4579 next ticks
-4563 before update
-4563 before display
-4563 before clear screen
-4565 before Flipping the screen
-4566 before delay
-
- sleeptime : 13
-
-4595 next ticks
-4579 before update
-4579 before display
-4579 before clear screen
-4581 before Flipping the screen
-4581 before delay
+2668 next ticks
+2652 before update
+2652 before display
+2652 before clear screen
+2654 before Flipping the screen
+2654 before delay
 
  sleeptime : 14
 
-4611 next ticks
-4595 before update
-4595 before display
-4595 before clear screen
-4597 before Flipping the screen
-4598 before delay
+2684 next ticks
+2668 before update
+2668 before display
+2668 before clear screen
+2670 before Flipping the screen
+2671 before delay
 
  sleeptime : 13
 
-4627 next ticks
-4611 before update
-4611 before display
-4611 before clear screen
-4613 before Flipping the screen
-4614 before delay
+2700 next ticks
+2684 before update
+2684 before display
+2684 before clear screen
+2686 before Flipping the screen
+2686 before delay
 
  sleeptime : 13
 
-4643 next ticks
-4627 before update
-4627 before display
-4627 before clear screen
-4629 before Flipping the screen
-4629 before delay
+2716 next ticks
+2700 before update
+2700 before display
+2700 before clear screen
+2702 before Flipping the screen
+2702 before delay
 
  sleeptime : 14
 
-4659 next ticks
-4643 before update
-4643 before display
-4643 before clear screen
-4645 before Flipping the screen
-4646 before delay
+2732 next ticks
+2716 before update
+2716 before display
+2716 before clear screen
+2718 before Flipping the screen
+2719 before delay
 
  sleeptime : 13
 
-4675 next ticks
-4659 before update
-4659 before display
-4659 before clear screen
-4662 before Flipping the screen
-4663 before delay
+2748 next ticks
+2732 before update
+2732 before display
+2732 before clear screen
+2734 before Flipping the screen
+2735 before delay
+
+ sleeptime : 13
+
+2764 next ticks
+2748 before update
+2748 before display
+2748 before clear screen
+2750 before Flipping the screen
+2751 before delay
+
+ sleeptime : 13
+
+2780 next ticks
+2764 before update
+2764 before display
+2764 before clear screen
+2766 before Flipping the screen
+2767 before delay
+
+ sleeptime : 13
+
+2796 next ticks
+2780 before update
+2780 before display
+2780 before clear screen
+2782 before Flipping the screen
+2783 before delay
+
+ sleeptime : 13
+
+2812 next ticks
+2796 before update
+2796 before display
+2796 before clear screen
+2798 before Flipping the screen
+2800 before delay
 
  sleeptime : 12
 
-4691 next ticks
-4675 before update
-4675 before display
-4675 before clear screen
-4677 before Flipping the screen
-4678 before delay
+2828 next ticks
+2812 before update
+2812 before display
+2812 before clear screen
+2814 before Flipping the screen
+2815 before delay
 
  sleeptime : 13
 
-4707 next ticks
-4691 before update
-4691 before display
-4691 before clear screen
-4693 before Flipping the screen
-4695 before delay
+2844 next ticks
+2828 before update
+2828 before display
+2828 before clear screen
+2830 before Flipping the screen
+2831 before delay
+
+ sleeptime : 13
+
+2860 next ticks
+2844 before update
+2844 before display
+2844 before clear screen
+2846 before Flipping the screen
+2847 before delay
+
+ sleeptime : 13
+
+2876 next ticks
+2860 before update
+2860 before display
+2860 before clear screen
+2862 before Flipping the screen
+2863 before delay
+
+ sleeptime : 13
+
+2892 next ticks
+2876 before update
+2876 before display
+2876 before clear screen
+2878 before Flipping the screen
+2879 before delay
+
+ sleeptime : 13
+
+2908 next ticks
+2892 before update
+2892 before display
+2892 before clear screen
+2894 before Flipping the screen
+2895 before delay
+
+ sleeptime : 13
+
+2924 next ticks
+2908 before update
+2908 before display
+2908 before clear screen
+2910 before Flipping the screen
+2911 before delay
+
+ sleeptime : 13
+
+2940 next ticks
+2924 before update
+2924 before display
+2924 before clear screen
+2926 before Flipping the screen
+2927 before delay
+
+ sleeptime : 13
+
+2956 next ticks
+2940 before update
+2940 before display
+2940 before clear screen
+2942 before Flipping the screen
+2943 before delay
+
+ sleeptime : 13
+
+2972 next ticks
+2956 before update
+2956 before display
+2956 before clear screen
+2959 before Flipping the screen
+2960 before delay
 
  sleeptime : 12
 
-4723 next ticks
-4707 before update
-4707 before display
-4707 before clear screen
-4709 before Flipping the screen
-4710 before delay
+2988 next ticks
+2972 before update
+2972 before display
+2972 before clear screen
+2974 before Flipping the screen
+2975 before delay
 
  sleeptime : 13
 
-4739 next ticks
-4723 before update
-4723 before display
-4723 before clear screen
-4725 before Flipping the screen
-4726 before delay
+3004 next ticks
+2988 before update
+2988 before display
+2988 before clear screen
+2990 before Flipping the screen
+2991 before delay
 
  sleeptime : 13
 
-4755 next ticks
-4739 before update
-4739 before display
-4739 before clear screen
-4741 before Flipping the screen
-4742 before delay
+3020 next ticks
+3004 before update
+3004 before display
+3004 before clear screen
+3006 before Flipping the screen
+3007 before delay
 
  sleeptime : 13
 
-4771 next ticks
-4755 before update
-4755 before display
-4755 before clear screen
-4757 before Flipping the screen
-4758 before delay
+3036 next ticks
+3020 before update
+3020 before display
+3020 before clear screen
+3022 before Flipping the screen
+3023 before delay
 
  sleeptime : 13
 
-4787 next ticks
-4771 before update
-4771 before display
-4771 before clear screen
-4773 before Flipping the screen
-4774 before delay
+3052 next ticks
+3036 before update
+3036 before display
+3036 before clear screen
+3038 before Flipping the screen
+3039 before delay
 
  sleeptime : 13
 
-4803 next ticks
-4787 before update
-4877 before display
-4877 before clear screen
-4879 before Flipping the screen
-4880 before delay
+3068 next ticks
+3052 before update
+3052 before display
+3052 before clear screen
+3054 before Flipping the screen
+3055 before delay
 
- sleeptime : 0
+ sleeptime : 13
 
-4819 next ticks
-4880 before update
-4880 before display
-4880 before clear screen
-4882 before Flipping the screen
-4883 before delay
+3084 next ticks
+3068 before update
+3068 before display
+3068 before clear screen
+3070 before Flipping the screen
+3071 before delay
 
- sleeptime : 0
+ sleeptime : 13
 
-4835 next ticks
-4883 before update
-4883 before display
-4883 before clear screen
-4885 before Flipping the screen
-4887 before delay
+3100 next ticks
+3084 before update
+3084 before display
+3084 before clear screen
+3086 before Flipping the screen
+3087 before delay
 
- sleeptime : 0
+ sleeptime : 13
 
-4851 next ticks
-4887 before update
-4887 before display
-4887 before clear screen
-4890 before Flipping the screen
-4892 before delay
+3116 next ticks
+3100 before update
+3100 before display
+3100 before clear screen
+3102 before Flipping the screen
+3103 before delay
 
- sleeptime : 0
+ sleeptime : 13
 
-4867 next ticks
-4892 before update
-4892 before display
-4892 before clear screen
-4894 before Flipping the screen
-4895 before delay
+3132 next ticks
+3116 before update
+3116 before display
+3116 before clear screen
+3118 before Flipping the screen
+3119 before delay
 
- sleeptime : 0
+ sleeptime : 13
 
-4883 next ticks
-4895 before update
-4895 before display
-4895 before clear screen
-4898 before Flipping the screen
-4899 before delay
+3148 next ticks
+3132 before update
+3132 before display
+3132 before clear screen
+3135 before Flipping the screen
+3135 before delay
 
- sleeptime : 0
+ sleeptime : 13
 
-4899 next ticks
-4899 before update
-4899 before display
-4899 before clear screen
-4901 before Flipping the screen
-4902 before delay
+3164 next ticks
+3148 before update
+3148 before display
+3148 before clear screen
+3150 before Flipping the screen
+3151 before delay
 
- sleeptime : 0
+ sleeptime : 13
 
-4915 next ticks
-4902 before update
-4902 before display
-4902 before clear screen
-4904 before Flipping the screen
-4905 before delay
+3180 next ticks
+3164 before update
+3164 before display
+3164 before clear screen
+3166 before Flipping the screen
+3167 before delay
 
- sleeptime : 10
+ sleeptime : 13
 
-4931 next ticks
-4915 before update
-4915 before display
-4915 before clear screen
-4918 before Flipping the screen
-4919 before delay
+3196 next ticks
+3181 before update
+3181 before display
+3181 before clear screen
+3183 before Flipping the screen
+3184 before delay
 
  sleeptime : 12
 
-4947 next ticks
-4931 before update
-4931 before display
-4931 before clear screen
-4933 before Flipping the screen
-4934 before delay
+3212 next ticks
+3196 before update
+3196 before display
+3196 before clear screen
+3199 before Flipping the screen
+3199 before delay
 
  sleeptime : 13
 
-4963 next ticks
-4947 before update
-4947 before display
-4947 before clear screen
-4949 before Flipping the screen
-4950 before delay
-
- sleeptime : 13
-
-4979 next ticks
-4963 before update
-4963 before display
-4963 before clear screen
-4965 before Flipping the screen
-4966 before delay
-
- sleeptime : 13
-
-4995 next ticks
-4979 before update
-4979 before display
-4979 before clear screen
-4981 before Flipping the screen
-4982 before delay
-
- sleeptime : 13
-
-5011 next ticks
-4995 before update
-4995 before display
-4995 before clear screen
-4997 before Flipping the screen
-4998 before delay
-
- sleeptime : 13
-
-5027 next ticks
-5011 before update
-5011 before display
-5011 before clear screen
-5013 before Flipping the screen
-5014 before delay
-
- sleeptime : 13
-
-5043 next ticks
-5027 before update
-5027 before display
-5027 before clear screen
-5029 before Flipping the screen
-5030 before delay
-
- sleeptime : 13
-
-5059 next ticks
-5043 before update
-5043 before display
-5043 before clear screen
-5045 before Flipping the screen
-5046 before delay
-
- sleeptime : 13
-
-5075 next ticks
-5059 before update
-5059 before display
-5059 before clear screen
-5061 before Flipping the screen
-5062 before delay
-
- sleeptime : 13
-
-5091 next ticks
-5075 before update
-5075 before display
-5075 before clear screen
-5077 before Flipping the screen
-5078 before delay
-
- sleeptime : 13
-
-5107 next ticks
-5091 before update
-5091 before display
-5091 before clear screen
-5093 before Flipping the screen
-5094 before delay
-
- sleeptime : 13
-
-5123 next ticks
-5107 before update
-5107 before display
-5107 before clear screen
-5109 before Flipping the screen
-5110 before delay
-
- sleeptime : 13
-
-5139 next ticks
-5123 before update
-5123 before display
-5123 before clear screen
-5125 before Flipping the screen
-5126 before delay
-
- sleeptime : 13
-
-5155 next ticks
-5139 before update
-5139 before display
-5139 before clear screen
-5141 before Flipping the screen
-5141 before delay
-
- sleeptime : 14
-
-5171 next ticks
-5155 before update
-5155 before display
-5155 before clear screen
-5157 before Flipping the screen
-5158 before delay
-
- sleeptime : 13
-
-5187 next ticks
-5171 before update
-5171 before display
-5171 before clear screen
-5174 before Flipping the screen
-5175 before delay
+3228 next ticks
+3212 before update
+3212 before display
+3212 before clear screen
+3215 before Flipping the screen
+3216 before delay
 
  sleeptime : 12
 
-5203 next ticks
-5187 before update
-5187 before display
-5187 before clear screen
-5190 before Flipping the screen
-5191 before delay
+3244 next ticks
+3228 before update
+3228 before display
+3228 before clear screen
+3230 before Flipping the screen
+3231 before delay
+
+ sleeptime : 13
+
+3260 next ticks
+3244 before update
+3244 before display
+3244 before clear screen
+3246 before Flipping the screen
+3247 before delay
+
+ sleeptime : 13
+
+3276 next ticks
+3260 before update
+3260 before display
+3260 before clear screen
+3262 before Flipping the screen
+3263 before delay
+
+ sleeptime : 13
+
+3292 next ticks
+3276 before update
+3276 before display
+3276 before clear screen
+3279 before Flipping the screen
+3279 before delay
+
+ sleeptime : 13
+
+3308 next ticks
+3292 before update
+3292 before display
+3292 before clear screen
+3294 before Flipping the screen
+3295 before delay
+
+ sleeptime : 13
+
+3324 next ticks
+3308 before update
+3308 before display
+3308 before clear screen
+3310 before Flipping the screen
+3311 before delay
+
+ sleeptime : 13
+
+3340 next ticks
+3324 before update
+3324 before display
+3324 before clear screen
+3326 before Flipping the screen
+3327 before delay
+
+ sleeptime : 13
+
+3356 next ticks
+3340 before update
+3340 before display
+3340 before clear screen
+3342 before Flipping the screen
+3343 before delay
+
+ sleeptime : 13
+
+3372 next ticks
+3356 before update
+3356 before display
+3356 before clear screen
+3358 before Flipping the screen
+3359 before delay
+
+ sleeptime : 13
+
+3388 next ticks
+3372 before update
+3372 before display
+3372 before clear screen
+3374 before Flipping the screen
+3375 before delay
+
+ sleeptime : 13
+
+3404 next ticks
+3388 before update
+3388 before display
+3388 before clear screen
+3390 before Flipping the screen
+3391 before delay
+
+ sleeptime : 13
+
+3420 next ticks
+3404 before update
+3404 before display
+3404 before clear screen
+3406 before Flipping the screen
+3408 before delay
 
  sleeptime : 12
 
-5219 next ticks
-5203 before update
-5203 before display
-5203 before clear screen
-5206 before Flipping the screen
-5207 before delay
+3436 next ticks
+3420 before update
+3420 before display
+3420 before clear screen
+3422 before Flipping the screen
+3423 before delay
+
+ sleeptime : 13
+
+3452 next ticks
+3436 before update
+3436 before display
+3436 before clear screen
+3438 before Flipping the screen
+3439 before delay
+
+ sleeptime : 13
+
+3468 next ticks
+3452 before update
+3452 before display
+3452 before clear screen
+3454 before Flipping the screen
+3455 before delay
+
+ sleeptime : 13
+
+3484 next ticks
+3468 before update
+3468 before display
+3468 before clear screen
+3470 before Flipping the screen
+3471 before delay
+
+ sleeptime : 13
+
+3500 next ticks
+3484 before update
+3484 before display
+3484 before clear screen
+3486 before Flipping the screen
+3487 before delay
+
+ sleeptime : 13
+
+3516 next ticks
+3500 before update
+3500 before display
+3500 before clear screen
+3502 before Flipping the screen
+3503 before delay
+
+ sleeptime : 13
+
+3532 next ticks
+3516 before update
+3516 before display
+3516 before clear screen
+3518 before Flipping the screen
+3519 before delay
+
+ sleeptime : 13
+
+3548 next ticks
+3532 before update
+3532 before display
+3532 before clear screen
+3534 before Flipping the screen
+3535 before delay
+
+ sleeptime : 13
+
+3564 next ticks
+3548 before update
+3548 before display
+3548 before clear screen
+3551 before Flipping the screen
+3552 before delay
 
  sleeptime : 12
 
-5235 next ticks
-5219 before update
-5219 before display
-5219 before clear screen
-5221 before Flipping the screen
-5222 before delay
+3580 next ticks
+3564 before update
+3564 before display
+3564 before clear screen
+3566 before Flipping the screen
+3567 before delay
 
  sleeptime : 13
 
-5251 next ticks
-5235 before update
-5235 before display
-5235 before clear screen
-5239 before Flipping the screen
-5241 before delay
-
- sleeptime : 10
-
-5267 next ticks
-5251 before update
-5251 before display
-5251 before clear screen
-5253 before Flipping the screen
-5254 before delay
+3596 next ticks
+3580 before update
+3580 before display
+3580 before clear screen
+3582 before Flipping the screen
+3583 before delay
 
  sleeptime : 13
 
-5283 next ticks
-5267 before update
-5267 before display
-5267 before clear screen
-5271 before Flipping the screen
-5273 before delay
-
- sleeptime : 10
-
-5299 next ticks
-5283 before update
-5283 before display
-5283 before clear screen
-5285 before Flipping the screen
-5286 before delay
-
- sleeptime : 13
-
-5315 next ticks
-5299 before update
-5299 before display
-5299 before clear screen
-5301 before Flipping the screen
-5302 before delay
-
- sleeptime : 13
-
-5331 next ticks
-5315 before update
-5315 before display
-5315 before clear screen
-5317 before Flipping the screen
-5318 before delay
-
- sleeptime : 13
-
-5347 next ticks
-5331 before update
-5331 before display
-5331 before clear screen
-5333 before Flipping the screen
-5334 before delay
-
- sleeptime : 13
-
-5363 next ticks
-5347 before update
-5347 before display
-5347 before clear screen
-5349 before Flipping the screen
-5350 before delay
-
- sleeptime : 13
-
-5379 next ticks
-5363 before update
-5363 before display
-5363 before clear screen
-5365 before Flipping the screen
-5366 before delay
-
- sleeptime : 13
-
-5395 next ticks
-5379 before update
-5379 before display
-5379 before clear screen
-5381 before Flipping the screen
-5382 before delay
-
- sleeptime : 13
-
-5411 next ticks
-5395 before update
-5395 before display
-5395 before clear screen
-5397 before Flipping the screen
-5398 before delay
-
- sleeptime : 13
-
-5427 next ticks
-5411 before update
-5411 before display
-5411 before clear screen
-5413 before Flipping the screen
-5414 before delay
-
- sleeptime : 13
-
-5443 next ticks
-5427 before update
-5427 before display
-5427 before clear screen
-5429 before Flipping the screen
-5430 before delay
-
- sleeptime : 13
-
-5459 next ticks
-5443 before update
-5443 before display
-5443 before clear screen
-5445 before Flipping the screen
-5446 before delay
-
- sleeptime : 13
-
-5475 next ticks
-5459 before update
-5459 before display
-5459 before clear screen
-5461 before Flipping the screen
-5462 before delay
-
- sleeptime : 13
-
-5491 next ticks
-5475 before update
-5475 before display
-5475 before clear screen
-5477 before Flipping the screen
-5478 before delay
-
- sleeptime : 13
-
-5507 next ticks
-5491 before update
-5491 before display
-5491 before clear screen
-5493 before Flipping the screen
-5494 before delay
-
- sleeptime : 13
-
-5523 next ticks
-5507 before update
-5507 before display
-5507 before clear screen
-5509 before Flipping the screen
-5510 before delay
-
- sleeptime : 13
-
-5539 next ticks
-5523 before update
-5523 before display
-5523 before clear screen
-5525 before Flipping the screen
-5526 before delay
-
- sleeptime : 13
-
-5555 next ticks
-5539 before update
-5539 before display
-5539 before clear screen
-5542 before Flipping the screen
-5543 before delay
+3612 next ticks
+3596 before update
+3596 before display
+3596 before clear screen
+3598 before Flipping the screen
+3600 before delay
 
  sleeptime : 12
 
-5571 next ticks
-5555 before update
-5555 before display
-5555 before clear screen
-5557 before Flipping the screen
-5558 before delay
+3628 next ticks
+3612 before update
+3612 before display
+3612 before clear screen
+3614 before Flipping the screen
+3615 before delay
 
  sleeptime : 13
 
-5587 next ticks
-5571 before update
-5571 before display
-5571 before clear screen
-5573 before Flipping the screen
-5574 before delay
+3644 next ticks
+3628 before update
+3628 before display
+3628 before clear screen
+3630 before Flipping the screen
+3631 before delay
 
  sleeptime : 13
 
-5603 next ticks
-5587 before update
-5587 before display
-5587 before clear screen
-5589 before Flipping the screen
-5590 before delay
+3660 next ticks
+3644 before update
+3644 before display
+3644 before clear screen
+3646 before Flipping the screen
+3647 before delay
 
  sleeptime : 13
 
-5619 next ticks
-5603 before update
-5603 before display
-5603 before clear screen
-5606 before Flipping the screen
-5606 before delay
-
- sleeptime : 13
-
-5635 next ticks
-5619 before update
-5619 before display
-5619 before clear screen
-5622 before Flipping the screen
-5623 before delay
+3676 next ticks
+3660 before update
+3660 before display
+3660 before clear screen
+3662 before Flipping the screen
+3664 before delay
 
  sleeptime : 12
 
-5651 next ticks
-5635 before update
-5635 before display
-5635 before clear screen
-5639 before Flipping the screen
-5640 before delay
+3692 next ticks
+3676 before update
+3676 before display
+3676 before clear screen
+3678 before Flipping the screen
+3679 before delay
+
+ sleeptime : 13
+
+3708 next ticks
+3692 before update
+3692 before display
+3692 before clear screen
+3694 before Flipping the screen
+3695 before delay
+
+ sleeptime : 13
+
+3724 next ticks
+3708 before update
+3708 before display
+3708 before clear screen
+3711 before Flipping the screen
+3711 before delay
+
+ sleeptime : 13
+
+3740 next ticks
+3724 before update
+3724 before display
+3724 before clear screen
+3726 before Flipping the screen
+3727 before delay
+
+ sleeptime : 13
+
+3756 next ticks
+3740 before update
+3740 before display
+3740 before clear screen
+3742 before Flipping the screen
+3743 before delay
+
+ sleeptime : 13
+
+3772 next ticks
+3756 before update
+3756 before display
+3756 before clear screen
+3758 before Flipping the screen
+3759 before delay
+
+ sleeptime : 13
+
+3788 next ticks
+3772 before update
+3772 before display
+3772 before clear screen
+3775 before Flipping the screen
+3775 before delay
+
+ sleeptime : 13
+
+3804 next ticks
+3788 before update
+3788 before display
+3788 before clear screen
+3790 before Flipping the screen
+3791 before delay
+
+ sleeptime : 13
+
+3820 next ticks
+3804 before update
+3804 before display
+3804 before clear screen
+3806 before Flipping the screen
+3807 before delay
+
+ sleeptime : 13
+
+3836 next ticks
+3820 before update
+3820 before display
+3820 before clear screen
+3822 before Flipping the screen
+3823 before delay
+
+ sleeptime : 13
+
+3852 next ticks
+3836 before update
+3836 before display
+3836 before clear screen
+3838 before Flipping the screen
+3839 before delay
+
+ sleeptime : 13
+
+3868 next ticks
+3852 before update
+3852 before display
+3852 before clear screen
+3854 before Flipping the screen
+3855 before delay
+
+ sleeptime : 13
+
+3884 next ticks
+3868 before update
+3868 before display
+3868 before clear screen
+3870 before Flipping the screen
+3871 before delay
+
+ sleeptime : 13
+
+3900 next ticks
+3884 before update
+3884 before display
+3884 before clear screen
+3886 before Flipping the screen
+3887 before delay
+
+ sleeptime : 13
+
+3916 next ticks
+3900 before update
+3900 before display
+3900 before clear screen
+3902 before Flipping the screen
+3903 before delay
+
+ sleeptime : 13
+
+3932 next ticks
+3917 before update
+3917 before display
+3917 before clear screen
+3920 before Flipping the screen
+3921 before delay
 
  sleeptime : 11
 
-5667 next ticks
-5651 before update
-5651 before display
-5651 before clear screen
-5654 before Flipping the screen
-5656 before delay
+3948 next ticks
+3932 before update
+3932 before display
+3932 before clear screen
+3934 before Flipping the screen
+3935 before delay
+
+ sleeptime : 13
+
+3964 next ticks
+3948 before update
+3948 before display
+3948 before clear screen
+3950 before Flipping the screen
+3951 before delay
+
+ sleeptime : 13
+
+3980 next ticks
+3964 before update
+3964 before display
+3964 before clear screen
+3966 before Flipping the screen
+3967 before delay
+
+ sleeptime : 13
+
+3996 next ticks
+3980 before update
+3980 before display
+3980 before clear screen
+3982 before Flipping the screen
+3983 before delay
+
+ sleeptime : 13
+
+4012 next ticks
+3996 before update
+3996 before display
+3996 before clear screen
+3998 before Flipping the screen
+3999 before delay
+
+ sleeptime : 13
+
+4028 next ticks
+4012 before update
+4012 before display
+4012 before clear screen
+4014 before Flipping the screen
+4015 before delay
+
+ sleeptime : 13
+
+4044 next ticks
+4028 before update
+4028 before display
+4028 before clear screen
+4030 before Flipping the screen
+4031 before delay
+
+ sleeptime : 13
+
+4060 next ticks
+4044 before update
+4044 before display
+4044 before clear screen
+4046 before Flipping the screen
+4047 before delay
+
+ sleeptime : 13
+
+4076 next ticks
+4060 before update
+4060 before display
+4060 before clear screen
+4062 before Flipping the screen
+4063 before delay
+
+ sleeptime : 13
+
+4092 next ticks
+4076 before update
+4076 before display
+4076 before clear screen
+4078 before Flipping the screen
+4079 before delay
+
+ sleeptime : 13
+
+4108 next ticks
+4092 before update
+4092 before display
+4092 before clear screen
+4094 before Flipping the screen
+4095 before delay
+
+ sleeptime : 13
+
+4124 next ticks
+4108 before update
+4108 before display
+4108 before clear screen
+4110 before Flipping the screen
+4111 before delay
+
+ sleeptime : 13
+
+4140 next ticks
+4124 before update
+4124 before display
+4124 before clear screen
+4126 before Flipping the screen
+4127 before delay
+
+ sleeptime : 13
+
+4156 next ticks
+4140 before update
+4140 before display
+4140 before clear screen
+4142 before Flipping the screen
+4143 before delay
+
+ sleeptime : 13
+
+4172 next ticks
+4156 before update
+4156 before display
+4156 before clear screen
+4160 before Flipping the screen
+4161 before delay
 
  sleeptime : 11
 
-5683 next ticks
-5667 before update
-5667 before display
-5667 before clear screen
-5669 before Flipping the screen
-5670 before delay
+4188 next ticks
+4172 before update
+4172 before display
+4172 before clear screen
+4174 before Flipping the screen
+4175 before delay
 
  sleeptime : 13
 
-5699 next ticks
-5683 before update
-5683 before display
-5683 before clear screen
-5686 before Flipping the screen
-5688 before delay
-
- sleeptime : 11
-
-5715 next ticks
-5699 before update
-5699 before display
-5699 before clear screen
-5701 before Flipping the screen
-5702 before delay
+4204 next ticks
+4188 before update
+4188 before display
+4188 before clear screen
+4190 before Flipping the screen
+4191 before delay
 
  sleeptime : 13
 
-5731 next ticks
-5715 before update
-5715 before display
-5715 before clear screen
-5717 before Flipping the screen
-5718 before delay
+4220 next ticks
+4204 before update
+4204 before display
+4204 before clear screen
+4206 before Flipping the screen
+4207 before delay
 
  sleeptime : 13
 
-5747 next ticks
-5731 before update
-5731 before display
-5731 before clear screen
-5733 before Flipping the screen
-5734 before delay
+4236 next ticks
+4220 before update
+4220 before display
+4220 before clear screen
+4222 before Flipping the screen
+4223 before delay
 
  sleeptime : 13
 
-5763 next ticks
-5747 before update
-5747 before display
-5747 before clear screen
-5749 before Flipping the screen
-5750 before delay
+4252 next ticks
+4236 before update
+4236 before display
+4236 before clear screen
+4238 before Flipping the screen
+4239 before delay
 
  sleeptime : 13
 
-5779 next ticks
-5763 before update
-5763 before display
-5763 before clear screen
-5765 before Flipping the screen
-5766 before delay
+4268 next ticks
+4252 before update
+4252 before display
+4252 before clear screen
+4254 before Flipping the screen
+4255 before delay
 
  sleeptime : 13
 
-5795 next ticks
-5779 before update
-5779 before display
-5779 before clear screen
-5781 before Flipping the screen
-5782 before delay
+4284 next ticks
+4268 before update
+4268 before display
+4268 before clear screen
+4270 before Flipping the screen
+4271 before delay
 
  sleeptime : 13
 
-5811 next ticks
-5795 before update
-5795 before display
-5795 before clear screen
-5797 before Flipping the screen
-5798 before delay
+4300 next ticks
+4284 before update
+4284 before display
+4284 before clear screen
+4286 before Flipping the screen
+4287 before delay
 
  sleeptime : 13
 
-5827 next ticks
-5811 before update
-5811 before display
-5811 before clear screen
-5813 before Flipping the screen
-5814 before delay
-
- sleeptime : 13
-
-5843 next ticks
-5827 before update
-5827 before display
-5827 before clear screen
-5829 before Flipping the screen
-5830 before delay
-
- sleeptime : 13
-
-5859 next ticks
-5843 before update
-5843 before display
-5843 before clear screen
-5845 before Flipping the screen
-5846 before delay
-
- sleeptime : 13
-
-5875 next ticks
-5859 before update
-5859 before display
-5859 before clear screen
-5861 before Flipping the screen
-5862 before delay
-
- sleeptime : 13
-
-5891 next ticks
-5875 before update
-5875 before display
-5875 before clear screen
-5877 before Flipping the screen
-5878 before delay
-
- sleeptime : 13
-
-5907 next ticks
-5891 before update
-5891 before display
-5891 before clear screen
-5893 before Flipping the screen
-5894 before delay
-
- sleeptime : 13
-
-5923 next ticks
-5907 before update
-5907 before display
-5907 before clear screen
-5909 before Flipping the screen
-5910 before delay
-
- sleeptime : 13
-
-5939 next ticks
-5923 before update
-5923 before display
-5923 before clear screen
-5925 before Flipping the screen
-5926 before delay
-
- sleeptime : 13
-
-5955 next ticks
-5939 before update
-5939 before display
-5939 before clear screen
-5942 before Flipping the screen
-5943 before delay
+4316 next ticks
+4300 before update
+4300 before display
+4300 before clear screen
+4303 before Flipping the screen
+4304 before delay
 
  sleeptime : 12
 
-5971 next ticks
-5955 before update
-5955 before display
-5955 before clear screen
-5957 before Flipping the screen
-5958 before delay
+4332 next ticks
+4316 before update
+4316 before display
+4316 before clear screen
+4318 before Flipping the screen
+4319 before delay
 
  sleeptime : 13
 
-5987 next ticks
-5971 before update
-5971 before display
-5971 before clear screen
-5974 before Flipping the screen
-5976 before delay
-
- sleeptime : 11
-
-6003 next ticks
-5987 before update
-5987 before display
-5987 before clear screen
-5989 before Flipping the screen
-5991 before delay
-
- sleeptime : 12
-
-6019 next ticks
-6003 before update
-6003 before display
-6003 before clear screen
-6005 before Flipping the screen
-6007 before delay
-
- sleeptime : 12
-
-6035 next ticks
-6019 before update
-6019 before display
-6019 before clear screen
-6021 before Flipping the screen
-6022 before delay
+4348 next ticks
+4332 before update
+4332 before display
+4332 before clear screen
+4334 before Flipping the screen
+4335 before delay
 
  sleeptime : 13
 
-6051 next ticks
-6035 before update
-6035 before display
-6035 before clear screen
-6037 before Flipping the screen
-6038 before delay
-
- sleeptime : 13
-
-6067 next ticks
-6051 before update
-6051 before display
-6051 before clear screen
-6054 before Flipping the screen
-6055 before delay
+4364 next ticks
+4348 before update
+4348 before display
+4348 before clear screen
+4351 before Flipping the screen
+4352 before delay
 
  sleeptime : 12
 
-6083 next ticks
-6067 before update
-6067 before display
-6067 before clear screen
-6070 before Flipping the screen
-6071 before delay
-
- sleeptime : 12
-
-6099 next ticks
-6083 before update
-6083 before display
-6083 before clear screen
-6086 before Flipping the screen
-6087 before delay
-
- sleeptime : 12
-
-6115 next ticks
-6099 before update
-6099 before display
-6099 before clear screen
-6101 before Flipping the screen
-6103 before delay
-
- sleeptime : 12
-
-6131 next ticks
-6115 before update
-6115 before display
-6115 before clear screen
-6117 before Flipping the screen
-6118 before delay
-
- sleeptime : 13
-
-6147 next ticks
-6131 before update
-6131 before display
-6131 before clear screen
-6133 before Flipping the screen
-6134 before delay
-
- sleeptime : 13
-
-6163 next ticks
-6147 before update
-6147 before display
-6147 before clear screen
-6152 before Flipping the screen
-6154 before delay
-
- sleeptime : 8
-
-6179 next ticks
-6163 before update
-6163 before display
-6163 before clear screen
-6165 before Flipping the screen
-6166 before delay
-
- sleeptime : 13
-
-6195 next ticks
-6179 before update
-6245 before display
-6245 before clear screen
-6247 before Flipping the screen
-6248 before delay
-
- sleeptime : 0
+4380 next ticks
+4364 before update
+4364 before display
+4364 before clear screen
+4366 before Flipping the screen
+4367 before delay
 

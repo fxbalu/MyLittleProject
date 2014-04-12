@@ -33,8 +33,8 @@ typedef struct Level {
    SDL_Rect* rectSrc;
    SDL_Rect* rectDst;
 
-   int sizeX;
-   int sizeY;
+   int sizeX; //nombre de tiles en largeur
+   int sizeY; //nombre de tiles en hauteur
 
    char** tab; //nom a changer
 
