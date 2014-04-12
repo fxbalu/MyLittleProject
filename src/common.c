@@ -7,6 +7,7 @@
 
 
 #include "common.h"
+#include "log.h"
 
 
 //premiere version on va test la vitesse des blits avec et sans

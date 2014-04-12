@@ -15,6 +15,7 @@
 */
 #include "define.h"
 #include "common.h"
+#include "log.h"
 
 #include "gameStatus.h"
 #include "gameOptions.h"

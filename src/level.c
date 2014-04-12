@@ -43,14 +43,11 @@ void loadLevel (Level* level) {
 
    xmlLevel->root = parseXMLFile(xmlLevel->file);
 
-   //char* path = xmlLevel->root->first->name;
+   printXMLNode(xmlLevel->root, 2);
 
    printf("%s", xmlLevel->root->first->name);
 
-//   level->tileset = loadImage(path);
-
-//réutiliser path normalement
-   //level->background = loadImage("res/image/background/backgroundworld1.png");
+   level->background = loadImage("res/image/background/backgroundworld1.png");
 
    level->sizeX = 20;
    level->sizeY = 20;

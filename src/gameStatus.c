@@ -10,7 +10,7 @@
 
 void initGameStatus(GameStatus* status) {
    status->gameIsRunning = true;
-   status->state = mainMenu; //intro
+   status->state = intro; //intro
    status->menuSelection = 0;
    status->numberItemsMenu = 4;
    status->level = 0;
