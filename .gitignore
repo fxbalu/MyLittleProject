@@ -30,3 +30,7 @@
 
 # Testing files that shouldn't be shared
 test_*
+
+# Standard and error outputs
+stdout.txt
+stderr.txt
