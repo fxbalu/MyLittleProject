@@ -32,7 +32,7 @@
  * \see XML_FIRST_LINE
  */
 #ifndef XML_BUFFER_LENGTH
-#define XML_BUFFER_LENGTH  50
+#define XML_BUFFER_LENGTH  200
 #endif /* XML_BUFFER_LENGTH */
 
 /**
