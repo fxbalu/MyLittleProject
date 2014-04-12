@@ -28,6 +28,7 @@
 *.depend
 *.cscope_file_list
 bin/
+obj/
 
 # Testing files that shouldn't be shared
 test_*
