@@ -14,8 +14,8 @@
 /* Logging options. Comment to disable.  */
 #define LOG_ON_STDOUT
 #define LOG_ON_STDERR
-#define LOG_IN_STD_FILE
-#define LOG_IN_ERR_FILE
+//#define LOG_IN_STD_FILE
+//#define LOG_IN_ERR_FILE
 //#define LOG_FILE_PATH
 
 /* Log files path */
@@ -25,7 +25,6 @@
 /* Direction for logMem(). Basically IN or OUT */
 #define LOG_ALLOC   '+'
 #define LOG_FREE    '-'
-#define LOG_REALLOC '='
 
 /* Number of entry in the global Log_Variable table t */
 #define LOG_VARIABLE_NB  4000
@@ -78,7 +77,7 @@
          46 Cyan
          47 White
     */
-//#define LOG_WITH_COLORS
+#define LOG_WITH_COLORS
 #ifdef LOG_WITH_COLORS
    #define LOG_RED      "\e[1;31m"
    #define LOG_GREEN    "\e[1;32m"
@@ -101,7 +100,8 @@
 
 /* Structures for dynamic memory allocation logging */
 typedef struct Log_Variable {
-   int type;
+   void* ptr;  /**< address where this variable is stored */
+   int type;   /**< index for a Log_Memory.type[] string */
    char description[LOG_DESCRIPTION_LENGTH];
    char file[LOG_FILE_LENGTH];
    int line;
@@ -119,7 +119,8 @@ typedef struct Log_Memory {
 
 
 void logError(const char* str, const char* file, const int line);
-void logMem(const char direction, const char* type, const char* file, const int line);
+void logMem(const char direction, const void* ptr, const char* type,
+            const char* desc, const char* file, const int line);
 void checkAllocatedMemory(const char verbosity);
 
 #endif /* LOG_H_INCLUDED */

@@ -48,14 +48,14 @@ void destroyXMLAttribute(XML_Attribute* attr)
       logError("Trying to destroy a NULL attribute", __FILE__, __LINE__);
    }
    else {
-      /* logMem(FREE, "string", __FILE__, __LINE__); */
+      logMem(LOG_FREE, attr->name, "string", "attribute's name", __FILE__, __LINE__);
       free(attr->name);
-      /* logMem(FREE, "string", __FILE__, __LINE__); */
+      logMem(LOG_FREE, attr->value, "string", "attribute's value", __FILE__, __LINE__);
       free(attr->value);
       if(attr->next != NULL) {
          destroyXMLAttribute(attr->next);
       }
-      logMem(LOG_FREE, "XML_Attribute", __FILE__, __LINE__);
+      logMem(LOG_FREE, attr, "XML_Attribute", "attribute", __FILE__, __LINE__);
       free(attr);
    }
 }
@@ -78,7 +78,7 @@ XML_Attribute* allocXMLAttribute(XML_Attribute* attr)
       logError("Can't allocate memory for an attribute", __FILE__, __LINE__);
    }
    else {
-      logMem(LOG_ALLOC, "XML_Attribute", __FILE__, __LINE__);
+      logMem(LOG_ALLOC, attr, "XML_Attribute", "attribute", __FILE__, __LINE__);
    }
 
    return attr;

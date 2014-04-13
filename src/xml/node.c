@@ -62,11 +62,11 @@ void destroyXMLNode(XML_Node* n)
 
       /* destroy other members */
       if(n->name != NULL) {
-         logMem(LOG_FREE, "string", __FILE__, __LINE__);
+         logMem(LOG_FREE, n->name, "string", "node's name", __FILE__, __LINE__);
          free(n->name);
       }
       if(n->value != NULL) {
-         logMem(LOG_FREE, "string", __FILE__, __LINE__);
+         logMem(LOG_FREE, n->value, "string", "node's value", __FILE__, __LINE__);
          free(n->value);
       }
       if(n->attr != NULL) {
@@ -74,7 +74,7 @@ void destroyXMLNode(XML_Node* n)
       }
 
       /* free node */
-      logMem(LOG_FREE, "XML_Node", __FILE__, __LINE__);
+      logMem(LOG_FREE, n, "XML_Node", "node", __FILE__, __LINE__);
       free(n);
    }
 }
@@ -90,7 +90,7 @@ XML_Node* allocXMLNode(XML_Node* n)
       logError("Can't allocate memory for a XML node", __FILE__, __LINE__);
    }
    else {
-      logMem(LOG_ALLOC, "XML_Node", __FILE__, __LINE__);
+      logMem(LOG_ALLOC, n, "XML_Node", "node", __FILE__, __LINE__);
    }
 
    return n;
@@ -115,7 +115,7 @@ void freeXMLNode(XML_Node* n)
       logError("Trying to free a non initialized node", __FILE__, __LINE__);
    }
    else {
-      logMem(LOG_FREE, "XML_Node", __FILE__, __LINE__);
+      logMem(LOG_FREE, n, "XML_Node", "node", __FILE__, __LINE__);
       free(n);
    }
 }
@@ -181,7 +181,7 @@ void setXMLNodeName(const char* name, XML_Node* n)
          logError("can't allocate memory for node's name", __FILE__, __LINE__);
       }
       else {
-         logMem(LOG_ALLOC, "string", __FILE__, __LINE__);
+         logMem(LOG_ALLOC, n->name, "string", "node's name", __FILE__, __LINE__);
          strcpy(n->name, name);
       }
    }
@@ -221,7 +221,7 @@ void setXMLNodeValue(const char* value, XML_Node* n)
          logError("can't allocate memory for node's value", __FILE__, __LINE__);
       }
       else {
-         logMem(LOG_ALLOC, "string", __FILE__, __LINE__);
+         logMem(LOG_ALLOC, n->value, "string", "node's value", __FILE__, __LINE__);
          strcpy(n->value, value);
       }
    }

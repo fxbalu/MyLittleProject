@@ -23,7 +23,7 @@ static Log_Memory mem;
  * \code
  * logError("Useful message.", __FILE__, __LINE__);
  * \endcode
- * The output message should be :
+ * The output message should be like this :
  * \verbatim
  * ! error in [/home/user/git/mlp/src/my_file.c] at line [42] :
  * ! Useful message.
@@ -84,101 +84,121 @@ void logError(const char* str, const char* file, const int line){
 /**
  * \brief Log dynamically allocated memory to look for memory leaks.
  */
-void logMem(const char direction, const char* type, const char* file, const int line){
+void logMem(const char direction, const void* ptr, const char* type,
+            const char* desc, const char* file, const int line){
+   int iVar, iType;
+   Log_Variable* var;
+
    #ifndef LOG_FILE_PATH
    char* lastSlash;
    lastSlash = NULL;
    #endif /* LOG_FILE_PATH */
-   int temp, i;
+
+   var = NULL;
+
 
    /* add newly allocated variable to global structure mem */
    if(direction == LOG_ALLOC){
+
+      /* check if variable table is full */
       if(mem.varNb >= LOG_VARIABLE_NB){
          logError("Variable table is full. Change LOG_VARIABLE_NB constant in log.h.",
                   __FILE__, __LINE__);
       }
+
+      /* copy variable in table */
       else{
-         /* copy file's name */
-         #ifdef LOG_FILE_PATH
-            strcpy(mem.var[mem.varNb].file, file);
-         #else
-            if((lastSlash = strrchr(file, '/')) == NULL){
-               strcpy(mem.var[mem.varNb].file, file);
-            }
-            else{
-               strcpy(mem.var[mem.varNb].file, lastSlash + 1);
-            }
-         #endif /* LOG_FILE_PATH */
+         var = &(mem.var[mem.varNb]);
 
-         /* copy line's value */
-         mem.var[mem.varNb].line = line;
-
-         /* check if this type has been used before. -1 means never used. */
-         temp = -1;
-         i = 0;
-         while((i < mem.typeNb) && (temp == -1)){
-            if(strcmp(type, mem.type[i]) == 0) temp = i;
-            i++;
+         /* check if this type has been used before */
+         iType = 0;
+         while((iType < mem.typeNb) && (strcmp(type, mem.type[iType]) != 0)){
+            iType++;
          }
-         /* add new type in type table */
-         if(temp == -1){
-            temp = mem.typeNb;
+
+         /* detected new type, add it in type table */
+         if(iType == mem.typeNb){
             if(mem.typeNb >= LOG_TYPE_NB){
-               logError("Not enough space in type table", __FILE__, __LINE__);
+               logError("Type table is full. Change LOG_TYPE_NB constant in log.h",
+                        __FILE__, __LINE__);
             }
             else{
-               strcpy(mem.type[temp], type);
-               mem.typeByVar[temp] = 0;
+               strcpy(mem.type[iType], type);
+               mem.typeByVar[iType] = 0;
                mem.typeNb++;
             }
          }
 
          /* copy type */
-         mem.var[mem.varNb].type = temp;
+         var->type = iType;
+
+         /* copy file's name */
+         #ifdef LOG_FILE_PATH
+            strcpy(var->file, file);
+         #else
+            if((lastSlash = strrchr(file, '/')) == NULL){
+               strcpy(var->file, file);
+            }
+            else{
+               strcpy(var->file, lastSlash + 1);
+            }
+         #endif /* LOG_FILE_PATH */
+
+         /* copy variable's address */
+         var->ptr = (void*)ptr;
+
+         /* copy description */
+         strcpy(var->description, desc);
+
+         /* copy line's value */
+         var->line = line;
 
          /* set state */
-         mem.var[mem.varNb].alloc = 1;
+         var->alloc = 1;
 
-         mem.typeByVar[temp]++;
+         mem.typeByVar[iType]++;
          mem.varNb++;
       }
    }
 
-   /* delete freed variable from the global MemAlloc table t */
+   /* delete freed variable from the variable table */
    else if(direction == LOG_FREE){
+
+      /* check if variable table is empty */
       if(mem.varNb <= 0){
          logError("mem table is empty.", __FILE__, __LINE__);
       }
-      else{
-         /* find type in type table */
-         temp = -1;
-         i = 0;
-         while((i < LOG_TYPE_NB) &&
-               ((temp = strcmp(type, mem.type[i])) != 0)){
-            i++;
-         }
-         if(temp != 0){
-            logError("Logged a free() with an unknown type", file, line);
-         }
 
-         /* find a variable with this type */
+      /* search variable in variable table */
+      else{
+
+         /* find type in type table */
+         iVar = 0;
+         while((iVar < mem.varNb) && (mem.var[iVar].ptr != ptr)){
+            iVar++;
+         }
+         if(iVar == mem.varNb){
+            logError("Didn't find variable in variable table.", __FILE__, __LINE__);
+         }
          else{
-            temp = i;
-            i = 0;
-            while( (i < mem.varNb) &&
-                   !( (temp == mem.var[i].type) &&
-                      (mem.var[i].alloc == 1)   ) ){
-               i++;
+            var = &(mem.var[iVar]);
+
+            /* set state */
+            var->alloc = 0;
+
+            /* decrement type */
+            iType = 0;
+            while((iType < mem.typeNb) && (strcmp(mem.type[iType], type) != 0)){
+               iType++;
             }
-            if(i == mem.varNb){
-               logError("Didn't find a variable with this type", __FILE__, __LINE__);
+            if(iType == mem.typeNb){
+               logError("Didn't find type in variable type.", __FILE__, __LINE__);
             }
-            else if(mem.typeByVar[temp] <= 0){
-               logError("The type number is zero, can't decrement", __FILE__, __LINE__);
+            else if(mem.typeByVar[iType] <= 0){
+               logError("Type count is already zero", __FILE__, __LINE__);
             }
             else{
-               mem.var[i].alloc = 0;
-               mem.typeByVar[temp]--;
+               mem.typeByVar[iType]--;
             }
          }
       }
@@ -197,7 +217,7 @@ void logMem(const char direction, const char* type, const char* file, const int 
       else{
          printf(LOG_MAGENTA "[MEM] " LOG_RED "- ");
       }
-      printf(LOG_CYAN "%s " LOG_NORMAL, type);
+      printf(LOG_CYAN "%s " LOG_WHITE "%s " LOG_NORMAL, type, desc);
       printf("in " LOG_YELLOW "%s " LOG_NORMAL, mem.var[mem.typeNb-1].file);
       printf("at line " LOG_BLUE "%d\n" LOG_NORMAL, line);
    #endif /* LOG_ON_STDOUT */

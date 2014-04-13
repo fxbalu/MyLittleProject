@@ -75,7 +75,7 @@ XML_Tag* allocXMLTag(XML_Tag* tag)
       logError("Can't allocate memory for XML_Tag", __FILE__, __LINE__);
    }
    else {
-      logMem(LOG_ALLOC, "XML_Tag", __FILE__, __LINE__);
+      logMem(LOG_ALLOC, tag, "XML_Tag", "tag", __FILE__, __LINE__);
    }
 
    return tag;
@@ -98,7 +98,7 @@ void freeXMLTag(XML_Tag* tag)
       logError("Trying to free a non initialized tag", __FILE__, __LINE__);
    }
    else {
-      logMem(LOG_FREE, "XML_Tag", __FILE__, __LINE__);
+      logMem(LOG_FREE, tag, "XML_Tag", "tag", __FILE__, __LINE__);
       free(tag);
    }
 }
@@ -146,7 +146,7 @@ void resetXMLTag(XML_Tag* tag)
    }
    else {
       if(tag->name != NULL) {
-         logMem(LOG_FREE, "string", __FILE__, __LINE__);
+         logMem(LOG_FREE, tag->name, "string", "tag's name", __FILE__, __LINE__);
          free(tag->name);
       }
       if(tag->attr != NULL) {
@@ -190,7 +190,7 @@ void setXMLTagName(const char* name, XML_Tag* tag)
          logError("can't allocate memory for tag's name", __FILE__, __LINE__);
       }
       else {
-         logMem(LOG_ALLOC, "string", __FILE__, __LINE__);
+         logMem(LOG_ALLOC, tag->name, "string", "tag->name", __FILE__, __LINE__);
          strcpy(tag->name, name);
       }
    }
