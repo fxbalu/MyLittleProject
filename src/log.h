@@ -18,9 +18,14 @@
 #define LOG_IN_ERR_FILE
 //#define LOG_FILE_PATH
 
+/* Log files path */
+#define LOG_STD_FILE_PATH  "stdlog.txt"
+#define LOG_ERR_FILE_PATH  "errlog.txt"
+
 /* Direction for logMem(). Basically IN or OUT */
 #define LOG_ALLOC   '+'
 #define LOG_FREE    '-'
+#define LOG_REALLOC '='
 
 /* Number of entry in the global Log_Variable table t */
 #define LOG_VARIABLE_NB  4000

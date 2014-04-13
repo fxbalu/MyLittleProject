@@ -9,9 +9,9 @@
  */
 
 
-#include <stdio.h>
+#include <stdio.h>   /* FILE, fopen(), fprintf(), printf() */
 #include <stdlib.h>
-#include <string.h>
+#include <string.h>  /* strrchr(), strcmp(), strcpy() */
 #include "log.h"
 
 static Log_Memory mem;
@@ -39,26 +39,45 @@ static Log_Memory mem;
  * \endcode
  */
 void logError(const char* str, const char* file, const int line){
-   char* lastSlash;
+   #ifndef LOG_FILE_PATH
+      char* lastSlash;
+   #endif /* LOG_FILE_PATH */
+   #ifdef LOG_IN_ERR_FILE
+      static FILE* errorFile = NULL;
+   #endif /* LOG_IN_ERR_FILE */
+
    #ifdef LOG_ON_STDERR
       #ifdef LOG_FILE_PATH
-      fprintf(stderr, LOG_RED "[ERR] error in " LOG_YELLOW "%s ", file);
-      fprintf(stderr, LOG_RED "at line " LOG_BLUE "%d ", line);
-      fprintf(stderr, LOG_RED ":\n%s\n" LOG_NORMAL, str);
-      #else
-      if((lastSlash = strrchr(file, '/')) == NULL){
          fprintf(stderr, LOG_RED "[ERR] error in " LOG_YELLOW "%s ", file);
-      }
-      else{
-         fprintf(stderr, LOG_RED "[ERR] error in " LOG_YELLOW "%s ", lastSlash+1);
-      }
+      #else
+         if((lastSlash = strrchr(file, '/')) == NULL){
+            fprintf(stderr, LOG_RED "[ERR] error in " LOG_YELLOW "%s ", file);
+         }
+         else{
+            fprintf(stderr, LOG_RED "[ERR] error in " LOG_YELLOW "%s ", lastSlash+1);
+         }
+      #endif /* LOG_FILE_PATH */
       fprintf(stderr, LOG_RED "at line " LOG_BLUE "%d ", line);
       fprintf(stderr, LOG_RED ":\n%s\n" LOG_NORMAL, str);
-      #endif /* LOG_FILE_PATH */
    #endif /* LOG_ON_STDERR */
+
    #ifdef LOG_IN_ERR_FILE
-   /* file logging code */
-   #endif
+      /* file logging code */
+      if(errorFile == NULL){
+         errorFile = fopen(LOG_ERR_FILE_PATH, "w");
+      }
+      #ifdef LOG_FILE_PATH
+         fprintf(errorFile, "[ERR] error in %s ", file);
+      #else
+         if((lastSlash = strrchr(file, '/')) == NULL){
+            fprintf(errorFile, "[ERR] error in %s ", file);
+         }
+         else{
+            fprintf(errorFile, "[ERR] error in %s ", lastSlash+1);
+         }
+      #endif /* LOG_FILE_PATH */
+      fprintf(errorFile, "at line %d : %s\n\r", line, str);
+   #endif /* LOG_IN_ERR_FILE */
 }
 
 
