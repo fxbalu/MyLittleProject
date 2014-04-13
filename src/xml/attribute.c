@@ -13,7 +13,7 @@
 #include <stdio.h>         /* FILE, fgetc() */
 #include <string.h>        /* strlen(), strcpy() */
 
-#include "../log.h"     /* logError() */
+#include "../log.h"     /* logError(), logMem() */
 #include "attribute.h"
 
 
@@ -55,7 +55,7 @@ void destroyXMLAttribute(XML_Attribute* attr)
       if(attr->next != NULL) {
          destroyXMLAttribute(attr->next);
       }
-      /* logMem(FREE, "attribute", __FILE__, __LINE__); */
+      logMem(LOG_FREE, "XML_Attribute", __FILE__, __LINE__);
       free(attr);
    }
 }
@@ -78,7 +78,7 @@ XML_Attribute* allocXMLAttribute(XML_Attribute* attr)
       logError("Can't allocate memory for an attribute", __FILE__, __LINE__);
    }
    else {
-      /* logMem(ALLOC, "XML_Attribute", __FILE__, __LINE__) */
+      logMem(LOG_ALLOC, "XML_Attribute", __FILE__, __LINE__);
    }
 
    return attr;

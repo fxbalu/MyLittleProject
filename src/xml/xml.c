@@ -32,6 +32,7 @@ XML_File* createXMLFile(void)
       logError("Can't allocate memory for XML_File", __FILE__, __LINE__);
    }
    else {
+      logMem(LOG_ALLOC, "XML_File", __FILE__, __LINE__);
       xml->path = NULL;
       xml->file = NULL;
       xml->root = NULL;
@@ -54,12 +55,12 @@ void destroyXMLFile(XML_File* xml)
    else {
       /* free path */
       if(xml->path != NULL) {
-         /* logMem(FREE, "string", __FILE__, __LINE__); */
+         logMem(LOG_FREE, "string", __FILE__, __LINE__);
          free(xml->path);
       }
       /* close file */
       if(xml->file != NULL) {
-         /* logMem(FREE, "file", __FILE__, __LINE__); */
+         logMem(LOG_FREE, "file", __FILE__, __LINE__);
          fclose(xml->file);
       }
       /* destroy tree */
@@ -67,7 +68,7 @@ void destroyXMLFile(XML_File* xml)
          destroyXMLNode(xml->root);
       }
       /* free XML_File */
-      /* logMem(FREE, "XML_File", __FILE__, __LINE__); */
+      logMem(LOG_FREE, "XML_File", __FILE__, __LINE__);
       free(xml);
    }
 }
@@ -106,7 +107,7 @@ void setXMLFilePath(const char* path, XML_File* xml)
          logError("can't allocate memory for file path", __FILE__, __LINE__);
       }
       else {
-         /* logMem(ALLOC, "string", __FILE__, __LINE__) */
+         logMem(LOG_ALLOC, "string", __FILE__, __LINE__);
          strcpy(xml->path, path);
       }
    }
@@ -128,7 +129,7 @@ void openXMLFile(XML_File* xml)
       logError("Can't open file with XML_File's path", __FILE__, __LINE__);
    }
    else {
-      /* logMem(ALLOC, "file", __FILE__, __LINE__) */
+      logMem(LOG_ALLOC, "file", __FILE__, __LINE__);
    }
 }
 
@@ -142,7 +143,7 @@ void closeXMLFile(XML_File* xml)
       logError("Can't close a NULL file in XML_File", __FILE__, __LINE__);
    }
    else {
-      /* logMem(FREE, "file", __FILE__, __LINE__) */
+      logMem(LOG_FREE, "file", __FILE__, __LINE__);
       fclose(xml->file);
       xml->file = NULL;
    }
