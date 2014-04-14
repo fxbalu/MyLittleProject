@@ -46,7 +46,7 @@ XML_Tag* createXMLTag(void)
 void destroyXMLTag(XML_Tag* tag)
 {
    if(tag == NULL) {
-      logError("NULL tag can't be destroyed", __FILE__, __LINE__);
+      logError("NULL tag can't be destroyed",  __FILE__ ,  __LINE__ );
    }
    else {
       resetXMLTag(tag);
@@ -68,14 +68,14 @@ XML_Tag* allocXMLTag(XML_Tag* tag)
 {
    if(tag != NULL) {
       logError("Doesn't allocate memory for a non NULL tag to prevent memory leak",
-               __FILE__, __LINE__);
+                __FILE__ ,  __LINE__ );
       tag = NULL;
    }
    else if((tag = malloc(sizeof(XML_Tag))) == NULL) {
-      logError("Can't allocate memory for XML_Tag", __FILE__, __LINE__);
+      logError("Can't allocate memory for XML_Tag",  __FILE__ ,  __LINE__ );
    }
    else {
-      logMem(LOG_ALLOC, tag, "XML_Tag", "tag", __FILE__, __LINE__);
+      logMem(LOG_ALLOC, tag, "XML_Tag", "tag",  __FILE__ ,  __LINE__ );
    }
 
    return tag;
@@ -92,13 +92,13 @@ XML_Tag* allocXMLTag(XML_Tag* tag)
 void freeXMLTag(XML_Tag* tag)
 {
    if(tag == NULL) {
-      logError("Trying to free a NULL tag", __FILE__, __LINE__);
+      logError("Trying to free a NULL tag",  __FILE__ ,  __LINE__ );
    }
    else if((tag->name != NULL) || (tag->attr != NULL)) {
-      logError("Trying to free a non initialized tag", __FILE__, __LINE__);
+      logError("Trying to free a non initialized tag",  __FILE__ ,  __LINE__ );
    }
    else {
-      logMem(LOG_FREE, tag, "XML_Tag", "tag", __FILE__, __LINE__);
+      logMem(LOG_FREE, tag, "XML_Tag", "tag",  __FILE__ ,  __LINE__ );
       free(tag);
    }
 }
@@ -115,7 +115,7 @@ void freeXMLTag(XML_Tag* tag)
 void initXMLTag(XML_Tag* tag)
 {
    if(tag == NULL) {
-      logError("Trying to initialize a NULL tag", __FILE__, __LINE__);
+      logError("Trying to initialize a NULL tag",  __FILE__ ,  __LINE__ );
    }
    else {
       tag->name = NULL;
@@ -142,11 +142,11 @@ void initXMLTag(XML_Tag* tag)
 void resetXMLTag(XML_Tag* tag)
 {
    if(tag == NULL) {
-      logError("Trying to reset a NULL tag", __FILE__, __LINE__);
+      logError("Trying to reset a NULL tag",  __FILE__ ,  __LINE__ );
    }
    else {
       if(tag->name != NULL) {
-         logMem(LOG_FREE, tag->name, "string", "tag's name", __FILE__, __LINE__);
+         logMem(LOG_FREE, tag->name, "string", "tag name", __FILE__ , __LINE__ );
          free(tag->name);
       }
       if(tag->attr != NULL) {
@@ -169,28 +169,29 @@ void setXMLTagName(const char* name, XML_Tag* tag)
 {
    /* NULL tag */
    if(tag == NULL) {
-      logError("Giving a name to a NULL tag", __FILE__, __LINE__);
+      logError("Giving a name to a NULL tag",  __FILE__ ,  __LINE__ );
    }
    /* NULL tag */
    else if(name == NULL) {
-      logError("Giving a NULL name to a tag", __FILE__, __LINE__);
+      logError("Giving a NULL name to a tag",  __FILE__ ,  __LINE__ );
    }
    /* tag already has a name */
    else if(tag->name != NULL) {
       if((tag->name = realloc(tag->name, (strlen(name) + 1) * sizeof(char))) == NULL) {
-         logError("Can't reallocate memory for tag's name", __FILE__, __LINE__);
+         logError("Can't reallocate memory for tag's name",  __FILE__ ,  __LINE__ );
       }
       else {
+         printf("   >>> realloc tag.c:184 <<<\n");
          strcpy(tag->name, name);
       }
    }
    /* tag doesn't have a name */
    else {
       if((tag->name = malloc((strlen(name) + 1) * sizeof(char))) == NULL) {
-         logError("can't allocate memory for tag's name", __FILE__, __LINE__);
+         logError("can't allocate memory for tag's name",  __FILE__ ,  __LINE__ );
       }
       else {
-         logMem(LOG_ALLOC, tag->name, "string", "tag->name", __FILE__, __LINE__);
+         logMem(LOG_ALLOC, tag->name, "string", "tag name",  __FILE__  ,  __LINE__ );
          strcpy(tag->name, name);
       }
    }
@@ -206,10 +207,10 @@ void setXMLTagName(const char* name, XML_Tag* tag)
 void addAttributeToXMLTag(XML_Attribute* attr, XML_Tag* tag)
 {
    if(tag == NULL) {
-      logError("Trying to add an attribute to a NULL tag", __FILE__, __LINE__);
+      logError("Trying to add an attribute to a NULL tag",  __FILE__ ,  __LINE__ );
    }
    else if(attr == NULL) {
-      logError("Trying to add a NULL attribute to a tag", __FILE__, __LINE__);
+      logError("Trying to add a NULL attribute to a tag",  __FILE__ ,  __LINE__ );
    }
    /* no attribute in tag */
    else if(tag->attr == NULL) {
@@ -238,10 +239,10 @@ XML_Attribute* deleteAttributeFromXMLTag(XML_Tag* tag)
    deleted = NULL;
    if(tag == NULL) {
       logError("Trying to delete an attribute from a NULL tag",
-               __FILE__, __LINE__);
+                __FILE__ ,  __LINE__ );
    }
    else if(tag->attr == NULL) {
-      logError("Nothing to delete in tag", __FILE__, __LINE__);
+      logError("Nothing to delete in tag",  __FILE__ ,  __LINE__ );
    }
    else {
       deleted = tag->attr;
@@ -298,7 +299,7 @@ XML_Tag* readXMLTag(FILE* file)
       charBuffer = fgetc(file);
       i++;
       if(i >= XML_BUFFER_LENGTH) {
-         logError("XML reading buffer strBuffer is full", __FILE__, __LINE__);
+         logError("XML reading buffer strBuffer is full",  __FILE__ ,  __LINE__ );
          freeXMLTag(tag);
          return NULL;
       }
@@ -324,14 +325,14 @@ XML_Tag* readXMLTag(FILE* file)
             tag->type = UNIQUE;
             /* check implied following '>' */
             if((charBuffer = fgetc(file)) != (int)'>') {
-               logError("Badly parsed XML file.", __FILE__, __LINE__);
+               logError("Badly parsed XML file.",  __FILE__ ,  __LINE__ );
                destroyXMLTag(tag);
                return NULL;
             }
          }
          else {
             logError("XML parser found a closing unique tag !",
-                     __FILE__, __LINE__);
+                      __FILE__ ,  __LINE__ );
             destroyXMLTag(tag);
             return NULL;
          }
@@ -344,13 +345,13 @@ XML_Tag* readXMLTag(FILE* file)
 
       /* End Of File character EOF, who shouldn't be here */
       case EOF:
-         logError("Reached EOF while reading XML tag", __FILE__, __LINE__);
+         logError("Reached EOF while reading XML tag",  __FILE__ ,  __LINE__ );
          destroyXMLTag(tag);
          return NULL;
 
       /* Any other character, who shouldn't be here either */
       default:
-         logError("Unknown character after tag's name.", __FILE__, __LINE__);
+         logError("Unknown character after tag's name.",  __FILE__ ,  __LINE__ );
          destroyXMLTag(tag);
          return NULL;
    }
@@ -373,7 +374,7 @@ XML_Tag* readXMLTag(FILE* file)
 
    /* check tag closing character '>' */
    if(charBuffer != (int)'>') {
-      logError("Badly parsed XML file.", __FILE__, __LINE__);
+      logError("Badly parsed XML file.",  __FILE__ ,  __LINE__ );
       destroyXMLTag(tag);
       return NULL;
    }
@@ -392,6 +393,6 @@ void reachNextXMLTag(FILE* file)
 
    if(charBuffer == EOF) {
       logError("Reached End Of File while searching for next tag",
-               __FILE__, __LINE__);
+                __FILE__ ,  __LINE__ );
    }
 }

@@ -11,47 +11,117 @@
 #define LOG_H_INCLUDED
 
 
-/* Logging options. Comment to disable.  */
-#define LOG_ON_STDOUT
-#define LOG_ON_STDERR
-//#define LOG_IN_STD_FILE
-//#define LOG_IN_ERR_FILE
+/**
+ * \name Logging options
+ * Define how the logging is handled, if it should be done in a terminal,
+ * in a text file, if colors are used, if full file path is saved, etc.
+ * Comment to disable them.
+ */
+/**@{*/
+
+/** Memory related message will be displayed on the standard output (terminal) */
+#define LOG_MEM_IN_STDOUT
+
+/** Memory related message will be saved in a text file */
+//#define LOG_MEM_IN_LOG_FILE
+
+/** Error related message will be displayed on the error output (terminal) */
+//#define LOG_ERR_IN_STDERR
+
+/** Error related message will be displayed on the standard output (terminal) */
+#define LOG_ERR_IN_STDOUT
+
+/** Error related message will be saved in a error specific text file */
+//#define LOG_ERR_IN_ERR_FILE
+
+/** Error related message will be saved in a text file */
+//#define LOG_ERR_IN_LOG_FILE
+
+/** full file path will be used.
+ * If defined, file path will be like this: /home/foo/src/bar.c
+ * If commented, file path will be like this: bar.c
+ */
 //#define LOG_FILE_PATH
 
-/* Log files path */
+/** Path of the standard logging file */
 #define LOG_STD_FILE_PATH  "stdlog.txt"
+
+/** Path of the error logging file */
 #define LOG_ERR_FILE_PATH  "errlog.txt"
 
-/* Direction for logMem(). Basically IN or OUT */
+/** Use colors in the standard output and error output */
+#define LOG_WITH_COLORS
+
+/**@}*/ /* Logging options */
+
+
+/**
+ * \name logMem() constants
+ * Define direction of the memory logging. Use them in place of the direction
+ * parameter of logMem().
+ */
+/**@{*/
+
+/** Use this direction to log an allocation (after a malloc, calloc and realloc) */
 #define LOG_ALLOC   '+'
+/** Use this direction to log a freeing of memory (before a free and realloc) */
 #define LOG_FREE    '-'
 
-/* Number of entry in the global Log_Variable table t */
+/**@}*/
+
+
+/**
+ * \name Verbose level of checkLoggedMemory().
+ */
+/**@}*/
+
+#define LOG_TYPE         0x01 /**< Display the types summary */
+#define LOG_USED         0x02 /**< Display variables actually used (not freed) */
+#define LOG_FREED        0x04 /**< Display freed variables */
+#define LOG_FILE_INFO    0x08 /**< Display variables' origin (file and line) */
+#define LOG_DESCRIPTION  0x10 /**< Display variables' description */
+#define LOG_ADDRESS      0x20 /**< Display variables' addresses */
+#define LOG_EVERYTHING   0xFF /**< Every options above */
+
+/**@}*/
+
+
+/**
+ * \name Tables Size
+ * Define various sizes of some tables used in log.h and log.c. Try to increase
+ * them if functions throw errors and glitches.
+ */
+/**@{*/
+
+/** Number of entry in the global variable table */
 #define LOG_VARIABLE_NB  4000
 
-/* Number of type who can be logged at the same time */
+/** Number of types that can be logged */
 #define LOG_TYPE_NB  20
 
-/* String length */
+/** Length of a type string */
 #define LOG_TYPE_LENGTH         15
-#define LOG_DESCRIPTION_LENGTH  10
+
+/** Length of a description string */
+#define LOG_DESCRIPTION_LENGTH  30
+
+/**
+ * \def LOG_FILE_LENGTH
+ * Length of a file path string, with a long (full path) and short (file's name
+ * only) version.
+ */
 #ifdef LOG_FILE_PATH
    #define LOG_FILE_LENGTH      70
 #else
    #define LOG_FILE_LENGTH      15
 #endif /* LOG_FILE_PATH */
 
+/**@}*/
 
-/* Verbose level of logMem() */
-#define LOG_TYPE         0x01
-#define LOG_USED         0x02
-#define LOG_FREED        0x04
-#define LOG_FILE_INFO    0x08
-#define LOG_DESCRIPTION  0x10
-#define LOG_ADDRESS      0x20
-#define LOG_EVERYTHING   0xFF
 
-/** Colors for terminal logging
+/**
+ * \name Colors for standard output
+ * Colors for terminal logging
       String: "\e[{attr};{fg};{bg}m"
 
       Attributes:
@@ -83,16 +153,18 @@
          46 Cyan
          47 White
     */
-#define LOG_WITH_COLORS
+
+/**@{*/
+
 #ifdef LOG_WITH_COLORS
-   #define LOG_RED      "\e[1;31m"
-   #define LOG_GREEN    "\e[1;32m"
-   #define LOG_YELLOW   "\e[1;33m"
-   #define LOG_BLUE     "\e[1;34m"
-   #define LOG_MAGENTA  "\e[1;35m"
-   #define LOG_CYAN     "\e[1;36m"
-   #define LOG_WHITE    "\e[1;37m"
-   #define LOG_NORMAL   "\e[0m"
+   #define LOG_RED      "\e[1;31m"  /**< Bold red */
+   #define LOG_GREEN    "\e[1;32m"  /**< Bold Green */
+   #define LOG_YELLOW   "\e[1;33m"  /**< Bold Yellow */
+   #define LOG_BLUE     "\e[1;34m"  /**< Bold Blue */
+   #define LOG_MAGENTA  "\e[1;35m"  /**< Bold Magenta */
+   #define LOG_CYAN     "\e[1;36m"  /**< Bold Cyan */
+   #define LOG_WHITE    "\e[1;37m"  /**< Bold White */
+   #define LOG_NORMAL   "\e[0m"     /**< Reset colors and attributes */
 #else
    #define LOG_RED      ""
    #define LOG_GREEN    ""
@@ -104,34 +176,41 @@
    #define LOG_NORMAL   ""
 #endif /* LOG_WITH_COLORS */
 
+/**@}*/
 
+
+/** Computes the maximum of \a a and \a b */
 #define max(a,b) (a<b)?b:a
 
 
-/* Structures for dynamic memory allocation logging */
+/**
+ * \struct Log_Variable
+ * Informations about a logged variable are stored there. */
 typedef struct Log_Variable {
    void* ptr;  /**< address where this variable is stored */
    int type;   /**< index for a Log_Memory.type[] string */
-   char description[LOG_DESCRIPTION_LENGTH];
-   char file[LOG_FILE_LENGTH];
-   int line;
-   int alloc; /**< 1 if this var is used, 0 if it was freed */
+   char description[LOG_DESCRIPTION_LENGTH]; /**< a brief description */
+   char file[LOG_FILE_LENGTH];   /**< file where the variable was allocated */
+   int line;   /**< line where the file was allocated */
+   int alloc;  /**< 1 if this var is used, 0 if it was freed */
 } Log_Variable;
 
 
+/**
+ * Informations about every logged variables are stored there. */
 typedef struct Log_Memory {
-   Log_Variable var[LOG_VARIABLE_NB];
-   char type[LOG_TYPE_NB][LOG_TYPE_LENGTH];
-   int typeByVar[LOG_TYPE_NB];
-   int varNb;
-   int typeNb;
+   Log_Variable var[LOG_VARIABLE_NB];  /**< Every logged variables */
+   char type[LOG_TYPE_NB][LOG_TYPE_LENGTH];  /**< Every logged variables' types */
+   int typeByVar[LOG_TYPE_NB];   /**< number of variables logged by types */
+   int varNb;  /**< Number of variables logged */
+   int typeNb; /**< Number of types logged */
 
 } Log_Memory;
 
 
 void logError(const char* str, const char* file, const int line);
 void logMem(const char direction, const void* ptr, const char* type,
-            const char* desc, const char* file, const int line);
+            const char* desc, char* file, const int line);
 void checkAllocatedMemory(const char verbosity);
 
 #endif /* LOG_H_INCLUDED */

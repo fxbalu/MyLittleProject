@@ -45,17 +45,21 @@ XML_Attribute* createXMLAttribute(void)
 void destroyXMLAttribute(XML_Attribute* attr)
 {
    if(attr == NULL) {
-      logError("Trying to destroy a NULL attribute", __FILE__, __LINE__);
+      logError("Trying to destroy a NULL attribute",  __FILE__ ,  __LINE__ );
    }
    else {
-      logMem(LOG_FREE, attr->name, "string", "attribute's name", __FILE__, __LINE__);
-      free(attr->name);
-      logMem(LOG_FREE, attr->value, "string", "attribute's value", __FILE__, __LINE__);
-      free(attr->value);
-      if(attr->next != NULL) {
+      if(attr->name != NULL){
+         logMem(LOG_FREE, attr->name, "string", "attribute name",  __FILE__ ,  __LINE__ );
+         free(attr->name);
+      }
+      if(attr->value != NULL){
+         logMem(LOG_FREE, attr->value, "string", "attribute value",  __FILE__ ,  __LINE__ );
+         free(attr->value);
+      }
+      if(attr->next != NULL){
          destroyXMLAttribute(attr->next);
       }
-      logMem(LOG_FREE, attr, "XML_Attribute", "attribute", __FILE__, __LINE__);
+      logMem(LOG_FREE, attr, "XML_Attribute", "attribute",  __FILE__ ,  __LINE__ );
       free(attr);
    }
 }
@@ -72,13 +76,13 @@ XML_Attribute* allocXMLAttribute(XML_Attribute* attr)
 {
    if(attr != NULL) {
       logError("Trying to allocate memory for a non NULL attribute",
-               __FILE__, __LINE__);
+                __FILE__ ,  __LINE__ );
    }
    else if((attr = malloc(sizeof(XML_Attribute))) == NULL) {
-      logError("Can't allocate memory for an attribute", __FILE__, __LINE__);
+      logError("Can't allocate memory for an attribute",  __FILE__ ,  __LINE__ );
    }
    else {
-      logMem(LOG_ALLOC, attr, "XML_Attribute", "attribute", __FILE__, __LINE__);
+      logMem(LOG_ALLOC, attr, "XML_Attribute", "attribute",  __FILE__ ,  __LINE__ );
    }
 
    return attr;
@@ -95,16 +99,16 @@ XML_Attribute* allocXMLAttribute(XML_Attribute* attr)
 void freeXMLAttribute(XML_Attribute* attr)
 {
    if(attr == NULL) {
-      logError("Trying to free a NULL attribute", __FILE__, __LINE__);
+      logError("Trying to free a NULL attribute",  __FILE__ ,  __LINE__ );
    }
    else if((attr->name != NULL) ||
            (attr->value != NULL) ||
            (attr->next != NULL)) {
       logError("Trying to free a non initialized attribute",
-               __FILE__, __LINE__);
+                __FILE__ ,  __LINE__ );
    }
    else {
-      /* logMem(FREE, "XML_Attribute", __FILE__, __LINE__) */
+      logMem(LOG_FREE, attr, "XML_Attribute", "attribute",  __FILE__ ,  __LINE__ );
       free(attr);
    }
 }
@@ -121,7 +125,7 @@ void freeXMLAttribute(XML_Attribute* attr)
 void initXMLAttribute(XML_Attribute* attr)
 {
    if(attr == NULL) {
-      logError("Trying to initialize a NULL attr", __FILE__, __LINE__);
+      logError("Trying to initialize a NULL attr",  __FILE__ ,  __LINE__ );
    }
    else {
       attr->name = NULL;
@@ -149,15 +153,15 @@ void initXMLAttribute(XML_Attribute* attr)
 void resetXMLAttribute(XML_Attribute* attr)
 {
    if(attr == NULL) {
-      logError("Trying to reset a NULL attribute", __FILE__, __LINE__);
+      logError("Trying to reset a NULL attribute",  __FILE__ ,  __LINE__ );
    }
    else {
       if(attr->name != NULL) {
-         /* logMem(FREE, "string", __FILE__, __LINE__); */
+         logMem(LOG_FREE, attr->name, "string", "attribute's name",  __FILE__ ,  __LINE__ );
          free(attr->name);
       }
       if(attr->value != NULL) {
-         /* logMem(FREE, "string", __FILE__, __LINE__); */
+         logMem(LOG_FREE, attr->value, "string", "attribute's value",  __FILE__ ,  __LINE__ );
          free(attr->value);
       }
       if(attr->next != NULL) {
@@ -180,28 +184,29 @@ void setXMLAttributeName(const char* name, XML_Attribute* attr)
 {
    /* NULL attribute */
    if(attr == NULL) {
-      logError("Giving a name to a NULL attribute", __FILE__, __LINE__);
+      logError("Giving a name to a NULL attribute",  __FILE__ ,  __LINE__ );
    }
    /* NULL name */
    else if(name == NULL) {
-      logError("Giving a NULL name to an attribute", __FILE__, __LINE__);
+      logError("Giving a NULL name to an attribute",  __FILE__ ,  __LINE__ );
    }
-   /* attribute already has a name */
+   /* attribute already has a name, reallocate space */
    else if(attr->name != NULL) {
       if((attr->name = realloc(attr->name, (strlen(name) + 1) * sizeof(char))) == NULL) {
-         logError("Can't reallocate memory for attribute's name", __FILE__, __LINE__);
+         logError("Can't reallocate memory for attribute's name",  __FILE__ ,  __LINE__ );
       }
       else {
+         printf("   >>> realloc attribute.c:199 <<<\n");
          strcpy(attr->name, name);
       }
    }
    /* attribute doesn't have a name */
    else {
       if((attr->name = malloc((strlen(name) + 1) * sizeof(char))) == NULL) {
-         logError("can't allocate memory for attribute's name", __FILE__, __LINE__);
+         logError("can't allocate memory for attribute's name",  __FILE__ ,  __LINE__ );
       }
       else {
-         /* logMem(ALLOC, "string", __FILE__, __LINE__) */
+         logMem(LOG_ALLOC, attr->name, "string", "attribute name", __FILE__ , __LINE__ );
          strcpy(attr->name, name);
       }
    }
@@ -220,28 +225,29 @@ void setXMLAttributeValue(const char* value, XML_Attribute* attr)
 {
    /* NULL attribute */
    if(attr == NULL) {
-      logError("Giving a value to a NULL attribute", __FILE__, __LINE__);
+      logError("Giving a value to a NULL attribute",  __FILE__ ,  __LINE__ );
    }
    /* NULL value */
    else if(value == NULL) {
-      logError("Giving a NULL value to an attribute", __FILE__, __LINE__);
+      logError("Giving a NULL value to an attribute",  __FILE__ ,  __LINE__ );
    }
-   /* attribute already has a value */
+   /* attribute already has a value, reallocate space */
    else if(attr->value != NULL) {
       if((attr->value = realloc(attr->value, (strlen(value) + 1) * sizeof(char))) == NULL) {
-         logError("Can't reallocate memory for attribute's value", __FILE__, __LINE__);
+         logError("Can't reallocate memory for attribute's value",  __FILE__ ,  __LINE__ );
       }
       else {
          strcpy(attr->value, value);
+         printf("   >>> realloc attribute.c:241 <<<\n");
       }
    }
    /* attribute doesn't have a value */
    else {
       if((attr->value = malloc((strlen(value) + 1) * sizeof(char))) == NULL) {
-         logError("can't allocate memory for attribute's value", __FILE__, __LINE__);
+         logError("can't allocate memory for attribute's value",  __FILE__ ,  __LINE__ );
       }
       else {
-         /* logMem(ALLOC, "string", __FILE__, __LINE__) */
+         logMem(LOG_ALLOC, attr->value, "string", "attribute value",  __FILE__ ,  __LINE__ );
          strcpy(attr->value, value);
       }
    }
@@ -278,7 +284,7 @@ XML_Attribute* readXMLAttribute(FILE* file)
 
    /* check implied following character '"' */
    if(fgetc(file) != (int)'"') {
-      logError("Badly parsed XML file.", __FILE__, __LINE__);
+      logError("Badly parsed XML file.",  __FILE__ ,  __LINE__ );
       freeXMLAttribute(attr);
       return NULL;
    }

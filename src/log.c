@@ -21,7 +21,7 @@ static Log_Memory mem;
  * Show an error message in standard error output with file name and line number.
  * It need to be called as shown below :
  * \code
- * logError("Useful message.", __FILE__, __LINE__);
+ * logError("Useful message.",  __FILE__ ,  __LINE__ );
  * \endcode
  * The output message should be like this :
  * \verbatim
@@ -34,68 +34,83 @@ static Log_Memory mem;
  * \param[in] line  Line number displayed in log's first line.
  *
  * \todo Improve logError with variable argument number as seen with printf().
- * Prototype will be : \code
- * void logError(const char* str, const char* file, const char* line, ...);
+ *       Prototype will be : \code
+ *       void logError(const char* str, const char* file, const char* line, ...);
  * \endcode
+ * \todo replace every similar (f)printf(same_stuff) by (f)printf(line)
+ *       with line a string where log will be written only once.
  */
 void logError(const char* str, const char* file, const int line){
+   #ifdef LOG_ERR_IN_ERR_FILE
+      static FILE* errFile = NULL;
+   #endif /* LOG_ERR_IN_ERR_FILE */
+
+   #ifdef LOG_ERR_IN_LOG_FILE
+      static FILE* logFile = NULL;
+   #endif /* LOG_ERR_IN_LOG_FILE */
+
    #ifndef LOG_FILE_PATH
       char* lastSlash;
-   #endif /* LOG_FILE_PATH */
-   #ifdef LOG_IN_ERR_FILE
-      static FILE* errorFile = NULL;
-   #endif /* LOG_IN_ERR_FILE */
 
-   #ifdef LOG_ON_STDERR
-      #ifdef LOG_FILE_PATH
-         fprintf(stderr, LOG_RED "[ERR] error in " LOG_YELLOW "%s ", file);
-      #else
-         if((lastSlash = strrchr(file, '/')) == NULL){
-            fprintf(stderr, LOG_RED "[ERR] error in " LOG_YELLOW "%s ", file);
-         }
-         else{
-            fprintf(stderr, LOG_RED "[ERR] error in " LOG_YELLOW "%s ", lastSlash+1);
-         }
-      #endif /* LOG_FILE_PATH */
+      if((lastSlash = strrchr(file, '/')) != NULL){
+         file = lastSlash + 1;
+      }
+   #endif /* LOG_FILE_PATH */
+
+   #ifdef LOG_ERR_IN_STDERR
+      fprintf(stderr, LOG_RED "[ERR] error in " LOG_YELLOW "%s ", file);
       fprintf(stderr, LOG_RED "at line " LOG_BLUE "%d ", line);
       fprintf(stderr, LOG_RED ":\n%s\n" LOG_NORMAL, str);
-   #endif /* LOG_ON_STDERR */
+   #endif /* LOG_ERR_IN_STDERR */
 
-   #ifdef LOG_IN_ERR_FILE
+   #ifdef LOG_ERR_IN_STDOUT
+      fprintf(stdout, LOG_RED "[ERR] error in " LOG_YELLOW "%s ", file);
+      fprintf(stdout, LOG_RED "at line " LOG_BLUE "%d ", line);
+      fprintf(stdout, LOG_RED ":\n%s\n" LOG_NORMAL, str);
+   #endif /* LOG_ERR_IN_STDOUT */
+
+   #ifdef LOG_ERR_IN_ERR_FILE
       /* file logging code */
-      if(errorFile == NULL){
-         errorFile = fopen(LOG_ERR_FILE_PATH, "w");
+      if(errFile == NULL){
+         errFile = fopen(LOG_ERR_FILE_PATH, "w");
       }
-      #ifdef LOG_FILE_PATH
-         fprintf(errorFile, "[ERR] error in %s ", file);
-      #else
-         if((lastSlash = strrchr(file, '/')) == NULL){
-            fprintf(errorFile, "[ERR] error in %s ", file);
-         }
-         else{
-            fprintf(errorFile, "[ERR] error in %s ", lastSlash+1);
-         }
-      #endif /* LOG_FILE_PATH */
-      fprintf(errorFile, "at line %d : %s\n\r", line, str);
-   #endif /* LOG_IN_ERR_FILE */
+      fprintf(errFile, "[ERR] error in %s ", file);
+      fprintf(errFile, "at line %d : %s\n\r", line, str);
+   #endif /* LOG_ERR_IN_ERR_FILE */
+
+   #ifdef LOG_ERR_IN_LOG_FILE
+      /* file logging code */
+      if(logFile == NULL){
+         logFile = fopen(LOG_ERR_FILE_PATH, "w");
+      }
+      fprintf(logFile, "[ERR] error in %s ", file);
+      fprintf(logFile, "at line %d : %s\n\r", line, str);
+   #endif /* LOG_ERR_IN_LOG_FILE */
 }
 
 
 /**
  * \brief Log dynamically allocated memory to look for memory leaks.
+ *
+ * \param[in] direction  LOG_ALLOC if memory is allocated, LOG_FREE if memory is freed.
+ * \param[in] ptr        Logged variable's address.
+ * \param[in] type       String of the variable's type, eg: "int", "string".
+ * \param[in] desc       A brief description of this variable.
+ * \param[in] file       File where this variable was allocated, use the macro __FILE__.
+ * \param[in] line       Line where this variable was allocated, use the macro __LINE__.
  */
 void logMem(const char direction, const void* ptr, const char* type,
-            const char* desc, const char* file, const int line){
+            const char* desc, char* file, const int line){
    int iVar, iType;
    Log_Variable* var;
 
    #ifndef LOG_FILE_PATH
    char* lastSlash;
-   lastSlash = NULL;
+
+   if((lastSlash = strrchr(file, '/')) != NULL){
+      file = lastSlash + 1;
+   }
    #endif /* LOG_FILE_PATH */
-
-   var = NULL;
-
 
    /* add newly allocated variable to global structure mem */
    if(direction == LOG_ALLOC){
@@ -103,7 +118,7 @@ void logMem(const char direction, const void* ptr, const char* type,
       /* check if variable table is full */
       if(mem.varNb >= LOG_VARIABLE_NB){
          logError("Variable table is full. Change LOG_VARIABLE_NB constant in log.h.",
-                  __FILE__, __LINE__);
+                   __FILE__ ,  __LINE__ );
       }
 
       /* copy variable in table */
@@ -120,7 +135,7 @@ void logMem(const char direction, const void* ptr, const char* type,
          if(iType == mem.typeNb){
             if(mem.typeNb >= LOG_TYPE_NB){
                logError("Type table is full. Change LOG_TYPE_NB constant in log.h",
-                        __FILE__, __LINE__);
+                         __FILE__ ,  __LINE__ );
             }
             else{
                strcpy(mem.type[iType], type);
@@ -133,16 +148,7 @@ void logMem(const char direction, const void* ptr, const char* type,
          var->type = iType;
 
          /* copy file's name */
-         #ifdef LOG_FILE_PATH
-            strcpy(var->file, file);
-         #else
-            if((lastSlash = strrchr(file, '/')) == NULL){
-               strcpy(var->file, file);
-            }
-            else{
-               strcpy(var->file, lastSlash + 1);
-            }
-         #endif /* LOG_FILE_PATH */
+         strcpy(var->file, file);
 
          /* copy variable's address */
          var->ptr = (void*)ptr;
@@ -166,19 +172,19 @@ void logMem(const char direction, const void* ptr, const char* type,
 
       /* check if variable table is empty */
       if(mem.varNb <= 0){
-         logError("mem table is empty.", __FILE__, __LINE__);
+         logError("mem table is empty.",  __FILE__ ,  __LINE__ );
       }
 
       /* search variable in variable table */
       else{
 
-         /* find type in type table */
          iVar = 0;
-         while((iVar < mem.varNb) && (mem.var[iVar].ptr != ptr)){
+         while((iVar < mem.varNb) &&
+               ((mem.var[iVar].ptr != ptr) || (mem.var[iVar].alloc == 0)) ){
             iVar++;
          }
          if(iVar == mem.varNb){
-            logError("Didn't find variable in variable table.", __FILE__, __LINE__);
+            logError("Didn't find variable in variable table.",  __FILE__ ,  __LINE__ );
          }
          else{
             var = &(mem.var[iVar]);
@@ -192,10 +198,10 @@ void logMem(const char direction, const void* ptr, const char* type,
                iType++;
             }
             if(iType == mem.typeNb){
-               logError("Didn't find type in variable type.", __FILE__, __LINE__);
+               logError("Didn't find type in variable type.",  __FILE__ ,  __LINE__ );
             }
             else if(mem.typeByVar[iType] <= 0){
-               logError("Type count is already zero", __FILE__, __LINE__);
+               logError("Type count is already zero",  __FILE__ ,  __LINE__ );
             }
             else{
                mem.typeByVar[iType]--;
@@ -206,11 +212,11 @@ void logMem(const char direction, const void* ptr, const char* type,
 
    /* Direction is not LOG_ALLOC or LOG_FREE */
    else{
-      logError("Use LOG_ALLOC or LOG_FREE as direction.", __FILE__, __LINE__);
+      logError("Use LOG_ALLOC or LOG_FREE as direction.",  __FILE__ ,  __LINE__ );
    }
 
    /* display log messages in a terminal */
-   #ifdef LOG_ON_STDOUT
+   #ifdef LOG_MEM_IN_STDOUT
       if(direction == LOG_ALLOC){
          printf(LOG_MAGENTA "[MEM] " LOG_GREEN "+ ");
       }
@@ -218,13 +224,13 @@ void logMem(const char direction, const void* ptr, const char* type,
          printf(LOG_MAGENTA "[MEM] " LOG_RED "- ");
       }
       printf(LOG_CYAN "%s " LOG_WHITE "%s " LOG_NORMAL, type, desc);
-      printf("in " LOG_YELLOW "%s " LOG_NORMAL, mem.var[mem.typeNb-1].file);
+      printf("in " LOG_YELLOW "%s " LOG_NORMAL, file);
       printf("at line " LOG_BLUE "%d " LOG_NORMAL, line);
       printf("[adress: %p]\n", ptr);
    #endif /* LOG_ON_STDOUT */
 
    /* save log messages in a text file */
-   #ifdef LOG_IN_STD_FILE
+   #ifdef LOG_MEM_IN_LOG_FILE
       /* file logging code */
    #endif /* LOG_IN_STD_FILE */
 }
@@ -275,7 +281,7 @@ void checkAllocatedMemory(const char verbosity){
 
       /* address */
       if(verbosity & LOG_ADDRESS){
-         temp += 1 + 16;
+         temp += 1 + 11;
       }
 
       width = max(width, temp);
@@ -382,7 +388,7 @@ void checkAllocatedMemory(const char verbosity){
 
             /* display variable's address */
             if(verbosity & LOG_ADDRESS){
-               printf(" [%p]", var->ptr);
+               printf(" [%9p]", var->ptr);
             }
 
             /* end of line */

@@ -62,11 +62,11 @@ void destroyXMLNode(XML_Node* n)
 
       /* destroy other members */
       if(n->name != NULL) {
-         logMem(LOG_FREE, n->name, "string", "node's name", __FILE__, __LINE__);
+         logMem(LOG_FREE, n->name, "string", "node name", __FILE__, __LINE__);
          free(n->name);
       }
       if(n->value != NULL) {
-         logMem(LOG_FREE, n->value, "string", "node's value", __FILE__, __LINE__);
+         logMem(LOG_FREE, n->value, "string", "node value", __FILE__, __LINE__);
          free(n->value);
       }
       if(n->attr != NULL) {
@@ -181,7 +181,7 @@ void setXMLNodeName(const char* name, XML_Node* n)
          logError("can't allocate memory for node's name", __FILE__, __LINE__);
       }
       else {
-         logMem(LOG_ALLOC, n->name, "string", "node's name", __FILE__, __LINE__);
+         logMem(LOG_ALLOC, n->name, "string", "node name", __FILE__, __LINE__);
          strcpy(n->name, name);
       }
    }
@@ -221,7 +221,7 @@ void setXMLNodeValue(const char* value, XML_Node* n)
          logError("can't allocate memory for node's value", __FILE__, __LINE__);
       }
       else {
-         logMem(LOG_ALLOC, n->value, "string", "node's value", __FILE__, __LINE__);
+         logMem(LOG_ALLOC, n->value, "string", "node value", __FILE__, __LINE__);
          strcpy(n->value, value);
       }
    }
