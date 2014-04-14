@@ -33,9 +33,14 @@
 #define LOG_TYPE_NB  20
 
 /* String length */
-#define LOG_TYPE_LENGTH         20
-#define LOG_DESCRIPTION_LENGTH  40
-#define LOG_FILE_LENGTH         100
+#define LOG_TYPE_LENGTH         15
+#define LOG_DESCRIPTION_LENGTH  10
+#ifdef LOG_FILE_PATH
+   #define LOG_FILE_LENGTH      70
+#else
+   #define LOG_FILE_LENGTH      15
+#endif /* LOG_FILE_PATH */
+
 
 /* Verbose level of logMem() */
 #define LOG_TYPE         0x01
@@ -43,6 +48,7 @@
 #define LOG_FREED        0x04
 #define LOG_FILE_INFO    0x08
 #define LOG_DESCRIPTION  0x10
+#define LOG_ADDRESS      0x20
 #define LOG_EVERYTHING   0xFF
 
 /** Colors for terminal logging
@@ -98,6 +104,10 @@
    #define LOG_NORMAL   ""
 #endif /* LOG_WITH_COLORS */
 
+
+#define max(a,b) (a<b)?b:a
+
+
 /* Structures for dynamic memory allocation logging */
 typedef struct Log_Variable {
    void* ptr;  /**< address where this variable is stored */
@@ -115,6 +125,7 @@ typedef struct Log_Memory {
    int typeByVar[LOG_TYPE_NB];
    int varNb;
    int typeNb;
+
 } Log_Memory;
 
 

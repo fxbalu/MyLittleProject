@@ -219,7 +219,8 @@ void logMem(const char direction, const void* ptr, const char* type,
       }
       printf(LOG_CYAN "%s " LOG_WHITE "%s " LOG_NORMAL, type, desc);
       printf("in " LOG_YELLOW "%s " LOG_NORMAL, mem.var[mem.typeNb-1].file);
-      printf("at line " LOG_BLUE "%d\n" LOG_NORMAL, line);
+      printf("at line " LOG_BLUE "%d " LOG_NORMAL, line);
+      printf("[adress: %p]\n", ptr);
    #endif /* LOG_ON_STDOUT */
 
    /* save log messages in a text file */
@@ -237,67 +238,161 @@ void logMem(const char direction, const void* ptr, const char* type,
  *                       LOG_FREED display freed variables
  *                       LOG_FILE_INFO display file's path and line
  *                       LOG_DESCRIPTION display variable's description
+ *                       LOG_ADDRESS display variable's address
  *                       LOG_EVERYTHING display all the above
  */
 void checkAllocatedMemory(const char verbosity){
-   int i;
+   int i, iType, iVar, width, temp;
+   Log_Variable* var;
 
-   /* display general information */
-   printf("\n ___________________________\n");
-   printf("|        " LOG_MAGENTA "Memory Map" LOG_NORMAL "         |\n");
+   /* calculate window width */
+
+   /* width for title */
+   width = 10;
+
+   /* width for type part */
+   if(verbosity & LOG_TYPE){
+      temp = 5 + LOG_TYPE_LENGTH;
+      width = max(width, 5);
+      width = max(width, temp);
+   }
+
+   /* width for variable part */
+   if(verbosity & (LOG_FREED | LOG_USED)){
+
+      /* state and type */
+      temp = 1 + 4 + 1 + LOG_TYPE_LENGTH;
+
+      /* description */
+      if(verbosity & LOG_DESCRIPTION){
+         temp += 1 + LOG_DESCRIPTION_LENGTH;
+      }
+
+      /* file and line */
+      if(verbosity & LOG_FILE_INFO){
+         temp += 1 + LOG_FILE_LENGTH + 1 + 4;
+      }
+
+      /* address */
+      if(verbosity & LOG_ADDRESS){
+         temp += 1 + 16;
+      }
+
+      width = max(width, temp);
+   }
+   width += 2;
+
+   /* display window upper bar _______ */
+   printf("\n ");
+   for(i=0; i<width; i++) putchar('_');
+   printf("\n|");
+
+   /* display window title */
+   for(i=0; i<((width-10)/2); i++) putchar(' ');
+   printf(LOG_MAGENTA "MEMORY MAP" LOG_NORMAL);
+   for(i=0; i<(width-10-(width-10)/2); i++) putchar(' ');
+   printf("|\n");
 
    /* display used types */
    if(verbosity & LOG_TYPE){
-      printf("|---------------------------|\n");
-      printf("|          " LOG_GREEN "TYPES" LOG_NORMAL "            |\n");
-      for(i=0; i<mem.typeNb; i++){
-         if(mem.typeByVar[i] == 0){
-            printf("| " LOG_GREEN "%4d" LOG_NORMAL " %-*s |\n",
-                   mem.typeByVar[i], LOG_TYPE_LENGTH, mem.type[i]);
+
+      /* display separation bar |------| */
+      putchar('|');
+      for(i=0; i<width; i++) putchar('-');
+      printf("|\n|");
+
+      /* display section title */
+      for(i=0; i<((width-5)/2); i++) putchar(' ');
+      printf(LOG_GREEN "Types" LOG_NORMAL);
+      for(i=0; i<(width-5-(width-5)/2); i++) putchar(' ');
+      printf("|\n");
+
+      /* display separation bar |      | */
+      putchar('|');
+      for(i=0; i<width; i++) putchar(' ');
+      printf("|\n");
+
+      /* display type title and count */
+      for(iType=0; iType<mem.typeNb; iType++){
+         printf("| ");
+         if(mem.typeByVar[iType] == 0){
+            printf(LOG_GREEN "%4d" LOG_NORMAL " %-*s",
+                   mem.typeByVar[iType], LOG_TYPE_LENGTH, mem.type[iType]);
          }
          else{
-            printf("| " LOG_RED "%4d" LOG_NORMAL " %-*s |\n",
-                   mem.typeByVar[i], LOG_TYPE_LENGTH, mem.type[i]);
+            printf(LOG_RED "%4d" LOG_NORMAL " %-*s",
+                   mem.typeByVar[iType], LOG_TYPE_LENGTH, mem.type[iType]);
          }
+         for(i=0; i<width-(1+4+1+LOG_TYPE_LENGTH); i++){
+            putchar(' ');
+         }
+         printf("|\n");
       }
    }
 
    /* display every logged variables */
    if(verbosity & (LOG_USED | LOG_FREED)){
-      printf("|---------------------------|\n");
-      printf("|        " LOG_CYAN "VARIABLES" LOG_NORMAL "          |\n");
 
-      /* check every allocated variable in mem.var[] */
-      for(i=0; i<mem.varNb; i++){
-         /* display content on terminal */
-         if( ((verbosity & LOG_USED) && (mem.var[i].alloc == 1)) ||
-             ((verbosity & LOG_FREED) && (mem.var[i].alloc == 0)) ){
+      /* display separation bar |------| */
+      putchar('|');
+      for(i=0; i<width; i++) putchar('-');
+      printf("|\n|");
 
-            /* display basic information on variable */
-            if((verbosity & LOG_USED) && (mem.var[i].alloc == 1)){
-               printf("| " LOG_RED "used" LOG_NORMAL "  %s", mem.type[mem.var[i].type]);
+      /* display section title */
+      for(i=0; i<((width-9)/2); i++) putchar(' ');
+      printf(LOG_CYAN "Variables" LOG_NORMAL);
+      for(i=0; i<(width-9-(width-9)/2); i++) putchar(' ');
+      printf("|\n");
+
+      /* display separation bar |     | */
+      putchar('|');
+      for(i=0; i<width; i++) putchar(' ');
+      printf("|\n");
+
+      /* display variables */
+      for(iVar=0; iVar<mem.varNb; iVar++){
+         var = &(mem.var[iVar]);
+
+         if( ((verbosity & LOG_USED) && (var->alloc == 1)) ||
+             ((verbosity & LOG_FREED) && (var->alloc == 0)) ){
+
+            /* start line */
+            putchar('|');
+
+            /* display variable state (free or used) and type */
+            if((verbosity & LOG_USED) && (var->alloc == 1)){
+               printf(" " LOG_RED "used" LOG_NORMAL "  %-*s",
+                      LOG_TYPE_LENGTH, mem.type[var->type]);
             }
-            else if((verbosity & LOG_FREED) && (mem.var[i].alloc == 0)){
-               printf("| " LOG_GREEN "free" LOG_NORMAL "  %s", mem.type[mem.var[i].type]);
+            else if((verbosity & LOG_FREED) && (var->alloc == 0)){
+               printf(" " LOG_GREEN "free" LOG_NORMAL "  %-*s",
+                      LOG_TYPE_LENGTH, mem.type[var->type]);
             }
 
             /* display variable's description */
             if(verbosity & LOG_DESCRIPTION){
-               printf("  %s", mem.var[i].description);
+               printf(LOG_WHITE " %-*s" LOG_NORMAL, LOG_DESCRIPTION_LENGTH, var->description);
             }
 
             /* display variable's file infos */
             if(verbosity & LOG_FILE_INFO){
-               printf("  %s:%d", mem.var[i].file, mem.var[i].line);
+               printf(LOG_YELLOW " %*s" LOG_BLUE ":%-4d" LOG_NORMAL,
+                      LOG_FILE_LENGTH, var->file, var->line);
             }
+
+            /* display variable's address */
+            if(verbosity & LOG_ADDRESS){
+               printf(" [%p]", var->ptr);
+            }
+
+            /* end of line */
             printf(" |\n");
          }
       }
    }
 
-
-
-
    /* end of display */
-   printf("|___________________________|\n");
+   putchar('|');
+   for(i=0; i<width; i++) putchar('_');
+   printf("|\n");
 }
