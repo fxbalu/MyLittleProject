@@ -156,6 +156,7 @@
 
 /**@{*/
 
+
 #ifdef LOG_WITH_COLORS
    #define LOG_RED      "\e[1;31m"  /**< Bold red */
    #define LOG_GREEN    "\e[1;32m"  /**< Bold Green */
@@ -197,7 +198,8 @@ typedef struct Log_Variable {
 
 
 /**
- * Informations about every logged variables are stored there. */
+ * Informations about every logged variables are stored there.
+ */
 typedef struct Log_Memory {
    Log_Variable var[LOG_VARIABLE_NB];  /**< Every logged variables */
    char type[LOG_TYPE_NB][LOG_TYPE_LENGTH];  /**< Every logged variables' types */
@@ -212,5 +214,9 @@ void logError(const char* str, const char* file, const int line);
 void logMem(const char direction, const void* ptr, const char* type,
             const char* desc, char* file, const int line);
 void checkAllocatedMemory(const char verbosity);
+
+void drawBar(char line, int count);
+void printBar(char border, char line, int count);
+void printBarText(char border, char line, int count, char* text, char* color);
 
 #endif /* LOG_H_INCLUDED */

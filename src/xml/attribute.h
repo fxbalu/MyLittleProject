@@ -13,6 +13,9 @@
 #define ATTRIBUTE_H_INCLUDED
 
 
+#include <stdio.h>   /* FILE */
+
+
 #ifndef XML_BUFFER_LENGTH
 #define XML_BUFFER_LENGTH  200
 #endif /* XML_BUFFER_LENGTH */

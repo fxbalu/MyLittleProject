@@ -1,0 +1,80 @@
+#include "defs.h"
+
+typedef struct Input
+{
+
+int left,right,up,down,jump,attack,enter,erase,pause;
+
+}Input;
+
+#ifndef STRUCT_H_INCLUDED
+#define STRUCT_H_INCLUDED
+
+
+
+
+
+typedef struct Gestion
+{
+
+SDL_Surface* screen;
+
+SDL_Surface* HUD_vie;
+SDL_Surface* HUD_etoiles;
+int etoiles;
+int life;
+
+Mix_Music* musique;
+
+Mix_Chunk *miniondead_sound, *jump_sound, *coin_sound, *deadplayer1_sound;
+
+int nombreMonstres;
+
+
+int level;
+
+
+}Gestion;
+
+typedef struct Map
+{
+
+SDL_Surface *background;
+SDL_Surface *tileSet;
+
+int startX, startY;
+int maxX, maxY;
+
+
+
+int tile[MAX_MAP_Y][MAX_MAP_X];
+
+} Map;
+
+/* Structure pour gérer notre héros */
+
+typedef struct GameObject
+{
+   //Sprite du héros (pas d'animation pour l'instant)
+   SDL_Surface *sprite;
+
+   /* Coordonnées du héros */
+   int x, y;
+
+   int h,w;
+
+
+   int frameNumber, frameTimer;
+
+   int etat,direction;
+
+   int onGround, timerMort;
+   float dirX, dirY;
+
+   int saveX, saveY;
+
+} GameObject;
+
+
+
+#endif // STRUCT_H_INCLUDED

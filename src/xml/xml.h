@@ -68,5 +68,6 @@ void closeXMLFile(XML_File* xml);
 int checkFirstLineXMLFile(XML_File* xml);
 XML_Node* parseXMLFile(FILE* file);
 
+XML_File* loadXMLFile(const char* path);
 
 #endif /* XML_H_INCLUDED */

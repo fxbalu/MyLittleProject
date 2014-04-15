@@ -206,7 +206,7 @@ XML_Node* parseXMLFile(FILE* file)
 
    /* read following tags, if any */
    while(endOfParsing == 0) {
-         reachNextXMLTag(file);
+      reachNextXMLTag(file);  // prevent parsing to read a node's value.
       tag = readXMLTag(file);
 
       if(tag == NULL) {
@@ -247,4 +247,18 @@ XML_Node* parseXMLFile(FILE* file)
    }
 
    return root;
+}
+
+
+XML_File* loadXMLFile(const char* path){
+   XML_File* xml;
+
+   if((xml = createXMLFile()) != NULL){
+      setXMLFilePath(path, xml);
+      openXMLFile(xml);
+      checkFirstLineXMLFile(xml);
+      xml->root = parseXMLFile(xml->file);
+   }
+
+   return xml;
 }

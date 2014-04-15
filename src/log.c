@@ -9,12 +9,16 @@
  */
 
 
-#include <stdio.h>   /* FILE, fopen(), fprintf(), printf() */
+#include <stdio.h>      /* FILE, fopen(), fprintf(), printf() */
 #include <stdlib.h>
-#include <string.h>  /* strrchr(), strcmp(), strcpy() */
+#include <string.h>     /* strrchr(), strcmp(), strcpy(), strlen() */
+#include <inttypes.h>   /* PRIxPTR */
+#include <stdint.h>     /* uintptr_t */
 #include "log.h"
 
+
 static Log_Memory mem;
+
 
 /**
  * \brief Log error in standard error output
@@ -248,10 +252,13 @@ void logMem(const char direction, const void* ptr, const char* type,
  *                       LOG_EVERYTHING display all the above
  */
 void checkAllocatedMemory(const char verbosity){
-   int i, iType, iVar, width, temp;
+   int i, iType, iVar, width, temp, usedCount, usedCharCount;
    Log_Variable* var;
 
-   /* calculate window width */
+   /* ###########################################
+    * ##  compute window width
+    * ###########################################
+    */
 
    /* width for title */
    width = 10;
@@ -281,46 +288,62 @@ void checkAllocatedMemory(const char verbosity){
 
       /* address */
       if(verbosity & LOG_ADDRESS){
-         temp += 1 + 11;
+         temp += 4 + 16 + 1;
       }
 
       width = max(width, temp);
    }
    width += 2;
 
+   /* ###########################################
+    * ##  compute percentage of used memory
+    * ###########################################
+    */
+   usedCount = 0;
+   //printf("variable number:%d  \n");
+   for(iVar=(mem.varNb-1); iVar>=0; iVar--){
+      if(mem.var[iVar].alloc == 1) usedCount++;
+   }
+   usedCharCount = (width - 4 - usedCount) / mem.varNb;
+   printf("usedCount=%d usedCharCount=%d width-4=%d\n", usedCount, usedCharCount, width-4);
+
+   /* ###########################################
+    * ##  draw the memory map window
+    * ###########################################
+    */
+
    /* display window upper bar _______ */
-   printf("\n ");
-   for(i=0; i<width; i++) putchar('_');
-   printf("\n|");
+   printBar(' ', '_', width);
 
    /* display window title */
-   for(i=0; i<((width-10)/2); i++) putchar(' ');
-   printf(LOG_MAGENTA "MEMORY MAP" LOG_NORMAL);
-   for(i=0; i<(width-10-(width-10)/2); i++) putchar(' ');
-   printf("|\n");
+   printBarText('|', ' ', width, "MEMORY MAP", LOG_MAGENTA);
 
-   /* display used types */
+   /* display used variable bar */
+   printf("| [");
+   drawBar('#', usedCharCount);
+   drawBar(' ', width-4-usedCharCount);
+   printf("] |\n");
+
+   /* ###########################################
+    * ##  draw the types window
+    * ###########################################
+    */
    if(verbosity & LOG_TYPE){
 
       /* display separation bar |------| */
-      putchar('|');
-      for(i=0; i<width; i++) putchar('-');
-      printf("|\n|");
+      printBar('|', '-', width);
 
       /* display section title */
-      for(i=0; i<((width-5)/2); i++) putchar(' ');
-      printf(LOG_GREEN "Types" LOG_NORMAL);
-      for(i=0; i<(width-5-(width-5)/2); i++) putchar(' ');
-      printf("|\n");
+      printBarText('|', ' ', width, "Types", LOG_MAGENTA);
 
       /* display separation bar |      | */
       putchar('|');
       for(i=0; i<width; i++) putchar(' ');
-      printf("|\n");
+      puts("|");
 
       /* display type title and count */
       for(iType=0; iType<mem.typeNb; iType++){
-         printf("| ");
+         putchar('|');putchar(' ');
          if(mem.typeByVar[iType] == 0){
             printf(LOG_GREEN "%4d" LOG_NORMAL " %-*s",
                    mem.typeByVar[iType], LOG_TYPE_LENGTH, mem.type[iType]);
@@ -329,31 +352,29 @@ void checkAllocatedMemory(const char verbosity){
             printf(LOG_RED "%4d" LOG_NORMAL " %-*s",
                    mem.typeByVar[iType], LOG_TYPE_LENGTH, mem.type[iType]);
          }
-         for(i=0; i<width-(1+4+1+LOG_TYPE_LENGTH); i++){
-            putchar(' ');
-         }
-         printf("|\n");
+         drawBar(' ', width-(1+4+1+LOG_TYPE_LENGTH));
+         puts("|");
       }
    }
 
-   /* display every logged variables */
+   /* ###########################################
+    * ##  draw the variables window
+    * ###########################################
+    */
    if(verbosity & (LOG_USED | LOG_FREED)){
 
       /* display separation bar |------| */
       putchar('|');
       for(i=0; i<width; i++) putchar('-');
-      printf("|\n|");
+      puts("|");
 
       /* display section title */
-      for(i=0; i<((width-9)/2); i++) putchar(' ');
-      printf(LOG_CYAN "Variables" LOG_NORMAL);
-      for(i=0; i<(width-9-(width-9)/2); i++) putchar(' ');
-      printf("|\n");
+      printBarText('|', ' ', width, "Variables", LOG_MAGENTA);
 
       /* display separation bar |     | */
       putchar('|');
       for(i=0; i<width; i++) putchar(' ');
-      printf("|\n");
+      puts("|");
 
       /* display variables */
       for(iVar=0; iVar<mem.varNb; iVar++){
@@ -388,17 +409,46 @@ void checkAllocatedMemory(const char verbosity){
 
             /* display variable's address */
             if(verbosity & LOG_ADDRESS){
-               printf(" [%9p]", var->ptr);
+               //printf(" [%9p]", var->ptr);
+               printf(" [0x%016" PRIxPTR "]", (uintptr_t)(var->ptr));
             }
 
             /* end of line */
-            printf(" |\n");
+            puts(" |");
          }
       }
    }
 
    /* end of display */
-   putchar('|');
-   for(i=0; i<width; i++) putchar('_');
-   printf("|\n");
+   printBar('|', '_', width);
+}
+
+
+void drawBar(char line, int count){
+   while(count > 0){
+      putchar(line);
+      count--;
+   }
+}
+
+void printBar(char border, char line, int count){
+   putchar(border);
+   while(count > 0){
+      putchar(line);
+      count--;
+   }
+   putchar(border);
+   putchar('\n');
+}
+
+void printBarText(char border, char line, int count, char* text, char* color){
+   int length;
+
+   length = strlen(text);
+   putchar(border);
+   drawBar(line, (count-length)/2);
+   printf("%s%s" LOG_NORMAL, color, text);
+   drawBar(line, count-length-(count-length)/2);
+   putchar(border);
+   putchar('\n');
 }
