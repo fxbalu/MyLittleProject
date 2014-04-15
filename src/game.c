@@ -5,43 +5,110 @@
  * \date 14.03.2014
  */
 
-#include "game.h"
+#include <stdio.h>   /* malloc() */
+#include <SDL.h>     /* SDL_SetVideoMode() */
+#include "game.h"    /* Game */
+#include "log.h"     /* logError(), logMem() */
 
 //le level n'est initialiser qu'apres le menu !!!
 /*décomposer plus cette fonction, tout revoir*/
 // malloc chaque structure de Game puis lancer init.....*/
+
+/**
+ * \brief Initialize the global Game structure
+ *
+ * \return Error code, 0 if everything is fine.
+ * \todo use an unique code for each error.
+ */
 int initGame(Game* game) {
 
-   if(initSDL()) {
+   /** \warning fxbalu: why initGame should initialize SDL ? */
+   if(initSDL() != 0) {
       return -1;
    }
 
-   game->status = (GameStatus*) malloc(sizeof(GameStatus));
-   initGameStatus(game->status);
-
-   game->options = (GameOptions*) malloc(sizeof(GameOptions));
-   initGameOptions(game->options);
-
-   /*Create the SDL window after the options*/
-   game->screen = SDL_SetVideoMode(game->options->windowWidth, game->options->windowHeight, 32, SDL_HWSURFACE|SDL_DOUBLEBUF);
-
-
-   game->input = (Input*) malloc(sizeof(Input));
-   initInput(game->input);
-
-   game->menu = (Menu*) malloc(sizeof(Menu));  // ou alors on peut faire game->menu = initMenu();
-   initMenu(game->menu);
-
-   game->level = (Level*) malloc(sizeof(Level));
-   initLevel(game->level);
-
-   game->player = (Character*) malloc(sizeof(Character));
-   initCharacter(game->player);
-
-   if(game->screen == NULL) {
-      fprintf(stderr, "Unable to create the window : %s\n", SDL_GetError());
+   if(game == NULL){
+      logError("Trying to initialize a NULL game structure", __FILE__, __LINE__);
       return -1;
    }
+   else{
+      /* initialize game status */
+      if((game->status = (GameStatus*) malloc(sizeof(GameStatus))) == NULL){
+         logError("Can't allocate memory for a GameStatus", __FILE__, __LINE__);
+         return -1;
+      }
+      else{
+         logMem(LOG_ALLOC, game->status, "GameStatus", "game's status", __FILE__, __LINE__);
+         initGameStatus(game->status);
+      }
+
+      /* initialize game options */
+      if((game->options = (GameOptions*) malloc(sizeof(GameOptions))) == NULL){
+         logError("Can't allocate memory for a GameOptions", __FILE__, __LINE__);
+         return -1;
+      }
+      else{
+         logMem(LOG_ALLOC, game->options, "GameOptions", "game's options", __FILE__, __LINE__);
+         initGameOptions(game->options);
+      }
+
+      /* Create the SDL window after the options */
+      game->screen = SDL_SetVideoMode(game->options->windowWidth,
+                                      game->options->windowHeight,
+                                      32,
+                                      SDL_HWSURFACE|SDL_DOUBLEBUF);
+      if(game->screen == NULL) {
+         logError("Unable to create the window.", __FILE__, __LINE__);
+         //fprintf(stderr, "Unable to create the window : %s\n", SDL_GetError());
+         return -1;
+      }
+
+      /* initialize game's input */
+      if((game->input = (Input*) malloc(sizeof(Input))) == NULL){
+         logError("Can't allocate memory for an Input", __FILE__, __LINE__);
+         return -1;
+      }
+      else{
+         logMem(LOG_ALLOC, game->input, "Input", "game's input", __FILE__, __LINE__);
+         initInput(game->input);
+      }
+
+      // ou alors on peut faire game->menu = initMenu();
+      // fxbalu: On devrait faire ça pour tout en fait.
+      /* initialize game's menu */
+      if((game->menu = (Menu*) malloc(sizeof(Menu))) == NULL){
+         logError("Can't allocate memory for a Menu", __FILE__, __LINE__);
+         return -1;
+      }
+      else{
+         logMem(LOG_ALLOC, game->menu, "Menu", "game's menu", __FILE__, __LINE__);
+         initMenu(game->menu);
+      }
+
+      /* initialize game's level */
+      if((game->level = (Level*) malloc(sizeof(Level))) == NULL){
+         logError("Can't allocate memory for a Level", __FILE__, __LINE__);
+         return -1;
+      }
+      else{
+         logMem(LOG_ALLOC, game->level, "Level", "game's level", __FILE__, __LINE__);
+         initLevel(game->level);
+      }
+
+      /* initialize game's main character, the player */
+      if((game->player = (Character*) malloc(sizeof(Character))) == NULL){
+         logError("Can't allocate memory for a Character", __FILE__, __LINE__);
+         return -1;
+      }
+      else{
+         logMem(LOG_ALLOC, game->player, "Character", "game's player", __FILE__, __LINE__);
+         initCharacter(game->player);
+      }
+   }
+
+   /**
+    * \warning fxbalu: wtf, hard coded window's name and files' path !
+    */
    SDL_WM_SetCaption("My Little Project", NULL);
    SDL_WM_SetIcon(IMG_Load("res/icon.png"),NULL);
 
@@ -53,25 +120,43 @@ int initGame(Game* game) {
    return 0;
 }
 
-/**
- * Initialisation of SDL and SDL image
- */
-int initSDL () {
-   /*Initialisation SDL*/
-   if(SDL_Init(SDL_INIT_VIDEO) < 0) {
-      fprintf(stderr, "Unable to initialize SDL : %s\n", SDL_GetError());
-      return -1;
-   }
-   atexit(SDL_Quit);
 
-   if(IMG_Init(IMG_INIT_PNG) < 0) {
-      fprintf(stderr, "Unable to initialize SDL_image : %s\n", IMG_GetError());
+/**
+ * \brief Initialize SDL and SDL image.
+ *
+ * \return Error code, 0 if everything was correctly initialized,
+ *         -1 if SDL was not initialized, -2 if SDL_image was not initialized.
+ *
+ * \warning fxbalu: why is it in game.c ?
+ */
+int initSDL() {
+   /* initialize SDL*/
+   if(SDL_Init(SDL_INIT_VIDEO) < 0) {
+      logError("Unable to initialize SDL", __FILE__, __LINE__);
+      // fprintf(stderr, "Unable to initialize SDL : %s\n", SDL_GetError());
       return -1;
    }
-   atexit(IMG_Quit);
+   else{
+      atexit(SDL_Quit);
+   }
+
+   /* initialize SDL_image */
+   if(IMG_Init(IMG_INIT_PNG) < 0) {
+      logError("Unable to initialize SDL_image", __FILE__, __LINE__);
+      // fprintf(stderr, "Unable to initialize SDL_image : %s\n", IMG_GetError());
+      return -2;
+   }
+   else{
+      atexit(IMG_Quit);
+   }
+
    return 0;
 }
 
+
+/**
+ * \brief Does something.
+ */
 void updateGame(Game* game) {
 
    getInput(game->input, game->options); /*on recupere les inputs, arche bien pour l'instant*/
@@ -82,7 +167,10 @@ void updateGame(Game* game) {
 }
 
 
-
+/**
+ * \brief fills the window with white.
+ * \warning fxbalu: why is it in game.c ?
+ */
 void clearScreen (Game* game) {
    SDL_FillRect(game->screen, NULL, SDL_MapRGB(game->screen->format, 255, 255, 255));
 }
@@ -109,7 +197,7 @@ void displayGame(Game* game) {
       displayMenu(game->menu, game->status, game->screen);
       break;
    case creditsMenu :
-      displayMenu(game->menu, game->status, game->screen); // or dislay crédits !
+      displayMenu(game->menu, game->status, game->screen); // or display credits !
       break;
    case inGame :
       displayLevel(game->level, game->screen);
@@ -129,9 +217,10 @@ void displayGame(Game* game) {
    }
 }
 
+
 /**
- * \param game Pointer on a Game structure.
  * \brief Wait a brief amount of time so the game runs at a constant FPS.
+ * \param game Pointer on a Game structure.
  */
 void delayGame(Game* game) {
 

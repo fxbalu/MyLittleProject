@@ -7,26 +7,25 @@
 
 #ifndef DEFINED_GAME_H
 #define DEFINED_GAME_H
-/*
-#include <stdlib.h>
-#include <stdio.h>
-#include <SDL.h>
-#include <SDL_image.h>
-*/
-#include "define.h"
-#include "common.h"
-#include "log.h"
 
-#include "gameStatus.h"
-#include "gameOptions.h"
-#include "input.h"
-#include "menu.h"
-#include "level.h"
-#include "character.h"
+#include <SDL.h>           /* SDL_Surface */
+#include "gameStatus.h"    /* GameStatus */
+#include "gameOptions.h"   /* GameOptions */
+#include "input.h"         /* Input */
+#include "menu.h"          /* Menu */
+#include "level.h"         /* Level */
+#include "character.h"     /* Character */
+
+// #include <SDL_image.h>
+// #include "define.h"
+// #include "common.h"
+// #include "log.h"
 
 /**
  * \struct Game
  * \brief Variables necessaries to most of the game-related functions.
+ *
+ * \warning Why does it use pointer ?
  */
 typedef struct Game {
    SDL_Surface* screen;

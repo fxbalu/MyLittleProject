@@ -5,7 +5,10 @@
  * \date 14.03.2014
  */
 
-#include "game.h"
+#include <stdlib.h>  /* EXIT_FAILURE */
+#include <stdio.h>   /* printf() */
+#include "game.h"    /* Game, initGame(), updateGame(), displayGame(), delayGame() */
+#include "log.h"     /* logError() */
 
 /**
  * \brief The main function initialize the game then runs the main loop of the game.
