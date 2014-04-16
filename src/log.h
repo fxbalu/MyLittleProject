@@ -216,7 +216,10 @@ void logMem(const char direction, const void* ptr, const char* type,
 void checkAllocatedMemory(const char verbosity);
 
 void drawBar(char line, int count);
+void drawProgressBar(char firstBorder, char lastBorder, char on, char off, int percentage, int width);
+
 void printBar(char border, char line, int count);
 void printBarText(char border, char line, int count, char* text, char* color);
+void printProgressBar(int percentage, int width);
 
 #endif /* LOG_H_INCLUDED */

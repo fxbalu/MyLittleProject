@@ -252,7 +252,7 @@ void logMem(const char direction, const void* ptr, const char* type,
  *                       LOG_EVERYTHING display all the above
  */
 void checkAllocatedMemory(const char verbosity){
-   int i, iType, iVar, width, temp, usedCount, usedCharCount;
+   int i, iType, iVar, width, temp, usedCount, usedPercentage;
    Log_Variable* var;
 
    /* ###########################################
@@ -304,8 +304,7 @@ void checkAllocatedMemory(const char verbosity){
    for(iVar=(mem.varNb-1); iVar>=0; iVar--){
       if(mem.var[iVar].alloc == 1) usedCount++;
    }
-   usedCharCount = (width - 4 - usedCount) / mem.varNb;
-   printf("usedCount=%d usedCharCount=%d width-4=%d\n", usedCount, usedCharCount, width-4);
+   usedPercentage = (usedCount * 100) / mem.varNb;
 
    /* ###########################################
     * ##  draw the memory map window
@@ -319,10 +318,7 @@ void checkAllocatedMemory(const char verbosity){
    printBarText('|', ' ', width, "MEMORY MAP", LOG_MAGENTA);
 
    /* display used variable bar */
-   printf("| [");
-   drawBar('#', usedCharCount);
-   drawBar(' ', width-4-usedCharCount);
-   printf("] |\n");
+   printProgressBar(usedPercentage, width);
 
    /* ###########################################
     * ##  draw the types window
@@ -431,6 +427,20 @@ void drawBar(char line, int count){
    }
 }
 
+void drawProgressBar(char firstBorder, char lastBorder, char on, char off, int percentage, int width){
+   int barWidth, onCount;
+
+   /* compute essential values */
+   barWidth = width - 7;
+   onCount = barWidth*percentage/100;
+
+   /* print percentage and draw progress bar */
+   printf("%3d%c %c", percentage, '%', firstBorder);
+   drawBar(on, onCount);
+   drawBar(off, barWidth-onCount);
+   putchar(lastBorder);
+}
+
 void printBar(char border, char line, int count){
    putchar(border);
    while(count > 0){
@@ -451,4 +461,10 @@ void printBarText(char border, char line, int count, char* text, char* color){
    drawBar(line, count-length-(count-length)/2);
    putchar(border);
    putchar('\n');
+}
+
+void printProgressBar(int percentage, int width){
+   putchar('|'); putchar(' ');
+   drawProgressBar('[', ']', '#', ' ', percentage, width-2);
+   puts(" |");
 }
