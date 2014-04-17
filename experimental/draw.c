@@ -53,8 +53,8 @@ void drawHud(void)
 
 
 
- void draw(void)
-  {
+void draw(void)
+{
     int i;
     drawImage(map.background, 0, 0);
 
@@ -120,7 +120,7 @@ SDL_Surface* loadImage(char *name)
 
 
 void delay(unsigned int frameLimit)
-  {
+{
 
     /* Gestion des 60 fps (images/stories/seconde) */
 

@@ -30,6 +30,8 @@ Mix_Chunk *miniondead_sound, *jump_sound, *coin_sound, *deadplayer1_sound;
 
 int nombreMonstres;
 
+int onMenu, menuType, choice;
+
 
 int level;
 

@@ -25,7 +25,7 @@
 
 #define TIME_BETWEEN_2_FRAMES 2
 
-#define PLAYER_SPEED 5
+#define PLAYER_SPEED 10
 
 //Valeurs attribuées aux états/directions
 #define WALK_RIGHT 1
@@ -63,6 +63,11 @@
     DEADPLAYER
 };
 
+  enum
+ {
+      START,
+      PAUSE
+  };
 
 
 

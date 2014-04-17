@@ -31,11 +31,8 @@ void initializePlayer(void)
 }
 
 
-
-
-
-  void updatePlayer(void)
- {
+void updatePlayer(void)
+{
 
    //On rajoute un timer au cas où notre héros mourrait lamentablement en tombant dans un trou...
    //Si le timer vaut 0, c'est que tout va bien, sinon, on le décrémente jusqu'à 0, et là,
@@ -161,11 +158,8 @@ void initializePlayer(void)
   }
 
 
-
-
-
 void centerScrollingOnPlayer(void)
- {
+{
     //On définit les coordonnées du début de l'affichage de la map par rapport à celles
     //du joueur.
     //Pour centrer le joueur, la map doit donc s'afficher à un demi-écran avant la position
@@ -206,8 +200,8 @@ void getItem(void)
 
 void playerGameover()
 {
-    Mix_FreeMusic(jeu.musique);
-    playSoundFx(DEADPLAYER);
+
+    loadSong("sounds/gameover.mp3");
     SDL_Surface *gameover = loadImage("graphics/gameover.jpg");
 
     drawImage(gameover);
@@ -215,11 +209,11 @@ void playerGameover()
 
     SDL_Flip(jeu.screen);
 
-    SDL_Delay(1000);
+    SDL_Delay(4250);
+    loadGame();
 
-    changeLevel();
-
-    jeu.life =3;
+    jeu.onMenu = 1;
+    jeu.menuType = START;
 
 }
 

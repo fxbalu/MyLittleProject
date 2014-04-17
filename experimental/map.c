@@ -420,8 +420,6 @@ void changeLevel(void)
 
 }
 
-
-
 void drawMap(void)
 {
 

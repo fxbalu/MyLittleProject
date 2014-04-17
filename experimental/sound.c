@@ -47,7 +47,7 @@ void loadSound(void)
         fprintf(stderr, "Can't read the coin sound FX \n");
         exit(1);
     }
-    jeu.deadplayer1_sound = Mix_LoadWAV("sounds/gameover.flac");
+    jeu.deadplayer1_sound = Mix_LoadWAV("sounds/coin.wav");
    if (jeu.deadplayer1_sound == NULL)
     {
         fprintf(stderr, "Can't read the deadplayer1_sound FX \n");

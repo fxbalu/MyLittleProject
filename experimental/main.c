@@ -18,12 +18,38 @@ go=1;
 while(go==1)        /*Boucle infinie*/
 {
 
-    getInput();     /*On vérifie les entrées*/
+    getInput();
 
-    updatePlayer();
-    updateMonsters();
+   if(jeu.onMenu == 0)
+    {
+        /* On met à jour le jeu */
+        updatePlayer();
+        updateMonsters();
+    }
+    else
+    {
+        if(jeu.menuType == START)
+            updateStartMenu();
+    }
 
-    draw();         /*On affiche tout*/
+
+    //Si on n'est pas dans un menu
+    if(jeu.onMenu == 0)
+    {
+        /* On affiche tout */
+        draw();
+    }
+    else
+    {
+        if(jeu.menuType == START)
+        {
+            drawImage(map.background, 0, 0);
+            drawStartMenu();
+            SDL_Flip(jeu.screen);
+            SDL_Delay(1);
+        }
+
+    }      /*On affiche tout*/
 
     delay(frameLimit);                  /*on attends 16ms pour avoir un jeu tournant à max 60fps*/
     frameLimit = SDL_GetTicks()+16;

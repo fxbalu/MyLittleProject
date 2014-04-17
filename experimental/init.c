@@ -75,7 +75,7 @@ void loadGame(void)
     changeLevel();
 
 
-    loadSong("music/Chippy Cloud Kid (loop).mp3");
+    loadSong("music/Those of Us Who Fight.mp3");
 
     loadSound();
 
@@ -85,9 +85,12 @@ void loadGame(void)
     jeu.HUD_vie = loadImage("graphics/lifeHud.png");
     jeu.HUD_etoiles = loadImage("graphics/hud_coins.png");
 
+    jeu.onMenu = 1;
+    jeu.choice = 0;
+    jeu.menuType = START;
+
 
  }
-
 
 void cleanup()
 {
