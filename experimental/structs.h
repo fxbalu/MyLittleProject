@@ -1,17 +1,17 @@
 #include "defs.h"
 
+
+
+#ifndef STRUCT_H_INCLUDED
+#define STRUCT_H_INCLUDED
+
+
 typedef struct Input
 {
 
 int left,right,up,down,jump,attack,enter,erase,pause;
 
 }Input;
-
-#ifndef STRUCT_H_INCLUDED
-#define STRUCT_H_INCLUDED
-
-
-
 
 
 typedef struct Gestion
@@ -43,6 +43,7 @@ typedef struct Map
 
 SDL_Surface *background;
 SDL_Surface *tileSet;
+SDL_Surface *menu;
 
 int startX, startY;
 int maxX, maxY;

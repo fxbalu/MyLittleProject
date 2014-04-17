@@ -107,6 +107,11 @@ if (map.tileSet != NULL)
     SDL_FreeSurface(map.tileSet);
 }
 
+if (map.menu != NULL)
+{
+    SDL_FreeSurface(map.menu);
+}
+
 if(player.sprite != NULL)
 {
     SDL_FreeSurface(player.sprite);
@@ -138,12 +143,7 @@ Mix_CloseAudio();
 Mix_Quit();
 
 freeSound();
-/*for(i=0;i<MAX_MAP_X;i++)
-    {
-        free(map.tile[i]);
-    }
 
-free(map.tile);*/
 
 closeFont(font);
 

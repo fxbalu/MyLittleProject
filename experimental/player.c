@@ -204,7 +204,7 @@ void playerGameover()
     loadSong("sounds/gameover.mp3");
     SDL_Surface *gameover = loadImage("graphics/gameover.jpg");
 
-    drawImage(gameover);
+    drawImage(gameover,0,0);
 
 
     SDL_Flip(jeu.screen);

@@ -20,7 +20,7 @@ while(go==1)        /*Boucle infinie*/
 
     getInput();
 
-   if(jeu.onMenu == 0)
+    if(jeu.onMenu == 0)
     {
         /* On met à jour le jeu */
         updatePlayer();
@@ -28,8 +28,7 @@ while(go==1)        /*Boucle infinie*/
     }
     else
     {
-        if(jeu.menuType == START)
-            updateStartMenu();
+        if(jeu.menuType == START) updateStartMenu();
     }
 
 
