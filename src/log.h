@@ -20,7 +20,7 @@
 /**@{*/
 
 /** Memory related message will be displayed on the standard output (terminal) */
-#define LOG_MEM_IN_STDOUT
+//#define LOG_MEM_IN_STDOUT
 
 /** Memory related message will be saved in a text file */
 //#define LOG_MEM_IN_LOG_FILE
