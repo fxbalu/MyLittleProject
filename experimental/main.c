@@ -1,60 +1,81 @@
+/**
+ * \file main.c
+ * \brief Main program.
+ *
+ * \author Vincent WERNER
+ * \author Gwendal HENRY
+ * \author François-Xavier BALU
+ */
+
+#include <stdlib.h>  /* atexit(), EXIT_SUCCESS */
 #include "main.h"
 
-int main(int argc, char *argv[])
+/**
+ * \brief Main function.
+ * \param[in] argc  Number of argument passed to the program.
+ * \param[in] argv  Arguments passed to the program.
+ */
+int main(int argc, char* argv[])
 {
-unsigned int frameLimit = SDL_GetTicks()+16;
-int go;
+   unsigned int frameLimit;
+   int go;
 
-init("MyLittleProject");       /*Initialisation de la SDL dans une fonction séparée*/
+   frameLimit = SDL_GetTicks()+16;
 
+   /* initializes SDL */
+   init("MyLittleProject");
 
-initializePlayer();
+   /* initializes player */
+   initializePlayer();
 
-loadGame(); /* Chargement des ressources (graphismes, sons) */
-atexit(cleanup);    /* Appelle la fonction cleanup à la fin du programme */
+   /* loads resources */
+   loadGame();
 
-go=1;
+   /* calls cleanup function at program end */
+   atexit(cleanup);
 
-while(go==1)        /*Boucle infinie*/
-{
+   go = 1;
 
-    getInput();
+   /* Main loop */
+   while(go == 1)
+   {
+      /* reads input from keyboard */
+      getInput();
 
-    if(jeu.onMenu == 0)
-    {
-        /* On met à jour le jeu */
-        updatePlayer();
-        updateMonsters();
-    }
-    else
-    {
-        if(jeu.menuType == START) updateStartMenu();
-    }
+      /* checks if menu is used */
+      if(jeu.onMenu == 0)
+      {
+         /* updates game */
+         updatePlayer();
+         updateMonsters();
+      }
+      else
+      {
+         if(jeu.menuType == START) updateStartMenu();
+      }
 
+      /* checks if menu is used (same test as the previous one) */
+      if(jeu.onMenu == 0)
+      {
+         /* displays everything */
+         draw();
+      }
+      else
 
-    //Si on n'est pas dans un menu
-    if(jeu.onMenu == 0)
-    {
-        /* On affiche tout */
-        draw();
-    }
-    else
-    {
-        if(jeu.menuType == START)
-        {
+         if(jeu.menuType == START)
+         {
             drawImage(map.background, 0, 0);
             drawStartMenu();
             SDL_Flip(jeu.screen);
             SDL_Delay(1);
-        }
+         }
 
-    }      /*On affiche tout*/
+      }      /*On affiche tout*/
 
-    delay(frameLimit);                  /*on attends 16ms pour avoir un jeu tournant à max 60fps*/
-    frameLimit = SDL_GetTicks()+16;
-}
+      delay(frameLimit);                  /*on attends 16ms pour avoir un jeu tournant à max 60fps*/
+      frameLimit = SDL_GetTicks()+16;
+   }
 
-exit(0);
-
+   return EXIT_SUCCESS;
 }
 
