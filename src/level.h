@@ -12,6 +12,7 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include "common.h"
+#include "define.h"
 #include "xml/xml.h"
 
 /**
@@ -49,6 +50,8 @@ void initLevel (Level* level);
 void updateLevel (Level* level);
 
 void displayLevel (Level* level, SDL_Surface* screen);
+
+void selectTile (SDL_Rect* src, int gid) ;
 
 void displayBackground (Level* level, SDL_Surface* screen);
 
