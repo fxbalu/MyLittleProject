@@ -263,3 +263,94 @@ XML_File* loadXMLFile(const char* path){
 
    return xml;
 }
+
+
+/**
+ * \brief Reads a value in a XML file.
+ *
+ * \param[in] path  Values path in the XML file.
+ *                  To find a node's value, use "root/foo/bar$"
+ *                  To find an attribute, use "root/foo/bar:attribute"
+ * \param[in] xml   Searched XML file.
+ */
+char* getXMLValue(char* path, XML_File* xml){
+   char strBuffer[XML_BUFFER_LENGTH];
+   char charBuffer;
+   char* value;
+   XML_Node* n;
+   XML_Attribute* attr;
+   int iPath, iBuf;
+
+   value = NULL;
+   n = xml->root;
+   attr = NULL;
+   iPath = 0;
+
+   /* reads path */
+   while(value == NULL){
+      iBuf = 0;
+      charBuffer = path[iPath];
+      while((charBuffer != '/') &&
+            (charBuffer != ':') &&
+            (charBuffer != '$') &&
+            (charBuffer != '\0')){
+         strBuffer[iBuf] = charBuffer;
+         iBuf++;
+         iPath++;
+         charBuffer = path[iPath];
+      }
+      strBuffer[iBuf] = '\0';
+      iPath++;
+
+      /* found end of path */
+      if(charBuffer == '\0'){
+         logError("Reached end of path without ':' or '$'.", __FILE__, __LINE__);
+         return NULL;
+      }
+
+      /* find child with this name */
+      while((n != NULL) && (strcmp(strBuffer, n->name) != 0)){
+         n = n->next;
+      }
+      if(n == NULL){
+         logError("Didn't find a child with this name", __FILE__, __LINE__);
+         return NULL;
+      }
+
+      /* found node character '/', checks child */
+      if(charBuffer == '/'){
+         n = n->first;
+      }
+      /* found value character '$', reads value */
+      else if(charBuffer == '$'){
+         value = n->value;
+      }
+      /* found attribute character ':', reads attribute */
+      else if(charBuffer == ':'){
+
+         /* read attribute's name */
+         iBuf = 0;
+         while(path[iPath] != '\0'){
+            strBuffer[iBuf] = path[iPath];
+            iBuf++;
+            iPath++;
+         }
+         strBuffer[iBuf] = '\0';
+
+         /* searches attribute */
+         attr = n->attr;
+         while((attr != NULL) && (strcmp(strBuffer, attr->name) != 0)){
+            attr = attr->next;
+         }
+         if(attr == NULL){
+            logError("Didn't find an attribute with this name", __FILE__, __LINE__);
+            return NULL;
+         }
+         else{
+            value = attr->value;
+         }
+      }
+   }
+
+   return value;
+}
