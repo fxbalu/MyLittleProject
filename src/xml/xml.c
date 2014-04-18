@@ -206,7 +206,8 @@ XML_Node* parseXMLFile(FILE* file)
 
    /* read following node's value or tags, if any */
    while(endOfParsing == 0) {
-      reachNextXMLTag(file);  // prevent parsing to read a node's value.
+      //reachNextXMLTag(file);  // prevent parsing to read a node's value.
+      readXMLNodeValue(current, file);
       tag = readXMLTag(file);
 
       if(tag == NULL) {

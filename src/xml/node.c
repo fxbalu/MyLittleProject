@@ -410,11 +410,22 @@ void printXMLNode(XML_Node* n, int mode)
       }
       /* normal display mode, without descendants */
       if(mode != 2) {
-         printf("/>");
+         if(n->value != NULL){
+            printf("%s</%s>" ,n->value , n->name);
+         }
+         else{
+            printf("/>");
+         }
+
       }
       /* complete display mode, with descendants */
       else {
-         printf(">\n");
+         if(n->value != NULL){
+            printf(">%s\n" ,n->value);
+         }
+         else{
+            printf(">\n");
+         }
          child = n->first;
          while(child != NULL) {
             printXMLNode(child, 2);
