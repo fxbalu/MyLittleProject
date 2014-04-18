@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
          draw();
       }
       else
-
+      {
          if(jeu.menuType == START)
          {
             drawImage(map.background, 0, 0);
