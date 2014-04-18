@@ -204,7 +204,7 @@ XML_Node* parseXMLFile(FILE* file)
       destroyXMLTag(tag);
    }
 
-   /* read following tags, if any */
+   /* read following node's value or tags, if any */
    while(endOfParsing == 0) {
       reachNextXMLTag(file);  // prevent parsing to read a node's value.
       tag = readXMLTag(file);

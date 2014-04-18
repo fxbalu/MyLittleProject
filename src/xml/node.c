@@ -424,3 +424,58 @@ void printXMLNode(XML_Node* n, int mode)
       }
    }
 }
+
+
+void readXMLNodeValue(XML_Node* n, FILE* file){
+   char strBuffer[XML_BUFFER_LENGTH];
+   int charBuffer;
+   int i, reading;
+
+   /* reaches first useful character */
+   i = 0;
+   do{
+      charBuffer = fgetc(file);
+
+      /* reached end of file, that's not good */
+      if(charBuffer == EOF){
+         logError("Reached EOF while reading a node's value", __FILE__, __LINE__);
+         return;
+      }
+      /* found a tag, stop reading */
+      else if((char)charBuffer == '<'){
+         return;
+      }
+      /* found a compatible character */
+      else if(((char)charBuffer >= '!') && ((char)charBuffer <= '~')){
+         strBuffer[0] = charBuffer;
+         i = 1;
+      }
+   }while(i == 0);
+
+   /* same thing, but now spaces ' ' are read as well */
+   reading = 1;
+   do{
+      charBuffer = fgetc(file);
+
+      /* reached end of file, that's not good */
+      if(charBuffer == EOF){
+         logError("Reached EOF while reading a node's value", __FILE__, __LINE__);
+         return;
+      }
+      /* end of value, stop reading */
+      else if(((char)charBuffer == '<') ||
+              ((char)charBuffer == '\n') ||
+              ((char)charBuffer == '\r')){
+         reading = 0;
+      }
+      /* found a compatible character */
+      else if(((char)charBuffer >= ' ') && ((char)charBuffer <= '~')){
+         strBuffer[i] = charBuffer;
+         i++;
+      }
+   }while(reading == 1);
+
+   /* stop reading and copy string */
+   strBuffer[i] = '\0';
+   setXMLNodeValue(strBuffer, n);
+}
