@@ -47,8 +47,8 @@ void displayLevel (Level* level, SDL_Surface* screen) {
 
    int i,j;
 
-   for (i=firstTileY ; i<lastTileY ; i++){
-      for(j=firstTileX ; j<lastTileX ; j++){
+   for (i=firstTileY ; i<lastTileY ; i++) {
+      for(j=firstTileX ; j<lastTileX ; j++) {
 
 
          level->rectDst->y = i*70 - level->camera->y;
@@ -57,9 +57,9 @@ void displayLevel (Level* level, SDL_Surface* screen) {
          selectTile(level->rectSrc, level->tab[i][j]);
 
          SDL_BlitSurface(level->tileset, level->rectSrc, screen, level->rectDst);
-       //  printf("%d ", level->tab[i][j]);
+         //  printf("%d ", level->tab[i][j]);
       }
-    //  printf("\n");
+      //  printf("\n");
    }
 
 }
@@ -92,7 +92,7 @@ void displayBackground (Level* level, SDL_Surface* screen) {
 //test xml parseur :
 void loadLevel (Level* level) {
    XML_File* xmlLevel = createXMLFile();
-   setXMLFilePath("res/data/level/test1.tmx", xmlLevel); // resetXMLFile pour recharger un autre niveau ! ty fx
+   setXMLFilePath("res/data/level/test tuto.tmx", xmlLevel); // resetXMLFile pour recharger un autre niveau ! ty fx
    openXMLFile(xmlLevel);
    checkFirstLineXMLFile(xmlLevel);
 
@@ -104,9 +104,6 @@ void loadLevel (Level* level) {
    int sizeY = atoi(xmlLevel->root->attr->next->next->next->value); //échec et mat !
 
    int i,j;
-
-   printf("%s\n", pathBackground);
-   printf("%d, %d\n", sizeX, sizeY);
 
    //printXMLNode(xmlLevel->root, 2);
 
@@ -122,14 +119,46 @@ void loadLevel (Level* level) {
       level->tab[i] = (char*) malloc(level->sizeX*sizeof(char));
    }
 
+   XML_Node* tileLayer = xmlLevel->root->first->next->next;
+
    for(i=0 ; i<level->sizeY ; i++) {
       for(j=0 ; j<level->sizeX ; j++) {
 
-         level->tab[i][j] = atoi(xmlLevel->root->last->first->current->attr->value);
-         xmlLevel->root->last->first->current = xmlLevel->root->last->first->current->next;
+         level->tab[i][j] = atoi(xmlLevel->root->first->next->next->first->current->attr->value);
+         tileLayer->first->current = tileLayer->first->current->next;
 
+         //printf("%d", level->tab[i][j]);
       }
+      //printf("\n");
    }
+
+   XML_Node* objectLayer = xmlLevel->root->last;
+
+   //remplissage du tableau des objets
+   int objectNumber = 1;
+
+   while(objectLayer->current != objectLayer->last) {
+      objectNumber++;
+      objectLayer->current = objectLayer->current->next;
+   }
+   objectLayer->current = objectLayer->first;
+
+   level->objects = (GameObject**) malloc(objectNumber*sizeof(GameObject*));
+
+   for(i=0 ; i<objectNumber ; i++){
+      *(level->objects + i) = (GameObject*) malloc(sizeof(GameObject));
+      level->objects[i]->name = objectLayer->current->attr->value;
+      level->objects[i]->id = atoi(objectLayer->current->attr->next->value);
+      level->objects[i]->x = atoi(objectLayer->current->attr->next->next->value);
+      level->objects[i]->y = atoi(objectLayer->current->attr->next->next->next->value);
+
+      //printf("%s    ", level->objects[i]->name);
+      objectLayer->current = objectLayer->current->next;
+
+   }
+
+   //printf("\n%d objects\n", i);
+
    closeXMLFile(xmlLevel);
    destroyXMLFile(xmlLevel);
 }

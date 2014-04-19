@@ -25,6 +25,13 @@ typedef struct Camera {
    int y;
 } Camera;
 
+typedef struct GameObject {
+   char* name;
+   int id; //identifiant de l'objet
+   int x;//position de l'objet
+   int y;
+} GameObject;
+
 /**
  * \struct Level
  * Informations on the current level.
@@ -39,6 +46,7 @@ typedef struct Level {
    int sizeY; //nombre de tiles en hauteur
 
    char** tab; //nom a changer
+   GameObject** objects; //tableau des objets
 
    Camera* camera;
    /*ajouter la camera ici je pense*/
