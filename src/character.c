@@ -10,35 +10,174 @@
 /*utiliser parseur xml ???*/
 void initCharacter (Character* player) {
 
-    player->rectSrc = (SDL_Rect*) malloc(sizeof(SDL_Rect));
-    player->rectDst = (SDL_Rect*) malloc(sizeof(SDL_Rect));
+   player->rectSrc = (SDL_Rect*) malloc(sizeof(SDL_Rect));
+   player->rectDst = (SDL_Rect*) malloc(sizeof(SDL_Rect));
 
-    player->spriteCharacterSheet = loadImage("res/image/sprite/player/playerSpriteSheet.png");
+   player->spriteCharacterSheet = loadImage("res/image/sprite/player/playerSpriteSheet.png");
 
-    player->rectSrc->x = 0;
-    player->rectSrc->y = 0;
-    player->rectSrc->w = 72;/*definir des constantes !*/
-    player->rectSrc->h = 97;
+   player->rectSrc->x = 0;
+   player->rectSrc->y = 0;
+   player->rectSrc->w = 72;/*definir des constantes !*/
+   player->rectSrc->h = 97;
 
-    player->rectDst->x = 0;
-    player->rectDst->y = 0;
+   player->rectDst->x = 0;
+   player->rectDst->y = 0;
 
-    player->state = idle;
-    player->direction = right;
-    /*autres init plus tard*/
+   player->state = idle;
+   player->direction = right;
+   player->frameCounter = 0;
+   /*autres init plus tard*/
 }
 
 
 /*detecte les collisions, détermine la nouvelle position du perso*/
 /*chande l'etat du perso, sa position etc*/
-void updateCharacter (Character* player, Level* level) {
+void updateCharacter (Character* player, Level* level, Input* input) {
+
+player->state = idle; //si pas d'appui, position : idle
+
+   if(input->left.pressed) {
+      player->direction = left;
+      player->frameCounter = 0;
+   }
+   if(input->left.down) {
+      player->state = run;
+      player->frameCounter++;
+   }
+   if(input->up.pressed) {
+      player->direction = up;
+      player->frameCounter = 0;
+   }
+   if(input->up.down) {
+
+   }
+   if(input->right.pressed) {
+      player->direction = right;
+      player->frameCounter = 0;
+
+   }
+   if(input->right.down) {
+      player->state = run;
+      player->frameCounter++;
+   }
+   if(input->down.pressed) {
+      player->direction = down;
+      player->frameCounter = 0;
+   }
+   if(input->down.down) {
+
+   }
+   if(input->enter.pressed) {
+
+   }
+   if(input->enter.down) {
+
+   }
+   if(input->jump.pressed) {
+      player->frameCounter = 0;
+   }
+   if(input->jump.down) {
+
+   }
+   if(input->crouch.pressed) {
+
+   }
+   if(input->crouch.down) {
+      player->state = crouch;
+   }
+   if(input->shoot.pressed) {
+
+   }
+   if(input->shoot.down) {
+
+   }
 
 }
 
 void displayCharacter (Character* player, SDL_Surface* screen) {
-    /*a revoir*/
-    /*refaire le sprite aussi*/
-    /*changement de sdl rect ici ( ajouter ca dans une autre fct selectSprite charach?*/
 
-    SDL_BlitSurface(player->spriteCharacterSheet, player->rectSrc, screen, player->rectDst);
+   switch(player->state) {
+
+   case idle :
+      switch(player->direction) {
+      case left :
+         player->rectSrc->x = 0;
+         player->rectSrc->y = 194;
+         break;
+
+      case up :
+         player->rectSrc->x = 72;
+         player->rectSrc->y = 194;
+         break;
+
+      case right :
+         player->rectSrc->x = 144;
+         player->rectSrc->y = 194;
+         break;
+
+      case down :
+         player->rectSrc->x = 216;
+         player->rectSrc->y = 194;
+      }
+      break;
+
+   case walk :
+      switch(player->direction) {
+         case left :
+         player->rectSrc->x = player->frameCounter*72;
+         player->rectSrc->y = 97;
+         break;
+
+      case right :
+         player->rectSrc->x = player->frameCounter*72;
+         player->rectSrc->y = 0;
+         break;
+      }
+      break;
+
+   case run :
+      switch(player->direction) {
+      case left :
+         player->rectSrc->x = player->frameCounter*72;
+         player->rectSrc->y = 97;
+         break;
+
+      case right :
+         player->rectSrc->x = player->frameCounter*72;
+         player->rectSrc->y = 0;
+
+      }
+      break;
+
+   case jump :
+      switch(player->direction) {
+
+      }
+      break;
+
+   case crouch :
+      switch(player->direction) {
+      case left :
+         player->rectSrc->x = 432;
+         player->rectSrc->y = 194;
+         break;
+      case right :
+         player->rectSrc->x = 504;
+         player->rectSrc->y = 194;
+      break;
+
+      default :
+                  player->rectSrc->x = 504;
+         player->rectSrc->y = 194;
+      }
+
+      ;
+
+   }
+
+
+   player->rectDst->x = 0; // gérer ici avec le scrolling
+   player->rectDst->y = 0;
+
+   SDL_BlitSurface(player->spriteCharacterSheet, player->rectSrc, screen, player->rectDst);
 }

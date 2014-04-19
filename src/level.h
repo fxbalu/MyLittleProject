@@ -13,6 +13,7 @@
 #include <SDL_image.h>
 #include "common.h"
 #include "define.h"
+#include "input.h"
 #include "xml/xml.h"
 
 /**
@@ -47,7 +48,7 @@ typedef struct Level {
 
 void initLevel (Level* level);
 
-void updateLevel (Level* level);
+void updateLevel (Level* level, Input* input);
 
 void displayLevel (Level* level, SDL_Surface* screen);
 

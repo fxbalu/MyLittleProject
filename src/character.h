@@ -18,7 +18,7 @@
  * \brief Enumeration of the different directions possible of the character.
  */
 typedef enum Direction {
-   left, right
+   left,up, right,down
 } Direction;
 
 
@@ -27,7 +27,7 @@ typedef enum Direction {
  * \brief Enumeration of the different states possible of the character.
  */
 typedef enum CharacterState {
-   idle, walk, run, jump
+   idle, walk, run, jump, crouch
 } CharacterState;
 
 /*!
@@ -39,16 +39,17 @@ typedef struct Character {
    SDL_Rect* rectSrc;
    SDL_Rect* rectDst;
 
-   int x; /*coordonnées du perosn ,om a changer peut etre*/
+   int x; /*coordonnées du personnage ,om a changer peut etre*/
    int y;
 
    CharacterState state;
    Direction direction;
+   int frameCounter;
 } Character;
 
 void initCharacter (Character* player);
 
-void updateCharacter (Character* player, Level* level);
+void updateCharacter (Character* player, Level* level, Input* input);
 
 void displayCharacter (Character* player, SDL_Surface* screen);
 

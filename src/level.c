@@ -31,7 +31,7 @@ void initLevel (Level* level) {
    /*charger le niveau avec le parseur xml*/
 }
 
-void updateLevel (Level* level) {
+void updateLevel (Level* level, Input* input) {
 
 }
 

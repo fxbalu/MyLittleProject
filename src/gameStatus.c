@@ -18,8 +18,6 @@ void initGameStatus(GameStatus* status) {
    status->sleepTime = 0;
 }
 
-/*a refaire, peut etre avec des switchs*/
-/*dans quel ordre faire les tests ? d'abord les directions*/
 void updateGameStatus (GameStatus* status, Input* input) {
 
    switch (status->state) {
