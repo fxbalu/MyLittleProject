@@ -49,7 +49,7 @@ int initGame(Game* game) {
          initGameOptions(game->options);
       }
 
-      /* Create the SDL window after the options */
+      /* Create the SDL window after the options (because options contains the dimensions of the window*/
       game->screen = SDL_SetVideoMode(game->options->windowWidth,
                                       game->options->windowHeight,
                                       32,
@@ -67,6 +67,14 @@ int initGame(Game* game) {
       } else {
          logMem(LOG_ALLOC, game->input, "Input", "game's input", __FILE__, __LINE__);
          initInput(game->input);
+      }
+
+            if((game->intro = (Intro*) malloc(sizeof(Intro))) == NULL) {
+         logError("Can't allocate memory for a Intro", __FILE__, __LINE__);
+         return -1;
+      } else {
+         logMem(LOG_ALLOC, game->status, "Intro", "game's intro", __FILE__, __LINE__);
+         initIntro(game->intro);
       }
 
       // ou alors on peut faire game->menu = initMenu();
@@ -146,7 +154,7 @@ int initSDL() {
 
 
 /**
- * \brief Does something.
+ * \brief Function called at each frame, update all the state of the game, character, level ...
  */
 void updateGame(Game* game) {
 
@@ -190,14 +198,17 @@ void clearScreen (Game* game) {
    SDL_FillRect(game->screen, NULL, SDL_MapRGB(game->screen->format, 255, 255, 255));
 }
 
+/**
+ * \brief Function called at each frame, display the game on the screen.
+ */
 void displayGame(Game* game) {
-   printf("%d before clear screen\n", SDL_GetTicks());
+
    clearScreen(game);
 
    switch (game->status->state) {
 
    case intro :
-      //displayIntro();
+      displayIntro(game->intro, game->screen);
       break;
    case mainMenu :
       displayMenu(game->menu, game->status, game->screen);

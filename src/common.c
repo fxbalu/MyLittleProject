@@ -15,8 +15,12 @@ SDL_Surface* loadImage(char* file) {
    SDL_Surface* temp = IMG_Load(file);
    SDL_Surface* image = SDL_DisplayFormatAlpha(temp);
 
+   if(temp == NULL){
+      logError("erreur IMG_Load \n", __FILE__, __LINE__);
+   }
+
    if(image == NULL){
-      logError("erreur fonction loadImage", __FILE__, __LINE__);
+      logError("erreur DisplayFormatAlpha", __FILE__, __LINE__);
    }
    free(temp);
    return image;

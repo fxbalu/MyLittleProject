@@ -20,8 +20,8 @@ void initCharacter (Character* player) {
    player->rectSrc->w = 72;/*definir des constantes !*/
    player->rectSrc->h = 97;
 
-   player->rectDst->x = 0;
-   player->rectDst->y = 0;
+   player->rectDst->x = 500;
+   player->rectDst->y = 300;
 
    player->state = idle;
    player->direction = right;
@@ -34,7 +34,7 @@ void initCharacter (Character* player) {
 /*chande l'etat du perso, sa position etc*/
 void updateCharacter (Character* player, Level* level, Input* input) {
 
-player->state = idle; //si pas d'appui, position : idle
+   player->state = idle; //si pas d'appui, position : idle
 
    if(input->left.pressed) {
       player->direction = left;
@@ -77,7 +77,7 @@ player->state = idle; //si pas d'appui, position : idle
       player->frameCounter = 0;
    }
    if(input->jump.down) {
-
+      player->state = jump;
    }
    if(input->crouch.pressed) {
 
@@ -123,7 +123,10 @@ void displayCharacter (Character* player, SDL_Surface* screen) {
 
    case walk :
       switch(player->direction) {
-         case left :
+         if(player->frameCounter>7) {
+            player->frameCounter = 0; //bouclage de l'animation
+         }
+      case left :
          player->rectSrc->x = player->frameCounter*72;
          player->rectSrc->y = 97;
          break;
@@ -136,6 +139,9 @@ void displayCharacter (Character* player, SDL_Surface* screen) {
       break;
 
    case run :
+      if(player->frameCounter>7) {
+         player->frameCounter = 0; //bouclage de l'animation
+      }
       switch(player->direction) {
       case left :
          player->rectSrc->x = player->frameCounter*72;
@@ -145,13 +151,19 @@ void displayCharacter (Character* player, SDL_Surface* screen) {
       case right :
          player->rectSrc->x = player->frameCounter*72;
          player->rectSrc->y = 0;
-
       }
       break;
 
    case jump :
       switch(player->direction) {
-
+         case left :
+         player->rectSrc->x = 288;
+         player->rectSrc->y = 194;
+         break;
+      case right :
+         player->rectSrc->x = 360;
+         player->rectSrc->y = 194;
+         break;
       }
       break;
 
@@ -164,20 +176,16 @@ void displayCharacter (Character* player, SDL_Surface* screen) {
       case right :
          player->rectSrc->x = 504;
          player->rectSrc->y = 194;
-      break;
+         break;
 
       default :
-                  player->rectSrc->x = 504;
+         player->rectSrc->x = 504;
          player->rectSrc->y = 194;
       }
 
       ;
 
    }
-
-
-   player->rectDst->x = 0; // gérer ici avec le scrolling
-   player->rectDst->y = 0;
 
    SDL_BlitSurface(player->spriteCharacterSheet, player->rectSrc, screen, player->rectDst);
 }

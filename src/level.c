@@ -134,7 +134,7 @@ void loadLevel (Level* level) {
 
    XML_Node* objectLayer = xmlLevel->root->last;
 
-   //remplissage du tableau des objets
+   //on compte le nombre d'objets
    int objectNumber = 1;
 
    while(objectLayer->current != objectLayer->last) {
@@ -143,6 +143,7 @@ void loadLevel (Level* level) {
    }
    objectLayer->current = objectLayer->first;
 
+//on rempli le tableau d'objets
    level->objects = (GameObject**) malloc(objectNumber*sizeof(GameObject*));
 
    for(i=0 ; i<objectNumber ; i++){

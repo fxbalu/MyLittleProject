@@ -10,7 +10,7 @@
 
 void initGameStatus(GameStatus* status) {
    status->gameIsRunning = true;
-   status->state = intro; //intro
+   status->state = intro; //on démarre le jeu à l'intro
    status->menuSelection = 0;
    status->numberItemsMenu = 4;
    status->level = 0;
@@ -57,54 +57,63 @@ void updateGameStatus (GameStatus* status, Input* input) {
 void updateIntro(GameStatus* status, Input* input) {
 
    if(input->left.pressed) {
+         // appeler la fonction fin d'intro !!
       status->state = mainMenu;
    }
    if(input->left.down) {
 
    }
    if(input->up.pressed) {
+         // appeler la fonction fin d'intro !!
       status->state = mainMenu;
    }
    if(input->up.down) {
 
    }
    if(input->right.pressed) {
+         // appeler la fonction fin d'intro !!
       status->state = mainMenu;
    }
    if(input->right.down) {
 
    }
    if(input->down.pressed) {
+         // appeler la fonction fin d'intro !!
       status->state = mainMenu;
    }
    if(input->down.down) {
 
    }
    if(input->enter.pressed) {
+         // appeler la fonction fin d'intro !!
       status->state = mainMenu;
    }
    if(input->enter.down) {
 
    }
    if(input->jump.pressed) {
+         // appeler la fonction fin d'intro !!
       status->state = mainMenu;
    }
    if(input->jump.down) {
 
    }
    if(input->crouch.pressed) {
+         // appeler la fonction fin d'intro !!
       status->state = mainMenu;
    }
    if(input->crouch.down) {
 
    }
    if(input->shoot.pressed) {
+         // appeler la fonction fin d'intro !!
       status->state = mainMenu;
    }
    if(input->shoot.down) {
 
    }
    if(input->escape.pressed) {
+         // appeler la fonction fin d'intro !!
       status->state = mainMenu;
    }
    if(input->escape.down) {
