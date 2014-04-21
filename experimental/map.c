@@ -1,5 +1,6 @@
 #include "map.h"
 
+
 void loadMap(char* name)
 {
     int x,y;
@@ -37,9 +38,8 @@ void loadMap(char* name)
     fclose(fp);
 }
 
-
- void mapCollision(GameObject *entity)
- {
+void mapCollision(GameObject *entity)
+{
 
     int i, x1, x2, y1, y2;
 
@@ -406,7 +406,6 @@ void loadMap(char* name)
     }
 }
 
-
 void changeLevel(void)
 {
     char file[200];
@@ -494,7 +493,6 @@ void drawMap(void)
     }
 
 }
-
 
 void monsterCollisionToMap(GameObject* entity)
 {

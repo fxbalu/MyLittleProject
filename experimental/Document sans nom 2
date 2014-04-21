@@ -1,0 +1,75 @@
+void loadLevel (Map* map) {
+   XML_File* xmlLevel = createXMLFile();
+   setXMLFilePath("res/data/level/level1.tmx", xmlLevel); // resetXMLFile pour recharger un autre niveau ! ty fx
+   openXMLFile(xmlLevel);
+   checkFirstLineXMLFile(xmlLevel);
+
+   xmlLevel->root = parseXMLFile(xmlLevel->file);
+
+   //on recupère les premières infos dans le xml
+   char* pathBackground = xmlLevel->root->first->next->first->attr->value;
+   int sizeX = atoi(xmlLevel->root->attr->next->next->value); //a toi de jouer !
+   int sizeY = atoi(xmlLevel->root->attr->next->next->next->value); //échec et mat !
+
+   int i,j;
+
+   //printXMLNode(xmlLevel->root, 2);
+
+   //on stocke les premières infos
+   map->background = loadImage(pathBackground);
+   map->sizeX = sizeX;
+   map->sizeY = sizeY;
+   map->startX = 0;
+   map->startY = 0;
+
+   //on rempli le tableau de tile, puis le tableau des items.
+   map->tile = (int**) malloc(map->sizeY*sizeof(int*)); //colonne puis ligne
+
+   for(i=0 ; i<map->sizeY ; i++) {
+      map->tile[i] = (char*) malloc(map->sizeX*sizeof(char));
+   }
+
+   XML_Node* tileLayer = xmlLevel->root->first->next->next;
+
+   for(i=0 ; i<map->sizeY ; i++) {
+      for(j=0 ; j<map->sizeX ; j++) {
+
+         map->tab[i][j] = atoi(xmlLevel->root->first->next->next->first->current->attr->value);
+         tileLayer->first->current = tileLayer->first->current->next;
+
+         //printf("%d", level->tab[i][j]);
+      }
+      //printf("\n");
+   }
+
+   XML_Node* objectLayer = xmlLevel->root->last;
+
+   //on compte le nombre d'objets
+   int objectNumber = 1;
+
+   while(objectLayer->current != objectLayer->last) {
+      objectNumber++;
+      objectLayer->current = objectLayer->current->next;
+   }
+   objectLayer->current = objectLayer->first;
+
+//on rempli le tableau d'objets
+   map->objects = (GameObject**) malloc(objectNumber*sizeof(GameObject*));
+
+   for(i=0 ; i<objectNumber ; i++){
+      *(map->objects + i) = (GameObject*) malloc(sizeof(GameObject));
+      map->objects[i]->name = objectLayer->current->attr->value;
+      map->objects[i]->id = atoi(objectLayer->current->attr->next->value);
+      map->objects[i]->x = atoi(objectLayer->current->attr->next->next->value);
+      map->objects[i]->y = atoi(objectLayer->current->attr->next->next->next->value);
+
+      //printf("%s    ", level->objects[i]->name);
+      objectLayer->current = objectLayer->current->next;
+
+   }
+
+   //printf("\n%d objects\n", i);
+
+   closeXMLFile(xmlLevel);
+   destroyXMLFile(xmlLevel);
+}

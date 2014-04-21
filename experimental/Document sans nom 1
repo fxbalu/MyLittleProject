@@ -1,0 +1,39 @@
+
+void loadMap(char* name)
+{
+
+
+    int x,y;
+    FILE *fp;
+
+    fp = fopen(name, "rb");
+
+    if(fp == NULL)
+    {
+        printf("Failed to open map %s\n", name);
+        exit(1);
+    }
+
+    map.maxX = map.maxY =0;
+
+    for(y=0;y<MAX_MAP_Y;y++)
+    {
+        for(x=0;x<MAX_MAP_X;x++)
+        {
+            fscanf(fp,"%d", &map.tile[y][x]);
+
+            if(map.tile[y][x]>0)
+            {
+                if(x>map.maxX) map.maxX = x;
+                if(y>map.maxY) map.maxY = y;
+            }
+        }
+    }
+
+    map.maxX = (map.maxX+1)*TILE_SIZE;
+    map.maxY = (map.maxY+1)*TILE_SIZE;
+
+    map.startX = map.startY = 0;
+
+    fclose(fp);
+}

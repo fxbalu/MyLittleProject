@@ -9,7 +9,7 @@
 typedef struct Input
 {
 
-int left,right,up,down,jump,attack,enter,erase,pause;
+int left,right,up,down,jump,attack,enter,pause;
 
 }Input;
 
@@ -40,19 +40,6 @@ int level;
 
 }Gestion;
 
-typedef struct Map
-{
-
-SDL_Surface *background;
-SDL_Surface *tileSet;
-SDL_Surface *backgroundMenu;
-
-int startX, startY;
-int maxX, maxY;
-
-int tile[MAX_MAP_Y][MAX_MAP_X];
-
-} Map;
 
 
 
@@ -62,6 +49,8 @@ typedef struct GameObject
 {
    //Sprite du héros (pas d'animation pour l'instant)
    SDL_Surface *sprite;
+
+   char* name;
 
    /* Coordonnées du héros */
    int x, y;
@@ -80,6 +69,20 @@ typedef struct GameObject
 
 } GameObject;
 
+typedef struct Map
+{
+
+SDL_Surface *background;
+SDL_Surface *tileSet;
+SDL_Surface *backgroundMenu;
+
+int startX, startY;
+int maxX, maxY;
+
+
+int tile[MAX_MAP_X][MAX_MAP_Y];
+
+} Map;
 
 
 #endif // STRUCT_H_INCLUDED

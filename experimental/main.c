@@ -65,13 +65,13 @@ int main(int argc, char* argv[])
          if(jeu.menuType == START)
          {
             drawImage(map.backgroundMenu, 0, 0);
-
+            /*displays menu*/
             drawStartMenu();
             SDL_Flip(jeu.screen);
             SDL_Delay(1);
          }
 
-      }      /*On affiche tout*/
+      }
 
       delay(frameLimit);                  /*on attends 16ms pour avoir un jeu tournant à max 60fps*/
       frameLimit = SDL_GetTicks()+16;

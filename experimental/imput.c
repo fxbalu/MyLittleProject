@@ -25,9 +25,7 @@ while(SDL_PollEvent(&event))
             exit(0);
             break;
 
-            case SDLK_DELETE:
-            input.erase = 1;
-            break;
+
 
             case SDLK_SPACE:
             input.jump = 1;
@@ -65,9 +63,7 @@ while(SDL_PollEvent(&event))
         case SDL_KEYUP:
         switch (event.key.keysym.sym)
         {
-            case SDLK_DELETE:
-            input.erase = 0;
-            break;
+
 
             case SDLK_SPACE:
             input.jump = 0;
