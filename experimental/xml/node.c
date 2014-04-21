@@ -411,10 +411,10 @@ void printXMLNode(XML_Node* n, int mode)
       /* normal display mode, without descendants */
       if(mode != 2) {
          if(n->value != NULL){
-            printf("%s</%s>" ,n->value , n->name);
+            printf(">%s</%s>\n" ,n->value , n->name);
          }
          else{
-            printf("/>");
+            printf("/>\n");
          }
 
       }
