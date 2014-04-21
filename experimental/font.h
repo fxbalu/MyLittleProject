@@ -6,5 +6,6 @@
 
 extern Gestion jeu;
 extern TTF_Font *font;
+extern TTF_Font *fontMenu;
 
 #endif // FONT_H_INCLUDED

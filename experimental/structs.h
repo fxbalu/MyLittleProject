@@ -18,6 +18,8 @@ typedef struct Gestion
 {
 
 SDL_Surface* screen;
+SDL_Surface* tileMenu;
+
 
 SDL_Surface* HUD_vie;
 SDL_Surface* HUD_etoiles;
@@ -43,16 +45,16 @@ typedef struct Map
 
 SDL_Surface *background;
 SDL_Surface *tileSet;
-SDL_Surface *menu;
+SDL_Surface *backgroundMenu;
 
 int startX, startY;
 int maxX, maxY;
 
-
-
 int tile[MAX_MAP_Y][MAX_MAP_X];
 
 } Map;
+
+
 
 /* Structure pour gérer notre héros */
 

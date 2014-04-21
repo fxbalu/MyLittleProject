@@ -22,6 +22,8 @@ void drawTile(SDL_Surface *image, int destx,int desty,int srcx, int srcy)
 }
 
 
+
+
 void drawImage(SDL_Surface* image,int x,int y)
 {
     SDL_Rect dest;
@@ -74,6 +76,7 @@ void draw(void)
     }
 
     drawHud();
+
 
     SDL_Flip(jeu.screen);
 

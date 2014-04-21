@@ -42,7 +42,7 @@ while(go==1)        /*Boucle infinie*/
     {
         if(jeu.menuType == START)
         {
-            drawImage(map.background, 0, 0);
+            drawImage(map.backgroundMenu, 0, 0);
             drawStartMenu();
             SDL_Flip(jeu.screen);
             SDL_Delay(1);

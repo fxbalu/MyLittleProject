@@ -37,6 +37,7 @@ if(TTF_Init()<0)
 }
 
 font = loadFont("font/font1.ttf", 65);
+fontMenu = loadFont("font/font1.ttf", 45);
 
 int flags = MIX_INIT_FLAC; // Le mp3 ne marchait pas
 int initted = Mix_Init(flags);
@@ -70,6 +71,9 @@ void loadGame(void)
 
     /* Charge l'image du fond */
     map.background = loadImage("graphics/backgroundworld1.png");
+    map.backgroundMenu = loadImage("graphics/splashScreen.png");
+    jeu.tileMenu = loadImage("graphics/spriteSheetMenu.png");
+
 
     jeu.level = 1;
     changeLevel();
@@ -107,10 +111,17 @@ if (map.tileSet != NULL)
     SDL_FreeSurface(map.tileSet);
 }
 
-if (map.menu != NULL)
+if (map.backgroundMenu != NULL)
 {
-    SDL_FreeSurface(map.menu);
+    SDL_FreeSurface(map.backgroundMenu);
 }
+if (jeu.tileMenu != NULL)
+{
+    SDL_FreeSurface(jeu.tileMenu);
+}
+
+
+
 
 if(player.sprite != NULL)
 {

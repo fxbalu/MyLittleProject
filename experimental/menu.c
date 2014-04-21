@@ -44,6 +44,26 @@ void updateStartMenu(void)
 
 }
 
+void drawTileMenu(SDL_Surface *image,int x, int y , int frameNumber)
+{
+    SDL_Rect dest;
+
+    dest.x = x;
+    dest.y = y;
+    dest.w = image->w;
+    dest.h = image->h;
+
+    SDL_Rect src;
+
+    src.x = frameNumber * 190;
+    src.y = 0;
+    src.h = image->h;
+    src.w = 190;
+
+    SDL_BlitSurface(image, &src, jeu.screen, &dest);
+}
+
+
 
 void drawStartMenu(void)
 {
@@ -55,24 +75,28 @@ void drawStartMenu(void)
     if(jeu.choice != 0)
     {
         sprintf(text, "START");
-        drawString(text, 273, 200, font);
+        drawTileMenu(jeu.tileMenu,430,350,0);
+        drawString(text, 460, 350, fontMenu);
     }
     if(jeu.choice != 1)
     {
         sprintf(text, "QUIT");
-        drawString(text, 273, 280, font);
+        drawTileMenu(jeu.tileMenu,430,450,0);
+        drawString(text, 470, 450, fontMenu);
     }
 
-     //Si l'option est en surbrillance, on rajoute ">"
+
     if(jeu.choice == 0)
     {
-        sprintf(text, "B START");
-        drawString(text, 250, 200, font);
+        sprintf(text, "START");
+        drawTileMenu(jeu.tileMenu,430,350,1);
+        drawString(text, 460, 350, fontMenu);
     }
     else if(jeu.choice == 1)
     {
-        sprintf(text, "B QUIT");
-        drawString(text, 250, 280, font);
+        sprintf(text, "QUIT");
+        drawTileMenu(jeu.tileMenu,430,450,1);
+        drawString(text, 470, 450, fontMenu);
     }
 
 }

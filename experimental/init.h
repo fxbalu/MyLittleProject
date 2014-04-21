@@ -19,6 +19,7 @@ extern void freeSound(void);
 extern Gestion jeu;
 extern Map map;
 extern TTF_Font *font;
+extern TTF_Font *fontMenu;
 extern GameObject player;
 extern GameObject monster[MONSTRES_MAX];
 extern void loadSong( char filename[200]);

@@ -30,6 +30,7 @@ Gestion jeu;
 Map map;
 GameObject player;
 TTF_Font* font;
+TTF_Font* fontMenu;
 GameObject monster[MONSTRES_MAX];
 
 

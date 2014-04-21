@@ -444,8 +444,8 @@ void drawMap(void)
     /* Dessine la carte en commençant par startX et startY */
 
     /* On dessine ligne par ligne en commençant par y1 (0) jusqu'à y2 (480)
-    A chaque fois, on rajoute TILE_SIZE (donc 32), car on descend d'une ligne
-    de tile (qui fait 32 pixels de hauteur) */
+    A chaque fois, on rajoute TILE_SIZE (donc 70), car on descend d'une ligne
+    de tile (qui fait 70 pixels de hauteur) */
 
     for (y = y1; y < y2; y += TILE_SIZE)
     {
@@ -455,7 +455,7 @@ void drawMap(void)
         mapX = map.startX / TILE_SIZE;
 
         /* A chaque colonne de tile, on dessine la bonne tile en allant
-        de x = 0 à x = 640 */
+        de x = 0 à x = 1050*/
 
         for (x = x1; x < x2; x += TILE_SIZE)
         {
