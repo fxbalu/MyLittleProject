@@ -7,7 +7,6 @@
  * \author François-Xavier BALU
  */
 
-#include <stdlib.h>  /* atexit(), EXIT_SUCCESS */
 #include "main.h"
 
 /**
@@ -17,34 +16,7 @@
  */
 int main(int argc, char* argv[])
 {
-<<<<<<< HEAD
 
-    getInput();
-
-    if(jeu.onMenu == 0)
-    {
-        /* On met à jour le jeu */
-        updatePlayer();
-        updateMonsters();
-    }
-    else
-    {
-        if(jeu.menuType == START) updateStartMenu();
-    }
-
-
-    //Si on n'est pas dans un menu
-    if(jeu.onMenu == 0)
-    {
-        /* On affiche tout */
-        draw();
-    }
-    else
-    {
-        if(jeu.menuType == START)
-        {
-            drawImage(map.backgroundMenu, 0, 0);
-=======
    unsigned int frameLimit;
    int go;
 
@@ -92,8 +64,8 @@ int main(int argc, char* argv[])
       {
          if(jeu.menuType == START)
          {
-            drawImage(map.background, 0, 0);
->>>>>>> a1f03ba4959f4b0f01903861375de7e161b2064b
+            drawImage(map.backgroundMenu, 0, 0);
+
             drawStartMenu();
             SDL_Flip(jeu.screen);
             SDL_Delay(1);
