@@ -9,6 +9,7 @@
 #define DEFINED_GAME_H
 
 #include <SDL.h>           /* SDL_Surface */
+#include "intro.h"
 #include "gameStatus.h"    /* GameStatus */
 #include "gameOptions.h"   /* GameOptions */
 #include "input.h"         /* Input */
@@ -29,6 +30,7 @@
  */
 typedef struct Game {
    SDL_Surface* screen;
+   Intro* intro;
    GameStatus* status;
    GameOptions* options;
    Input* input;

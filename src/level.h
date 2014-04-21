@@ -12,6 +12,8 @@
 #include <SDL.h>
 #include <SDL_image.h>
 #include "common.h"
+#include "define.h"
+#include "input.h"
 #include "xml/xml.h"
 
 /**
@@ -22,6 +24,13 @@ typedef struct Camera {
    int x;
    int y;
 } Camera;
+
+typedef struct GameObject {
+   char* name;
+   int id; //identifiant de l'objet
+   int x;//position de l'objet
+   int y;
+} GameObject;
 
 /**
  * \struct Level
@@ -37,6 +46,7 @@ typedef struct Level {
    int sizeY; //nombre de tiles en hauteur
 
    char** tab; //nom a changer
+   GameObject** objects; //tableau des objets
 
    Camera* camera;
    /*ajouter la camera ici je pense*/
@@ -46,9 +56,11 @@ typedef struct Level {
 
 void initLevel (Level* level);
 
-void updateLevel (Level* level);
+void updateLevel (Level* level, Input* input);
 
 void displayLevel (Level* level, SDL_Surface* screen);
+
+void selectTile (SDL_Rect* src, int gid) ;
 
 void displayBackground (Level* level, SDL_Surface* screen);
 

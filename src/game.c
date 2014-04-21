@@ -27,32 +27,29 @@ int initGame(Game* game) {
       return -1;
    }
 
-   if(game == NULL){
+   if(game == NULL) {
       logError("Trying to initialize a NULL game structure", __FILE__, __LINE__);
       return -1;
-   }
-   else{
+   } else {
       /* initialize game status */
-      if((game->status = (GameStatus*) malloc(sizeof(GameStatus))) == NULL){
+      if((game->status = (GameStatus*) malloc(sizeof(GameStatus))) == NULL) {
          logError("Can't allocate memory for a GameStatus", __FILE__, __LINE__);
          return -1;
-      }
-      else{
+      } else {
          logMem(LOG_ALLOC, game->status, "GameStatus", "game's status", __FILE__, __LINE__);
          initGameStatus(game->status);
       }
 
       /* initialize game options */
-      if((game->options = (GameOptions*) malloc(sizeof(GameOptions))) == NULL){
+      if((game->options = (GameOptions*) malloc(sizeof(GameOptions))) == NULL) {
          logError("Can't allocate memory for a GameOptions", __FILE__, __LINE__);
          return -1;
-      }
-      else{
+      } else {
          logMem(LOG_ALLOC, game->options, "GameOptions", "game's options", __FILE__, __LINE__);
          initGameOptions(game->options);
       }
 
-      /* Create the SDL window after the options */
+      /* Create the SDL window after the options (because options contains the dimensions of the window*/
       game->screen = SDL_SetVideoMode(game->options->windowWidth,
                                       game->options->windowHeight,
                                       32,
@@ -64,43 +61,47 @@ int initGame(Game* game) {
       }
 
       /* initialize game's input */
-      if((game->input = (Input*) malloc(sizeof(Input))) == NULL){
+      if((game->input = (Input*) malloc(sizeof(Input))) == NULL) {
          logError("Can't allocate memory for an Input", __FILE__, __LINE__);
          return -1;
-      }
-      else{
+      } else {
          logMem(LOG_ALLOC, game->input, "Input", "game's input", __FILE__, __LINE__);
          initInput(game->input);
+      }
+
+            if((game->intro = (Intro*) malloc(sizeof(Intro))) == NULL) {
+         logError("Can't allocate memory for a Intro", __FILE__, __LINE__);
+         return -1;
+      } else {
+         logMem(LOG_ALLOC, game->status, "Intro", "game's intro", __FILE__, __LINE__);
+         initIntro(game->intro);
       }
 
       // ou alors on peut faire game->menu = initMenu();
       // fxbalu: On devrait faire ça pour tout en fait.
       /* initialize game's menu */
-      if((game->menu = (Menu*) malloc(sizeof(Menu))) == NULL){
+      if((game->menu = (Menu*) malloc(sizeof(Menu))) == NULL) {
          logError("Can't allocate memory for a Menu", __FILE__, __LINE__);
          return -1;
-      }
-      else{
+      } else {
          logMem(LOG_ALLOC, game->menu, "Menu", "game's menu", __FILE__, __LINE__);
          initMenu(game->menu);
       }
 
       /* initialize game's level */
-      if((game->level = (Level*) malloc(sizeof(Level))) == NULL){
+      if((game->level = (Level*) malloc(sizeof(Level))) == NULL) {
          logError("Can't allocate memory for a Level", __FILE__, __LINE__);
          return -1;
-      }
-      else{
+      } else {
          logMem(LOG_ALLOC, game->level, "Level", "game's level", __FILE__, __LINE__);
          initLevel(game->level);
       }
 
       /* initialize game's main character, the player */
-      if((game->player = (Character*) malloc(sizeof(Character))) == NULL){
+      if((game->player = (Character*) malloc(sizeof(Character))) == NULL) {
          logError("Can't allocate memory for a Character", __FILE__, __LINE__);
          return -1;
-      }
-      else{
+      } else {
          logMem(LOG_ALLOC, game->player, "Character", "game's player", __FILE__, __LINE__);
          initCharacter(game->player);
       }
@@ -135,8 +136,7 @@ int initSDL() {
       logError("Unable to initialize SDL", __FILE__, __LINE__);
       // fprintf(stderr, "Unable to initialize SDL : %s\n", SDL_GetError());
       return -1;
-   }
-   else{
+   } else {
       atexit(SDL_Quit);
    }
 
@@ -145,8 +145,7 @@ int initSDL() {
       logError("Unable to initialize SDL_image", __FILE__, __LINE__);
       // fprintf(stderr, "Unable to initialize SDL_image : %s\n", IMG_GetError());
       return -2;
-   }
-   else{
+   } else {
       atexit(IMG_Quit);
    }
 
@@ -155,13 +154,37 @@ int initSDL() {
 
 
 /**
- * \brief Does something.
+ * \brief Function called at each frame, update all the state of the game, character, level ...
  */
 void updateGame(Game* game) {
 
-   getInput(game->input, game->options); /*on recupere les inputs, arche bien pour l'instant*/
+   getInput(game->input, game->options); /*on recupere les inputs, marche bien*/
 
-   updateGameStatus(game->status, game->input); /*on update d'abord le statud du jeu*/
+   updateGameStatus(game->status, game->input); /*on update d'abord le status du jeu (le graphe d'état)*/
+
+// update les éléments du jeu
+   switch (game->status->state) {
+   case intro :
+      break;
+   case mainMenu :
+      break;
+   case newGameMenu :
+      break;
+   case continueMenu :
+      break;
+   case optionsMenu :
+      break;
+   case creditsMenu :
+      break;
+   case inGame :
+      updateCharacter(game->player, game->level, game->input);
+      updateLevel(game->level, game->input);
+      break;
+   case inGameMenu :
+      break;
+   case inGamePopUp :
+      ;
+   }
 
 //puis switch pour update la partie qui va bien
 }
@@ -175,14 +198,17 @@ void clearScreen (Game* game) {
    SDL_FillRect(game->screen, NULL, SDL_MapRGB(game->screen->format, 255, 255, 255));
 }
 
+/**
+ * \brief Function called at each frame, display the game on the screen.
+ */
 void displayGame(Game* game) {
-   printf("%d before clear screen\n", SDL_GetTicks());
+
    clearScreen(game);
 
    switch (game->status->state) {
 
    case intro :
-      //displayIntro();
+      displayIntro(game->intro, game->screen);
       break;
    case mainMenu :
       displayMenu(game->menu, game->status, game->screen);

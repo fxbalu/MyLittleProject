@@ -12,7 +12,7 @@
 
 /**
  * \brief The main function initialize the game then runs the main loop of the game.
- * When the game stops, the game is exit properly
+ * When the game stops, the game is exit properly.
  */
 int main(int argc, char* argv[]) {
 
