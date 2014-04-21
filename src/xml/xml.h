@@ -13,7 +13,7 @@
 #define XML_H_INCLUDED
 
 
-#include "node.h"    /* XML_Node member in XML_File structure */
+#include "node.h"    /* XML_Node */
 
 
 /**
@@ -56,19 +56,31 @@ typedef struct XML_File {
 } XML_File;
 
 
-XML_File* createXMLFile(void);
+/*
+ * Use these functions to manipulate XML files.
+ */
+XML_File* loadXMLFile(const char* path);
 void destroyXMLFile(XML_File* xml);
 
+char* getXMLString(char* path, XML_File* xml, char* defaultValue);
+int getXMLInt(char* path, XML_File* xml, int defaultValue);
+int getXMLBool(char* path, XML_File* xml, int defaultValue);
+double getXMLDouble(char* path, XML_File* xml, double defaultValue);
+int getXMLIntTable(int* table, char* path, XML_File* xml);
+
+
+
+/*
+ * Internal functions, do not use them to read values
+ */
+XML_File* createXMLFile(void);
 void resetXMLFile(XML_File* xml);
 void setXMLFilePath(const char* path, XML_File* xml);
-
 void openXMLFile(XML_File* xml);
 void closeXMLFile(XML_File* xml);
-
 int checkFirstLineXMLFile(XML_File* xml);
 XML_Node* parseXMLFile(FILE* file);
-
-XML_File* loadXMLFile(const char* path);
-char* getXMLValue(char* path, XML_File* xml);
+char* getXMLValue(char* path, XML_Node* root);
+XML_Node* getXMLNode(char* path, XML_Node* root);
 
 #endif /* XML_H_INCLUDED */

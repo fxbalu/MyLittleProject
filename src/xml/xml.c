@@ -10,8 +10,8 @@
 
 
 #include <stdio.h>   /* printf(), fopen(), fclose(), fgets() */
-#include <stdlib.h>  /* malloc(), free() */
-#include <string.h>  /* strlen(), strcpy() */
+#include <stdlib.h>  /* malloc(), free(), atoi(), strtod() */
+#include <string.h>  /* strlen(), strcpy(), strcmp() */
 
 #include "../log.h"  /* logError() */
 #include "node.h"    /* XML_Node */
@@ -266,90 +266,347 @@ XML_File* loadXMLFile(const char* path){
 
 
 /**
- * \brief Reads a value in a XML file.
+ * \brief Read integer values in a XML file and stored them in a table.
+ *
+ * \param[in] table  Table where integers will be stored
+ * \param[in] path   Matching expression. Every matching values will be
+ *                   converted to int and stored.
+ * \param[in] xml    XML file where values are searched
+ * \return           Number of stored integers
+ */
+int getXMLIntTable(int* table, char* path, XML_File* xml){
+   int count;
+   char* temp;
+   char strBuffer[XML_BUFFER_LENGTH];
+   char nameBuffer[XML_BUFFER_LENGTH];
+   char attrBuffer[XML_BUFFER_LENGTH];
+   XML_Node* n;
+   XML_Attribute* attr;
+   int readValue;
+
+   count = 0;
+
+   /* check parameters */
+   if((table == NULL) || (path == NULL) || (xml == NULL)){
+      logError("NULL parameter(s) in getXMLIntTable().", __FILE__, __LINE__);
+      return 0;
+   }
+
+   /* check if there is a ':' or a '$' in path */
+   /** \bug do not work as expected. Use multiple of strchr() instead. */
+   else if(strpbrk(path, "$:/") == NULL){
+      logError("Bad path (no parent (/), attribute (:) or value ($)).", __FILE__, __LINE__);
+      return 0;
+   }
+
+   // test/data?layer=0/gid:n
+   // -----------------  <--parent
+
+   /* get parent node */
+   temp = strrchr(path, (int)'/');
+   strncpy(strBuffer, path, temp-path);
+   strBuffer[temp-path] = '\0';
+   if((n = getXMLNode(strBuffer, xml->root)) == NULL){
+      logError("Can't find a parent node with this path.", __FILE__, __LINE__);
+   }
+
+   /* check children */
+   else{
+
+      /* read node's name in path */
+      path = temp+1;
+      temp = strpbrk(path, ":$");
+      strncpy(nameBuffer, path, temp-path);
+      nameBuffer[temp-path] = '\0';
+
+      /* read attribute's name if necessary */
+      if(*temp == ':'){
+         readValue = 0;
+         strcpy(attrBuffer, temp+1);
+      }
+      else{
+         readValue = 1;
+      }
+
+      n = n->first;
+      while(n != NULL){
+         /* check node's name */
+         if(strcmp(n->name, nameBuffer) == 0){
+
+            /* read, convert and store value */
+            if(readValue){
+               *table = atoi(n->value);
+               table++;
+               count++;
+            }
+
+            /* check attributes */
+            else{
+               attr = n->attr;
+               while(attr != NULL){
+                  if(strcmp(attr->name, attrBuffer) == 0){
+                     *table = atoi(attr->value);
+                     table++;
+                     count++;
+                  }
+                  attr = attr->next;
+               }
+            }
+         }
+         n = n->next;
+      }
+   }
+
+   return count;
+}
+
+
+/**
+ * \brief Read a value in a XML file.
  *
  * \param[in] path  Values path in the XML file.
  *                  To find a node's value, use "root/foo/bar$"
  *                  To find an attribute, use "root/foo/bar:attribute"
- * \param[in] xml   Searched XML file.
+ * \param[in] root  Searched XML tree.
  */
-char* getXMLValue(char* path, XML_File* xml){
+char* getXMLValue(char* path, XML_Node* root){
    char strBuffer[XML_BUFFER_LENGTH];
-   char charBuffer;
+   char* charPtr;
    char* value;
    XML_Node* n;
    XML_Attribute* attr;
-   int iPath, iBuf;
 
    value = NULL;
-   n = xml->root;
-   attr = NULL;
-   iPath = 0;
 
-   /* reads path */
-   while(value == NULL){
-      iBuf = 0;
-      charBuffer = path[iPath];
-      while((charBuffer != '/') &&
-            (charBuffer != ':') &&
-            (charBuffer != '$') &&
-            (charBuffer != '\0')){
-         strBuffer[iBuf] = charBuffer;
-         iBuf++;
-         iPath++;
-         charBuffer = path[iPath];
-      }
-      strBuffer[iBuf] = '\0';
-      iPath++;
+   /* check parameters */
+   if((path == NULL) || (root == NULL)){
+      logError("NULL parameter(s) in getXMLValue().", __FILE__, __LINE__);
+   }
 
-      /* found end of path */
-      if(charBuffer == '\0'){
-         logError("Reached end of path without ':' or '$'.", __FILE__, __LINE__);
-         return NULL;
+   /* check if there is a ':' or a '$' in path */
+   else if((charPtr = strpbrk(path, "$:")) == NULL){
+      logError("Not asking a value ($) or an attribute (:) in path.", __FILE__, __LINE__);
+   }
+
+   /* get node */
+   else{
+      /* copy path without the last part ("$" or ":attribute_name") */
+      strncpy(strBuffer, path, charPtr-path);
+      strBuffer[charPtr-path] = '\0';
+
+      if((n = getXMLNode(strBuffer, root)) == NULL){
+         logError("Didn't find a node with this path.", __FILE__, __LINE__);
       }
 
-      /* find child with this name */
-      while((n != NULL) && (strcmp(strBuffer, n->name) != 0)){
-         n = n->next;
-      }
-      if(n == NULL){
-         logError("Didn't find a child with this name", __FILE__, __LINE__);
-         return NULL;
-      }
-
-      /* found node character '/', checks child */
-      if(charBuffer == '/'){
-         n = n->first;
-      }
-      /* found value character '$', reads value */
-      else if(charBuffer == '$'){
+      /* return node's value */
+      else if(*charPtr == '$'){
          value = n->value;
       }
-      /* found attribute character ':', reads attribute */
-      else if(charBuffer == ':'){
 
-         /* read attribute's name */
-         iBuf = 0;
-         while(path[iPath] != '\0'){
-            strBuffer[iBuf] = path[iPath];
-            iBuf++;
-            iPath++;
-         }
-         strBuffer[iBuf] = '\0';
-
-         /* searches attribute */
+      /* find attribute */
+      else{
+         charPtr++;
          attr = n->attr;
-         while((attr != NULL) && (strcmp(strBuffer, attr->name) != 0)){
+         while((attr != NULL) && (strcmp(charPtr, attr->name) != 0)){
             attr = attr->next;
          }
          if(attr == NULL){
             logError("Didn't find an attribute with this name", __FILE__, __LINE__);
-            return NULL;
          }
          else{
             value = attr->value;
          }
       }
+   }
+
+   return value;
+}
+
+/**
+ * \brief Finds a particular node in a XML tree.
+ *
+ * \param[in] path  Node path in the tree.
+ *                  eg. "foo/bar", "foo/bar?attr=value/lel"
+ * \param[in] root  Tree's root.
+ * \return          A pointer to found node, NULL if such a node wasn't found.
+ */
+XML_Node* getXMLNode(char* path, XML_Node* root){
+   char nameBuffer[XML_BUFFER_LENGTH];
+   char attrBuffer[XML_BUFFER_LENGTH];
+   char valueBuffer[XML_BUFFER_LENGTH];
+   int iPath, iNaBuf, iAtBuf, iVaBuf;
+   char charBuffer;
+   XML_Node* n;
+   XML_Attribute* attr;
+   int nodeFound;
+
+   /* checks parameters */
+   if((path == NULL) || (root == NULL)){
+      return NULL;
+   }
+
+   n = root;
+   iPath = iNaBuf = iAtBuf = iVaBuf = 0;
+
+   /* reads node's name in path */
+   charBuffer = path[iPath];
+   while((charBuffer != '/') &&
+         (charBuffer != '?') &&
+         (charBuffer != '\0') &&
+         (iNaBuf < XML_BUFFER_LENGTH)){
+      nameBuffer[iNaBuf] = charBuffer;
+      iNaBuf++;
+      iPath++;
+      charBuffer = path[iPath];
+   }
+
+   nameBuffer[iNaBuf] = '\0';
+   iPath++;
+
+   /* reads attribute's name and value if necessary */
+   if(charBuffer == '?'){
+
+      /* reads attribute's name in path */
+      charBuffer = path[iPath];
+      while((charBuffer != '=') &&
+            (charBuffer != '\0') &&
+            (iNaBuf < XML_BUFFER_LENGTH)){
+         attrBuffer[iAtBuf] = charBuffer;
+         iAtBuf++;
+         iPath++;
+         charBuffer = path[iPath];
+      }
+      attrBuffer[iAtBuf] = '\0';
+      iPath++;
+
+      /* checks if attribute's name is followed by a value */
+      if(charBuffer != '='){
+         logError("Attribute's name is not followed by a value.", __FILE__, __LINE__);
+         return NULL;
+      }
+
+      /* reads attribute's value */
+      else{
+         charBuffer = path[iPath];
+         while((charBuffer != '/') &&
+               (charBuffer != '\0') &&
+               (iVaBuf < XML_BUFFER_LENGTH)){
+            valueBuffer[iVaBuf] = charBuffer;
+            iVaBuf++;
+            iPath++;
+            charBuffer = path[iPath];
+         }
+         valueBuffer[iVaBuf] = '\0';
+         iPath++;
+      }
+   }
+
+   /* finds a matching node */
+   nodeFound = 0;
+   printf("search node with name %s\n", nameBuffer);
+   do{
+      printf(" tested node: ");printXMLNode(n, 1);
+      /* checks node's name */
+      if(strcmp(nameBuffer, n->name) != 0){
+         n = n->next;
+      }
+      /* found a node with this name, and no need to check attribute */
+      else if(!iAtBuf){
+         nodeFound = 1;
+      }
+      /* also checks attribute's name and value */
+      else{
+         printf(" search attribute %s with value %s\n", attrBuffer, valueBuffer);
+         attr = n->attr;
+         while((attr != NULL) && (nodeFound == 0)){
+            printf("  %s=\"%s\"\n", attr->name, attr->value);
+            if((strcmp(attr->name, attrBuffer) == 0) &&
+               (strcmp(attr->value, valueBuffer) == 0)){
+               nodeFound = 1;
+            }
+            else{
+               attr = attr->next;
+            }
+         }
+         /* Didn't found a matching attribute, select next node */
+         if(attr == NULL){
+            n = n->next;
+         }
+      }
+   }
+   while((!nodeFound) && (n != NULL));
+
+   /* Didn't found a matching node, return NULL */
+   if(!nodeFound){
+      n = NULL;
+   }
+   /* found node character '/', checks children */
+   else if(charBuffer == '/'){
+      n = getXMLNode(path + iPath, n->first);
+   }
+   /* Didn't find end of string character '/0', return NULL  */
+   else if(charBuffer != '\0'){
+      n = NULL;
+   }
+
+   return n;
+}
+
+char* getXMLString(char* path, XML_File* xml, char* defaultValue){
+   char* value;
+
+   if((value = getXMLValue(path, xml->root)) == NULL){
+      value = defaultValue;
+   }
+
+   return value;
+}
+
+int getXMLInt(char* path, XML_File* xml, int defaultValue){
+   char* temp;
+   int value;
+
+   if((temp = getXMLValue(path, xml->root)) == NULL){
+      value = defaultValue;
+   }
+   else{
+      value  = atoi(temp);
+   }
+
+   return value;
+}
+
+int getXMLBool(char* path, XML_File* xml, int defaultValue){
+   char* temp;
+   int value;
+
+   if((temp = getXMLValue(path, xml->root)) == NULL){
+      value = defaultValue;
+   }
+   else{
+      if(strcmp(temp, "true") == 0){
+         value = 1;
+      }
+      else if(strcmp(temp, "false") == 0){
+         value = 0;
+      }
+      else{
+         value = defaultValue;
+      }
+   }
+
+   return value;
+}
+
+double getXMLDouble(char* path, XML_File* xml, double defaultValue){
+   char* temp;
+   double value;
+
+   if((temp = getXMLValue(path, xml->root)) == NULL){
+      value = defaultValue;
+   }
+   else{
+      value  = strtod(temp, NULL);
    }
 
    return value;
