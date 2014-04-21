@@ -1,5 +1,34 @@
 #include "map.h"
+#include "xml/xml.h" /* XML_File, loadXMLFile(), getXMLInt()... */
 
+/**
+ * \brief Load a map from a TMX file.
+ * \warning WIP, doesn't work.
+ */
+void loadMapXML(char* path){
+   XML_File* xml;
+
+   if((xml = loadXMLFile(path)) == NULL){
+      printf("Failed to open file\n");
+      destroyXMLFile(xml);
+   }
+
+   else if((map.maxX = getXMLInt("map/layer?name=foreground:width", xml, 0)) >= MAX_MAP_X){
+      printf("Too many tiles on X\n");
+   }
+   else if((map.maxY = getXMLInt("map/layer?name=foreground:height", xml, 0)) >= MAX_MAP_Y){
+      printf("Too many tiles on Y\n");
+   }
+   else{
+      getXMLIntTable(*(map.tile), "map/layer?name=foreground/data/tile:gid", xml);
+   }
+
+   map.maxX = (map.maxX + 1) * TILE_SIZE;
+   map.maxY = (map.maxY + 1) * TILE_SIZE;
+   map.startX = map.startY = 0;
+
+   destroyXMLFile(xml);
+}
 
 void loadMap(char* name)
 {
