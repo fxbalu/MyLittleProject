@@ -92,7 +92,7 @@ void displayBackground (Level* level, SDL_Surface* screen) {
 //test xml parseur :
 void loadLevel (Level* level) {
    XML_File* xmlLevel = createXMLFile();
-   setXMLFilePath("res/data/level/test tuto.tmx", xmlLevel); // resetXMLFile pour recharger un autre niveau ! ty fx
+   setXMLFilePath("res/data/level/level1.tmx", xmlLevel); // resetXMLFile pour recharger un autre niveau ! ty fx
    openXMLFile(xmlLevel);
    checkFirstLineXMLFile(xmlLevel);
 

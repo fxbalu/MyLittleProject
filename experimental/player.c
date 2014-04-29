@@ -166,7 +166,7 @@ void centerScrollingOnPlayer(void)
     //du joueur.
     //Puis on "clamp" (limite) l'affichage de l'écran pour ne pas sortir de la map.
 
-    map.startX = player.x - (SCREEN_WIDTH/2);
+    map.startX = player.x - (SCREEN_WIDTH/4);
 
     if(map.startX < 0)
     {
@@ -178,7 +178,7 @@ void centerScrollingOnPlayer(void)
         map.startX = map.maxX - SCREEN_WIDTH;
     }
 
-    map.startY = player.y - (SCREEN_HEIGHT/2);
+    map.startY = player.y - (SCREEN_HEIGHT/4);
 
     if(map.startY < 0)
     {
