@@ -79,9 +79,9 @@ void loadGame(void)
     changeLevel();
 
 
-    loadSong("music/Those of Us Who Fight.mp3");
+    //loadSong("music/Those of Us Who Fight.mp3");
 
-    loadSound();
+    //loadSound();
 
     jeu.etoiles = 0;
     jeu.life = 3;

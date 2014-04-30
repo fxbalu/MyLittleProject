@@ -12,8 +12,12 @@ void loadMapXML(char* path){
       printf("Failed to open file\n");
       destroyXMLFile(xml);
    }
+   else {
+      checkFirstLineXMLFile(xml);
+   }
 
-   else if((map.maxX = getXMLInt("map/layer?name=foreground:width", xml, 0)) >= MAX_MAP_X){
+
+   if((map.maxX = getXMLInt("map/layer?name=foreground:width", xml, 0)) >= MAX_MAP_X){
       printf("Too many tiles on X\n");
    }
    else if((map.maxY = getXMLInt("map/layer?name=foreground:height", xml, 0)) >= MAX_MAP_Y){
@@ -32,6 +36,7 @@ void loadMapXML(char* path){
 
 void loadMap(char* name)
 {
+
     int x,y;
     FILE *fp;
 
@@ -441,7 +446,7 @@ void changeLevel(void)
 
     /* Charge la map depuis le fichier */
     sprintf(file, "map/map%d.txt", jeu.level );
-    loadMap(file);
+    loadMapXML("level1.tmx");
 
     if(map.tileSet == NULL)    map.tileSet = loadImage("graphics/all_tileset.png");
 

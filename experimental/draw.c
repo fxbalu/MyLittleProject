@@ -40,6 +40,7 @@ void drawImage(SDL_Surface* image,int x,int y)
 
 void drawHud(void)
 {
+
     char text[200];
 
     drawImage(jeu.HUD_vie,50,30);
