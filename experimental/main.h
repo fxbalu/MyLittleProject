@@ -31,6 +31,8 @@ Map map;
 GameObject player;
 TTF_Font* font;
 TTF_Font* fontMenu;
+TTF_Font* fontGameover;
+
 GameObject monster[MONSTRES_MAX];
 
 

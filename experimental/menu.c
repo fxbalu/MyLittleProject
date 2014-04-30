@@ -28,10 +28,6 @@ void updateStartMenu(void)
         {
             jeu.level = 1;
             initializePlayer();
-            changeLevel();
-            /* On réinitialise les variables du jeu */
-            jeu.life = 3;
-            jeu.etoiles = 0;
             jeu.onMenu = 0;
         }
         //Sinon, on quitte le jeu
@@ -76,13 +72,13 @@ void drawStartMenu(void)
     {
         sprintf(text, "START");
         drawTileMenu(jeu.tileMenu,430,350,0);
-        drawString(text, 460, 350, fontMenu);
+        drawString(text, 460, 350, 255, 255, 255, fontMenu);
     }
     if(jeu.choice != 1)
     {
         sprintf(text, "QUIT");
         drawTileMenu(jeu.tileMenu,430,450,0);
-        drawString(text, 470, 450, fontMenu);
+        drawString(text, 470, 450, 255, 255, 255,fontMenu);
     }
 
 
@@ -90,13 +86,13 @@ void drawStartMenu(void)
     {
         sprintf(text, "START");
         drawTileMenu(jeu.tileMenu,430,350,1);
-        drawString(text, 460, 350, fontMenu);
+        drawString(text, 460, 350, 255, 255, 255, fontMenu);
     }
     else if(jeu.choice == 1)
     {
         sprintf(text, "QUIT");
         drawTileMenu(jeu.tileMenu,430,450,1);
-        drawString(text, 470, 450, fontMenu);
+        drawString(text, 470, 450, 255, 255, 255, fontMenu);
     }
 
 }

@@ -35,9 +35,9 @@ if(TTF_Init()<0)
     printf("couldn't initialize  SDL_TTF: %s\n",SDL_GetError());
     exit(1);
 }
-
 font = loadFont("font/font1.ttf", 65);
 fontMenu = loadFont("font/font1.ttf", 45);
+fontGameover = loadFont("font/font1.ttf", 65);
 
 int flags = MIX_INIT_FLAC; // Le mp3 ne marchait pas
 int initted = Mix_Init(flags);
@@ -70,21 +70,22 @@ void loadGame(void)
 {
 
     /* Charge l'image du fond */
-    map.background = loadImage("graphics/backgroundworld1.png");
-    map.backgroundMenu = loadImage("graphics/splashScreen.png");
-    jeu.tileMenu = loadImage("graphics/spriteSheetMenu.png");
+    if(map.background == NULL) map.background = loadImage("graphics/backgroundworld1.png");
+    if(map.backgroundMenu == NULL) map.backgroundMenu = loadImage("graphics/splashScreen.png");
+    if(jeu.tileMenu == NULL) jeu.tileMenu = loadImage("graphics/spriteSheetMenu.png");
 
 
     jeu.level = 1;
     changeLevel();
 
 
-    //loadSong("music/Those of Us Who Fight.mp3");
+    loadSong(-1,"music/Those of Us Who Fight.mp3");
 
-    //loadSound();
+    loadSound();
 
     jeu.etoiles = 0;
-    jeu.life = 3;
+    jeu.life = 1;
+
 
     jeu.HUD_vie = loadImage("graphics/lifeHud.png");
     jeu.HUD_etoiles = loadImage("graphics/hud_coins.png");
@@ -100,6 +101,7 @@ void cleanup()
 {
 
 int i;
+
 /* Libère l'image du background */
 
 if (map.background != NULL)
@@ -110,6 +112,7 @@ if (map.tileSet != NULL)
 {
     SDL_FreeSurface(map.tileSet);
 }
+
 
 if (map.backgroundMenu != NULL)
 {
@@ -150,6 +153,8 @@ if(jeu.musique !=NULL)
     Mix_FreeMusic(jeu.musique);
 }
 
+
+
 Mix_CloseAudio();
 Mix_Quit();
 
@@ -157,6 +162,8 @@ freeSound();
 
 
 closeFont(font);
+closeFont(fontGameover);
+closeFont(fontMenu);
 
 TTF_Quit();
 

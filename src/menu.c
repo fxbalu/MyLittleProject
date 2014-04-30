@@ -68,8 +68,8 @@ void displayMenuBlock(Menu* menu, GameStatus* status, SDL_Surface* screen) {
 }
 
 void displaySplashScreen (Menu* menu, SDL_Surface* screen) {
-   printf("%d before blit\n", SDL_GetTicks());
+   //printf("%d before blit\n", SDL_GetTicks());
    SDL_BlitSurface(menu->splashScreen, NULL, screen, NULL);/* on fera mieux plus tard pour le splash screen*/
 
-   printf("%d after blit\n", SDL_GetTicks());
+  // printf("%d after blit\n", SDL_GetTicks());
 }

@@ -29,7 +29,7 @@
 //#define LOG_ERR_IN_STDERR
 
 /** Error related message will be displayed on the standard output (terminal) */
-#define LOG_ERR_IN_STDOUT
+//#define LOG_ERR_IN_STDOUT
 
 /** Error related message will be saved in a error specific text file */
 //#define LOG_ERR_IN_ERR_FILE
@@ -44,10 +44,10 @@
 //#define LOG_FILE_PATH
 
 /** Path of the standard logging file */
-#define LOG_STD_FILE_PATH  "stdlog.txt"
+//#define LOG_STD_FILE_PATH  "stdlog.txt"
 
 /** Path of the error logging file */
-#define LOG_ERR_FILE_PATH  "errlog.txt"
+//#define LOG_ERR_FILE_PATH  "errlog.txt"
 
 /** Use colors in the standard output and error output */
 #define LOG_WITH_COLORS
@@ -94,7 +94,7 @@
 /**@{*/
 
 /** Number of entry in the global variable table */
-#define LOG_VARIABLE_NB  4000
+#define LOG_VARIABLE_NB  10000
 
 /** Number of types that can be logged */
 #define LOG_TYPE_NB  20

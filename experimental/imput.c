@@ -85,9 +85,6 @@ while(SDL_PollEvent(&event))
             input.up = 0;
             break;
 
-            case SDLK_RETURN:
-            input.enter = 0;
-            break;
 
             default:
             break;

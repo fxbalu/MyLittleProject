@@ -26,12 +26,12 @@ int main(int argc, char* argv[]) {
 
    /* Main Loop */
    while(game.status->gameIsRunning) {
-      printf("%d next ticks\n",game.status->nextTick);
-      printf("%d before update\n", SDL_GetTicks()); // verif des timings + des fps
+      //printf("%d next ticks\n",game.status->nextTick);
+      //printf("%d before update\n", SDL_GetTicks()); // verif des timings + des fps
       updateGame(&game);
-      printf("%d before display\n", SDL_GetTicks());
+      //printf("%d before display\n", SDL_GetTicks());
       displayGame(&game);
-      printf("%d before delay\n\n", SDL_GetTicks());
+      //printf("%d before delay\n\n", SDL_GetTicks());
       delayGame(&game);
       //printInput(game.input);
    }

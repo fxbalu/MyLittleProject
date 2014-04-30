@@ -15,8 +15,6 @@
 #define SCREEN_WIDTH 1050
 #define SCREEN_HEIGHT 700
 
-#define MAX_MAP_X 1000
-#define MAX_MAP_Y 100
 
 #define TILE_SIZE 70
 
@@ -24,7 +22,9 @@
 #define PLAYER_WIDTH 72
 #define PLAYER_HEIGTH 97
 
-#define TIME_BETWEEN_2_FRAMES 2
+// constantes pour l'annimation du hero
+
+#define TIME_BETWEEN_2_FRAMES 1
 
 #define PLAYER_SPEED 10
 
@@ -41,9 +41,6 @@
 
  // définissant le seuil entre les tiles traversables (blank) et les tiles solides
 #define BLANK_TILE 78
-#define TILE_MONSTER1 300
-#define TILE_COIN 15
-#define TILE_DOOR 44
 
 //Constantes définissant la gravité et la vitesse max de chute
 #define GRAVITY_SPEED 1,5
@@ -54,7 +51,7 @@
 #define LEVEL_MAX 2
 
 
-
+// enum pour les sounds
 
   enum
 {
@@ -63,6 +60,8 @@
     COIN,
     DEADPLAYER
 };
+
+// enum pour le menu
 
   enum
  {

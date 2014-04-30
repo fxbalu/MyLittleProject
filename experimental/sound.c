@@ -1,6 +1,6 @@
 #include "sound.h"
 
-void loadSong(char filename[200] )
+void loadSong(int loop,char filename[200] )
 {
 
     if(jeu.musique != NULL)
@@ -16,7 +16,7 @@ void loadSong(char filename[200] )
         exit(1);
     }
 
-    if(Mix_PlayMusic(jeu.musique, -1) == -1)
+    if(Mix_PlayMusic(jeu.musique, loop) == -1)
     {
         printf("Mix_PlayMusic: %s\n", Mix_GetError());
     }
@@ -27,27 +27,27 @@ void loadSong(char filename[200] )
 void loadSound(void)
 {
 
-   jeu.miniondead_sound = Mix_LoadWAV("sounds/miniondead.wav");
+   if(jeu.miniondead_sound == NULL) jeu.miniondead_sound = Mix_LoadWAV("sounds/miniondead.wav");
    if (jeu.miniondead_sound == NULL)
     {
         fprintf(stderr, "Can't read the deadminion sound FX \n");
         exit(1);
     }
 
-   jeu.jump_sound = Mix_LoadWAV("sounds/jump.wav");
+   if(jeu.jump_sound == NULL)jeu.jump_sound = Mix_LoadWAV("sounds/jump.wav");
    if (jeu.jump_sound == NULL)
     {
         fprintf(stderr, "Can't read the jump sound FX \n");
         exit(1);
     }
 
-   jeu.coin_sound = Mix_LoadWAV("sounds/coin.wav");
+   if(jeu.coin_sound == NULL)jeu.coin_sound = Mix_LoadWAV("sounds/coin.wav");
    if (jeu.coin_sound == NULL)
     {
         fprintf(stderr, "Can't read the coin sound FX \n");
         exit(1);
     }
-    jeu.deadplayer1_sound = Mix_LoadWAV("sounds/coin.wav");
+   if(jeu.deadplayer1_sound == NULL) jeu.deadplayer1_sound = Mix_LoadWAV("sounds/coin.wav");
    if (jeu.deadplayer1_sound == NULL)
     {
         fprintf(stderr, "Can't read the deadplayer1_sound FX \n");

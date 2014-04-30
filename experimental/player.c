@@ -200,8 +200,11 @@ void getItem(void)
 
 void playerGameover()
 {
+    int i;
+    char text[200];
+    sprintf(text, "Press ENTER");
+    loadSong(1,"sounds/gameover.mp3");
 
-    loadSong("sounds/gameover.mp3");
     SDL_Surface *gameover = loadImage("graphics/gameover.jpg");
 
     drawImage(gameover,0,0);
@@ -209,7 +212,23 @@ void playerGameover()
 
     SDL_Flip(jeu.screen);
 
-    SDL_Delay(4250);
+    while(input.enter == 0)
+    {
+    i = SDL_GetTicks();
+
+    drawImage(gameover,0,0);
+    drawString(text, 350, 400, 150, 150, 150, fontGameover);
+    SDL_Flip(jeu.screen);
+    while(SDL_GetTicks()-i != 500);
+    drawImage(gameover,0,0);
+    SDL_Flip(jeu.screen);
+    while(SDL_GetTicks()-i != 1000);
+    getInput();
+
+    }
+    input.enter = 0;
+
+
     loadGame();
 
     jeu.onMenu = 1;

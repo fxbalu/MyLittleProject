@@ -5,72 +5,77 @@
  * \brief Load a map from a TMX file.
  * \warning WIP, doesn't work.
  */
-void loadMapXML(char* path){
-   XML_File* xml;
-
-   if((xml = loadXMLFile(path)) == NULL){
-      printf("Failed to open file\n");
-      destroyXMLFile(xml);
-   }
-   else {
-      checkFirstLineXMLFile(xml);
-   }
+void loadMap (char* name) {
 
 
-   if((map.maxX = getXMLInt("map/layer?name=foreground:width", xml, 0)) >= MAX_MAP_X){
-      printf("Too many tiles on X\n");
-   }
-   else if((map.maxY = getXMLInt("map/layer?name=foreground:height", xml, 0)) >= MAX_MAP_Y){
-      printf("Too many tiles on Y\n");
-   }
-   else{
-      getXMLIntTable(*(map.tile), "map/layer?name=foreground/data/tile:gid", xml);
-   }
 
-   map.maxX = (map.maxX + 1) * TILE_SIZE;
-   map.maxY = (map.maxY + 1) * TILE_SIZE;
-   map.startX = map.startY = 0;
+        XML_File* xmlLevel = createXMLFile();
+        setXMLFilePath(name, xmlLevel);
+         // resetXMLFile pour recharger un autre niveau ! ty fx
+        openXMLFile(xmlLevel);
 
-   destroyXMLFile(xml);
-}
+        checkFirstLineXMLFile(xmlLevel);
 
-void loadMap(char* name)
-{
+        xmlLevel->root = parseXMLFile(xmlLevel->file);
 
-    int x,y;
-    FILE *fp;
+        //printXMLNode(xmlLevel->root, 2);
 
-    fp = fopen(name, "rb");
+        //on recupère les premières infos dans le xml
 
-    if(fp == NULL)
-    {
-        printf("Failed to open map %s\n", name);
-        exit(1);
-    }
+        int sizeX = atoi(xmlLevel->root->attr->next->next->value); //a toi de jouer !
+        int sizeY = atoi(xmlLevel->root->attr->next->next->next->value); //échec et mat !
 
-    map.maxX = map.maxY =0;
+        int i,j;
 
-    for(y=0;y<MAX_MAP_Y;y++)
-    {
-        for(x=0;x<MAX_MAP_X;x++)
-        {
-            fscanf(fp,"%d", &map.tile[y][x]);
 
-            if(map.tile[y][x]>0)
-            {
-                if(x>map.maxX) map.maxX = x;
-                if(y>map.maxY) map.maxY = y;
-            }
+        //printXMLNode(xmlLevel->root, 2);
+
+        //on stocke les premières infos
+
+        map.maxX = (sizeX)*TILE_SIZE;
+        map.maxY = (sizeY)*TILE_SIZE;
+        map.sizeX = sizeX;
+        map.sizeY = sizeY;
+        map.startX = map.startY = 0;
+
+
+
+        //on rempli le tableau de tile, puis le tableau des items.
+        map.tile = (int**) malloc((map.sizeY+1)*sizeof(int*)); //colonne puis ligne
+
+        for(i=0 ; i<map.sizeX; i++) {
+          map.tile[i] = (int*) malloc(map.sizeX*sizeof(int));
         }
-    }
 
-    map.maxX = (map.maxX+1)*TILE_SIZE;
-    map.maxY = (map.maxY+1)*TILE_SIZE;
+        XML_Node* tileLayer = xmlLevel->root->first->next->next;
 
-    map.startX = map.startY = 0;
+        for(i=0 ; i<map.sizeY ; i++) {
+          for(j=0 ; j<map.sizeX ; j++) {
 
-    fclose(fp);
+             map.tile[i][j] = atoi(tileLayer->first->current->attr->value);
+
+
+             tileLayer->first->current = tileLayer->first->current->next;
+
+
+          }
+
+
+        }
+        // ligne supplémentaire pour les gestions de collisions
+        for(i=0; i<map.sizeX;i++) map.tile[map.sizeY][i] = 0;
+        for(i=0; i<map.sizeX;i++) map.tile[map.sizeY+1][i] = 0;
+
+
+
+       closeXMLFile(xmlLevel);
+
+
+
 }
+
+
+
 
 void mapCollision(GameObject *entity)
 {
@@ -106,60 +111,12 @@ void mapCollision(GameObject *entity)
         //De là, on va tester les mouvements initiés dans updatePlayer grâce aux vecteurs
         //dirX et dirY, tout en testant avant qu'on se situe bien dans les limites de l'écran.
 
-        if (x1 >= 0 && x2 < MAX_MAP_X && y1 >= 0 && y2 < MAX_MAP_Y)
+        if (x1 >= 0 && x2 < map.maxX && y1 >= 0 && y2 < map.maxY)
         {
             //Si on a un mouvement à droite
 
             if (entity->dirX > 0)
             {
-
-
-
-                if(map.tile[y1][x2] == TILE_COIN)
-                {
-                    getItem();
-                    map.tile[y1][x2] = 0;
-                }
-
-                else if(map.tile[y2][x2] == TILE_COIN)
-                {
-                    getItem();
-                    map.tile[y2][x2] = 0;
-                }
-
-                if(map.tile[y1][x2] == TILE_DOOR)
-                {
-                    jeu.level++;
-                    //Si on dépasse le niveau max, on annule et on limite le déplacement du joueur
-                    if(jeu.level > LEVEL_MAX)
-                    {
-                        jeu.level = LEVEL_MAX;
-                        entity->x = map.maxX - entity->w - 1;
-                    }
-                    //Sion, on passe au niveau sup, on charge la nouvelle map et on réinitialise le joueur
-                    else
-                    {
-                        changeLevel();
-                        initializePlayer();
-                    }
-                }
-
-                else if(map.tile[y2][x2] == TILE_DOOR)
-                {
-                    jeu.level++;
-                    //Si on dépasse le niveau max, on annule et on limite le déplacement du joueur
-                    if(jeu.level > LEVEL_MAX)
-                    {
-                        jeu.level = LEVEL_MAX;
-                        entity->x = map.maxX - entity->w - 1;
-                    }
-                    //Sion, on passe au niveau sup, on charge la nouvelle map et on réinitialise le joueur
-                    else
-                    {
-                        changeLevel();
-                        initializePlayer();
-                    }
-                }
 
                 //On vérifie si les tiles recouvertes sont solides
 
@@ -184,51 +141,7 @@ void mapCollision(GameObject *entity)
             else if (entity->dirX < 0)
             {
 
-                if(map.tile[y1][x1] == TILE_COIN)
-                {
-                    getItem();
-                    map.tile[y1][x1] = 0;
-                }
 
-                else if(map.tile[y2][x1] == TILE_COIN)
-                {
-                    getItem();
-                    map.tile[y2][x1] = 0;
-                }
-
-                if(map.tile[y1][x1] == TILE_DOOR)
-                {
-                    jeu.level++;
-                    //Si on dépasse le niveau max, on annule et on limite le déplacement du joueur
-                    if(jeu.level > LEVEL_MAX)
-                    {
-                        jeu.level = LEVEL_MAX;
-                        entity->x = map.maxX - entity->w - 1;
-                    }
-                    //Sion, on passe au niveau sup, on charge la nouvelle map et on réinitialise le joueur
-                    else
-                    {
-                        changeLevel();
-                        initializePlayer();
-                    }
-                }
-
-                else if(map.tile[y2][x1] == TILE_DOOR)
-                {
-                    jeu.level++;
-                    //Si on dépasse le niveau max, on annule et on limite le déplacement du joueur
-                    if(jeu.level > LEVEL_MAX)
-                    {
-                        jeu.level = LEVEL_MAX;
-                        entity->x = map.maxX - entity->w - 1;
-                    }
-                    //Sion, on passe au niveau sup, on charge la nouvelle map et on réinitialise le joueur
-                    else
-                    {
-                        changeLevel();
-                        initializePlayer();
-                    }
-                }
 
                 if ( map.tile[y1][x1] > BLANK_TILE ||  map.tile[y2][x1] > BLANK_TILE)
                 {
@@ -273,56 +186,13 @@ void mapCollision(GameObject *entity)
         y1 = (entity->y + entity->dirY) / TILE_SIZE;
         y2 = (entity->y + entity->dirY + entity->h) / TILE_SIZE;
 
-        if (x1 >= 0 && x2 < MAX_MAP_X && y1 >= 0 && y2 < MAX_MAP_Y)
+        if (x1 >= 0 && x2 < map.maxX && y1 >= 0 && y2 < map.maxY)
         {
             if (entity->dirY > 0)
             {
                 /* Déplacement en bas */
 
-                if(map.tile[y2][x1] == TILE_COIN)
-                {
-                    getItem();
-                    map.tile[y2][x1] = 0;
-                }
-                else if(map.tile[y2][x2] == TILE_COIN)
-                {
-                    getItem();
-                    map.tile[y2][x2] = 0;
-                }
 
-                if(map.tile[y2][x1] == TILE_DOOR)
-                {
-                    jeu.level++;
-                    //Si on dépasse le niveau max, on annule et on limite le déplacement du joueur
-                    if(jeu.level > LEVEL_MAX)
-                    {
-                        jeu.level = LEVEL_MAX;
-                        entity->x = map.maxX - entity->w - 1;
-                    }
-                    //Sion, on passe au niveau sup, on charge la nouvelle map et on réinitialise le joueur
-                    else
-                    {
-                        changeLevel();
-                        initializePlayer();
-                    }
-                }
-
-                else if(map.tile[y2][x2] == TILE_DOOR)
-                {
-                    jeu.level++;
-                    //Si on dépasse le niveau max, on annule et on limite le déplacement du joueur
-                    if(jeu.level > LEVEL_MAX)
-                    {
-                        jeu.level = LEVEL_MAX;
-                        entity->x = map.maxX - entity->w - 1;
-                    }
-                    //Sion, on passe au niveau sup, on charge la nouvelle map et on réinitialise le joueur
-                    else
-                    {
-                        changeLevel();
-                        initializePlayer();
-                    }
-                }
 
                 if ( map.tile[y2][x1] > BLANK_TILE || map.tile[y2][x2] > BLANK_TILE)
                 {
@@ -342,51 +212,7 @@ void mapCollision(GameObject *entity)
             {
                 /* Déplacement vers le haut */
 
-                if(map.tile[y2][x1] == TILE_COIN)
-                {
-                    getItem();
-                    map.tile[y2][x1] = 0;
-                }
 
-                else if(map.tile[y2][x2] == TILE_COIN)
-                {
-                    getItem();
-                    map.tile[y2][x2] = 0;
-                }
-
-                if(map.tile[y2][x1] == TILE_DOOR)
-                {
-                    jeu.level++;
-                    //Si on dépasse le niveau max, on annule et on limite le déplacement du joueur
-                    if(jeu.level > LEVEL_MAX)
-                    {
-                        jeu.level = LEVEL_MAX;
-                        entity->x = map.maxX - entity->w - 1;
-                    }
-                    //Sion, on passe au niveau sup, on charge la nouvelle map et on réinitialise le joueur
-                    else
-                    {
-                        changeLevel();
-                        initializePlayer();
-                    }
-                }
-
-                else if(map.tile[y2][x2] == TILE_DOOR)
-                {
-                    jeu.level++;
-                    //Si on dépasse le niveau max, on annule et on limite le déplacement du joueur
-                    if(jeu.level > LEVEL_MAX)
-                    {
-                        jeu.level = LEVEL_MAX;
-                        entity->x = map.maxX - entity->w - 1;
-                    }
-                    //Sion, on passe au niveau sup, on charge la nouvelle map et on réinitialise le joueur
-                    else
-                    {
-                        changeLevel();
-                        initializePlayer();
-                    }
-                }
 
 
                 if ( map.tile[y1][x1] > BLANK_TILE ||  map.tile[y1][x2] > BLANK_TILE)
@@ -432,10 +258,10 @@ void mapCollision(GameObject *entity)
 
     //Maintenant, s'il sort de l'écran par le bas (chute dans un trou sans fond), on lance le timer
     //qui gère sa mort et sa réinitialisation (plus tard on gèrera aussi les vies).
-    if (entity->y > map.maxY)
+    if (entity->y  > map.maxY)
     {
         jeu.life--;
-        entity->timerMort = 60;
+        entity->timerMort = 10;
         if(jeu.life < 1) playerGameover();
     }
 }
@@ -445,8 +271,8 @@ void changeLevel(void)
     char file[200];
 
     /* Charge la map depuis le fichier */
-    sprintf(file, "map/map%d.txt", jeu.level );
-    loadMapXML("level1.tmx");
+    sprintf(file, "map/level%d.tmx", jeu.level );
+    loadMap(file);
 
     if(map.tileSet == NULL)    map.tileSet = loadImage("graphics/all_tileset.png");
 
@@ -493,19 +319,9 @@ void drawMap(void)
         for (x = x1; x < x2; x += TILE_SIZE)
         {
 
-            if(map.tile[mapY][mapX]!=0)
-            {
-                if(map.tile[mapY][mapX] == TILE_MONSTER1)
-                {
-                    initializeMonsters(mapX*TILE_SIZE, mapY*TILE_SIZE);
-
-                    map.tile[mapY][mapX] = 0;
-                }
-            }
-
             /* Suivant le numéro de notre tile, on découpe le tileset */
 
-            a = map.tile[mapY][mapX];
+            a = map.tile[mapY][mapX]-1;
 
             /* Calcul pour obtenir son y (pour un tileset de 10 tiles
             par ligne, d'où le 10 */
@@ -528,6 +344,8 @@ void drawMap(void)
 
 }
 
+
+
 void monsterCollisionToMap(GameObject* entity)
 {
 
@@ -548,7 +366,7 @@ void monsterCollisionToMap(GameObject* entity)
         y1 = (entity->y) / TILE_SIZE;
         y2 = (entity->y + i - 1) / TILE_SIZE;
 
-        if (x1 >= 0 && x2 < MAX_MAP_X && y1 >= 0 && y2 < MAX_MAP_Y)
+        if (x1 >= 0 && x2 < map.maxX && y1 >= 0 && y2 < map.maxY)
         {
             //Si on a un mouvement à droite
             if (entity->dirX > 0)
@@ -608,7 +426,7 @@ void monsterCollisionToMap(GameObject* entity)
         y1 = (entity->y + entity->dirY) / TILE_SIZE;
         y2 = (entity->y + entity->dirY + entity->h) / TILE_SIZE;
 
-        if (x1 >= 0 && x2 < MAX_MAP_X && y1 >= 0 && y2 < MAX_MAP_Y)
+        if (x1 >= 0 && x2 < map.maxX && y1 >= 0 && y2 < map.maxY)
         {
             if (entity->dirY > 0)
             {

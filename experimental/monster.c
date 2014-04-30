@@ -76,7 +76,7 @@ void updateMonsters()
 
 
 
-             monsterCollisionToMap(&monster[i]);
+            monsterCollisionToMap(&monster[i]);
 
             if(collide(&player,&monster[i]) == 1)
             {
@@ -131,11 +131,11 @@ int checkFall(GameObject monster)
 
         if(y<0) y = 1;
 
-        if(y>MAX_MAP_Y) y = MAX_MAP_Y;
+        if(y>map.maxY) y = map.maxY;
 
         if(x<0) x = 1;
 
-        if(x>MAX_MAP_X) x = MAX_MAP_X;
+        if(x>map.maxX) x = map.maxX;
 
         if(map.tile[y+1][x] < BLANK_TILE) return 1 ;
 
@@ -148,11 +148,11 @@ int checkFall(GameObject monster)
 
         if (y <= 0) y = 1;
 
-        if (y >= MAX_MAP_Y) y = MAX_MAP_Y - 1;
+        if (y >= map.maxY) y = map.maxY - 1;
 
         if (x <= 0) x = 1;
 
-        if (x >= MAX_MAP_X) x = MAX_MAP_X - 1;
+        if (x >= map.maxX) x = map.maxX - 1;
 
         if (map.tile[y + 1][x] < BLANK_TILE) return 1;
 

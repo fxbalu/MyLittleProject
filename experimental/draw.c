@@ -45,13 +45,13 @@ void drawHud(void)
 
     drawImage(jeu.HUD_vie,50,30);
     sprintf(text, "%d",jeu.life);
-    drawString(text,135,19,font);
+    drawString(text,135,19, 255, 255, 255,font);
 
 
 
     drawImage(jeu.HUD_etoiles,810,30);
     sprintf(text, "%.4d",jeu.etoiles);
-    drawString(text,900,19,font);
+    drawString(text,900,19, 255, 255, 255, font);
 }
 
 

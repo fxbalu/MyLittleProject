@@ -98,7 +98,7 @@ void loadLevel (Level* level) {
 
    xmlLevel->root = parseXMLFile(xmlLevel->file);
 
-   printXMLNode(xmlLevel->root, 2);
+   //printXMLNode(xmlLevel->root, 2);
 
    //on recupère les premières infos dans le xml
    char* pathBackground = xmlLevel->root->first->next->first->attr->value;
@@ -107,12 +107,15 @@ void loadLevel (Level* level) {
 
    int i,j;
 
+
    //printXMLNode(xmlLevel->root, 2);
 
    //on stocke les premières infos
    level->background = loadImage(pathBackground);
    level->sizeX = sizeX;
    level->sizeY = sizeY;
+
+       printf("%s",pathBackground);
 
    //on rempli le tableau de tile, puis le tableau des items.
    level->tab = (char**) malloc(level->sizeY*sizeof(char*)); //colonne puis ligne

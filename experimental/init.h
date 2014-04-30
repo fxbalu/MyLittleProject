@@ -20,8 +20,9 @@ extern Gestion jeu;
 extern Map map;
 extern TTF_Font *font;
 extern TTF_Font *fontMenu;
+extern TTF_Font *fontGameover;
 extern GameObject player;
 extern GameObject monster[MONSTRES_MAX];
-extern void loadSong( char filename[200]);
+extern void loadSong(int loop, char filename[200]);
 
 #endif // INIT_H_INCLUDED

@@ -47,12 +47,14 @@ int level;
 
 typedef struct GameObject
 {
-   //Sprite du héros (pas d'animation pour l'instant)
+   //Sprite de l'objet
    SDL_Surface *sprite;
 
    char* name;
 
-   /* Coordonnées du héros */
+   int gid;
+
+   /* Coordonnées de l'objet */
    int x, y;
 
    int h,w;
@@ -78,9 +80,10 @@ SDL_Surface *backgroundMenu;
 
 int startX, startY;
 int maxX, maxY;
+int sizeX,sizeY;
 
-
-int tile[MAX_MAP_X][MAX_MAP_Y];
+GameObject **objects;
+int **tile;
 
 } Map;
 
