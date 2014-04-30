@@ -98,6 +98,8 @@ void loadLevel (Level* level) {
 
    xmlLevel->root = parseXMLFile(xmlLevel->file);
 
+   printXMLNode(xmlLevel->root, 2);
+
    //on recupère les premières infos dans le xml
    char* pathBackground = xmlLevel->root->first->next->first->attr->value;
    int sizeX = atoi(xmlLevel->root->attr->next->next->value); //a toi de jouer !
