@@ -13,6 +13,7 @@ extern TTF_Font *loadFont(char *, int);
 extern void changeLevel(void);
 
 
+
 extern void loadSound(void);
 extern void freeSound(void);
 

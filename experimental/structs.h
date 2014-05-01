@@ -32,6 +32,8 @@ Mix_Chunk *miniondead_sound, *jump_sound, *coin_sound, *deadplayer1_sound;
 
 int nombreMonstres;
 
+int objectNumber;
+
 int onMenu, menuType, choice;
 
 
@@ -50,7 +52,9 @@ typedef struct GameObject
    //Sprite de l'objet
    SDL_Surface *sprite;
 
-   char* name;
+   int type;
+
+   int initialized;
 
    int gid;
 

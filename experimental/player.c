@@ -103,7 +103,7 @@ void updatePlayer(void)
     {
         player.dirY = -JUMP_HEIGHT;
         player.onGround = 0;
-        playSoundFx(JUMP);
+        playSoundFx(JUMPSOUND);
 
     }
 
@@ -195,7 +195,7 @@ void centerScrollingOnPlayer(void)
 void getItem(void)
 {
     jeu.etoiles++;
-    playSoundFx(COIN);
+    playSoundFx(COINSOUND);
 }
 
 void playerGameover()

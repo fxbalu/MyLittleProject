@@ -89,7 +89,7 @@ void updateMonsters()
             }
 
 
-            if(collide(&player,&monster[i]) == 2) {monster[i].etat = DEAD; monster[i].timerMort = 60; playSoundFx(DEADMINION);}
+            if(collide(&player,&monster[i]) == 2) {monster[i].etat = DEAD; monster[i].timerMort = 20; playSoundFx(DEADMINION);}
         }
 
 

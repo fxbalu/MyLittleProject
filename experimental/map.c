@@ -1,5 +1,4 @@
 #include "map.h"
-#include "xml/xml.h" /* XML_File, loadXMLFile(), getXMLInt()... */
 
 /**
  * \brief Load a map from a TMX file.
@@ -8,73 +7,124 @@
 void loadMap (char* name) {
 
 
+    XML_File* xmlLevel = createXMLFile();
 
-        XML_File* xmlLevel = createXMLFile();
-        setXMLFilePath(name, xmlLevel);
-         // resetXMLFile pour recharger un autre niveau ! ty fx
-        openXMLFile(xmlLevel);
+    setXMLFilePath(name, xmlLevel);
+     // resetXMLFile pour recharger un autre niveau ! ty fx
+    openXMLFile(xmlLevel);
 
-        checkFirstLineXMLFile(xmlLevel);
+    checkFirstLineXMLFile(xmlLevel);
 
-        xmlLevel->root = parseXMLFile(xmlLevel->file);
-
-        //printXMLNode(xmlLevel->root, 2);
-
-        //on recupère les premières infos dans le xml
-
-        int sizeX = atoi(xmlLevel->root->attr->next->next->value); //a toi de jouer !
-        int sizeY = atoi(xmlLevel->root->attr->next->next->next->value); //échec et mat !
-
-        int i,j;
+    xmlLevel->root = parseXMLFile(xmlLevel->file);
 
 
-        //printXMLNode(xmlLevel->root, 2);
+    //printXMLNode(xmlLevel->root, 2);
 
-        //on stocke les premières infos
+    //on recupère les premières infos dans le xml
 
-        map.maxX = (sizeX)*TILE_SIZE;
-        map.maxY = (sizeY)*TILE_SIZE;
-        map.sizeX = sizeX;
-        map.sizeY = sizeY;
-        map.startX = map.startY = 0;
+    int sizeX = atoi(xmlLevel->root->attr->next->next->value); //a toi de jouer !
+    int sizeY = atoi(xmlLevel->root->attr->next->next->next->value); //échec et mat !
 
+    int i,j;
 
 
-        //on rempli le tableau de tile, puis le tableau des items.
-        map.tile = (int**) malloc((map.sizeY+1)*sizeof(int*)); //colonne puis ligne
+    //printXMLNode(xmlLevel->root, 2);
 
-        for(i=0 ; i<map.sizeX; i++) {
-          map.tile[i] = (int*) malloc(map.sizeX*sizeof(int));
-        }
+    //on stocke les premières infos
 
-        XML_Node* tileLayer = xmlLevel->root->first->next->next;
-
-        for(i=0 ; i<map.sizeY ; i++) {
-          for(j=0 ; j<map.sizeX ; j++) {
-
-             map.tile[i][j] = atoi(tileLayer->first->current->attr->value);
-
-
-             tileLayer->first->current = tileLayer->first->current->next;
-
-
-          }
-
-
-        }
-        // ligne supplémentaire pour les gestions de collisions
-        for(i=0; i<map.sizeX;i++) map.tile[map.sizeY][i] = 0;
-        for(i=0; i<map.sizeX;i++) map.tile[map.sizeY+1][i] = 0;
+    map.maxX = (sizeX)*TILE_SIZE;
+    map.maxY = (sizeY)*TILE_SIZE;
+    map.sizeX = sizeX;
+    map.sizeY = sizeY;
+    map.startX = map.startY = 0;
 
 
 
-       closeXMLFile(xmlLevel);
+    //on rempli le tableau de tile, puis le tableau des items.
+    map.tile = (int**) malloc((map.sizeY+1)*sizeof(int*)); //colonne puis ligne
 
+    for(i=0 ; i<map.sizeX; i++) {
+      map.tile[i] = (int*) malloc(map.sizeX*sizeof(int));
+    }
+
+    XML_Node* tileLayer = xmlLevel->root->first->next->next;
+
+    for(i=0 ; i<map.sizeY ; i++) {
+      for(j=0 ; j<map.sizeX ; j++) {
+
+         map.tile[i][j] = atoi(tileLayer->first->current->attr->value);
+
+
+         tileLayer->first->current = tileLayer->first->current->next;
+
+
+      }
+
+
+    }
+    // ligne supplémentaire pour les gestions de collisions
+    for(i=0; i<map.sizeX;i++) map.tile[map.sizeY][i] = 0;
+    for(i=0; i<map.sizeX;i++) map.tile[map.sizeY+1][i] = 0;
+
+    checkAllocatedMemory(LOG_TYPE);
+
+    //destroyXMLFile(xmlLevel);
 
 
 }
 
 
+void loadObject (char* name){
+
+    XML_File* xmlLevel = createXMLFile();
+
+    setXMLFilePath(name, xmlLevel);
+     // resetXMLFile pour recharger un autre niveau ! ty fx
+    openXMLFile(xmlLevel);
+
+    checkFirstLineXMLFile(xmlLevel);
+
+    xmlLevel->root = parseXMLFile(xmlLevel->file);
+
+
+    XML_Node* objectLayer = xmlLevel->root->last;
+
+    //on compte le nombre d'objets
+    jeu.objectNumber = 1;
+    int i = 0;
+
+    while(objectLayer->current != objectLayer->last) {
+      jeu.objectNumber++;
+      objectLayer->current = objectLayer->current->next;
+    }
+    objectLayer->current = objectLayer->first;
+
+
+
+    //on rempli le tableau d'objets
+    map.objects = (GameObject**) malloc(jeu.objectNumber*sizeof(GameObject*));
+
+
+    for(i=0 ; i<jeu.objectNumber ; i++){
+      *(map.objects + i) = (GameObject*) malloc(sizeof(GameObject));
+      map.objects[i]->type = atoi(objectLayer->current->attr->value);
+      map.objects[i]->gid = atoi(objectLayer->current->attr->next->value);
+      map.objects[i]->x = atoi(objectLayer->current->attr->next->next->value);
+      map.objects[i]->y = atoi(objectLayer->current->attr->next->next->next->value);
+      map.objects[i]->initialized = 0;
+
+      printf("%d\n", map.objects[i]->type);
+
+
+      objectLayer->current = objectLayer->current->next;
+
+    }
+
+    printf("\n%d objects\n", jeu.objectNumber);
+
+    checkAllocatedMemory(LOG_TYPE);
+
+}
 
 
 void mapCollision(GameObject *entity)
@@ -273,6 +323,9 @@ void changeLevel(void)
     /* Charge la map depuis le fichier */
     sprintf(file, "map/level%d.tmx", jeu.level );
     loadMap(file);
+    loadObject(file);
+
+
 
     if(map.tileSet == NULL)    map.tileSet = loadImage("graphics/all_tileset.png");
 
@@ -341,6 +394,10 @@ void drawMap(void)
 
         mapY++;
     }
+
+    initializeObject();
+
+
 
 }
 

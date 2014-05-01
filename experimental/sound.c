@@ -80,11 +80,11 @@ void playSoundFx(int type)
             Mix_PlayChannel(-1, jeu.miniondead_sound, 0);
         break;
 
-        case JUMP :
+        case JUMPSOUND :
             Mix_PlayChannel(-1, jeu.jump_sound, 0);
         break;
 
-        case COIN:
+        case COINSOUND:
             Mix_PlayChannel(-1, jeu.coin_sound, 0);
         break;
 

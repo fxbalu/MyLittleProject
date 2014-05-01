@@ -11,6 +11,7 @@ extern void drawImage(SDL_Surface *, int, int);
 extern void drawTile(SDL_Surface *image, int destx, int desty, int srcx, int srcy);
 extern void initializeMonsters(int x, int y);
 extern void getItem(void);
+extern void initializeObject();
 extern void playSoundFx(int type);
 extern SDL_Surface *loadImage(char *name);
 extern void changeLevel(void);

@@ -48,6 +48,7 @@ int main(int argc, char* argv[])
          /* updates game */
          updatePlayer();
          updateMonsters();
+         updateObject();
       }
       else
       {

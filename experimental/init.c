@@ -123,9 +123,6 @@ if (jeu.tileMenu != NULL)
     SDL_FreeSurface(jeu.tileMenu);
 }
 
-
-
-
 if(player.sprite != NULL)
 {
     SDL_FreeSurface(player.sprite);

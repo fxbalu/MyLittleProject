@@ -10,6 +10,7 @@
 #include <SDL_ttf.h>
 #include <SDL_mixer.h>
 #include "xml/xml.h"
+#include "log.h"
 
 
 #define SCREEN_WIDTH 1050
@@ -39,8 +40,14 @@
 #define DEAD 6
 #define ALIVE 7
 
- // définissant le seuil entre les tiles traversables (blank) et les tiles solides
-#define BLANK_TILE 78
+
+#define COIN 1
+#define DOOR 2
+#define FLY 300
+
+
+// définissant le seuil entre les tiles traversables (blank) et les tiles solides
+#define BLANK_TILE 77
 
 //Constantes définissant la gravité et la vitesse max de chute
 #define GRAVITY_SPEED 1,5
@@ -56,8 +63,8 @@
   enum
 {
     DEADMINION,
-    JUMP,
-    COIN,
+    JUMPSOUND,
+    COINSOUND,
     DEADPLAYER
 };
 
