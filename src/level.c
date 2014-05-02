@@ -64,6 +64,7 @@ void displayLevel (Level* level, SDL_Surface* screen) {
 
 }
 
+
 // nom de var à revoir
 void selectTile (SDL_Rect* src, int gid) {
 
