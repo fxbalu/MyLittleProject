@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
 
    /* Initialization of components of the game*/
    if (initGame(&game)) {
-      logError("Useful message.", __FILE__, __LINE__);
+      logError("Game failed to init: error line %d on file %s\n", __FILE__, __LINE__);
       return EXIT_FAILURE;
    }
 
