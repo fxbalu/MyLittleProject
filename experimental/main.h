@@ -19,7 +19,6 @@ extern void updatePlayer(void);
 extern void initializePlayer(void );
 
 
-
 extern void updateMonsters(void);
 extern void drawStartMenu(void);
 extern void updateStartMenu(void);

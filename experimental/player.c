@@ -166,7 +166,7 @@ void centerScrollingOnPlayer(void)
     //du joueur.
     //Puis on "clamp" (limite) l'affichage de l'écran pour ne pas sortir de la map.
 
-    map.startX = player.x - (SCREEN_WIDTH/4);
+    map.startX = player.x - (SCREEN_WIDTH/2);
 
     if(map.startX < 0)
     {
@@ -178,7 +178,7 @@ void centerScrollingOnPlayer(void)
         map.startX = map.maxX - SCREEN_WIDTH;
     }
 
-    map.startY = player.y - (SCREEN_HEIGHT/4);
+    map.startY = player.y - (SCREEN_HEIGHT/2);
 
     if(map.startY < 0)
     {
@@ -202,15 +202,15 @@ void playerGameover()
 {
     int i;
     char text[200];
+
+    fontGameover = loadFont("font/font1.ttf", 65);
+
     sprintf(text, "Press ENTER");
     loadSong(1,"sounds/gameover.mp3");
 
     SDL_Surface *gameover = loadImage("graphics/gameover.jpg");
 
-    drawImage(gameover,0,0);
 
-
-    SDL_Flip(jeu.screen);
 
     while(input.enter == 0)
     {
@@ -219,10 +219,11 @@ void playerGameover()
     drawImage(gameover,0,0);
     drawString(text, 350, 400, 150, 150, 150, fontGameover);
     SDL_Flip(jeu.screen);
-    while(SDL_GetTicks()-i != 500);
+    while(SDL_GetTicks()-i != 500 && input.enter == 0)
+    getInput();
     drawImage(gameover,0,0);
     SDL_Flip(jeu.screen);
-    while(SDL_GetTicks()-i != 1000);
+    while(SDL_GetTicks()-i != 1000 && input.enter == 0)
     getInput();
 
     }
@@ -234,8 +235,49 @@ void playerGameover()
     jeu.onMenu = 1;
     jeu.menuType = START;
 
+    closeFont(fontGameover);
+    SDL_FreeSurface(gameover);
+
 }
 
+void endLevel()
+{
+
+    int i;
+    char text[200];
+
+    fontGameover = loadFont("font/font1.ttf", 65);
+
+    sprintf(text, "Press ENTER to CONTINUE");
+    loadSong(1,"music/Victory Theme (Faded).mp3");
+
+    SDL_Surface *endLevel = loadImage("graphics/splashScreenEndLevel.png");
+
+
+
+    while(input.enter == 0)
+    {
+    i = SDL_GetTicks();
+
+    drawImage(endLevel,0,0);
+    drawString(text, 160, 560, 250, 250, 250, fontGameover);
+    SDL_Flip(jeu.screen);
+    while(SDL_GetTicks()-i != 500 && input.enter == 0)
+    getInput();
+    drawImage(endLevel,0,0);
+    SDL_Flip(jeu.screen);
+    while(SDL_GetTicks()-i != 1000 && input.enter == 0)
+    getInput();
+
+    }
+    input.enter = 0;
+
+
+    loadGame();
+
+    closeFont(fontGameover);
+    SDL_FreeSurface(endLevel);
+}
 
 
 

@@ -65,7 +65,7 @@ void destroyXMLFile(XML_File* xml)
       }
       /* destroy tree */
       if(xml->root != NULL) {
-         destroyXMLNode(xml->root);
+        destroyXMLNode(xml->root);
       }
       /* free XML_File */
       logMem(LOG_FREE, xml, "XML_File", "xml file", __FILE__, __LINE__);

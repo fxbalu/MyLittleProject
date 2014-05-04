@@ -4,6 +4,7 @@
 
 void drawTile(SDL_Surface *image, int destx,int desty,int srcx, int srcy)
 {
+
     SDL_Rect dest;
 
     dest.x = destx;
@@ -19,13 +20,15 @@ void drawTile(SDL_Surface *image, int destx,int desty,int srcx, int srcy)
     src.h = TILE_SIZE;
 
     SDL_BlitSurface(image,&src,jeu.screen,&dest);
-}
 
+}
 
 
 
 void drawImage(SDL_Surface* image,int x,int y)
 {
+
+
     SDL_Rect dest;
 
     dest.x = x;
@@ -35,6 +38,7 @@ void drawImage(SDL_Surface* image,int x,int y)
 
 
     SDL_BlitSurface(image,NULL,jeu.screen,&dest);
+
 }
 
 
@@ -91,6 +95,7 @@ void draw(void)
 
 SDL_Surface* loadImage(char *name)
 {
+
     SDL_Surface* temp = IMG_Load(name);
     SDL_Surface* image;
 

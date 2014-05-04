@@ -9,5 +9,7 @@
 
 extern Input input;
 extern Map map;
+extern Gestion jeu;
 
+extern void loadGame();
 #endif

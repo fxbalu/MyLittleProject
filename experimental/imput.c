@@ -22,6 +22,7 @@ while(SDL_PollEvent(&event))
         switch (event.key.keysym.sym)
         {
             case SDLK_ESCAPE:
+
             exit(0);
             break;
 
@@ -31,8 +32,8 @@ while(SDL_PollEvent(&event))
             input.jump = 1;
             break;
 
-            case SDLK_v:
-            input.attack = 1;
+            case SDLK_e:
+            input.use = 1;
             break;
 
             case SDLK_LEFT:
@@ -63,6 +64,10 @@ while(SDL_PollEvent(&event))
         case SDL_KEYUP:
         switch (event.key.keysym.sym)
         {
+
+            case SDLK_e:
+            input.use = 0;
+            break;
 
 
             case SDLK_SPACE:

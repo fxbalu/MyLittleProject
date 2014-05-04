@@ -7,15 +7,7 @@
 void loadMap (char* name) {
 
 
-    XML_File* xmlLevel = createXMLFile();
-
-    setXMLFilePath(name, xmlLevel);
-     // resetXMLFile pour recharger un autre niveau ! ty fx
-    openXMLFile(xmlLevel);
-
-    checkFirstLineXMLFile(xmlLevel);
-
-    xmlLevel->root = parseXMLFile(xmlLevel->file);
+    XML_File* xmlLevel = loadXMLFile(name);
 
 
     //printXMLNode(xmlLevel->root, 2);
@@ -66,9 +58,11 @@ void loadMap (char* name) {
     for(i=0; i<map.sizeX;i++) map.tile[map.sizeY][i] = 0;
     for(i=0; i<map.sizeX;i++) map.tile[map.sizeY+1][i] = 0;
 
+
+    destroyXMLFile(xmlLevel);
+
     checkAllocatedMemory(LOG_TYPE);
 
-    //destroyXMLFile(xmlLevel);
 
 
 }
@@ -76,53 +70,38 @@ void loadMap (char* name) {
 
 void loadObject (char* name){
 
-    XML_File* xmlLevel = createXMLFile();
-
-    setXMLFilePath(name, xmlLevel);
-     // resetXMLFile pour recharger un autre niveau ! ty fx
-    openXMLFile(xmlLevel);
-
-    checkFirstLineXMLFile(xmlLevel);
-
-    xmlLevel->root = parseXMLFile(xmlLevel->file);
-
+    XML_File* xmlLevel = loadXMLFile(name);
 
     XML_Node* objectLayer = xmlLevel->root->last;
 
-    //on compte le nombre d'objets
-    jeu.objectNumber = 1;
     int i = 0;
 
-    while(objectLayer->current != objectLayer->last) {
-      jeu.objectNumber++;
-      objectLayer->current = objectLayer->current->next;
-    }
-    objectLayer->current = objectLayer->first;
+    //on compte le nombre d'objets
 
+    jeu.objectNumber = objectLayer->cc;
 
+    printf("\n\n%d\n\n",jeu.objectNumber);
 
     //on rempli le tableau d'objets
-    map.objects = (GameObject**) malloc(jeu.objectNumber*sizeof(GameObject*));
+    map.objects = (GameObject*) malloc(jeu.objectNumber*sizeof(GameObject));
 
 
-    for(i=0 ; i<jeu.objectNumber ; i++){
-      *(map.objects + i) = (GameObject*) malloc(sizeof(GameObject));
-      map.objects[i]->type = atoi(objectLayer->current->attr->value);
-      map.objects[i]->gid = atoi(objectLayer->current->attr->next->value);
-      map.objects[i]->x = atoi(objectLayer->current->attr->next->next->value);
-      map.objects[i]->y = atoi(objectLayer->current->attr->next->next->next->value);
-      map.objects[i]->initialized = 0;
+    for(i=0 ; i<jeu.objectNumber; i++){
 
-      printf("%d\n", map.objects[i]->type);
 
+      map.objects[i].type = atoi(objectLayer->current->attr->value);
+      map.objects[i].spe = atoi(objectLayer->current->attr->next->value);
+      map.objects[i].gid = atoi(objectLayer->current->attr->next->next->value);
+      map.objects[i].x = atoi(objectLayer->current->attr->next->next->next->value);
+      map.objects[i].y = atoi(objectLayer->current->attr->next->next->next->next->value);
+      map.objects[i].initialized = 0;
 
       objectLayer->current = objectLayer->current->next;
 
     }
 
-    printf("\n%d objects\n", jeu.objectNumber);
 
-    checkAllocatedMemory(LOG_TYPE);
+    checkAllocatedMemory(LOG_TYPE );
 
 }
 
@@ -311,7 +290,7 @@ void mapCollision(GameObject *entity)
     if (entity->y  > map.maxY)
     {
         jeu.life--;
-        entity->timerMort = 10;
+        entity->timerMort = 1;
         if(jeu.life < 1) playerGameover();
     }
 }
@@ -320,14 +299,17 @@ void changeLevel(void)
 {
     char file[200];
 
+
+
     /* Charge la map depuis le fichier */
     sprintf(file, "map/level%d.tmx", jeu.level );
     loadMap(file);
     loadObject(file);
 
 
-
     if(map.tileSet == NULL)    map.tileSet = loadImage("graphics/all_tileset.png");
+
+
 
 
 }

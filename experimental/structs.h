@@ -9,7 +9,7 @@
 typedef struct Input
 {
 
-int left,right,up,down,jump,attack,enter,pause;
+int left,right,up,down,jump,use,enter,pause;
 
 }Input;
 
@@ -28,7 +28,7 @@ int life;
 
 Mix_Music* musique;
 
-Mix_Chunk *miniondead_sound, *jump_sound, *coin_sound, *deadplayer1_sound;
+Mix_Chunk *miniondead_sound, *jump_sound, *coin_sound, *deadplayer1_sound, *switch_sound;
 
 int nombreMonstres;
 
@@ -53,6 +53,7 @@ typedef struct GameObject
    SDL_Surface *sprite;
 
    int type;
+   int spe;
 
    int initialized;
 
@@ -86,7 +87,7 @@ int startX, startY;
 int maxX, maxY;
 int sizeX,sizeY;
 
-GameObject **objects;
+GameObject *objects;
 int **tile;
 
 } Map;

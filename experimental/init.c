@@ -37,7 +37,7 @@ if(TTF_Init()<0)
 }
 font = loadFont("font/font1.ttf", 65);
 fontMenu = loadFont("font/font1.ttf", 45);
-fontGameover = loadFont("font/font1.ttf", 65);
+
 
 int flags = MIX_INIT_FLAC; // Le mp3 ne marchait pas
 int initted = Mix_Init(flags);
@@ -63,6 +63,13 @@ if(Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 1024)==-1)
 /* Définit le nombre de channels à mixer */
 Mix_AllocateChannels(32);
 
+jeu.level = 2;
+
+jeu.onMenu = 1;
+jeu.choice = 0;
+jeu.menuType = START;
+
+
 
 }
 
@@ -70,14 +77,11 @@ void loadGame(void)
 {
 
     /* Charge l'image du fond */
-    if(map.background == NULL) map.background = loadImage("graphics/backgroundworld1.png");
-    if(map.backgroundMenu == NULL) map.backgroundMenu = loadImage("graphics/splashScreen.png");
-    if(jeu.tileMenu == NULL) jeu.tileMenu = loadImage("graphics/spriteSheetMenu.png");
+    map.background = loadImage("graphics/backgroundworld1.png");
+    map.backgroundMenu = loadImage("graphics/splashScreen.png");
+    jeu.tileMenu = loadImage("graphics/spriteSheetMenu.png");
 
-
-    jeu.level = 1;
     changeLevel();
-
 
     loadSong(-1,"music/Those of Us Who Fight.mp3");
 
@@ -90,9 +94,6 @@ void loadGame(void)
     jeu.HUD_vie = loadImage("graphics/lifeHud.png");
     jeu.HUD_etoiles = loadImage("graphics/hud_coins.png");
 
-    jeu.onMenu = 1;
-    jeu.choice = 0;
-    jeu.menuType = START;
 
 
  }
@@ -136,6 +137,8 @@ for(i = 0 ; i < MONSTRES_MAX ; i++)
     }
 }
 
+
+
 if (jeu.HUD_etoiles != NULL)
 {
     SDL_FreeSurface(jeu.HUD_etoiles);
@@ -159,7 +162,6 @@ freeSound();
 
 
 closeFont(font);
-closeFont(fontGameover);
 closeFont(fontMenu);
 
 TTF_Quit();

@@ -26,7 +26,6 @@ void updateStartMenu(void)
     {
         if(jeu.choice == 0)
         {
-            jeu.level = 1;
             initializePlayer();
             jeu.onMenu = 0;
         }

@@ -17,7 +17,10 @@ extern TTF_Font* fontGameover;
 extern SDL_Surface *loadImage(char *name);
 extern void centerScrollingOnPlayer(void);
 extern void loadSong();
+
+extern TTF_Font* loadFont(char* name, int size);
 extern void getInput();
+extern void closeFont(TTF_Font *font);
 extern void drawString(char *text, int x, int y, int r, int b, int g, TTF_Font *font);
 
 

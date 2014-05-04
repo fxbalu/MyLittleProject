@@ -43,6 +43,17 @@
 
 #define COIN 1
 #define DOOR 2
+#define BLUE_SWITCH 3
+#define GREEN_SWITCH 4
+#define YELLOW_SWITCH 5
+#define RED_SWITCH 6
+#define BLUE_BLOCK 7
+#define GREEN_BLOCK 8
+#define YELLOW_BLOCK 9
+#define RED_BLOCK 10
+#define PICK 11
+#define ELEVATOR_BLOCK 12
+#define ELEVATOR_SWITCH 13
 #define FLY 300
 
 
@@ -54,7 +65,7 @@
 #define MAX_FALL_SPEED 15
 #define JUMP_HEIGHT 22
 
-#define MONSTRES_MAX 50
+#define MONSTRES_MAX 20
 #define LEVEL_MAX 2
 
 
@@ -65,7 +76,8 @@
     DEADMINION,
     JUMPSOUND,
     COINSOUND,
-    DEADPLAYER
+    DEADPLAYER,
+    SWITCHSOUND,
 };
 
 // enum pour le menu

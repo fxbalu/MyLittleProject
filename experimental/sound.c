@@ -54,6 +54,13 @@ void loadSound(void)
         exit(1);
     }
 
+   if(jeu.switch_sound == NULL) jeu.switch_sound = Mix_LoadWAV("sounds/switch.wav");
+   if (jeu.switch_sound == NULL)
+    {
+        fprintf(stderr, "Can't read the switch_sound FX \n");
+        exit(1);
+    }
+
 
 }
 
@@ -64,6 +71,7 @@ void freeSound(void)
    Mix_FreeChunk(jeu.jump_sound);
    Mix_FreeChunk(jeu.coin_sound);
    Mix_FreeChunk(jeu.deadplayer1_sound);
+   Mix_FreeChunk(jeu.switch_sound);
 
 
 }
@@ -90,6 +98,10 @@ void playSoundFx(int type)
 
         case DEADPLAYER:
             Mix_PlayChannel(-1, jeu.deadplayer1_sound, 0);
+        break;
+
+        case SWITCHSOUND:
+            Mix_PlayChannel(-1, jeu.switch_sound, 0);
         break;
 
 

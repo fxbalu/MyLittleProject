@@ -26,14 +26,14 @@ void initializeMonsters(int x, int y)
 
 int collide(GameObject* player,GameObject* monster)
 {
-    if( (player->x >= monster->x + monster->w)  ||
-        (player->x + player->w <= monster->x)   ||
+    if( (player->x >= monster->x + monster->w - 20)  ||
+        (player->x + player->w <= 20 + monster->x)   ||
         (player->y >= monster->h + monster->y)  ||
         (player->y + player->h <= monster->y))
 
     return 0;
 
-    else if(player->y + player->h <= monster->y + 10)
+    else if(player->y + player->h <= monster->y + 20)
     {
         player->dirY =- 15;
         return 2;

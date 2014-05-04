@@ -411,15 +411,15 @@
   </data>
  </layer>
  <objectgroup name="object" width="40" height="10">
-  <object name="1" gid="16" x="910" y="280"/>
-  <object name="1" gid="16" x="840" y="280"/>
-  <object name="1" gid="16" x="770" y="280"/>
-  <object name="1" gid="16" x="770" y="350"/>
-  <object name="1" gid="16" x="840" y="350"/>
-  <object name="1" gid="16" x="910" y="350"/>
-  <object name="2" gid="46" x="2660" y="420"/>
-  <object name="2" gid="45" x="2660" y="490"/>
-  <object name="300" gid="300" x="2030" y="280"/>
-  <object name="300" gid="300" x="450" y="490"/>
+  <object name="1" type="0" gid="16" x="910" y="280"/>
+  <object name="1" type="0" gid="16" x="840" y="280"/>
+  <object name="1" type="0" gid="16" x="770" y="280"/>
+  <object name="1" type="0" gid="16" x="770" y="350"/>
+  <object name="1" type="0" gid="16" x="840" y="350"/>
+  <object name="1" type="0" gid="16" x="910" y="350"/>
+  <object name="2" type="0" gid="46" x="2660" y="420"/>
+  <object name="2" type="0" gid="45" x="2660" y="490"/>
+  <object name="300" type="0" gid="300" x="2030" y="280"/>
+  <object name="300" type="0" gid="300" x="450" y="490"/>
  </objectgroup>
 </map>
