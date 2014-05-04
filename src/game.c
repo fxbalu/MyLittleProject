@@ -70,7 +70,7 @@ int initGame(Game* game) {
       }
 
             if((game->intro = (Intro*) malloc(sizeof(Intro))) == NULL) {
-         logError("Can't allocate memory for a Intro", __FILE__, __LINE__);
+         logError("Can't allocate memory for an Intro", __FILE__, __LINE__);
          return -1;
       } else {
          logMem(LOG_ALLOC, game->status, "Intro", "game's intro", __FILE__, __LINE__);

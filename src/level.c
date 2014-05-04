@@ -64,10 +64,14 @@ void displayLevel (Level* level, SDL_Surface* screen) {
 
 }
 
-// nom de var à revoir
+
+// nom de var Ã  revoir
 void selectTile (SDL_Rect* src, int gid) {
 
-   if(gid == 0) {
+   if(gid>0 && gid< 150)
+   src->x=((gid)%TILESET_WIDTH)*TILE_SIZE;
+   src->y=((gid-(gid%TILESET_WIDTH))/TILESET_WIDTH)*TILE_SIZE;
+   /*if(gid == 0) {
       src->x = 0;
       src->y = 0;
    } else if (gid == 2) {
@@ -83,10 +87,11 @@ void selectTile (SDL_Rect* src, int gid) {
       src->x = 0;
       src->y = 0;
    }
+   */
 }
 
 void displayBackground (Level* level, SDL_Surface* screen) {
-   SDL_BlitSurface(level->background, NULL, screen, NULL);/*il faudra gérer la caméra plus tard, double scrolling ?*/
+   SDL_BlitSurface(level->background, NULL, screen, NULL);/*il faudra gÃ©rer la camÃ©ra plus tard, double scrolling ?*/
 }
 
 //test xml parseur :
@@ -100,17 +105,17 @@ void loadLevel (Level* level) {
 
    //printXMLNode(xmlLevel->root, 2);
 
-   //on recupère les premières infos dans le xml
+   //on recupÃ¨re les premiÃ¨res infos dans le xml
    char* pathBackground = xmlLevel->root->first->next->first->attr->value;
    int sizeX = atoi(xmlLevel->root->attr->next->next->value); //a toi de jouer !
-   int sizeY = atoi(xmlLevel->root->attr->next->next->next->value); //échec et mat !
+   int sizeY = atoi(xmlLevel->root->attr->next->next->next->value); //Ã©chec et mat !
 
    int i,j;
 
 
    //printXMLNode(xmlLevel->root, 2);
 
-   //on stocke les premières infos
+   //on stocke les premiÃ¨res infos
    level->background = loadImage(pathBackground);
    level->sizeX = sizeX;
    level->sizeY = sizeY;
