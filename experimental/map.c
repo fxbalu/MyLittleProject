@@ -446,7 +446,7 @@ void changeLevel(void)
 
     /* Charge la map depuis le fichier */
     sprintf(file, "map/map%d.txt", jeu.level );
-    loadMapXML("level1.tmx");
+    loadMap("map/map1.txt");
 
     if(map.tileSet == NULL)    map.tileSet = loadImage("graphics/all_tileset.png");
 
