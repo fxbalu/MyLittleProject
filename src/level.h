@@ -16,6 +16,9 @@
 #include "input.h"
 #include "xml/xml.h"
 
+#define TILE_SIZE 70
+#define TILESET_WIDTH 10
+
 /**
  * \struct Camera
  * Position of the camera in the current level.

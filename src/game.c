@@ -70,7 +70,7 @@ int initGame(Game* game) {
       }
 
             if((game->intro = (Intro*) malloc(sizeof(Intro))) == NULL) {
-         logError("Can't allocate memory for a Intro", __FILE__, __LINE__);
+         logError("Can't allocate memory for an Intro", __FILE__, __LINE__);
          return -1;
       } else {
          logMem(LOG_ALLOC, game->status, "Intro", "game's intro", __FILE__, __LINE__);
@@ -116,7 +116,7 @@ int initGame(Game* game) {
 
    /*Initialisation des timers*/ //function initTicks
    game->status->nextTick = SDL_GetTicks() + SKIP_TICKS;
-   printf("%d initTicks\n", game->status->nextTick);
+   //printf("%d initTicks\n", game->status->nextTick);
 
    return 0;
 }
@@ -236,7 +236,7 @@ void displayGame(Game* game) {
       displayCharacter(game->player, game->screen);
    }
 
-   printf("%d before Flipping the screen\n", SDL_GetTicks());
+   //printf("%d before Flipping the screen\n", SDL_GetTicks());
 
    if(SDL_Flip(game->screen) == -1) {
       logError("Error when flipping screen", __FILE__, __LINE__);
@@ -257,7 +257,7 @@ void delayGame(Game* game) {
       game->status->sleepTime = game->status->nextTick - tick;
       SDL_Delay(game->status->sleepTime);
    }
-   printf(" sleeptime : %d\n\n",game->status->sleepTime);
+   //printf(" sleeptime : %d\n\n",game->status->sleepTime);
 
    game->status->nextTick += SKIP_TICKS;
 }
