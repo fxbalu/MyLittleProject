@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>My Little Project by fxbalu</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>My Little Project</h1>
+        <p>A 2D sprite based platformer game</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/fxbalu/MyLittleProject" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/fxbalu/MyLittleProject/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/fxbalu/MyLittleProject/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a name="my-little-project" class="anchor" href="#my-little-project"><span class="octicon octicon-link"></span></a>My Little Project</h1>
+
+<p>My Little Project is game developped by five engineering students from <strong>INSA de Rennes</strong> in France. It's a 2D sprite based platformer.</p>
+
+<h2>
+<a name="todo" class="anchor" href="#todo"><span class="octicon octicon-link"></span></a>Todo</h2>
+
+<ul>
+<li>[ ] Add screenshots</li>
+<li>[ ] Create a simple Makefile</li>
+<li>[ ] Rewrite the project with SDL2</li>
+<li>[x] Stop deleting useful files (hopefully)</li>
+</ul><h2>
+<a name="getting-started" class="anchor" href="#getting-started"><span class="octicon octicon-link"></span></a>Getting started</h2>
+
+<h3>
+<a name="ubuntu" class="anchor" href="#ubuntu"><span class="octicon octicon-link"></span></a>Ubuntu</h3>
+
+<ol>
+<li>Install <code>libsdl1.2-dev</code>, <code>libsdl-image1.2-dev</code>, <code>libsdl-mixer1.2-dev</code> and <code>libsdl-ttf2.0-dev</code> on your system.</li>
+</ol><pre><code>sudo apt-get install libsdl1.2-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev
+</code></pre>
+
+<ol>
+<li>Clone the repository.</li>
+</ol><pre><code>git clone https://github.com/fxbalu/MyLittleProject
+</code></pre>
+
+<ol>
+<li>Create a new SDL project with Code::Blocks.</li>
+<li>Add the <code>src</code> folder to your Code::Blocks project.</li>
+<li>Add <code>SDL</code>, <code>SDLmain</code>, <code>SDL_image</code>, <code>SDL_mixer</code> and <code>SDL_ttf</code> in <strong>Project &gt; Build options... &gt; Linker settings &gt; Link libraries</strong>
+</li>
+<li>Build and run the project (<code>F9</code>).</li>
+</ol><h2>
+<a name="how-to-contribute" class="anchor" href="#how-to-contribute"><span class="octicon octicon-link"></span></a>How to contribute</h2>
+
+<h3>
+<a name="syntax" class="anchor" href="#syntax"><span class="octicon octicon-link"></span></a>Syntax</h3>
+
+<ul>
+<li>Indent your code with three space, and no tab</li>
+<li>No trailing whitespace. Blank lines should not have any space.</li>
+</ul><h3>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h3>
+
+<p>Use Doxygen syntax to comment your files, structures and functions.</p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-c"><pre><span class="cm">/**</span>
+<span class="cm"> *  \brief Print arguments in standard output</span>
+<span class="cm"> *  \param arg1       First argument</span>
+<span class="cm"> *  \param bar        Second argument</span>
+<span class="cm"> *  \param character  Starting character</span>
+<span class="cm"> */</span>
+<span class="kt">void</span> <span class="nf">foo</span><span class="p">(</span><span class="kt">int</span> <span class="n">arg1</span><span class="p">,</span> <span class="kt">int</span> <span class="n">bar</span><span class="p">,</span> <span class="kt">char</span> <span class="n">character</span><span class="p">){</span>
+  <span class="c1">// some code</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2>
+<a name="authors" class="anchor" href="#authors"><span class="octicon octicon-link"></span></a>Authors</h2>
+
+<ul>
+<li>Vincent Werner</li>
+<li>Gwendal Henry</li>
+<li>Martin Parisot</li>
+<li>
+<del>Adrian Dufac</del> (still need to commit something)</li>
+<li>François-Xavier Balu</li>
+</ul>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/fxbalu">fxbalu</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
