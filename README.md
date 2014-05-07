@@ -42,6 +42,7 @@ Example:
  *  \param arg1       First argument
  *  \param bar        Second argument
  *  \param character  Starting character
+ */
 void foo(int arg1, int bar, char character){
   // some code
 }
