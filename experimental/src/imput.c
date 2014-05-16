@@ -1,7 +1,12 @@
+/**
+ * \file input.c
+ * \brief contains functions to manage inputs
+ *
+ * Implementation of createInput(), getInput() and destroyInput().
+ *
+ */
+
 #include "input.h"
-
-
-
 
 Input* createInput(){
 
@@ -26,10 +31,7 @@ Input* createInput(){
 
 }
 
-
-
 void getInput(Input* input,Game* game){
-
 
 SDL_Event event;
 
