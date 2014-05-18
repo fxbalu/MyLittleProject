@@ -1,3 +1,10 @@
+/**
+ * \file common.h
+ * \brief contains the needed includes and the defines of the parameters of the game
+ *
+ * \author François-Xavier Balu, Gwendal Henry, Martin Parisot, Vincent Werner
+ */
+
 #ifndef COMMON_H_INCLUDED
 #define COMMON_H_INCLUDED
 

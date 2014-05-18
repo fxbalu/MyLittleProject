@@ -1,3 +1,11 @@
+/**
+ * \file font.c 
+ * \brief contains the necessary functions to use a font with SDL_TTF
+ *
+ * Implementation of loadFont() and closeFont()
+ *
+ */
+
 #include "font.h"
 
 TTF_Font* loadFont(char* name, int size)

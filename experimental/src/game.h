@@ -1,3 +1,12 @@
+/**
+ * \file game.h
+ * \brief header of game.c
+ *
+ * Declaration of createGame_(), loadGame(), initGame() and destroyGame().
+ * Creation of structures Input, GameObject, Map and Game.
+ *
+ */
+
 #ifndef INIT_H_INCLUDED
 #define INIT_H_INCLUDED
 #include "common.h"

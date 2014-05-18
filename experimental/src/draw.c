@@ -1,13 +1,33 @@
+/**
+ * \file draw.c
+ * \brief contains all the drawing functions
+ *
+ * Every functions used to display images are implemented here:
+ * drawTile(), drawImage(), drawHud(), drawString(), draw(), loadImage(), delay()
+ *
+ * \author François-Xavier Balu, Gwendal Henry, Martin Parisot, Vincent Werner
+ */
+
 #include "draw.h"
 #include "object.h"
 #include "font.h"
 #include "map.h"
 #include "animation.h"
 
-
+/**
+ * \fn void drawTile(SDL_Surface *image, int destx,int desty,int srcx, int srcy, Game* game)
+ * \brief displays a tile from the given tileset to the given destination
+ *
+ * \param[in] image: the tileset
+ * \param[in] srcx: x-axis coordinate of the tile on the tileset 
+ * \param[in] srcy: y-axis coordinate of the tile on the tileset 
+ * \param[in] destx: x-axis coordinate of the place of the tiles on the screen
+ * \param[in] desty: y-axis coordinate of the place of the tiles on the screen
+ * \param[in] game: contains the necessary informations for the displaying (screen array)
+ *
+ */
 void drawTile(SDL_Surface *image, int destx,int desty,int srcx, int srcy, Game* game)
 {
-
     SDL_Rect dest;
 
     dest.x = destx;
@@ -23,11 +43,20 @@ void drawTile(SDL_Surface *image, int destx,int desty,int srcx, int srcy, Game* 
     src.h = TILE_SIZE;
 
     SDL_BlitSurface(image,&src,game->screen,&dest);
-
 }
 
-
-
+/**
+ * \fn void drawImage(SDL_Surface* image,int x,int y, Game* game)
+ * \brief displays an image to the given coordinates on the screen
+ *
+ * \param[in] image: the image to display
+ * \param[in] x: x-axis coordinate of the image on the screen
+ * \param[in] y: y-axis coordinate of the image on the screen
+ * \param[in] game: contains the necessary informations for the displaying (screen array)
+ *
+ * This functions simplifies the use of SDL_BlitSurface by automatically giving it the needed parameters
+ *
+ */
 void drawImage(SDL_Surface* image,int x,int y, Game* game)
 {
 
@@ -44,7 +73,16 @@ void drawImage(SDL_Surface* image,int x,int y, Game* game)
 
 }
 
-
+/**
+ * \fn void drawHud(Game* game)
+ * \brief displays the Head-up display with the needed informations for the player
+ *
+ * \param[in] game: needed informations to display on the HUD and the screen array
+ *
+ * This function take the informations from the Game variable and displays them on the HUD:
+ * Life, number of coins
+ *
+ */
 void drawHud(Game* game)
 {
 

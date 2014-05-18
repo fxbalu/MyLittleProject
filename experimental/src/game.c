@@ -1,3 +1,10 @@
+/**
+ * \file game.c
+ * \brief contains the necessary functions to create a new game, initialize it, load it or to close it
+ *
+ * Implementation of createGame_(), loadGame(), initGame() and destroyGame().
+ *
+ */
 
 #include "game.h"
 #include "font.h"
@@ -184,10 +191,4 @@ void destroyGame(Game* game){
         SDL_Quit();
     }
 }
-
-
-
-
-
-
 
