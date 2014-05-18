@@ -75,17 +75,6 @@
 #define LEVEL_MAX 2
 
 
-// enum pour les sounds
-
-  enum
-{
-    DEADMINION,
-    JUMPSOUND,
-    COINSOUND,
-    DEADPLAYER,
-    SWITCHSOUND,
-};
-
 // enum pour le menu
 
   enum

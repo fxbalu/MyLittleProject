@@ -38,7 +38,7 @@ void loadMap (char* name, Map* map, Game* game) {
     map->xmlLevel = loadXMLFile(name);
 
 
-    //printXMLNode(xmlLevel->root, 2);
+    //printXMLNode(map->xmlLevel->root, 2);
 
     //on recupère les premières infos dans le xml
 
@@ -530,7 +530,11 @@ void destroyMap(Map* map){
         SDL_FreeSurface(map->background);
         SDL_FreeSurface(map->backgroundMenu);
         SDL_FreeSurface(map->tileSet);
-        for(i=0;i<map->sizeX;i++) free(map->tile[i]);
+
+        for(i=0;i<map->sizeY;i++){
+         free(map->tile[i]);
+        }
+
         free(map->objects);
         free(map);
 

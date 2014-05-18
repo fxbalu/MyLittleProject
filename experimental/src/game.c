@@ -42,12 +42,14 @@ Game* createGame(){
         game->deadplayer1_sound = NULL;
         game->switch_sound = NULL;
 
+        game->monsterinitialized =0;
         game->objectNumber = 0;
         game->choice = 0;
         game->onMenu = 0;
         game->menuType = 0;
+        game->level = 1;
         game->go = 1;
-        game->monsterinitialized =0;
+
 
         game->map = NULL;
         game->player = NULL;
@@ -145,9 +147,9 @@ void loadGame(Game* game){
     game->HUD_life = loadImage("data/graphics/lifeHud.png");
     game->HUD_coin = loadImage("data/graphics/hud_coins.png");
 
-    loadSong(-1,"data/music/Those of Us Who Fight.mp3",game);
+    //loadSong(-1,"data/music/Those of Us Who Fight.mp3",game);
 
-    loadSound(game);
+    //loadSound(game);
 
 
     /* Charge la map depuis le fichier */
