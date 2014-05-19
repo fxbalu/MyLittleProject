@@ -17,7 +17,7 @@
  * \param[in] size: the size of the font to use.
  *
  * The function load a font into a TTF_Font structure, with the proper size.
- * If the loading fails, return NULL.
+ * If the loading fails, the function returns NULL.
  */
 TTF_Font* loadFont(char* name, int size) {
 
