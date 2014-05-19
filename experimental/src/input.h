@@ -4,6 +4,8 @@
  *
  * Declaration of createInput, getInput and destroyInput.
  *
+ * \author François-Xavier Balu, Gwendal Henry, Martin Parisot, Vincent Werner
+ *
  */
 
 #ifndef INPUT_H_INCLUDED

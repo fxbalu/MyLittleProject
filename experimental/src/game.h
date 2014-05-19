@@ -5,6 +5,7 @@
  * Declaration of createGame_(), loadGame(), initGame() and destroyGame().
  * Creation of structures Input, GameObject, Map and Game.
  *
+ * \author François-Xavier Balu, Gwendal Henry, Martin Parisot, Vincent Werner
  */
 
 #ifndef INIT_H_INCLUDED

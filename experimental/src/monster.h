@@ -1,3 +1,12 @@
+/**
+ * \file monster.h
+ * \brief header of monster.c
+ *
+ *  Declaration of initializeMonster(), collide(), updateMonsters(), checkFall()
+ *
+ * \author François-Xavier Balu, Gwendal Henry, Martin Parisot, Vincent Werner
+ */
+
 #ifndef MONSTER_H_INCLUDED
 #define MONSTER_H_INCLUDED
 

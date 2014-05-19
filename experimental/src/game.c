@@ -4,6 +4,8 @@
  *
  * Implementation of createGame, loadGame, initGame and destroyGame.
  *
+ * \author François-Xavier Balu, Gwendal Henry, Martin Parisot, Vincent Werner
+ *
  */
 
 #include "game.h"

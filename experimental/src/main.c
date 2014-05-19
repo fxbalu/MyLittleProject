@@ -2,9 +2,8 @@
  * \file main.c
  * \brief Main program.
  *
- * \author Vincent WERNER
- * \author Gwendal HENRY
- * \author François-Xavier BALU
+ * \author François-Xavier Balu, Gwendal Henry, Martin Parisot, Vincent Werner
+ *
  */
 
 #include "common.h"
