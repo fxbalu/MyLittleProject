@@ -16,6 +16,7 @@
 #include "draw.h"
 
 /**
+ * \fn int main(int argc, char* argv[])
  * \brief Main function.
  * \param[in] argc  Number of argument passed to the program.
  * \param[in] argv  Arguments passed to the program.
@@ -39,44 +40,35 @@ int main(int argc, char* argv[]) {
    loadGame(game);
 
    /* Main loop */
-   while(game->go == 1)
-   {
+   while(game->go == 1) {
       /* reads input from keyboard */
       getInput(game->input, game);
 
       /* checks if menu is used */
-      if(game->onMenu == 0)
-      {
+      if(game->onMenu == 0) {
          /* updates game */
          updatePlayer(game->player,game);
          updateObject(game);
-      }
-      else
-      {
+      } else {
          if(game->menuType == START) updateStartMenu(game->input,game);
       }
 
 
-
       /* checks if menu is used (same test as the previous one) */
-      if(game->onMenu == 0)
-      {
-
+      if(game->onMenu == 0) {
          /* displays everything */
          draw(game);
-      }
-      else
-      {
+      } else {
 
-        if(game->menuType == START)  drawStartMenu(game); // ya un bug ici !
-
+         if(game->menuType == START)  drawStartMenu(game); // ya un bug ici !
       }
 
-
-
-      delay(frameLimit);                  /*on attends 16ms pour avoir un jeu tournant à max 60fps*/
+      /*set the framerate at 60 FPS*/
+      delay(frameLimit);
       frameLimit = SDL_GetTicks()+16;
    }
+
+   /*free everything*/
    destroyGame(game);
 
    return EXIT_SUCCESS;

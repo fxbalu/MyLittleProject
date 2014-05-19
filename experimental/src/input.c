@@ -13,7 +13,7 @@
  * \fn Input* createInput()
  * \brief Create the Input structure
  *
- * the Input structure is allocate and initialized.
+ * the Input structure is allocated and initialized.
  * If the allocation failed the function returns NULL.
  */
 Input* createInput() {
