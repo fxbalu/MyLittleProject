@@ -2,7 +2,7 @@
  * \file animation.c
  * \brief this file contains necessary function to display animations
  *
- *	Implementation of drawAnimatedEntity() and changeAnimation()
+ * Implementation of drawAnimatedEntity() and changeAnimation()
  *
  * \author François-Xavier Balu, Gwendal Henry, Martin Parisot, Vincent Werner
  */

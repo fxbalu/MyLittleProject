@@ -3,7 +3,8 @@
  * \brief contains the necessary functions to use a font with SDL_TTF
  *
  * Implementation of loadFont and closeFont
- *
+ * 
+ * \author François-Xavier Balu, Gwendal Henry, Martin Parisot, Vincent Werner
  */
 
 #include "font.h"

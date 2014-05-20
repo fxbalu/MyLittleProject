@@ -4,6 +4,8 @@
  *
  * Declaration of loadFont() and closeFont()
  *
+ * \author François-Xavier Balu, Gwendal Henry, Martin Parisot, Vincent Werner
+ *
  */
 
 #ifndef FONT_H_INCLUDED

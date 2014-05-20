@@ -1,3 +1,12 @@
+/**
+ * \file monster.c
+ * \brief this file contains necessary function to initialize and manage the monsters
+ *
+ *  Implementation of initializeMonster(), collide(), updateMonsters(), checkFall()
+ *
+ * \author François-Xavier Balu, Gwendal Henry, Martin Parisot, Vincent Werner
+ */
+
 #include "monster.h"
 #include "draw.h"
 #include "player.h"
@@ -5,9 +14,15 @@
 #include "map.h"
 #include "animation.h"
 
-
-
-
+/**
+ * \fn void void initializeMonster(GameObject* monster, int x, int y)
+ * \brief initialize a given monster at the given coordinates on the map
+ *
+ * \param[in, out] monster: contains the sprite, direction, and position of the monster, as well as the necessaries informations for the animation
+ * \param[in] x,y: coordinates of where to place the monster
+ *
+ * This function charges the sprite of the monster into the GameObject corresponding, sets the direction, the coordinates and the parameters for animation (frameNumber and frameTimer)
+ */
 void initializeMonster(GameObject* monster, int x, int y){
 
     monster->sprite = loadImage("data/graphics/flyleft.png");
@@ -33,7 +48,15 @@ void initializeMonster(GameObject* monster, int x, int y){
 
 }
 
-
+/**
+ * \fn int collide(GameObject* player,GameObject* monster)
+ * \brief manages the collisions between the player and a monster
+ *
+ * \param[in, out] player: structure containing informations about the player
+ * \param[in, out] monster: structure containing informations about the monster
+ *
+ * This function check for collision between a monster and the player and in case of one, modify the player's direction.
+ */
 int collide(GameObject* player,GameObject* monster){
     if( (player->x >= monster->x + monster->w - 20)  ||
         (player->x + player->w <= 20 + monster->x)   ||
@@ -50,8 +73,16 @@ int collide(GameObject* player,GameObject* monster){
     else return 1;
 }
 
+/**
+ * \fn void updateMonsters(Game* game, GameObject* monster)
+ * \brief keeps the position and state of the monsters updated
+ *
+ * \param[in, out] game: structure containing informations about the game
+ * \param[in, out] monster: structure containing informations about the monsters
+ *
+ * This function update the monsters positions and apply the gravity, and make them fall if they're dead.
+ */
 void updateMonsters(Game* game, GameObject* monster){
-
 
     if(monster->timerMort == 0){
 
@@ -123,6 +154,15 @@ void updateMonsters(Game* game, GameObject* monster){
 
 
 
+/**
+ * \fn int checkFall(GameObject* monster, Map* map)
+ * \brief manage the fall of a monster
+ *
+ * \param[in, out] map: contains informations about the map (tiles)
+ * \param[in, out] monster: structure containing informations about the monsters
+ *
+ * This function manage the fall of the monster and check if it went out of the map.
+ */
 int checkFall(GameObject* monster, Map* map){
     int x,y;
 

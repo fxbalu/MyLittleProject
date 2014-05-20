@@ -23,7 +23,7 @@
  * \param[in] srcy: y-axis coordinate of the tile on the tileset
  * \param[in] destx: x-axis coordinate of the place of the tiles on the screen
  * \param[in] desty: y-axis coordinate of the place of the tiles on the screen
- * \param[in] game: contains the necessary informations for the displaying (screen array)
+ * \param[in] game: contains the necessary informations for the displaying (screen pointers)
  *
  */
 void drawTile(SDL_Surface *image, int destx,int desty,int srcx, int srcy, Game* game) {
@@ -51,7 +51,7 @@ void drawTile(SDL_Surface *image, int destx,int desty,int srcx, int srcy, Game* 
  * \param[in] image: the image to display
  * \param[in] x: x-axis coordinate of the image on the screen
  * \param[in] y: y-axis coordinate of the image on the screen
- * \param[in] game: contains the necessary informations for the displaying (screen array)
+ * \param[in] game: contains the necessary informations for the displaying (screen pointers)
  *
  * This functions simplifies the use of SDL_BlitSurface by automatically giving it the needed parameters
  *
@@ -72,7 +72,7 @@ void drawImage(SDL_Surface* image,int x,int y, Game* game) {
  * \fn void drawHud(Game* game)
  * \brief displays the Head-up display with the needed informations for the player
  *
- * \param[in] game: needed informations to display on the HUD and the screen array
+ * \param[in] game: needed informations to display on the HUD and the screen pointers
  *
  * This function take the informations from the Game structure and displays them on the HUD:
  * Life, number of coins
