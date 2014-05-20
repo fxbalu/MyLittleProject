@@ -80,6 +80,7 @@
   enum
  {
       START,
+      SELECT_LEVEL,
       PAUSE
   };
 

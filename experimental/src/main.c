@@ -49,18 +49,23 @@ int main(int argc, char* argv[]) {
          /* updates game */
          updatePlayer(game->player,game);
          updateObject(game);
-      } else {
-         if(game->menuType == START) updateStartMenu(game->input,game);
-      }
 
-
-      /* checks if menu is used (same test as the previous one) */
-      if(game->onMenu == 0) {
          /* displays everything */
          draw(game);
-      } else {
 
-         if(game->menuType == START)  drawStartMenu(game); // ya un bug ici !
+      } else {
+         switch(game->menuType){
+
+            case START :
+            updateStartMenu(game->input,game);
+            drawStartMenu(game); // ya un bug ici !
+            break;
+
+            case SELECT_LEVEL :
+               updateSelectLevelMenu(game->input,game);
+               drawSelectLevelMenu(game);
+
+         }
       }
 
       /*set the framerate at 60 FPS*/

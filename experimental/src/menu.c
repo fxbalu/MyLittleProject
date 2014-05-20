@@ -55,6 +55,18 @@ void updateStartMenu(Input* input, Game* game) {
 
 
 /**
+ * \fn void updateSelectLevelMenu(Input* input, Game* game)
+ * \brief
+ *
+ * \param[in] input
+ * \param[in] game
+ *
+ */
+void updateSelectLevelMenu(Input* input, Game* game) {
+
+}
+
+/**
  * \fn void drawTileMenu(SDL_Surface *image,int x, int y , int frameNumber, Game* game)
  * \brief Draw an item of a menu
  *
@@ -122,5 +134,16 @@ void drawStartMenu(Game* game) {
 
    SDL_Flip(game->screen);
    SDL_Delay(1);
+
+}
+
+/**
+ * \fn void drawSelectLevelMenu(Game* game)
+ * \brief
+ *
+ * \param[in] game
+ *
+ */
+void drawSelectLevelMenu(Game* game) {
 
 }

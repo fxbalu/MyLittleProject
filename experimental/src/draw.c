@@ -58,7 +58,6 @@ void drawTile(SDL_Surface *image, int destx,int desty,int srcx, int srcy, Game* 
  */
 void drawImage(SDL_Surface* image,int x,int y, Game* game) {
 
-
    SDL_Rect dest;
 
    dest.x = x;
@@ -66,9 +65,7 @@ void drawImage(SDL_Surface* image,int x,int y, Game* game) {
    dest.w = image->w;
    dest.h = image->h;
 
-
    SDL_BlitSurface(image,NULL,game->screen,&dest);
-
 }
 
 /**
@@ -88,7 +85,6 @@ void drawHud(Game* game) {
    drawImage(game->HUD_life,50,30, game);
    sprintf(text, "%d",game->life);
    drawString(text,135,19, 255, 255, 255,game->fontHUD, game);
-
 
 
    drawImage(game->HUD_coin,810,30, game);

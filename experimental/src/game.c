@@ -33,6 +33,7 @@ Game* createGame() {
 
       game->screen = NULL;
       game->tileMenu = NULL;
+      game->tileSelectLevel = NULL;
       game->gameover = NULL;
       game->endLevel = NULL;
       game->HUD_coin = NULL;
@@ -158,13 +159,14 @@ void loadGame(Game* game) {
    game->map->background = loadImage("data/graphics/backgroundworld1.png");
    game->map->backgroundMenu = loadImage("data/graphics/splashScreen.png");
    game->tileMenu = loadImage("data/graphics/spriteSheetMenu.png");
+   game->tileSelectLevel = loadImage("data/graphics/tileSelectLevel.png");
    game->map->tileSet = loadImage("data/graphics/all_tileset.png");
    game->gameover = loadImage("data/graphics/gameover.png");
    game->endLevel = loadImage("data/graphics/splashScreenEndLevel.png");
    game->HUD_life = loadImage("data/graphics/lifeHud.png");
    game->HUD_coin = loadImage("data/graphics/hud_coins.png");
 
-   loadSong(-1,"data/music/Those of Us Who Fight.mp3",game);
+   //loadSong(-1,"data/music/Those of Us Who Fight.mp3",game);
 
    loadSound(game);
 
@@ -191,6 +193,7 @@ void destroyGame(Game* game) {
    if(game != NULL) {
 
       SDL_FreeSurface(game->tileMenu);
+      SDL_FreeSurface(game->tileSelectLevel);
       SDL_FreeSurface(game->gameover);
       SDL_FreeSurface(game->HUD_coin);
       SDL_FreeSurface(game->HUD_life);

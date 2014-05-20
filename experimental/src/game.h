@@ -67,6 +67,7 @@ typedef struct Game{
 
     SDL_Surface* screen;
     SDL_Surface* tileMenu;
+    SDL_Surface* tileSelectLevel;
     SDL_Surface* gameover;
     SDL_Surface* endLevel;
     SDL_Surface* HUD_life;
