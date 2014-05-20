@@ -56,7 +56,7 @@ Game* createGame() {
       game->choice = 0;
       game->onMenu = 0;
       game->menuType = 0;
-      game->level = 1;
+      game->level = 0;
       game->go = 1;
 
 
@@ -137,7 +137,7 @@ void initGame(char* title, Game* game) {
    /* Définit le nombre de channels à mixer */
    Mix_AllocateChannels(32);
 
-   game->level = 1;
+   game->level = 0;
    game->onMenu = 1;
    game->choice = 0;
    game->menuType = START;
