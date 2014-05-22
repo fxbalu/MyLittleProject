@@ -69,7 +69,7 @@ typedef struct Game{
     Mix_Music* music;
     Mix_Chunk *miniondead_sound, *jump_sound, *coin_sound, *deadplayer1_sound, *switch_sound;
 
-    int monsterinitialized;
+    int doGameover;
     int objectNumber;
     int onMenu, menuType, choice;
     int level;

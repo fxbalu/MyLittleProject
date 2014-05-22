@@ -50,9 +50,9 @@ void drawHud(Game* game)
 
     char text[200];
 
-    drawImage(game->HUD_life,50,30, game);
-    sprintf(text, "%d",game->life);
-    drawString(text,135,19, 255, 255, 255,game->fontHUD, game);
+    //drawImage(game->HUD_life,50,30, game);
+   // sprintf(text, "%d",game->life);
+    //drawString(text,135,19, 255, 255, 255,game->fontHUD, game);
 
 
 

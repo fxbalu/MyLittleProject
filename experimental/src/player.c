@@ -220,34 +220,36 @@ void centerScrollingOnPlayer(GameObject* player, Map* map)
 
 void playerGameover(Game* game)
 {
+    if(game->doGameover == 1){
+        int i;
+        char text[200];
 
-    int i;
-    char text[200];
+        sprintf(text, "Press ENTER");
+        loadSong(1,"data/sounds/gameover.mp3",game);
 
-    sprintf(text, "Press ENTER");
-    loadSong(1,"data/sounds/gameover.mp3",game);
+        while(game->input->enter == 0)
+        {
+        i = SDL_GetTicks();
 
-    while(game->input->enter == 0)
-    {
-    i = SDL_GetTicks();
+        drawImage(game->gameover,0,0, game);
+        drawString(text, 350, 400, 150, 150, 150, game->fontGameover,game);
+        SDL_Flip(game->screen);
+        while(SDL_GetTicks()-i != 500 && game->input->enter == 0)
+        getInput(game->input,game);
+        drawImage(game->gameover,0,0, game);
+        SDL_Flip(game->screen);
+        while(SDL_GetTicks()-i != 1000 && game->input->enter == 0)
+        getInput(game->input,game);
 
-    drawImage(game->gameover,0,0, game);
-    drawString(text, 350, 400, 150, 150, 150, game->fontGameover,game);
-    SDL_Flip(game->screen);
-    while(SDL_GetTicks()-i != 500 && game->input->enter == 0)
-    getInput(game->input,game);
-    drawImage(game->gameover,0,0, game);
-    SDL_Flip(game->screen);
-    while(SDL_GetTicks()-i != 1000 && game->input->enter == 0)
-    getInput(game->input,game);
+        }
+        game->input->enter = 0;
+
+        loadGame(game);
+
+        game->onMenu = 1;
+        game->menuType = START;
 
     }
-    game->input->enter = 0;
-
-    loadGame(game);
-
-    game->onMenu = 1;
-    game->menuType = START;
 
 }
 

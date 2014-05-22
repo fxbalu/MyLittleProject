@@ -40,7 +40,7 @@ Game* createGame(){
         game->onMenu = 0;
         game->menuType = 0;
         game->go = 1;
-        game->monsterinitialized =0;
+        game->doGameover=1;
 
         game->map = NULL;
         game->player = NULL;
@@ -147,6 +147,7 @@ void loadGame(Game* game){
     sprintf(file, "data/map/map%d.tmx", game->level );
     loadMap(file, game->map, game);
 
+    game->doGameover =1;
     game->coin = 0;
     game->life = 1;
 
@@ -170,7 +171,6 @@ void destroyGame(Game* game){
         Mix_FreeMusic(game->music);
         freeSound(game);
         Mix_CloseAudio();
-
 
         destroyInput(game->input);
         destroyPlayer(game->player);
