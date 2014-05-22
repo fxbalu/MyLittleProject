@@ -1,3 +1,13 @@
+/**
+ * \file game.h
+ * \brief header of game.c
+ *
+ * Declaration of createGame_(), loadGame(), initGame() and destroyGame().
+ * Creation of structures Input, GameObject, Map and Game.
+ *
+ * \author François-Xavier Balu, Gwendal Henry, Martin Parisot, Vincent Werner
+ */
+
 #ifndef INIT_H_INCLUDED
 #define INIT_H_INCLUDED
 #include "common.h"
@@ -58,6 +68,7 @@ typedef struct Game{
 
     SDL_Surface* screen;
     SDL_Surface* tileMenu;
+    SDL_Surface* tileSelectLevel;
     SDL_Surface* gameover;
     SDL_Surface* endLevel;
     SDL_Surface* HUD_life;

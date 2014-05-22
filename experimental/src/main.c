@@ -1,11 +1,11 @@
 /**
- * \file main.c
- * \brief Main program.
- *
- * \author Vincent WERNER
- * \author Gwendal HENRY
- * \author François-Xavier BALU
- */
+* \file main.c
+* \brief Main program.
+*
+* \author Vincent WERNER
+* \author Gwendal HENRY
+* \author François-Xavier BALU
+*/
 
 #include "common.h"
 #include "game.h"
@@ -16,15 +16,16 @@
 #include "draw.h"
 
 /**
- * \brief Main function.
- * \param[in] argc  Number of argument passed to the program.
- * \param[in] argv  Arguments passed to the program.
- */
-int main(int argc, char* argv[])
-{
+* \fn int main(int argc, char* argv[])
+* \brief Main function.
+* \param[in] argc Number of argument passed to the program.
+* \param[in] argv Arguments passed to the program.
+*/
+int main(int argc, char* argv[]) {
 
    unsigned int frameLimit;
 
+   /*Create the Game structure*/
    Game* game = createGame();
 
    frameLimit = SDL_GetTicks()+16;
@@ -38,43 +39,42 @@ int main(int argc, char* argv[])
    /* loads resources */
    loadGame(game);
 
-   game->go = 1;
-
    /* Main loop */
-   while(game->go == 1)
-   {
+   while(game->go == 1) {
       /* reads input from keyboard */
       getInput(game->input, game);
 
       /* checks if menu is used */
-      if(game->onMenu == 0)
-      {
+      if(game->onMenu == 0) {
          /* updates game */
          updatePlayer(game->player,game);
          updateObject(game);
-      }
-      else
-      {
-         if(game->menuType == START) updateStartMenu(game->input,game);
-      }
 
-      /* checks if menu is used (same test as the previous one) */
-      if(game->onMenu == 0)
-      {
          /* displays everything */
          draw(game);
-      }
-      else
-      {
-        if(game->menuType == START)  drawStartMenu(game);
+
+      } else {
+         switch(game->menuType) {
+
+         case START :
+            updateStartMenu(game->input,game);
+            drawStartMenu(game); // ya un bug ici !
+            break;
+
+         case SELECT_LEVEL :
+            updateSelectLevelMenu(game->input,game);
+            drawSelectLevelMenu(game);
+
+         }
       }
 
-
-      delay(frameLimit);                  /*on attends 16ms pour avoir un jeu tournant à max 60fps*/
+      /*set the framerate at 60 FPS*/
+      delay(frameLimit);
       frameLimit = SDL_GetTicks()+16;
    }
+
+   /*free everything*/
    destroyGame(game);
 
    return EXIT_SUCCESS;
 }
-
