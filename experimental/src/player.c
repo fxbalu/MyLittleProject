@@ -246,9 +246,7 @@ void playerGameover(Game* game)
         game->input->enter = 0;
 
         loadGame(game);
-
-        game->onMenu = 1;
-        game->menuType = START;
+        initializePlayer(game->player);
 
     }
 

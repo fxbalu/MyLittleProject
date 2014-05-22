@@ -50,7 +50,7 @@ void updateStartMenu(Input* input, Game* game) {
       switch(game->choice) {
 
       case 0:
-         initializePlayer(game->player); /*start the game and leave the menu*/
+         //initializePlayer(game->player); /*start the game and leave the menu*/
          game->onMenu = 0;
          break;
       case 1:

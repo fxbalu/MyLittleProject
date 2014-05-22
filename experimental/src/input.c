@@ -8,6 +8,7 @@
  */
 
 #include "input.h"
+#include "menu.h"
 
 /**
  * \fn Input* createInput()
@@ -63,7 +64,8 @@ void getInput(Input* input,Game* game) {
          switch (event.key.keysym.sym) {
          case SDLK_ESCAPE:
 
-            exit(0);
+            game->menuType = START;
+            game->onMenu =1;
             break;
 
          case SDLK_SPACE:
