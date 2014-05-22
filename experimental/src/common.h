@@ -68,7 +68,7 @@
 #define BLANK_TILE 77
 
 //Constantes définissant la gravité et la vitesse max de chute
-#define GRAVITY_SPEED 1
+#define GRAVITY_SPEED 1,5
 #define MAX_FALL_SPEED 15
 #define JUMP_HEIGHT 22
 

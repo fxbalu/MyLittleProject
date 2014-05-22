@@ -62,7 +62,8 @@ void loadMap (char* name, Map* map, Game* game) {
    map->xmlLevel = loadXMLFile(name);
 
    int sizeX = atoi(map->xmlLevel->root->attr->next->next->value); //a toi de jouer !
-   int sizeY = atoi(map->xmlLevel->root->attr->next->next->next->value); //échec et mat !
+   int sizeY = atoi(map->xmlLevel->root->attr->next->next->next->value); //échec et mat !n
+
 
    int i,j;
 
@@ -81,15 +82,18 @@ void loadMap (char* name, Map* map, Game* game) {
       map->tile[i] = (int*) malloc(map->sizeX*sizeof(int));
    }
 
+
    XML_Node* tileLayer = map->xmlLevel->root->first->next->next;
 
    for(i=0 ; i<map->sizeY ; i++) {
       for(j=0 ; j<map->sizeX ; j++) {
 
+
          map->tile[i][j] = atoi(tileLayer->first->current->attr->value);
 
          tileLayer->first->current = tileLayer->first->current->next;
       }
+
    }
 
    /*Find the number of objects in the level*/

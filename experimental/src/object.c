@@ -393,6 +393,7 @@ void isSolid(GameObject *entity, GameObject *object){
 
             }
 
+
         }
 
     if(object->spe == 2){
