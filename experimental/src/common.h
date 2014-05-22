@@ -75,15 +75,4 @@
 #define LEVEL_MAX 2
 
 
-// enum pour le menu
-
-  enum
- {
-      START,
-      SELECT_LEVEL,
-      PAUSE
-  };
-
-
-
 #endif

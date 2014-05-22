@@ -13,6 +13,7 @@
 #include "sound.h"
 #include "map.h"
 #include "animation.h"
+#include "menu.h"
 
 /**
  * \fn void void initializeMonster(GameObject* monster, int x, int y)

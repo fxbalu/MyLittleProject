@@ -12,4 +12,15 @@ void drawStartMenu(Game* game);
 void drawSelectLevelMenu(Game* game);
 void drawTileSelectLevel(Game* game, int x, int y, int selected);
 
+
+// enum pour le menu
+
+  enum
+ {
+      START,
+      SELECT_LEVEL,
+      PAUSE
+  };
+
+
 #endif

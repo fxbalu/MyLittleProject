@@ -15,55 +15,8 @@
 #include "draw.h"
 #include "player.h"
 #include "sound.h"
+#include "menu.h"
 
-<<<<<<< HEAD
-/*Fonction qui initialise le jeu*/
-
-Game* createGame(){
-
-    Game* game;
-
-    if((game = (Game*)malloc(sizeof(Game))) == NULL){
-        fprintf(stderr, "can't allocate memory for a Game\n");
-    }
-    else{
-
-        game->screen = NULL;
-        game->tileMenu = NULL;
-        game->gameover = NULL;
-        game->endLevel = NULL;
-        game->HUD_coin = NULL;
-        game->HUD_life = NULL;
-
-        game->coin = 0;
-        game->life = 0;
-
-        game->music = NULL;
-        game->miniondead_sound = NULL;
-        game->jump_sound = NULL;
-        game->coin_sound = NULL;
-        game->deadplayer1_sound = NULL;
-        game->switch_sound = NULL;
-
-        game->objectNumber = 0;
-        game->choice = 0;
-        game->onMenu = 0;
-        game->menuType = 0;
-        game->go = 1;
-        game->doGameover=1;
-
-        game->map = NULL;
-        game->player = NULL;
-        game->input = NULL;
-        game->fontHUD = NULL;
-        game->fontMenu = NULL;
-        game->fontGameover = NULL;
-
-    }
-
-    return game;
-=======
->>>>>>> bf06b780f55eb19e2c131271ff13a4f02ed29f88
 
 /**
  * \fn Game* createGame()
@@ -99,7 +52,6 @@ Game* createGame() {
       game->deadplayer1_sound = NULL;
       game->switch_sound = NULL;
 
-      game->monsterinitialized =0;
       game->objectNumber = 0;
       game->choice = 0;
       game->onMenu = 0;
@@ -216,7 +168,7 @@ void loadGame(Game* game) {
    game->HUD_life = loadImage("data/graphics/lifeHud.png");
    game->HUD_coin = loadImage("data/graphics/hud_coins.png");
 
-   //loadSong(-1,"data/music/Those of Us Who Fight.mp3",game);
+   loadSong(-1,"data/music/Those of Us Who Fight.mp3",game);
 
    loadSound(game);
 
@@ -225,14 +177,13 @@ void loadGame(Game* game) {
    sprintf(file, "data/map/map%d.tmx", game->level );
    loadMap(file, game->map, game);
 
-<<<<<<< HEAD
     game->doGameover =1;
     game->coin = 0;
     game->life = 1;
-=======
+
    game->coin = 0;
    game->life = 1;
->>>>>>> bf06b780f55eb19e2c131271ff13a4f02ed29f88
+
 
 }
 
@@ -264,16 +215,16 @@ void destroyGame(Game* game) {
       freeSound(game);
       Mix_CloseAudio();
 
-<<<<<<< HEAD
+
         destroyInput(game->input);
         destroyPlayer(game->player);
         destroyMap(game->map);
-=======
+
 
       destroyInput(game->input);
       destroyPlayer(game->player);
       destroyMap(game->map);
->>>>>>> bf06b780f55eb19e2c131271ff13a4f02ed29f88
+
 
       free(game);
 

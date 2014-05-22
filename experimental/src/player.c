@@ -6,6 +6,7 @@
 #include "map.h"
 #include "draw.h"
 #include "object.h"
+#include "menu.h"
 
 
 GameObject* createPlayer(){

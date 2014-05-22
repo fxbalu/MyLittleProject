@@ -78,9 +78,7 @@ void drawImage(SDL_Surface* image,int x,int y, Game* game) {
  * Life, number of coins
  *
  */
-void drawHud(Game* game) {
 
-<<<<<<< HEAD
 void drawHud(Game* game)
 {
 
@@ -89,9 +87,7 @@ void drawHud(Game* game)
     //drawImage(game->HUD_life,50,30, game);
    // sprintf(text, "%d",game->life);
     //drawString(text,135,19, 255, 255, 255,game->fontHUD, game);
-=======
-   char text[200];
->>>>>>> bf06b780f55eb19e2c131271ff13a4f02ed29f88
+
 
    drawImage(game->HUD_life,50,30, game);
    sprintf(text, "%d",game->life);
