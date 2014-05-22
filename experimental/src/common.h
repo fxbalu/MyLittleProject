@@ -72,7 +72,7 @@
 #define MAX_FALL_SPEED 15
 #define JUMP_HEIGHT 22
 
-#define LEVEL_MAX 2
+#define LEVEL_MAX 8
 
 
 #endif
