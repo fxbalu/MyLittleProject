@@ -50,7 +50,6 @@ void updateStartMenu(Input* input, Game* game) {
       switch(game->choice) {
 
       case 0:
-         //initializePlayer(game->player); /*start the game and leave the menu*/
          game->onMenu = 0;
          break;
       case 1:
@@ -125,14 +124,17 @@ void updateSelectLevelMenu(Input* input, Game* game) {
          game->menuType = START;
       }
       else {
-         game->choice = 0;
-         game->onMenu = 0;
-
-         game->level = game->choice;
 
 
-         sprintf(level, "data/map/map%d.tmx", game->level );
-         loadMap(level, game->map, game); /*load the selected level*/
+        game->level = game->choice;
+        game->choice = 0;
+        game->onMenu = 0;
+        initializePlayer(game->player);
+        sprintf(level, "data/map/map%d.tmx", game->level );
+        loadMap(level, game->map, game);
+
+
+
       }
 
       input->enter = 0;
