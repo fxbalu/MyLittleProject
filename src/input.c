@@ -1,264 +1,160 @@
 /**
  * \file input.c
- * \brief Functions to analyse and process the user's input.
- * \author fx.balu & a.dufac & gw.henry & m.parisot & v.werner
- * \date 18 mars 2014
+ * \brief  Functions to manage the user's inputs
+ *
+ *	Implementation of CreateInput, getInput and destroyInput.
+ *
+ * \author FranÃ§ois-Xavier Balu, Gwendal Henry, Martin Parisot, Vincent Werner
  */
 
 #include "input.h"
+#include "menu.h"
 
+/**
+ * \fn Input* createInput()
+ * \brief Create the Input structure
+ *
+ * the Input structure is allocated and initialized.
+ * If the allocation failed the function returns NULL.
+ */
+Input* createInput() {
 
-/*ici on utilise toute la strucure Input*/
+   Input* input;
 
-void initInput(Input* input) {
+   if ((input = (Input*)malloc(sizeof(Input))) == NULL) {
+      fprintf(stderr, "can't allocate memory for a input\n");
+   } else {
+      input->left = 0;
+      input->right = 0;
+      input->up = 0;
+      input->down = 0;
+      input->use = 0;
+      input->enter = 0;
+      input->pause = 0;
+      input->jump = 0;
+   }
 
-   input->event = (SDL_Event*) malloc(sizeof(SDL_Event));
-
-   clearInput(input);
-
-}
-
-void freeInput(Input* input) {
-   clearInput(input);
-   free(input->event);
-   free(input);
-
-   //rajouter tout le reste
-}
-
-/*au moins utile pour l'initialisation !*/
-void clearInput(Input* input) {
-   clearInputPressed(input);
-   clearInputDown(input);
-}
-
-//remet a zero les évenement d'appui, mais pas le maintient d'appui
-void clearInputPressed(Input* input) {
-
-   input->left.pressed = false;
-   input->up.pressed = false; /*remplacer les noms down et pressed, trouver mieux*/
-   input->right.pressed = false;
-   input->down.pressed = false;
-
-   input->enter.pressed = false;
-   input->jump.pressed = false;
-   input->crouch.pressed = false;
-   input->shoot.pressed = false;
-
-   input->escape.pressed = false;
-   input->exit.pressed = false;
+   return input;
 
 }
 
-void clearInputDown(Input* input) {
 
-   input->left.down = false;
-   input->up.down = false;
-   input->right.down = false;
-   input->down.down = false;
+/**
+ * \fn void getInput(Input* input,Game* game)
+ * \brief Get the user's inputs
+ *
+ * \param[in] input Input structure
+ * \param[in] game Game structure
+ *
+ * The Input structure is updated.
+ * If a key is pressed the corresponding integer is set to 1, else if it's released, the integer is set to 0.
+ */
+void getInput(Input* input,Game* game) {
 
-   input->enter.down = false;
-   input->jump.down = false;
-   input->crouch.down = false;
-   input->shoot.down = false;
+   SDL_Event event;
 
-   input->escape.down = false;
-   input->exit.down = false; // juste la croix de la fenetre ! pour quitter le jeu avec la manette, revenir au menu, et touche escape
-}
+   while(SDL_PollEvent(&event)) {
+      switch(event.type) {
 
-
-void getInput(Input* input, GameOptions* options) {
-
-   clearInputPressed(input);
-
-   while(SDL_PollEvent(input->event)) {
-
-      switch (input->event->type) {
-      case SDL_QUIT :
-         input->exit.down = true;
-         input->exit.pressed = true;
+      case SDL_QUIT:
+         game->go = 0;
          break;
-      case SDL_KEYDOWN : /*gérer plus tard la manette*/
 
-         switch ( input->event->key.keysym.sym) {
-         case SDLK_LEFT :
-            input->left.down = true;
-            input->left.pressed = true;
-            break;
-         case SDLK_UP :
-            input->up.down = true;
-            input->up.pressed = true;
-            break;
-         case SDLK_RIGHT :
-            input->right.down = true;
-            input->right.pressed = true;
-            break;
-         case SDLK_DOWN :
-            input->down.down = true;
-            input->down.pressed = true;
+      case SDL_KEYDOWN:
+         switch (event.key.keysym.sym) {
+         case SDLK_ESCAPE:
+
+            game->menuType = START;
+            game->onMenu =1;
             break;
 
-         case SDLK_RETURN :
-            input->enter.down = true;
-            input->enter.pressed = true;
-            break;
-         case SDLK_SPACE :
-            input->jump.down = true;
-            input->jump.pressed = true;
-            break;
-         case SDLK_RCTRL :
-            input->crouch.down = true;
-            input->crouch.pressed = true;
-            break;
-         case SDLK_RSHIFT :
-            input->shoot.down = true;
-            input->shoot.pressed = true;
+         case SDLK_SPACE:
+            input->jump = 1;
             break;
 
-         case SDLK_ESCAPE :
-            input->escape.down = true;
-            input->escape.pressed = true;
+         case SDLK_e:
+            input->use = 1;
             break;
-         default :
-            ;
+
+         case SDLK_LEFT:
+            input->left = 1;
+            break;
+
+         case SDLK_RIGHT:
+            input->right = 1;
+            break;
+
+         case SDLK_DOWN:
+            input->down = 1;
+            break;
+
+         case SDLK_UP:
+            input->up = 1;
+            break;
+
+         case SDLK_RETURN:
+            input->enter = 1;
+            break;
+
+         default:
+            break;
          }
          break;
 
-      case SDL_KEYUP :
+      case SDL_KEYUP:
+         switch (event.key.keysym.sym) {
 
-         switch ( input->event->key.keysym.sym) {
-         case SDLK_LEFT :
-            input->left.down = false;
-            break;
-         case SDLK_UP :
-            input->up.down = false;
-            break;
-         case SDLK_RIGHT :
-            input->right.down = false;
-            break;
-         case SDLK_DOWN :
-            input->down.down = false;
+         case SDLK_e:
+            input->use = 0;
             break;
 
-         case SDLK_RETURN :
-            input->enter.down = false;
-            break;
-         case SDLK_SPACE :
-            input->jump.down = false;
-            break;
-         case SDLK_RCTRL :
-            input->crouch.down = false;
-            break;
-         case SDLK_RSHIFT :
-            input->shoot.down = false;
+
+         case SDLK_SPACE:
+            input->jump = 0;
             break;
 
-         case SDLK_ESCAPE :
-            input->escape.down = false;
+         case SDLK_LEFT:
+            input->left = 0;
             break;
-         default :
-            ;
+
+         case SDLK_RIGHT:
+            input->right = 0;
+            break;
+
+         case SDLK_DOWN:
+            input->down = 0;
+            break;
+
+         case SDLK_UP:
+            input->up = 0;
+            break;
+
+
+         default:
+            break;
          }
-      default :
-         ;
-
-
-
-
-
-         /*case options->controlerDown :
-             switch (input->event->key.keysym.sym) {//gerer la manette ici
-
-             case options->left :
-                 input->left.down = true;
-                 input->left.pressed = true; //pressed : le fait d'appuyer, down pour la tenu de la touche
-                 break;
-             case options->up :
-                 input->up.down = true;
-                 input->up.pressed = true;
-                 break;
-             case options->right :
-                 input->right.down = true;
-                 input->right.pressed = true;
-                 break;
-             case options->down :
-                 input.down = true;
-                 input.pressed = true;
-                 break;
-
-             case options->enter :
-                 input.enter.down = true;
-                 input.enter.pressed = true;
-                 break;
-             case options->jump :
-                 input->jump.down = true;
-                 input->jump.pressed = true;
-                 break;
-             case options->crouch :
-                 input->crouch.down = true;
-                 input->crouch.pressed = true;
-                 break;
-             case options->shoot :
-                 input->shoot.down = true;
-                 input->shoot.pressed = true;
-                 break;
-
-             case options->escape :
-                 input->escape.down = true;
-                 input->escape.pressed = true;
-                 break;
-             default :
-                 ;
-             }
-             break;
-
-         case options->controlerUp :
-             switch (input->event->key.keysym.sym) { //gerer la manette ici
-
-             case options->left :
-                 input->left.pressed = false; //pressed : le fait d'appuyer, down pour la tenu de la touche
-                 break;
-             case options->up :
-                 input->up.pressed = false;
-                 break;
-             case options->right :
-                 input->right.pressed = false;
-                 break;
-             case options->down :
-                 input.pressed = false;
-                 break;
-
-             case options->enter :
-                 input.enter.pressed = false;
-                 break;
-             case options->jump :
-                 input->jump.pressed = false;
-                 break;
-             case options->crouch :
-                 input->crouch.pressed = false;
-                 break;
-             case options->shoot :
-                 input->shoot.pressed = false;
-                 break;
-
-             case options->escape :
-                 input->escape.pressed = false;
-                 break;
-             default :
-                 ;
-             }*/
+         break;
 
       }
+
    }
 }
-/*obtient les touches appuyés pendat un cycle de la boucle ( en partant du dernier getInput)*/
-/*a modifier : comparer les touches avec les options de controlees de jeu + gérer manette*
-*/
 
-//pour verif les inputs, ca le fait pour l'instant
-void printInput(Input* input) {
 
-   fprintf(stdout, "\t pressed \t\t down \n\n"
-           "left : %d \t\t %d\n",   input->left.pressed, input->left.down);
+/**
+ * \fn destroyInput(Input* input)
+ * \brief Free the Input structure
+ *
+ * \param[in] input Input structure to free.
+ *
+ * The Input structure is freed.
+ */
+void destroyInput(Input* input) {
 
+   if(input != NULL) {
+      free(input);
+   }
 }
+
+
+

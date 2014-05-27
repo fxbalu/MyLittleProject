@@ -1,50 +1,106 @@
 /**
  * \file game.h
- * \brief Prototypes of functions used in the main function.
- * \author fx.balu & a.dufac & gw.henry & m.parisot & v.werner
- * \date 14.03.2014
- */
-
-#ifndef DEFINED_GAME_H
-#define DEFINED_GAME_H
-
-#include <SDL.h>           /* SDL_Surface */
-#include "intro.h"
-#include "gameStatus.h"    /* GameStatus */
-#include "gameOptions.h"   /* GameOptions */
-#include "input.h"         /* Input */
-#include "menu.h"          /* Menu */
-#include "level.h"         /* Level */
-#include "character.h"     /* Character */
-
-// #include <SDL_image.h>
-// #include "define.h"
-// #include "common.h"
-// #include "log.h"
-
-/**
- * \struct Game
- * \brief Variables necessaries to most of the game-related functions.
+ * \brief header of game.c
  *
- * \warning Why does it use pointer ?
+ * Declaration of createGame_(), loadGame(), initGame() and destroyGame().
+ * Creation of structures Input, GameObject, Map and Game.
+ *
+ * \author François-Xavier Balu, Gwendal Henry, Martin Parisot, Vincent Werner
  */
-typedef struct Game {
-   SDL_Surface* screen;
-   Intro* intro;
-   GameStatus* status;
-   GameOptions* options;
-   Input* input;
-   Menu* menu;
-   Level* level;
-   Character* player;
-} Game;
 
-int initGame(Game* game);
-int initSDL();
+#ifndef INIT_H_INCLUDED
+#define INIT_H_INCLUDED
+#include "common.h"
 
-void updateGame(Game* game);
-void clearScreen(Game* game);
-void displayGame(Game* game);
-void delayGame(Game* game);
 
-#endif
+typedef struct Input{
+
+    int left,right,up,down,jump,use,enter,pause;
+
+}Input;
+
+
+typedef struct GameObject{
+   //Sprite de l'objet
+   SDL_Surface *sprite;
+
+   int type;
+   int spe;
+   int initialized;
+   int gid;
+
+   /* Coordonnées de l'objet */
+   int x, y;
+   int h,w;
+
+
+   int frameNumber, frameTimer;
+
+   int etat,direction;
+
+   int onGround, timerMort;
+
+   float dirX, dirY;
+   int saveX, saveY;
+
+} GameObject;
+
+
+typedef struct Map{
+
+    SDL_Surface *background;
+    SDL_Surface *tileSet;
+    SDL_Surface *backgroundMenu;
+
+    XML_File* xmlLevel;
+
+    int startX, startY;
+    int maxX, maxY;
+    int sizeX,sizeY;
+
+    GameObject *objects;
+    int **tile;
+
+} Map;
+
+
+typedef struct Game{
+
+    SDL_Surface* screen;
+    SDL_Surface* tileMenu;
+    SDL_Surface* tileSelectLevel;
+    SDL_Surface* gameover;
+    SDL_Surface* endLevel;
+    SDL_Surface* HUD_life;
+    SDL_Surface* HUD_coin;
+
+    int coin;
+    int life;
+
+    Mix_Music* music;
+    Mix_Chunk *miniondead_sound, *jump_sound, *coin_sound, *deadplayer1_sound, *switch_sound;
+
+    int doGameover;
+    int objectNumber;
+    int onMenu, menuType, choice;
+    int level;
+    int go;
+
+    Map *map;
+    GameObject* player;
+    Input *input;
+    TTF_Font *fontMenu;
+    TTF_Font *fontGameover;
+    TTF_Font *fontHUD;
+
+}Game;
+
+
+void initGame(char *title,Game* game);
+void loadGame(Game* game);
+void destroyGame(Game* game);
+Game* createGame();
+
+
+
+#endif // INIT_H_INCLUDED

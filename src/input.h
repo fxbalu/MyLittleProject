@@ -1,63 +1,21 @@
 /**
  * \file input.h
- * \brief Prototypes of functions to get and process the user's input.
- * \author fx.balu & a.dufac & gw.henry & m.parisot & v.werner
- * \date 18 mars 2014
+ * \brief header of input.c
+ *
+ * Declaration of createInput, getInput and destroyInput.
+ *
+ * \author François-Xavier Balu, Gwendal Henry, Martin Parisot, Vincent Werner
+ *
  */
-
 
 #ifndef INPUT_H_INCLUDED
 #define INPUT_H_INCLUDED
 
-#include <SDL.h>
-#include "common.h"
-#include "gameOptions.h"
+#include "game.h"
 
-/*ok pour le nom ?*/
-/**
- * \struct Control
- * \brief
- */
-typedef struct Control {
-   Boolean pressed;
-   Boolean down; //revoir les noms
-} Control;
+void getInput(Input* input,Game* game);
+Input* createInput();
+void destroyInput(Input* input);
 
-/**
- * \struct Input
- * \brief
- */
-typedef struct Input {
-   SDL_Event* event;
-
-   Control left;
-   Control up; // pointeur sur control c'est bien non ?
-   Control right;
-   Control down;
-
-   Control enter; /*on peut appuyer sur plusieurs touches en meme temps, donc pas faire juste une enumeration*/
-   Control jump;/* note : les control sont des flags, ils sont a appliqur dans une fonction getinput, et en fonction de gameOptions*/
-   Control crouch;
-   Control shoot;
-
-   Control escape;
-   Control exit;
-} Input;
-
-
-/*void ou int pour gestion erreur */
-void initInput(Input* input);
-
-void clearInput(Input* input);
-
-void clearInputPressed(Input* input);
-
-void clearInputDown(Input* input);
-
-void getInput(Input* input, GameOptions* options);
-
-void freeInput(Input* input);
-
-void printInput(Input* input);
 
 #endif
