@@ -158,15 +158,15 @@ void loadGame(Game* game) {
 
    char file[200];
 
-   game->map->background = loadImage("data/graphics/backgroundworld1.png");
-   game->map->backgroundMenu = loadImage("data/graphics/splashScreen.png");
-   game->tileMenu = loadImage("data/graphics/spriteSheetMenu.png");
-   game->tileSelectLevel = loadImage("data/graphics/tileSelectLevel.png");
-   game->map->tileSet = loadImage("data/graphics/all_tileset.png");
-   game->gameover = loadImage("data/graphics/gameover.png");
-   game->endLevel = loadImage("data/graphics/splashScreenEndLevel.png");
-   game->HUD_life = loadImage("data/graphics/lifeHud.png");
-   game->HUD_coin = loadImage("data/graphics/hud_coins.png");
+   if(game->map->background == NULL )   game->map->background = loadImage("data/graphics/backgroundworld1.png");
+   if(game->map->backgroundMenu == NULL)   game->map->backgroundMenu = loadImage("data/graphics/splashScreen.png");
+   if(game->tileMenu == NULL)   game->tileMenu = loadImage("data/graphics/spriteSheetMenu.png");
+   if(game->tileSelectLevel== NULL)   game->tileSelectLevel = loadImage("data/graphics/tileSelectLevel.png");
+   if(game->map->tileSet== NULL)   game->map->tileSet = loadImage("data/graphics/all_tileset.png");
+   if(game->gameover== NULL )  game->gameover = loadImage("data/graphics/gameover.png");
+   if(game->endLevel== NULL )  game->endLevel = loadImage("data/graphics/splashScreenEndLevel.png");
+   if(game->HUD_life == NULL)  game->HUD_life = loadImage("data/graphics/lifeHud.png");
+   if(game->HUD_coin== NULL)   game->HUD_coin = loadImage("data/graphics/hud_coins.png");
 
    loadSong(-1,"data/music/Those of Us Who Fight.mp3",game);
 
@@ -180,10 +180,6 @@ void loadGame(Game* game) {
     game->doGameover =1;
     game->coin = 0;
     game->life = 1;
-
-   game->coin = 0;
-   game->life = 1;
-
 
 }
 
